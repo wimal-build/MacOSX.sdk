@@ -226,6 +226,12 @@ struct	BluetoothKey
 	uint8_t		data[ 16 ];
 };
 
+typedef struct  BluetoothIRK                BluetoothIRK;
+struct BluetoothIRK
+{
+    uint8_t     data[ 16 ];
+};
+        
 typedef struct	BluetoothPINCode			BluetoothPINCode;
 struct	BluetoothPINCode
 {
@@ -1306,7 +1312,7 @@ typedef uint16_t	BluetoothHCIConnectionAcceptTimeout;
 typedef uint16_t	BluetoothHCIPageTimeout;
 enum BluetoothHCITimeoutValues
 {
-	kDefaultPageTimeout			= 0x2000,
+	kDefaultPageTimeout			= 0x2710,
 };
 
 #define		BluetoothGetSlotsFromSeconds( inSeconds )		( (inSeconds/.000625 ) )

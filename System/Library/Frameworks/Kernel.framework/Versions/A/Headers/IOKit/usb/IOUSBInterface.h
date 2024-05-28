@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2007 Apple Inc. All rights reserved.
+ * Copyright © 1998-2007, 2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -41,7 +41,10 @@
 class IOUSBInterface : public IOUSBNub
 {
     friend class IOUSBInterfaceUserClientV2;
+    friend class IOUSBInterfaceUserClientV3;
     friend class IOUSBDevice;
+	friend class IOUSBPipe;
+	friend class IOUSBPipeV2;
 	
     OSDeclareDefaultStructors(IOUSBInterface)
 
@@ -67,6 +70,7 @@ protected:
 		IOLock *			_pipeObjLock;				// Deprecated
 		OSSet *				_openClients;
         UInt32              _RememberedStreams[kUSBMaxPipes];
+        bool                _openPending;
     };
     ExpansionData * _expansionData;
 
@@ -83,6 +87,10 @@ protected:
     IOReturn 			ReopenPipesGated();             // relink all pipes (except pipe zero) (not virtual)
 	void	 			RememberStreamsGated(void);
 	IOReturn	 		RecreateStreamsGated(void);
+    
+    // Return the "Full" MaxPacketSize, given an endpoint descriptor and a pointer to an sscd if there is one
+    // This will multiple the MPS in the ep by the mult and the burst which may or may not be present
+    UInt16              CalculateFullMaxPacketSize(IOUSBEndpointDescriptor *ed, IOUSBSuperSpeedEndpointCompanionDescriptor *sscd);
 	
 public:
 	// static methods
@@ -299,10 +307,45 @@ public:
     OSMetaClassDeclareReservedUsed(IOUSBInterface,  5);
     virtual void	ReopenPipes(void);				// open all pipes in the current interface/alt interface
 
-    OSMetaClassDeclareReservedUnused(IOUSBInterface,  6);
-    OSMetaClassDeclareReservedUnused(IOUSBInterface,  7);
-    OSMetaClassDeclareReservedUnused(IOUSBInterface,  8);
-    OSMetaClassDeclareReservedUnused(IOUSBInterface,  9);
+    OSMetaClassDeclareReservedUsed(IOUSBInterface,  6);
+    /*!
+	 @function GetEndpointPropertiesV3
+	 @abstract Returns the properties of an endpoint, possibly in an alternate interface, including any information from the SuperSpeed Companion Descriptor
+	 @param endpointProperties  Pointer to a IOUSBEndpointProperties structure that upon success will contain the information for the endpoint.  The bVersion field
+	 needs to be initialized with the structure version (see USBEndpointVersion enum in USB.h).  The bAlternateSetting, bEndpointNumber, and bDirection (kUSBIn, kUSBOut) MUST also be filled
+	 in with the values for the desired descriptor.  Not that the bMaxStreams value for Bulk endpoints is the value specified by the bmAttributes field in the SuperSpeed companion descriptor.
+	 @result returns kIOReturnSuccess if the endpoint is found, and kIOUSBEndpointNotFound if it is not.
+	 */
+    virtual IOReturn GetEndpointPropertiesV3(IOUSBEndpointProperties *endpointProperties);
+    
+    OSMetaClassDeclareReservedUsed(IOUSBInterface,  7);
+    /*!
+	 @function GetInterfaceStatus
+	 @abstract Returns the result of issuing a GET_STATUS request on the device for this interface.
+	 @param  status Pointer to a USBStatus type which will contain the results of the operation.
+	 @result returns kIOReturnSuccess if the request is completed successfully, otherwise returns the result of the Device Request.
+	 */
+	virtual	IOReturn	GetInterfaceStatus(USBStatus *status);
+	
+    OSMetaClassDeclareReservedUsed(IOUSBInterface,  8);
+    /*!
+	 @function SetFunctionSuspendFeature
+	 @abstract Issues a SET_FEATURE(FUNCTION_SUSPEND) to the interface.
+	 @param  options The suspend options passed to the Device Request.
+	 @result returns kIOReturnSuccess if the request is completed successfully, otherwise returns the result of the Device Request.
+	 */
+	virtual IOReturn	SetFunctionSuspendFeature(UInt8 options);
+
+    OSMetaClassDeclareReservedUsed(IOUSBInterface,  9);
+    /*!
+	 @function EnableRemoteWake
+	 @abstract Will enable or disable the USB 3.0 remote wake function for the interface
+	 @param  enable Whether we enable (true) or disable (false) the remote wake..
+	 @result returns kIOReturnSuccess if the request is completed successfully, otherwise returns the result of the Device Request to set the feature.
+	 */
+    virtual IOReturn    EnableRemoteWake(bool enable);
+
+    
     OSMetaClassDeclareReservedUnused(IOUSBInterface,  10);
     OSMetaClassDeclareReservedUnused(IOUSBInterface,  11);
     OSMetaClassDeclareReservedUnused(IOUSBInterface,  12);

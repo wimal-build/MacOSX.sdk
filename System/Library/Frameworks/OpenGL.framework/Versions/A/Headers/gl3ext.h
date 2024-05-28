@@ -1,14 +1,15 @@
 /*
-	Copyright:	(c) 2010-2012 Apple Inc. All rights reserved.
+	Copyright:	(c) 2010-2013 Apple Inc. All rights reserved.
 */
 
 #ifndef __gl3ext_h_
 #define __gl3ext_h_
 
+#include <OpenGL/gltypes.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 #if defined(_WIN32) && !defined(APIENTRY) && !defined(__CYGWIN__) && !defined(__SCITECH_SNAP__)
 #define WIN32_LEAN_AND_MEAN 1
@@ -35,24 +36,54 @@ extern "C" {
 #define GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ARB 0x88FE
 #endif
 
-#ifndef GL_ARB_occlusion_query2
-#define GL_ANY_SAMPLES_PASSED             0x8C2F
+#ifndef GL_ARB_internalformat_query
+#define GL_NUM_SAMPLE_COUNTS              0x9380
 #endif
 
-#ifndef GL_ARB_sampler_objects
-#define GL_SAMPLER_BINDING                0x8919
+#ifndef GL_ARB_sample_shading
+#define GL_SAMPLE_SHADING_ARB             0x8C36
+#define GL_MIN_SAMPLE_SHADING_VALUE_ARB   0x8C37
 #endif
 
-#ifndef GL_ARB_shader_bit_encoding
+#ifndef GL_ARB_shading_language_include
+#define GL_SHADER_INCLUDE_ARB             0x8DAE
+#define GL_NAMED_STRING_LENGTH_ARB        0x8DE9
+#define GL_NAMED_STRING_TYPE_ARB          0x8DEA
 #endif
 
-#ifndef GL_ARB_texture_rgb10_a2ui
-#define GL_RGB10_A2UI                     0x906F
-#endif 
+#ifndef GL_ARB_texture_cube_map_array
+#define GL_TEXTURE_CUBE_MAP_ARRAY_ARB     0x9009
+#define GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_ARB 0x900A
+#define GL_PROXY_TEXTURE_CUBE_MAP_ARRAY_ARB 0x900B
+#define GL_SAMPLER_CUBE_MAP_ARRAY_ARB     0x900C
+#define GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_ARB 0x900D
+#define GL_INT_SAMPLER_CUBE_MAP_ARRAY_ARB 0x900E
+#define GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_ARB 0x900F
+#endif
 
-#ifndef GL_ARB_timer_query
-#define GL_TIME_ELAPSED                   0x88BF
-#define GL_TIMESTAMP                      0x8E28
+#ifndef GL_ARB_texture_gather
+#define GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_ARB 0x8E5E
+#define GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_ARB 0x8E5F
+#define GL_MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS_ARB 0x8F9F
+#endif
+
+#ifndef GL_ARB_texture_storage
+#define GL_TEXTURE_IMMUTABLE_FORMAT       0x912F
+#endif
+
+#ifndef GL_EXT_debug_label
+/* reuse GL_TEXTURE */
+/* reuse GL_FRAMEBUFFER */
+/* reuse GL_RENDERBUFFER */
+/* reuse GL_TRANSFORM_FEEDBACK */
+#define GL_BUFFER_OBJECT_EXT              0x9151
+#define GL_SHADER_OBJECT_EXT              0x8B48
+#define GL_PROGRAM_OBJECT_EXT             0x8B40
+#define GL_VERTEX_ARRAY_OBJECT_EXT        0x9154
+#define GL_QUERY_OBJECT_EXT               0x9153
+#define GL_PROGRAM_PIPELINE_OBJECT_EXT    0x8A4F
+#define GL_SYNC_OBJECT_APPLE              0x8A53
+#define GL_SAMPLER                        0x82E6
 #endif
 
 #ifndef GL_EXT_depth_bounds_test
@@ -87,6 +118,12 @@ extern "C" {
 #define GL_MIRROR_CLAMP_TO_BORDER_EXT     0x8912
 #endif
 
+#ifndef GL_EXT_texture_sRGB_decode
+#define GL_TEXTURE_SRGB_DECODE_EXT        0x8A48
+#define GL_DECODE_EXT                     0x8A49
+#define GL_SKIP_DECODE_EXT                0x8A4A
+#endif
+
 #ifndef GL_APPLE_client_storage
 #define GL_UNPACK_CLIENT_STORAGE_APPLE    0x85B2
 #endif
@@ -105,6 +142,13 @@ extern "C" {
 #define GL_UNSIGNED_SHORT_8_8_REV_APPLE   0x85BB
 #endif
 
+#ifndef GL_APPLE_row_bytes
+#define GL_PACK_ROW_BYTES_APPLE           0x8A15
+#define GL_UNPACK_ROW_BYTES_APPLE         0x8A16
+#define GL_PACK_IMAGE_BYTES_APPLE         0x8A17
+#define GL_UNPACK_IMAGE_BYTES_APPLE       0x8A18
+#endif
+
 #ifndef GL_APPLE_texture_range
 #define GL_TEXTURE_RANGE_LENGTH_APPLE     0x85B7
 #define GL_TEXTURE_RANGE_POINTER_APPLE    0x85B8
@@ -115,7 +159,26 @@ extern "C" {
 #define GL_STORAGE_SHARED_APPLE           0x85BF
 #endif
 
+#ifndef GL_ATI_texture_mirror_once
+#define GL_MIRROR_CLAMP_ATI               0x8742
+#define GL_MIRROR_CLAMP_TO_EDGE_ATI       0x8743
+#endif
+
 /****** Functions Prototypes *********************************/
+
+#ifndef GL_ARB_draw_buffers_blend
+#define GL_ARB_draw_buffers_blend 1
+#ifdef GL3_PROTOTYPES
+GLAPI void APIENTRY glBlendEquationiARB (GLuint buf, GLenum mode);
+GLAPI void APIENTRY glBlendEquationSeparateiARB (GLuint buf, GLenum modeRGB, GLenum modeAlpha);
+GLAPI void APIENTRY glBlendFunciARB (GLuint buf, GLenum src, GLenum dst);
+GLAPI void APIENTRY glBlendFuncSeparateiARB (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
+#endif /* GL3_PROTOTYPES */
+typedef void (APIENTRYP PFNGLBLENDEQUATIONIARBPROC) (GLuint buf, GLenum mode);
+typedef void (APIENTRYP PFNGLBLENDEQUATIONSEPARATEIARBPROC) (GLuint buf, GLenum modeRGB, GLenum modeAlpha);
+typedef void (APIENTRYP PFNGLBLENDFUNCIARBPROC) (GLuint buf, GLenum src, GLenum dst);
+typedef void (APIENTRYP PFNGLBLENDFUNCSEPARATEIARBPROC) (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
+#endif
 
 #ifndef GL_ARB_instanced_arrays
 #define GL_ARB_instanced_arrays 1
@@ -125,54 +188,80 @@ GLAPI void APIENTRY glVertexAttribDivisorARB (GLuint index, GLuint divisor);
 typedef void (APIENTRYP PFNGLVERTEXATTRIBDIVISORARBPROC) (GLuint index, GLuint divisor);
 #endif
 
-#ifndef GL_ARB_sampler_objects
-#define GL_ARB_sampler_objects 1
+#ifndef GL_ARB_internalformat_query
+#define GL_ARB_internalformat_query 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glGenSamplers (GLsizei count, GLuint *samplers);
-GLAPI void APIENTRY glDeleteSamplers (GLsizei count, const GLuint *samplers);
-GLAPI GLboolean APIENTRY glIsSampler (GLuint sampler);
-GLAPI void APIENTRY glBindSampler (GLuint unit, GLuint sampler);
-GLAPI void APIENTRY glSamplerParameteri (GLuint sampler, GLenum pname, GLint param);
-GLAPI void APIENTRY glSamplerParameteriv (GLuint sampler, GLenum pname, const GLint *param);
-GLAPI void APIENTRY glSamplerParameterf (GLuint sampler, GLenum pname, GLfloat param);
-GLAPI void APIENTRY glSamplerParameterfv (GLuint sampler, GLenum pname, const GLfloat *param);
-GLAPI void APIENTRY glSamplerParameterIiv (GLuint sampler, GLenum pname, const GLint *param);
-GLAPI void APIENTRY glSamplerParameterIuiv (GLuint sampler, GLenum pname, const GLuint *param);
-GLAPI void APIENTRY glGetSamplerParameteriv (GLuint sampler, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetSamplerParameterIiv (GLuint sampler, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetSamplerParameterfv (GLuint sampler, GLenum pname, GLfloat *params);
-GLAPI void APIENTRY glGetSamplerParameterIuiv (GLuint sampler, GLenum pname, GLuint *params);
+GLAPI void APIENTRY glGetInternalformativ (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params);
 #endif /* GL3_PROTOTYPES */
-typedef void (APIENTRYP PFNGLGENSAMPLERSPROC) (GLsizei count, GLuint *samplers);
-typedef void (APIENTRYP PFNGLDELETESAMPLERSPROC) (GLsizei count, const GLuint *samplers);
-typedef GLboolean (APIENTRYP PFNGLISSAMPLERPROC) (GLuint sampler);
-typedef void (APIENTRYP PFNGLBINDSAMPLERPROC) (GLuint unit, GLuint sampler);
-typedef void (APIENTRYP PFNGLSAMPLERPARAMETERIPROC) (GLuint sampler, GLenum pname, GLint param);
-typedef void (APIENTRYP PFNGLSAMPLERPARAMETERIVPROC) (GLuint sampler, GLenum pname, const GLint *param);
-typedef void (APIENTRYP PFNGLSAMPLERPARAMETERFPROC) (GLuint sampler, GLenum pname, GLfloat param);
-typedef void (APIENTRYP PFNGLSAMPLERPARAMETERFVPROC) (GLuint sampler, GLenum pname, const GLfloat *param);
-typedef void (APIENTRYP PFNGLSAMPLERPARAMETERIIVPROC) (GLuint sampler, GLenum pname, const GLint *param);
-typedef void (APIENTRYP PFNGLSAMPLERPARAMETERIUIVPROC) (GLuint sampler, GLenum pname, const GLuint *param);
-typedef void (APIENTRYP PFNGLGETSAMPLERPARAMETERIVPROC) (GLuint sampler, GLenum pname, GLint *params);
-typedef void (APIENTRYP PFNGLGETSAMPLERPARAMETERIIVPROC) (GLuint sampler, GLenum pname, GLint *params);
-typedef void (APIENTRYP PFNGLGETSAMPLERPARAMETERFVPROC) (GLuint sampler, GLenum pname, GLfloat *params);
-typedef void (APIENTRYP PFNGLGETSAMPLERPARAMETERIUIVPROC) (GLuint sampler, GLenum pname, GLuint *params);
+typedef void (APIENTRYP PFNGLGETINTERNALFORMATIVPROC) (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params);
 #endif
 
-#ifndef GL_ARB_texture_rgb10_a2ui
-#define GL_ARB_texture_rgb10_a2ui 1
+#ifndef GL_ARB_sample_shading
+#define GL_ARB_sample_shading 1
+#ifdef GL3_PROTOTYPES
+GLAPI void APIENTRY glMinSampleShadingARB (GLclampf value);
+#endif /* GL3_PROTOTYPES */
+typedef void (APIENTRYP PFNGLMINSAMPLESHADINGARBPROC) (GLclampf value);
 #endif
 
-#ifndef GL_ARB_timer_query
-#define GL_ARB_timer_query 1
+#ifndef GL_ARB_shading_language_include
+#define GL_ARB_shading_language_include 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glQueryCounter (GLuint id, GLenum target);
-GLAPI void APIENTRY glGetQueryObjecti64v (GLuint id, GLenum pname, GLint64 *params);
-GLAPI void APIENTRY glGetQueryObjectui64v (GLuint id, GLenum pname, GLuint64 *params);
+GLAPI void APIENTRY glNamedStringARB (GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string);
+GLAPI void APIENTRY glDeleteNamedStringARB (GLint namelen, const GLchar *name);
+GLAPI void APIENTRY glCompileShaderIncludeARB (GLuint shader, GLsizei count, const GLchar* const *path, const GLint *length);
+GLAPI GLboolean APIENTRY glIsNamedStringARB (GLint namelen, const GLchar *name);
+GLAPI void APIENTRY glGetNamedStringARB (GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string);
+GLAPI void APIENTRY glGetNamedStringivARB (GLint namelen, const GLchar *name, GLenum pname, GLint *params);
 #endif /* GL3_PROTOTYPES */
-typedef void (APIENTRYP PFNGLQUERYCOUNTERPROC) (GLuint id, GLenum target);
-typedef void (APIENTRYP PFNGLGETQUERYOBJECTI64VPROC) (GLuint id, GLenum pname, GLint64 *params);
-typedef void (APIENTRYP PFNGLGETQUERYOBJECTUI64VPROC) (GLuint id, GLenum pname, GLuint64 *params);
+typedef void (APIENTRYP PFNGLNAMEDSTRINGARBPROC) (GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string);
+typedef void (APIENTRYP PFNGLDELETENAMEDSTRINGARBPROC) (GLint namelen, const GLchar *name);
+typedef void (APIENTRYP PFNGLCOMPILESHADERINCLUDEARBPROC) (GLuint shader, GLsizei count, const GLchar* const *path, const GLint *length);
+typedef GLboolean (APIENTRYP PFNGLISNAMEDSTRINGARBPROC) (GLint namelen, const GLchar *name);
+typedef void (APIENTRYP PFNGLGETNAMEDSTRINGARBPROC) (GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string);
+typedef void (APIENTRYP PFNGLGETNAMEDSTRINGIVARBPROC) (GLint namelen, const GLchar *name, GLenum pname, GLint *params);
+#endif
+
+#ifndef GL_ARB_texture_cube_map_array
+#define GL_ARB_texture_cube_map_array 1
+#endif
+
+#ifndef GL_ARB_texture_gather
+#define GL_ARB_texture_gather 1
+#endif
+
+#ifndef GL_ARB_texture_storage
+#define GL_ARB_texture_storage 1
+#ifdef GL3_PROTOTYPES
+GLAPI void APIENTRY glTexStorage1D (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width);
+GLAPI void APIENTRY glTexStorage2D (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
+GLAPI void APIENTRY glTexStorage3D (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
+#endif /* GL3_PROTOTYPES */
+typedef void (APIENTRYP PFNGLTEXSTORAGE1DPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width);
+typedef void (APIENTRYP PFNGLTEXSTORAGE2DPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
+typedef void (APIENTRYP PFNGLTEXSTORAGE3DPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
+#endif
+
+#ifndef GL_EXT_debug_label
+#define GL_EXT_debug_label 1
+#ifdef GL3_PROTOTYPES
+GLAPI void APIENTRY glLabelObjectEXT (GLenum type, GLuint object, GLsizei length, const GLchar *label);
+GLAPI void APIENTRY glGetObjectLabelEXT (GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label);
+#endif /* GL3_PROTOTYPES */
+typedef void (APIENTRYP PFNGLLABELOBJECTEXTPROC) (GLenum type, GLuint object, GLsizei length, const GLchar *label);
+typedef void (APIENTRYP PFNGLGETOBJECTLABELEXTPROC) (GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label);
+#endif
+
+#ifndef GL_EXT_debug_marker
+#define GL_EXT_debug_marker 1
+#ifdef GL3_PROTOTYPES
+GLAPI void APIENTRY glInsertEventMarkerEXT (GLsizei length, const char *marker);
+GLAPI void APIENTRY glPushGroupMarkerEXT (GLsizei length, const char *marker);
+GLAPI void APIENTRY glPopGroupMarkerEXT (void);
+#endif /* GL3_PROTOTYPES */
+typedef void (APIENTRYP PFNGLINSERTEVENTMARKEREXTPROC) (GLsizei length, const char *marker);
+typedef void (APIENTRYP PFNGLPUSHGROUPMARKEREXTPROC) (GLsizei length, const char *marker);
+typedef void (APIENTRYP PFNGLPOPGROUPMARKEREXTPROC) (void);
 #endif
 
 #ifndef GL_EXT_depth_bounds_test
@@ -199,12 +288,28 @@ typedef void (APIENTRYP PFNGLDEPTHBOUNDSEXTPROC) (GLclampd zmin, GLclampd zmax);
 #define GL_EXT_texture_mirror_clamp 1
 #endif
 
+#ifndef GL_EXT_texture_sRGB_decode
+#define GL_EXT_texture_sRGB_decode 1
+#endif
+
 #ifndef GL_APPLE_client_storage
 #define GL_APPLE_client_storage 1
 #endif
 
 #ifndef GL_APPLE_container_object_shareable
 #define GL_APPLE_container_object_shareable 1
+#endif
+
+#ifndef GL_APPLE_flush_render
+#define GL_APPLE_flush_render 1
+#ifdef GL3_PROTOTYPES
+GLAPI void APIENTRY glFlushRenderAPPLE (void);
+GLAPI void APIENTRY glFinishRenderAPPLE (void);
+GLAPI void APIENTRY glSwapAPPLE (void);
+#endif /* GL3_PROTOTYPES */
+typedef void (APIENTRYP PFNGLFLUSHRENDERAPPLEPROC) (void);
+typedef void (APIENTRYP PFNGLFINISHRENDERAPPLEPROC) (void);
+typedef void (APIENTRYP PFNGLSWAPAPPLEPROC) (void);
 #endif
 
 #ifndef GL_APPLE_object_purgeable
@@ -215,12 +320,16 @@ GLAPI GLenum APIENTRY glObjectUnpurgeableAPPLE (GLenum objectType, GLuint name, 
 GLAPI void APIENTRY glGetObjectParameterivAPPLE (GLenum objectType, GLuint name, GLenum pname, GLint *params);
 #endif /* GL3_PROTOTYPES */
 typedef GLenum (APIENTRYP PFNGLOBJECTPURGEABLEAPPLEPROC) (GLenum objectType, GLuint name, GLenum option);
-typedef GLenum (APIENTRYP PFNGLOBJECTUNPURGABLEAPPLEPROC) (GLenum objectType, GLuint name, GLenum option);
+typedef GLenum (APIENTRYP PFNGLOBJECTUNPURGEABLEAPPLEPROC) (GLenum objectType, GLuint name, GLenum option);
 typedef void (APIENTRYP PFNGLGETOBJECTPARAMETERIVAPPLEPROC) (GLenum objectType, GLuint name, GLenum pname, GLint *params);
 #endif
 
 #ifndef GL_APPLE_rgb_422
 #define GL_APPLE_rgb_422 1
+#endif
+
+#ifndef GL_APPLE_row_bytes
+#define GL_APPLE_row_bytes 1
 #endif
 
 #ifndef GL_APPLE_texture_range
@@ -229,8 +338,20 @@ typedef void (APIENTRYP PFNGLGETOBJECTPARAMETERIVAPPLEPROC) (GLenum objectType, 
 GLAPI void APIENTRY glTextureRangeAPPLE (GLenum target, GLsizei length, const GLvoid *pointer);
 GLAPI void APIENTRY glGetTexParameterPointervAPPLE (GLenum target, GLenum pname, GLvoid **params);
 #endif /* GL3_PROTOTYPES */
-typedef void (APIENTRYP PFNGLTEXTURERANGLEAPPLEPROC) (GLenum target, GLsizei length, const GLvoid *pointer);
+typedef void (APIENTRYP PFNGLTEXTURERANGEAPPLEPROC) (GLenum target, GLsizei length, const GLvoid *pointer);
 typedef void (APIENTRYP PFNGLGETTEXPARAMETERPOINTERVAPPLEPROC) (GLenum target, GLenum pname, GLvoid **params);
+#endif
+
+#ifndef GL_ATI_texture_mirror_once
+#define GL_ATI_texture_mirror_once 1
+#endif
+
+#ifndef GL_NV_texture_barrier
+#define GL_NV_texture_barrier 1
+#ifdef GL3_PROTOTYPES
+GLAPI void APIENTRY glTextureBarrierNV (void);
+#endif /* GL3_PROTOTYPES */
+typedef void (APIENTRYP PFNGLTEXTUREBARRIERNVPROC) (void);
 #endif
 
 #ifdef __cplusplus

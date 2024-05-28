@@ -3,8 +3,6 @@
  
      Contains:   Control Manager interfaces
  
-     Version:    HIToolbox-624~3
- 
      Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on

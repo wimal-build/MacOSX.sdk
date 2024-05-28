@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright © 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -152,6 +152,9 @@ enum {
     kPerPortOverCurrentBit  = (1 << 3),
     kNoOverCurrentBit       = (1 << 4),
 	
+    kUSBHubOvercurrentMask  = 0x18,
+    kUSBHubOvercurrentShift = 3,
+    
 	kHubTTThinkTimeMask		= 0x60,
 	kHubTTThinkTimeShift	= 5,
 	

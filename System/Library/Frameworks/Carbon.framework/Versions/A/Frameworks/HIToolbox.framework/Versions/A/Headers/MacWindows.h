@@ -3,8 +3,6 @@
  
      Contains:   Window Manager Interfaces
  
-     Version:    HIToolbox-624~3
- 
      Copyright:  © 1997-2008 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on

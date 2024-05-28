@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright © 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -46,9 +46,9 @@ extern const OSSymbol *gUSBDeviceProtocol;
 class IOUSBController;
 class IOUSBPipe;
 
-/*!
- @class IOUSBNub
- @abstract Super class for for IOUSBDevice and IOUSBInterface.
+/*
+ IOUSBNub
+ Super class for for IOUSBDevice and IOUSBInterface.
  */
 class IOUSBNub : public IOService
 {

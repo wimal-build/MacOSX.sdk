@@ -5,8 +5,7 @@
 #ifndef __glext_h_
 #define __glext_h_
 
-#include <inttypes.h>
-
+#include <OpenGL/gltypes.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -103,6 +102,8 @@ extern "C" {
 #define GL_EXT_blend_minmax                                  1
 #define GL_EXT_blend_subtract                                1
 #define GL_EXT_clip_volume_hint                              1
+#define GL_EXT_debug_label                                   1
+#define GL_EXT_debug_marker                                  1
 #define GL_EXT_depth_bounds_test                             1
 #define GL_EXT_draw_buffers2                                 1
 #define GL_EXT_draw_range_elements                           1
@@ -179,6 +180,7 @@ extern "C" {
 #define GL_NV_multisample_filter_hint                        1
 #define GL_NV_point_sprite                                   1
 #define GL_NV_texgen_reflection                              1
+#define GL_NV_texture_barrier                                1
 #define GL_NV_vertex_program2_option                         1
 #define GL_NV_vertex_program3                                1
 #define GL_SGI_color_matrix                                  1
@@ -990,6 +992,16 @@ typedef uint64_t GLuint64EXT;
 #define GL_POST_CONVOLUTION_GREEN_BIAS_EXT                   0x8021
 #define GL_POST_CONVOLUTION_BLUE_BIAS_EXT                    0x8022
 #define GL_POST_CONVOLUTION_ALPHA_BIAS_EXT                   0x8023
+#endif
+
+#if GL_EXT_debug_label
+#define GL_BUFFER_OBJECT_EXT                                 0x9151
+#define GL_SHADER_OBJECT_EXT                                 0x8B48
+#define GL_PROGRAM_OBJECT_EXT                                0x8B40
+#define GL_QUERY_OBJECT_EXT                                  0x9153
+#define GL_VERTEX_ARRAY_OBJECT_EXT                           0x9154
+#define GL_SAMPLER                                           0x82E6
+#define GL_SYNC_OBJECT_APPLE								 0x8A53
 #endif
 
 #if GL_EXT_depth_bounds_test
@@ -2154,12 +2166,12 @@ extern void glDrawBuffersARB(GLsizei n, const GLenum *bufs);
 typedef void (* glDrawElementsBaseVertexProcPtr) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint base_vertex);
 typedef void (* glDrawRangeElementsBaseVertexProcPtr) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint base_vertex);
 typedef void (* glDrawElementsInstancedBaseVertexProcPtr) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint base_vertex);
-typedef void (* glMultiDrawElementsBaseVertexProcPtr) (GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount, const GLint *base_vertex);
+typedef void (* glMultiDrawElementsBaseVertexProcPtr) (GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei primcount, const GLint *base_vertex);
 #else
 extern void glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint base_vertex);
 extern void glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint base_vertex);
 extern void glDrawElementsInstancedBaseVertex(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint base_vertex);
-extern void glMultiDrawElementsBaseVertex(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount, const GLint *base_vertex);
+extern void glMultiDrawElementsBaseVertex(GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei primcount, const GLint *base_vertex);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
@@ -2355,7 +2367,7 @@ typedef void (* glDeleteObjectARBProcPtr) (GLhandleARB obj);
 typedef GLhandleARB (* glGetHandleARBProcPtr) (GLenum pname);
 typedef void (* glDetachObjectARBProcPtr) (GLhandleARB containerObj, GLhandleARB attachedObj);
 typedef GLhandleARB (* glCreateShaderObjectARBProcPtr) (GLenum shaderType);
-typedef void (* glShaderSourceARBProcPtr) (GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+typedef void (* glShaderSourceARBProcPtr) (GLhandleARB shaderObj, GLsizei count, const GLcharARB* const *string, const GLint *length);
 typedef void (* glCompileShaderARBProcPtr) (GLhandleARB shaderObj);
 typedef GLhandleARB (* glCreateProgramObjectARBProcPtr) (void);
 typedef void (* glAttachObjectARBProcPtr) (GLhandleARB containerObj, GLhandleARB obj);
@@ -2395,7 +2407,7 @@ extern void glDeleteObjectARB(GLhandleARB obj);
 extern GLhandleARB glGetHandleARB(GLenum pname);
 extern void glDetachObjectARB(GLhandleARB containerObj, GLhandleARB attachedObj);
 extern GLhandleARB glCreateShaderObjectARB(GLenum shaderType);
-extern void glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+extern void glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB* const *string, const GLint *length);
 extern void glCompileShaderARB(GLhandleARB shaderObj);
 extern GLhandleARB glCreateProgramObjectARB(void);
 extern void glAttachObjectARB(GLhandleARB containerObj, GLhandleARB obj);
@@ -2847,6 +2859,28 @@ extern void glCopyTexSubImage3DEXT(GLenum, GLint, GLint, GLint, GLint, GLint, GL
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
+#if GL_EXT_debug_label
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glLabelObjectEXTProcPtr) (GLenum type, GLuint object, GLsizei length, const GLchar *label);
+typedef void (* glGetObjectLabelEXTProcPtr) (GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label);
+#else
+extern void glLabelObjectEXT(GLenum type, GLuint object, GLsizei length, const GLchar *label);
+extern void glGetObjectLabelEXT(GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_EXT_debug_marker
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glInsertEventMarkerEXTProcPtr) (GLsizei length, const char *marker);
+typedef void (* glPushGroupMarkerEXTProcPtr) (GLsizei length, const char *marker);
+typedef void (* glPopGroupMarkerEXTProcPtr) (void);
+#else
+extern void glInsertEventMarkerEXT(GLsizei length, const char *marker);
+extern void glPushGroupMarkerEXT(GLsizei length, const char *marker);
+extern void glPopGroupMarkerEXT(void);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
 #if GL_EXT_depth_bounds_test
 #ifdef GL_GLEXT_FUNCTION_POINTERS
 typedef void (* glDepthBoundsEXTProcPtr) (GLclampd zmin, GLclampd zmax);
@@ -3072,10 +3106,10 @@ extern void glResetMinmaxEXT(GLenum);
 #if GL_EXT_multi_draw_arrays
 #ifdef GL_GLEXT_FUNCTION_POINTERS
 typedef void (* glMultiDrawArraysEXTProcPtr) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-typedef void (* glMultiDrawElementsEXTProcPtr) (GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+typedef void (* glMultiDrawElementsEXTProcPtr) (GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei primcount);
 #else
 extern void glMultiDrawArraysEXT(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-extern void glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+extern void glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei primcount);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 
@@ -3232,7 +3266,7 @@ typedef void (* glBindBufferOffsetEXTProcPtr) (GLenum target, GLuint index, GLui
 typedef void (* glBindBufferBaseEXTProcPtr) (GLenum target, GLuint index, GLuint buffer);
 typedef void (* glBeginTransformFeedbackEXTProcPtr) (GLenum primitiveMode);
 typedef void (* glEndTransformFeedbackEXTProcPtr) (void);
-typedef void (* glTransformFeedbackVaryingsEXTProcPtr) (GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode);
+typedef void (* glTransformFeedbackVaryingsEXTProcPtr) (GLuint program, GLsizei count, const GLchar* const *varyings, GLenum bufferMode);
 typedef void (* glGetTransformFeedbackVaryingEXTProcPtr) (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
 #else
 extern void glBindBufferRangeEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
@@ -3240,7 +3274,7 @@ extern void glBindBufferOffsetEXT(GLenum target, GLuint index, GLuint buffer, GL
 extern void glBindBufferBaseEXT(GLenum target, GLuint index, GLuint buffer);
 extern void glBeginTransformFeedbackEXT(GLenum primitiveMode);
 extern void glEndTransformFeedbackEXT(void);
-extern void glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode);
+extern void glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar* const *varyings, GLenum bufferMode);
 extern void glGetTransformFeedbackVaryingEXT(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
 #endif
 #endif /* GL_EXT_transform_feedback */
@@ -3514,6 +3548,14 @@ typedef void (* glGetCombinerStageParameterfvNVProcPtr) (GLenum, GLenum, GLfloat
 #else
 extern void glCombinerStageParameterfvNV (GLenum, GLenum, const GLfloat *);
 extern void glGetCombinerStageParameterfvNV (GLenum, GLenum, GLfloat *);
+#endif /* GL_GLEXT_FUNCTION_POINTERS */
+#endif
+
+#if GL_NV_texture_barrier
+#ifdef GL_GLEXT_FUNCTION_POINTERS
+typedef void (* glTextureBarrierNVProcPtr) (void);
+#else
+extern void glTextureBarrierNV (void);
 #endif /* GL_GLEXT_FUNCTION_POINTERS */
 #endif
 

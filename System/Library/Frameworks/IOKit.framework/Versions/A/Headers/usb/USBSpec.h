@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright © 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -158,8 +158,18 @@ enum {
 	kUSBFeatureU1Enable				= 48,		// Device
 	kUSBFeatureU2Enable				= 49,		// Device
 	kUSBFeatureLTMEnable			= 50		// Device
-}; 
+};
 
+    /*!
+	 @enum Miscellaneous bits and masks
+	 */
+	enum {
+		kUSBFunctionRemoteWakeCapableBit	=	0,		//  GET_STATUS
+		kUSBFunctionRemoteWakeupBit			=	1,		//  GET_STATUS
+		kUSBLowPowerSuspendStateBit			=	0,		//  SET_FEATURE(FUNCTION_SUSPEND)
+		kUSBFunctionRemoteWakeEnableBit		=	1		//  SET_FEATURE(FUNCTION_SUSPEND)
+		};
+	
     /*!
     @enum USB Power constants
     @discussion Constants relating to USB Power.
@@ -360,6 +370,11 @@ enum {
     
 };
 
+	enum USBClassSpecificDesc {
+		kUSBClassSpecificDescriptor		= 0x24
+	};
+	
+
 /*!
 @enum	Interface Protocol
  @discussion Reported in the bInterfaceProtocol field of the Interface Descriptor.
@@ -427,12 +442,23 @@ enum {
     kUSBbEndpointDirectionBit				= 7,
     kUSBbEndpointDirectionMask				= ( 1 << kUSBbEndpointDirectionBit ),
     kUSBEndpointDirectionOut				= 0x00,
-    kUSBEndpointDirectionIn				= 0x80,
-    kUSBEndpointbmAttributesTransferTypeMask		= 0x03,
-    kUSBEndpointbmAttributesSynchronizationTypeMask	= 0x0c,
+    kUSBEndpointDirectionIn					= 0x80,
+	
+    kUSBEndpointbmAttributesTransferTypeMask			= 0x03,
+    kUSBEndpointbmAttributesSynchronizationTypeMask		= 0x0c,
     kUSBEndpointbmAttributesSynchronizationTypeShift	= 2,
-    kUSBEndpointbmAttributesUsageTypeMask		= 0x30,
-    kUSBEndpointbmAttributesUsageTypeShift		= 4
+    kUSBEndpointbmAttributesUsageTypeMask				= 0x30,
+    kUSBEndpointbmAttributesUsageTypeShift				= 4,
+	
+	kUSBPeriodicInterruptUsageType			= 0,
+	kUSBNotificationInterruptUsageType 		= 1,
+	kUSBNoSynchronizationIsocSyncType		= 0,
+	kUSBAsynchronousIsocSyncType			= 1,
+	kUSBAdaptiveIsocSyncType				= 2,
+	kUSBSynchronousIsocSyncType				= 3,
+	kUSBDataIsocUsageType					= 0,
+	kUSBFeedbackIsocUsageType				= 1,
+	kUSBImplicitFeedbackDataIsocUsageType 	= 2
 };
 
 	/*!

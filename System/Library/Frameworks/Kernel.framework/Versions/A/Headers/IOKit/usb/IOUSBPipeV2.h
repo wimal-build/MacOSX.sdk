@@ -1,21 +1,21 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright © 2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.2 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.  
- * Please see the License for the specific language governing rights and 
- * limitations under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
@@ -46,10 +46,10 @@ class IOUSBPipeV2 : public IOUSBPipe
 protected:
 		
 	IOUSBSuperSpeedEndpointCompanionDescriptor *	_sscd;
-	UInt32											_maxStream;
-	UInt32                      					_maxBurst;
+	UInt32											_maxStream;										// number to be used as an exponent to get the actual maximum
+	UInt32                      					_maxBurst;                                      // zero based (i.e. 0=1 burst)
     UInt32                                          _configuredStreams;
-	UInt32											_mult;
+	UInt32											_mult;                                          // zero based max value is 2 (meaning 3 packets)
 	UInt32											_bytesPerInterval;
 
     struct V2PipeExpansionData
@@ -65,8 +65,10 @@ public:
     using IOUSBPipe::Write;
     using IOUSBPipe::Abort;
     
-    
-		
+    // inherited from the IOUSBPipe class
+	virtual IOReturn SetPipePolicy(UInt16 maxPacketSize, UInt8 maxInterval);		//this must have the same KPI as IOUSBPipe::SetPipePolicy
+
+	// New to IOUSBPipeV2
 	virtual bool InitToEndpoint(const IOUSBEndpointDescriptor *endpoint, IOUSBSuperSpeedEndpointCompanionDescriptor *sscd, UInt8 speed,
 								USBDeviceAddress address, IOUSBController * controller, IOUSBDevice * device, IOUSBInterface * interface);
 	
@@ -116,8 +118,8 @@ public:
 	virtual UInt32 SupportsStreams(void);
 	
     /*!
-	 @function SupportsStreams
-     @param streamID ID of the highest stream to creat (pass 0 to destroy streams)
+	 @function CreateStreams
+     @param streamID ID of the highest stream to create (pass 0 to destroy streams)
 	 */
 	virtual IOReturn CreateStreams(UInt32 maxStreams);
 	
@@ -191,5 +193,4 @@ public:
 	OSMetaClassDeclareReservedUnused(IOUSBPipeV2,  29);
 };
 
-#endif
-
+#endif	

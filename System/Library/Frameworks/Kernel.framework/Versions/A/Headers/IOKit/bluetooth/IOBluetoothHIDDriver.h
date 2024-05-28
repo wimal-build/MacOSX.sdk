@@ -119,6 +119,16 @@ class IOBluetoothHIDDriver : public IOHIDDevice
         OSString*				connectionNotificationString;
         
 		IOTimerEventSource*		deviceConnectTimer;
+		
+		bool					mNeedToDropData;
+		
+		UInt32					mWakeTime;
+		
+		UInt32					mDriverLoadTime;
+		
+		IOTimerEventSource*		mReadyToSleepTimer;
+
+		
     };
     ExpansionData	*_expansionData;
 	
@@ -209,6 +219,9 @@ public:
 	virtual void		incrementOutstandingIO();
 	virtual void		decrementOutstandingIO();
 	
+	// ReadyToSleepTimeout Handler
+	static	void		ReadyToSleepTimerFired( OSObject* owner, IOTimerEventSource* sender );
+	
 private:
 	// Lazy Interrupt Channel Methods
 	static	bool		interruptChannelOpeningCallback(	void* me, void* ignoreMe, IOService* newService, IONotifier *notifier );
@@ -239,9 +252,12 @@ public:
     OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver,  7 );
 	virtual void			handleStopWL( IOService *  provider );
 	
+    OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver,  8 );
+	virtual UInt32			GetCurrentTime( void );
 	
-    OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver,  8 );
-    OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver,  9 );
+    OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver,  9 );
+	virtual void			handleReadyToSleepTimerFired();
+
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 10 );
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 11 );
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 12 );

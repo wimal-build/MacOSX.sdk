@@ -3,8 +3,6 @@
  
      Contains:   Carbon Help Manager Interfaces.
  
-     Version:    HIToolbox-624~3
- 
      Copyright:  © 1998-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on

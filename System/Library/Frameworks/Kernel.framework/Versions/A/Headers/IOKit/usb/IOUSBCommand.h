@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright © 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -54,10 +54,10 @@ typedef enum {
 
 #define 	kUSBCommandScratchBuffers	10
 
-/*!
- @class IOUSBCommand
- @abstract A subclass of IOCommand that is used to add USB specific data.
- */
+/*
+ IOUSBCommand
+ Subclass of IOCommand that is used to add USB specific data.
+*/
 class IOUSBCommand : public IOCommand
 {
     OSDeclareAbstractStructors(IOUSBCommand)

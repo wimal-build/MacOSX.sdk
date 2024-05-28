@@ -1,20 +1,21 @@
 /*
- * Copyright (c) 1998-2007 Apple Inc. All rights reserved.
+ * Copyright © 1998-2007 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.2 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.  
- * Please see the License for the specific language governing rights and 
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
  * limitations under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
@@ -64,6 +65,7 @@ class IOUSBDevice : public IOUSBNub
     friend class IOUSBInterface;
     friend class IOUSBPipe;
 	friend class IOUSBInterfaceUserClientV2;
+	friend class IOUSBInterfaceUserClientV3;
 	friend class IOUSBDeviceUserClientV2;
 
     OSDeclareDefaultStructors(IOUSBDevice)
@@ -99,8 +101,8 @@ protected:
         bool					_doneWaiting;                   // Obsolete
         bool					_notifiedWhileBooting;          // Obsolete
         IOWorkLoop *			_workLoop;
-        IOTimerEventSource *	_notifierHandlerTimer;
-        UInt32					_notificationType;
+        IOTimerEventSource *	_notifierHandlerTimer;          // Obsolete
+        UInt32					_notificationType;              // Obsolete
         bool					_suspendInProgress;
         bool					_portHasBeenSuspendedOrResumed;
         bool					_addExtraResetTime;
@@ -124,7 +126,12 @@ protected:
 	    OSArray*				_interfaceArray;
 		UInt32					_standardUSBPortPower;				// Largest amount of current that this port can provide (e.g. 500mA for USB2.0, 900mA for USB3.0)
 		bool					_usingExtra400mAforUSB3;
-    };	
+		UInt32					_wakeRevocablePowerAllocated;		// how much extra "revocable" power during wake did we already give our client
+		UInt32					_wakeUSB3PowerAllocated;			// how much extra "USB3" power during wake did we already give our client
+		bool					_attachedToEnclosureAndUsingExtraWakePower;
+		bool					_deviceIsOnThunderbolt;					// Will be set if all our upstream hubs are on Thunderbolt
+
+    };
     ExpansionData * _expansionData;
 
     const IOUSBConfigurationDescriptor *FindConfig(UInt8 configValue, UInt8 *configIndex=0);
@@ -351,9 +358,12 @@ public:
 
     virtual void 	DisplayNotEnoughPowerNotice();
     
-    // this is a non-virtual function so that we don't have to take up a binary compatibility slot.
+    // These are non-virtual function so that we don't have to take up a binary compatibility slot.
     UInt16	GetbcdUSB(void);
+    UInt8   GetDeviceClass(void);
+    UInt8   GetDeviceSubClass(void);
     UInt8	GetProtocol(void);
+    UInt32  GetLocationID(void);
 	void	SetBusPowerAvailable(UInt32 newPower);
 
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  0);
@@ -417,19 +427,13 @@ public:
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  4);
     /*!
         @function DisplayUserNotification
-        @abstract  Will use the KUNCUserNotification mechanism to display a notification to the user.
+        @abstract  Will use the Notification Center to display a notification to the user.  Only Low Power and Overcurrent notifications are supported.
         @param notificationType Which notification to display.
      */
     virtual void	DisplayUserNotification(UInt32 notificationType);
     
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  5);
-	/*!
-        @function MakePipe
-	 @abstract build a pipe on a given endpoint
-	 @param ep A description of the endpoint
-	 @param interface The IOUSBInterface object requesting the pipe
-	 returns the desired IOUSBPipe object
-	 */
+	// Deprecated but needed for binary compatibility
     virtual IOUSBPipe*	MakePipe(const IOUSBEndpointDescriptor *ep, IOUSBInterface *interface);
     
 	
@@ -545,11 +549,10 @@ public:
     virtual void 			SetAddress(USBDeviceAddress address);
     
 
-	
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  17);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  18);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  19);
-    
+
 private:
 
     static void			ProcessPortResetEntry(__unused OSObject *target){};			// obsolete
@@ -563,8 +566,7 @@ private:
     static void			DoMessageClientsEntry(OSObject *target, thread_call_param_t messageStruct);
     void				DoMessageClients( void * messageStructPtr);
 	
-    static void			DisplayUserNotificationForDeviceEntry (OSObject *owner, IOTimerEventSource *sender);
-    void				DisplayUserNotificationForDevice( );
+    void				DisplayUserNotificationForDevice(UInt32 notificationType, UInt8 port);
     
     UInt32              SimpleUnicodeToUTF8(UInt16 uChar, UInt8 utf8Bytes[4]);
     void                SwapUniWords (UInt16  **unicodeString, UInt32 uniSize);

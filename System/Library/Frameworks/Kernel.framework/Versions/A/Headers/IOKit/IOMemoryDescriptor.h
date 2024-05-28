@@ -38,6 +38,7 @@
 
 class IOMemoryMap;
 class IOMapper;
+class IOService;
 
 /*
  * Direction of transfer, with respect to the described memory.
@@ -52,7 +53,12 @@ enum IODirection
     kIODirectionIn    = 0x1,	// User land 'read',  same as VM_PROT_READ
     kIODirectionOut   = 0x2,	// User land 'write', same as VM_PROT_WRITE
     kIODirectionOutIn = kIODirectionOut | kIODirectionIn,
-    kIODirectionInOut = kIODirectionIn  | kIODirectionOut
+    kIODirectionInOut = kIODirectionIn  | kIODirectionOut,
+
+    // these flags are valid for the prepare() method only
+    kIODirectionPrepareToPhys32   = 0x00000004,
+    kIODirectionPrepareNoFault    = 0x00000008,
+    kIODirectionPrepareReserved1  = 0x00000010,
 };
 #ifdef __LP64__
 typedef IOOptionBits IODirection;
@@ -80,7 +86,8 @@ enum {
 
     kIOMemoryAsReference	= 0x00000100,
     kIOMemoryBufferPageable	= 0x00000400,
-    kIOMemoryMapperNone		= 0x00000800,
+    kIOMemoryMapperNone		= 0x00000800,	// Shared with Buffer MD
+    kIOMemoryHostOnly           = 0x00001000,   // Never DMA accessible
     kIOMemoryPersistent		= 0x00010000,
     kIOMemoryThreadSafe		= 0x00100000,	// Shared with Buffer MD
     kIOMemoryClearEncrypt	= 0x00200000,	// Shared with Buffer MD
@@ -91,9 +98,24 @@ enum {
 enum 
 {
     kIOMemoryPurgeableKeepCurrent = 1,
+
     kIOMemoryPurgeableNonVolatile = 2,
     kIOMemoryPurgeableVolatile    = 3,
-    kIOMemoryPurgeableEmpty       = 4
+    kIOMemoryPurgeableEmpty       = 4,
+
+    // modifiers for kIOMemoryPurgeableVolatile behavior
+    kIOMemoryPurgeableVolatileGroup0           = VM_VOLATILE_GROUP_0,
+    kIOMemoryPurgeableVolatileGroup1           = VM_VOLATILE_GROUP_1,
+    kIOMemoryPurgeableVolatileGroup2           = VM_VOLATILE_GROUP_2,
+    kIOMemoryPurgeableVolatileGroup3           = VM_VOLATILE_GROUP_3,
+    kIOMemoryPurgeableVolatileGroup4           = VM_VOLATILE_GROUP_4,
+    kIOMemoryPurgeableVolatileGroup5           = VM_VOLATILE_GROUP_5,
+    kIOMemoryPurgeableVolatileGroup6           = VM_VOLATILE_GROUP_6,
+    kIOMemoryPurgeableVolatileGroup7           = VM_VOLATILE_GROUP_7,
+    kIOMemoryPurgeableVolatileBehaviorFifo     = VM_PURGABLE_BEHAVIOR_FIFO,
+    kIOMemoryPurgeableVolatileBehaviorLifo     = VM_PURGABLE_BEHAVIOR_LIFO,
+    kIOMemoryPurgeableVolatileOrderingObsolete = VM_PURGABLE_ORDERING_OBSOLETE,
+    kIOMemoryPurgeableVolatileOrderingNormal   = VM_PURGABLE_ORDERING_NORMAL,
 };
 enum 
 {
@@ -105,6 +127,26 @@ enum
 };
 
 #define	IOMEMORYDESCRIPTOR_SUPPORTS_DMACOMMAND	1
+
+struct IODMAMapSpecification
+{
+	uint64_t    alignment;
+	IOService * device;
+	uint32_t    options;
+	uint8_t     numAddressBits;
+	uint8_t     resvA[3];
+	uint32_t    resvB[4];
+};
+
+enum
+{
+    kIODMAMapWriteAccess          = 0x00000002,
+    kIODMAMapPhysicallyContiguous = 0x00000010,
+    kIODMAMapDeviceMemory         = 0x00000020,
+    kIODMAMapPagingPath           = 0x00000040,
+    kIODMAMapIdentityMap          = 0x00000080,
+};
+
 
 enum 
 {
@@ -184,6 +226,17 @@ typedef IOOptionBits DMACommandOps;
 
     virtual IOReturn setPurgeable( IOOptionBits newState,
                                     IOOptionBits * oldState );
+    
+
+/*! @function getPageCounts
+    @abstract Retrieve the number of resident and/or dirty pages encompassed by an IOMemoryDescriptor.
+    @discussion This method returns the number of resident and/or dirty pages encompassed by an IOMemoryDescriptor.
+    @param residentPageCount - If non-null, a pointer to a byte count that will return the number of resident pages encompassed by this IOMemoryDescriptor.
+    @param dirtyPageCount - If non-null, a pointer to a byte count that will return the number of dirty pages encompassed by this IOMemoryDescriptor.
+    @result An IOReturn code. */
+
+    IOReturn getPageCounts( IOByteCount * residentPageCount,
+                            IOByteCount * dirtyPageCount);
 
 /*! @function performOperation
     @abstract Perform an operation on the memory descriptor's memory.
@@ -717,6 +770,11 @@ public:
 #endif /* !__LP64__ */
 
 
+    IOReturn wireRange(
+    	uint32_t		options,
+        mach_vm_size_t		offset,
+        mach_vm_size_t		length);
+
     OSMetaClassDeclareReservedUnused(IOMemoryMap, 0);
     OSMetaClassDeclareReservedUnused(IOMemoryMap, 1);
     OSMetaClassDeclareReservedUnused(IOMemoryMap, 2);
@@ -777,6 +835,7 @@ public:
 
     virtual uint64_t getPreparationID( void );
 
+
 private:
 
 #ifndef __LP64__
@@ -785,8 +844,6 @@ private:
     virtual void unmapFromKernel();
 #endif /* !__LP64__ */
 
-    // Internal APIs may be made virtual at some time in the future.
-    IOReturn wireVirtual(IODirection forDirection);
     void *createNamedEntry();
 
     // Internal
@@ -853,7 +910,7 @@ public:
 
     virtual IOReturn setPurgeable( IOOptionBits newState,
                                     IOOptionBits * oldState );
-
+    
     virtual addr64_t getPhysicalSegment( IOByteCount   offset,
                                          IOByteCount * length,
 #ifdef __LP64__
