@@ -44,30 +44,37 @@ extern "C" {
     Due to the large difference in speed between Min/Max and Dilate/Erode for large kernels, developers who wish 
     to do Min/Max with kvImageLeaveAlphaUnchanged should convert the data format to planar, then call Min/Max on the
     appropriate color channels and then convert back to the desired interleaved format. 
+    
+    Developers should be aware that it is incorrect to call any Morphology function on image data that is 
+    premultiplied by the alpha channel. Doing so may result in images containing color channel data that 
+    is larger than the alpha channel for some pixels. 
 */
-vImage_Error vImageDilate_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  const unsigned char *kernel, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageDilate_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  const float *kernel, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageDilate_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  const unsigned char *kernel, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageDilate_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  const float *kernel, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageDilate_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const unsigned char *kernel, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageDilate_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageDilate_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const unsigned char *kernel, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageDilate_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-vImage_Error vImageErode_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  const unsigned char *kernel, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageErode_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  const float *kernel, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageErode_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  const unsigned char *kernel, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageErode_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  const float *kernel, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageErode_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const unsigned char *kernel, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageErode_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageErode_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const unsigned char *kernel, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageErode_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const float *kernel, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-vImage_Error vImageMax_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageMax_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageMax_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageMax_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageMax_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageMax_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageMax_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageMax_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-vImage_Error vImageMin_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageMin_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageMin_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error vImageMin_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, unsigned int srcOffsetToROI_X, unsigned int srcOffsetToROI_Y,  unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageMin_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageMin_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageMin_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error vImageMin_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-
-size_t	vImageGetMinimumTempBufferSizeForMinMax( const vImage_Buffer *src, const vImage_Buffer *dest, unsigned int kernel_height, unsigned int kernel_width, vImage_Flags flags, size_t bytesPerPixel )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-
+/*
+ * It is recommended that you use the kvImageGetTempBufferSize flag with the appropriate function, instead of using this API 
+ * Simply pass the kvImageGetTempBufferSize flag in addition to all the regular parameters. The size will be returned in the  
+ * vImage_Error result.  kvImageGetTempBufferSize is for MacOS X.4 and later. 
+ */
+size_t	vImageGetMinimumTempBufferSizeForMinMax( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount kernel_height, vImagePixelCount kernel_width, vImage_Flags flags, size_t bytesPerPixel )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
 
 #ifdef __cplusplus
 }

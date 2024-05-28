@@ -24,9 +24,22 @@
 #ifndef __OPEN_SOURCE__
 /*
  *
- *	$Id: IOUSBLog.h,v 1.20 2003/09/05 22:38:50 nano Exp $
- *
  *	$Log: IOUSBLog.h,v $
+ *	Revision 1.23  2004/10/26 22:32:01  nano
+ *	Remove USB Loggging for Tiger
+ *	
+ *	Revision 1.22  2004/02/03 22:09:49  nano
+ *	Fix <rdar://problem/3548194>: Remove $ Id $ from source files to prevent conflicts
+ *	
+ *	Revision 1.21  2003/10/14 22:05:38  nano
+ *	Logging enabled.
+ *	
+ *	Revision 1.20.10.1  2003/09/17 20:57:44  nano
+ *	Change some logging to level 5 and add more info, just for testing
+ *	
+ *	Revision 1.20.14.1  2003/09/25 19:58:30  nano
+ *	Back to logging
+ *	
  *	Revision 1.20  2003/09/05 22:38:50  nano
  *	Removed logging --set to Production
  *	
@@ -75,7 +88,7 @@
 // Allow clients to define their own debug level.
 
 #if( !defined( DEBUG_LEVEL ) )
-	#define	DEBUG_LEVEL			DEBUG_LEVEL_PRODUCTION
+	#define	DEBUG_LEVEL			DEBUG_LEVEL_FINAL
 #endif
 
 // Index for user client methods
@@ -90,6 +103,8 @@ enum
     kUSBControllerUserClientGetDebuggingLevel,
     kUSBControllerUserClientGetDebuggingType,
     kUSBControllerUserClientSetTestMode,
+    kUSBControllerUserClientReadRegister,
+    kUSBControllerUserClientWriteRegister,
     kNumUSBControllerMethods
 };
 

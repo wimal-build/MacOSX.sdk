@@ -68,6 +68,9 @@
 
 #define kIOAudioDeviceConfigurationAppKey	"IOAudioDeviceConfigurationApplication"
 
+#define kIOAudioDeviceCanBeDefaults			"IOAudioDeviceCanBeDefaults"
+
+#define kIOAudioDeviceModelIDKey			"IOAudioDeviceModelID"
 
 /*****
  *
@@ -106,6 +109,8 @@
 
 #define kIOAudioEngineSampleOffsetKey				"IOAudioEngineSampleOffset"
 
+#define kIOAudioEngineInputSampleOffsetKey			"IOAudioEngineInputSampleOffset"
+
 #define kIOAudioEngineNumSampleFramesPerBufferKey	"IOAudioEngineNumSampleFramesPerBuffer"
 
 #define kIOAudioEngineCoreAudioPlugInKey			"IOAudioEngineCoreAudioPlugIn"
@@ -117,6 +122,10 @@
 #define kIOAudioEngineGlobalUniqueIDKey				"IOAudioEngineGlobalUniqueID"
 
 #define kIOAudioEngineDescriptionKey				"IOAudioEngineDescription"
+
+#define kIOAudioEngineClockIsStableKey				"IOAudioEngineClockIsStable"
+
+#define kIOAudioEngineClockDomainKey				"IOAudioEngineClockDomain"
 
 /*!
  * @defined kIOAudioEngineFullChannelNamesKey
@@ -369,8 +378,12 @@
 
 #define kIOAudioLevelControlRangesKey		"IOAudioLevelControlRanges"
 
+#define kIOAudioLevelControlUseLinearScale	"IOAudioLevelControlUseLinearScale"
+
 #define kIOAudioSelectorControlAvailableSelectionsKey	"IOAudioSelectorControlAvailableSelections"
 #define kIOAudioSelectorControlSelectionValueKey		"IOAudioSelectorControlSelectionValue"
 #define kIOAudioSelectorControlSelectionDescriptionKey	"IOAudioSelectorControlSelectionDescriptionKey"
+
+#define kIOAudioSelectorControlClockSourceKey				"IOAudioSelectorControlClockSourceKey"
 
 #endif /* _IOAUDIODEFINES_H */

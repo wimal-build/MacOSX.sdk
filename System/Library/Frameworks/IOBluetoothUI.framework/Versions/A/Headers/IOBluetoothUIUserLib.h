@@ -8,6 +8,10 @@
 
 #include <IOBluetooth/IOBluetoothUserLib.h>
 
+#ifdef	__cplusplus
+	extern "C" {
+#endif
+
 typedef struct OpaqueIOBluetoothObjectRef *			IOBluetoothDeviceSelectorControllerRef;
 typedef struct OpaqueIOBluetoothObjectRef *			IOBluetoothPairingControllerRef;
 typedef struct OpaqueIOBluetoothObjectRef *			IOBluetoothServiceBrowserControllerRef;
@@ -23,7 +27,8 @@ typedef struct OpaqueIOBluetoothObjectRef *			IOBluetoothServiceBrowserControlle
   @enum IOBluetoothServiceBrowserControllerOptions
   @discussion Option values to customize the behavior of an IOBluetoothServiceBrowserController object.
   @constant kIOBluetoothServiceBrowserControllerOptionsNone - no options set.
-  @constant kIOBluetoothServiceBrowserControllerOptionsAutoStartInquiry - automatically start an inquiry when the panel is diaplayed.
+  @constant kIOBluetoothServiceBrowserControllerOptionsAutoStartInquiry - automatically start an inquiry when the panel is displayed.
+  @constant kIOBluetoothServiceBrowserControllerOptionsDisconnectWhenDone - disconnect from the device when UI operations are finished.
   
 */
 typedef uint32_t IOBluetoothServiceBrowserControllerOptions;
@@ -152,3 +157,7 @@ CFArrayRef	IOBluetoothDeviceSelectorRunPanelWithAttributes(IOBluetoothDeviceSele
 
 
 IOReturn IOBluetoothValidateHardware( CFStringRef cancelButtonTitle ) AVAILABLE_BLUETOOTH_VERSION_1_1_AND_LATER;
+
+#ifdef	__cplusplus
+	}
+#endif

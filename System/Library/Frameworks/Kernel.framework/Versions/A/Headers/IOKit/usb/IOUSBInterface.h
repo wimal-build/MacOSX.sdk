@@ -24,9 +24,43 @@
 #ifndef __OPEN_SOURCE__
 /*
  *
- *	$Id: IOUSBInterface.h,v 1.19 2003/08/20 19:41:40 nano Exp $
- *
  *	$Log: IOUSBInterface.h,v $
+ *	Revision 1.24  2005/01/28 23:43:33  nano
+ *	Add uid for Mass Storage devices:  <rdar://problem/3918165> USB should add a GUID for mass storage devices to allow for USB booting
+ *	
+ *	Revision 1.23  2004/11/11 22:22:45  nano
+ *	Fix for <rdar://problem/3875705> Tiger: Q16B EVT Build run in fail Checkconfig Bluetooth *2.
+ *	
+ *	Revision 1.22.26.1  2004/11/04 19:34:37  nano
+ *	Change the MakeDevice USBErrors() to be just logs.
+ *	
+ *	Revision 1.22.32.1  2004/12/13 20:45:05  nano
+ *	Add the GUID for mass storage devices
+ *	
+ *	Revision 1.22  2004/09/09 04:52:59  nano
+ *	Merge branch PR-3731180 into TOT
+ *	
+ *	Revision 1.21.50.1  2004/09/07 19:44:35  nano
+ *	IOUSBInterfaceUserClient needs to call ClosePipes(), so  make it a friend.
+ *	
+ *	Revision 1.21  2004/02/03 22:09:49  nano
+ *	Fix <rdar://problem/3548194>: Remove $ Id $ from source files to prevent conflicts
+ *
+ *	Revision 1.19.36.1  2003/12/21 22:42:46  nano
+ *	Merge branch:  New methods to implement fix for rdar://3479244.
+ *
+ *	Revision 1.21.44.1  2004/08/26 19:32:31  nano
+ *	IOUSBUserClient needs to call ClosePipes()
+ *	
+ *	Revision 1.21  2004/02/03 22:09:49  nano
+ *	Fix <rdar://problem/3548194>: Remove $ Id $ from source files to prevent conflicts
+ *	
+ *	Revision 1.20  2003/10/14 22:05:30  nano
+ *	New methods to support calling super::open thru runAction.
+ *	
+ *	Revision 1.19.4.1  2003/08/22 21:13:12  nano
+ *	Add the gate to IOUSBInterface and call super::open through it
+ *	
  *	Revision 1.19  2003/08/20 19:41:40  nano
  *	
  *	Bug #:
@@ -62,6 +96,8 @@
 */
 class IOUSBInterface : public IOUSBNub
 {
+    friend class IOUSBInterfaceUserClient;
+    
     OSDeclareDefaultStructors(IOUSBInterface)
 
 protected:
@@ -79,16 +115,23 @@ protected:
     UInt8				_bInterfaceProtocol;
     UInt8				_iInterface;
 
-    struct ExpansionData { /* */ };
+    struct ExpansionData {
+        IOCommandGate	*		_gate;
+        IOWorkLoop	*		_workLoop;
+    };
     ExpansionData * _expansionData;
 
     // private methods
     virtual void 	ClosePipes(void);	// close all pipes (except pipe zero)
     virtual IOReturn	CreatePipes(void);	// open all pipes in the current interface/alt interface
     virtual void	SetProperties(void);	// update my property table with the correct properties		
-
+	
 public:
     static IOUSBInterface *withDescriptors(const IOUSBConfigurationDescriptor *cfDesc, const IOUSBInterfaceDescriptor *ifDesc);
+    static IOReturn	CallSuperOpen(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+    static IOReturn     CallSuperClose(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static UInt8 hex2char( UInt8 digit );
+    
     virtual bool 	init(	const IOUSBConfigurationDescriptor *cfDesc,
                                 const IOUSBInterfaceDescriptor *ifDesc);
     virtual bool 	attach(IOService *provider);
@@ -96,6 +139,7 @@ public:
     virtual bool 	finalize(IOOptionBits options);
     virtual void 	stop(IOService *  provider);
     virtual IOReturn 	message( UInt32 type, IOService * provider,  void * argument = 0 );
+    virtual void 	free();	
 
     /*!
         @function FindNextAltInterface
@@ -147,6 +191,9 @@ public:
                                 IOOptionBits	   options = 0,
                                 void *		   arg = 0 );
 
+    virtual void close( 	IOService *	   forClient,
+			IOOptionBits	   options = 0  );
+    
     virtual void handleClose(  	IOService *	   forClient,
                                 IOOptionBits	   options = 0 );
 

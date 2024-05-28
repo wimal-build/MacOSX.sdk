@@ -23,9 +23,59 @@
 #ifndef __OPEN_SOURCE__
 /*
  *
- *	$Id: IOUSBHIDDriver.h,v 1.28 2003/08/20 19:41:44 nano Exp $
- *
  *	$Log: IOUSBHIDDriver.h,v $
+ *	Revision 1.37  2004/12/20 19:02:57  nano
+ *	Update from branch to call handleReportWithTime
+ *	
+ *	Revision 1.36.64.1  2004/12/20 18:25:08  nano
+ *	Call handleReportWithTime(), instead of just plain handleReport
+ *	
+ *	Revision 1.36  2004/05/28 04:25:32  nano
+ *	Merged branch to implement the country code
+ *	
+ *	Revision 1.35.2.1  2004/05/28 02:48:34  nano
+ *	Implement newCountryCodeNumber
+ *	
+ *	Revision 1.35  2004/05/21 16:57:47  nano
+ *	Merged branches
+ *	
+ *	Revision 1.34.2.1  2004/05/20 22:32:10  nano
+ *	If we get an unsupported error from our new read (with time stamp), issue the old read.
+ *	
+ *	Revision 1.34  2004/05/17 21:42:47  nano
+ *	Use new Read() that includes a timestamp.
+ *	
+ *	Revision 1.33.6.1  2004/05/17 15:57:28  nano
+ *	API Changes for Tiger
+ *	
+ *	Revision 1.33  2004/03/29 18:41:21  nano
+ *	Fix for rdar://3602420 by calling handleReport on a callout thread
+ *	
+ *	Revision 1.32.4.1  2004/03/26 22:53:48  nano
+ *	Fix rdar://3602420 by calling handleReport on a callout thread so that we don't block the USB workloop if somebody (HID System) blocks us
+ *	
+ *	Revision 1.32  2004/03/03 21:57:18  nano
+ *	Fix to rdar://3544116: 8A44:mouse sometimes frozen on wake from sleep by reverting to the previous behavior of clearing a stall on a callout thread.
+ *	
+ *	Revision 1.31.8.1  2004/03/01 17:06:01  nano
+ *	Clear pipe stalls on a callout thread, as we did before.
+ *	
+ *	Revision 1.31  2004/02/03 22:09:51  nano
+ *	Fix <rdar://problem/3548194>: Remove $ Id $ from source files to prevent conflicts
+ *	
+ *	Revision 1.30  2003/12/02 16:32:59  nano
+ *	3437485  7B81 Panic in IOUSBHIDDriver after loading mouse on boot
+ *	3496814  Merlot: Credit Card swiper stopped working in Panther
+ *	
+ *	Revision 1.29.6.1  2003/11/11 17:54:18  nano
+ *	Fix #3437485 by assigning our command gate to a local variable until we are ready to exit the start() method.  This will avoid a race where we would assume that the gate was already added as an event source before it actually was
+ *	
+ *	Revision 1.29  2003/10/14 21:09:33  nano
+ *	Add personality for FlashGate device (#3249559).  Add personality to test fix to make interface open call thru runAction (for US Internal USB Modem).
+ *	
+ *	Revision 1.28.40.1  2003/09/25 19:44:25  nano
+ *	Remove separate threads to clear endpoint as we now can do it on the calling thread.
+ *	
  *	Revision 1.28  2003/08/20 19:41:44  nano
  *	
  *	Bug #:
@@ -85,8 +135,8 @@
 //        kIOHIDReportTypeCount
 //    };
 //
-#define HIDMgr2USBReportType(x) (x + 1)
-#define USB2HIDMgrReportType(x) (x - 1)
+#define HIDMGR2USBREPORTTYPE(x) (x + 1)
+#define USB2HIDMGRREPORTTYPE(x) (x - 1)
 
 
 // Note: In other Neptune files, kMaxHIDReportSize was defined as 64. But Ferg & Keithen were unable to
@@ -101,7 +151,7 @@ class IOUSBHIDDriver : public IOHIDDevice
 {
     OSDeclareDefaultStructors(IOUSBHIDDriver)
 
-    IOUSBInterface *	_interface;
+    IOUSBInterface *		_interface;
     IOUSBDevice	*		_device;
     IOUSBPipe *			_interruptPipe;
     UInt32			_maxReportSize;
@@ -118,58 +168,75 @@ class IOUSBHIDDriver : public IOHIDDevice
     IOCommandGate *		_gate;
     IOUSBPipe *			_interruptOutPipe;
     UInt32			_maxOutReportSize; 	// Obsolete
-    IOBufferMemoryDescriptor *	_outBuffer;
+    IOBufferMemoryDescriptor *	_outBuffer;		// Obsolete
     UInt32			_deviceUsage;		// Obsolete
     UInt32			_deviceUsagePage;	// Obsolete
 
-    struct ExpansionData 
-    { 
+    struct IOUSBHIDDriverExpansionData 
+    {
+        IOWorkLoop	*	_workLoop;
+        thread_call_t		_handleReportThread;
+        IOService *			_rootDomain;
+        AbsoluteTime			_wakeUpTime;
+        IOUSBCompletionWithTimeStamp	_completionWithTimeStamp;
+        bool				_checkForTimeStamp;
+        UInt32				_msToIgnoreTransactionsAfterWake;
     };
-    ExpansionData *_expansionData;
+    IOUSBHIDDriverExpansionData *_usbHIDExpansionData;
+    
     static void 		InterruptReadHandlerEntry(OSObject *target, void *param, IOReturn status, UInt32 bufferSizeRemaining);
-    void 			InterruptReadHandler(IOReturn status, UInt32 bufferSizeRemaining);
+    static void 		InterruptReadHandlerWithTimeStampEntry(OSObject *target, void *param, IOReturn status, UInt32 bufferSizeRemaining, AbsoluteTime timeStamp);
+    void 			InterruptReadHandler(IOReturn status, UInt32 bufferSizeRemaining, AbsoluteTime timeStamp);
 
     static void 		CheckForDeadDeviceEntry(OSObject *target);
     void			CheckForDeadDevice();
-    
+
     static void			ClearFeatureEndpointHaltEntry(OSObject *target);
     void			ClearFeatureEndpointHalt(void);
+    
+    static void			HandleReportEntry(OSObject *target, thread_call_param_t timeStamp);
+    void			HandleReport(AbsoluteTime timeStamp);
+    
+    virtual void 		processPacket(void *data, UInt32 size);		// Obsolete
 
-    virtual void processPacket(void *data, UInt32 size);
-
-    virtual void free();
-
-    static IOReturn	ChangeOutstandingIO(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+    static IOReturn		ChangeOutstandingIO(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
 
 public:
+        
     // IOService methods
+    //
     virtual bool	init(OSDictionary *properties);
     virtual bool	start(IOService * provider);
     virtual bool 	didTerminate( IOService * provider, IOOptionBits options, bool * defer );
     virtual bool 	willTerminate( IOService * provider, IOOptionBits options );
+    virtual void 	free();
+    virtual IOReturn 	message( UInt32 type, IOService * provider,  void * argument = 0 );
+    
 
     // IOHIDDevice methods
+    //
     virtual bool	handleStart(IOService * provider);
     virtual void	handleStop(IOService *  provider);
 
-    virtual IOReturn newReportDescriptor(
-                        IOMemoryDescriptor ** descriptor ) const;
+    virtual IOReturn 	newReportDescriptor( IOMemoryDescriptor ** descriptor ) const;
                         
-    virtual OSString * newTransportString() const;
+    virtual OSString * 	newTransportString() const;
 
-    virtual OSNumber * newVendorIDNumber() const;
+    virtual OSNumber * 	newVendorIDNumber() const;
 
-    virtual OSNumber * newProductIDNumber() const;
+    virtual OSNumber * 	newProductIDNumber() const;
 
-    virtual OSNumber * newVersionNumber() const;
+    virtual OSNumber * 	newVersionNumber() const;
 
-    virtual OSString * newManufacturerString() const;
+    virtual OSString * 	newManufacturerString() const;
 
-    virtual OSString * newProductString() const;
+    virtual OSString * 	newProductString() const;
 
-    virtual OSString * newSerialNumberString() const;
+    virtual OSString * 	newSerialNumberString() const;
 
-    virtual OSNumber * newLocationIDNumber() const;
+    virtual OSNumber * 	newLocationIDNumber() const;
+
+    virtual OSNumber * 	newCountryCodeNumber() const;
 
     virtual IOReturn	getReport( IOMemoryDescriptor * report,
                                 IOHIDReportType      reportType,
@@ -179,12 +246,11 @@ public:
                                 IOHIDReportType      reportType,
                                 IOOptionBits         options = 0 );
 			
-    virtual IOReturn 	message( UInt32 type, IOService * provider,  void * argument = 0 );
-
     // HID driver methods
-    virtual OSString * newIndexedString(UInt8 index) const;
+    //
+    virtual OSString * 	newIndexedString(UInt8 index) const;
 
-    virtual UInt32 getMaxReportSize();
+    virtual UInt32 	getMaxReportSize();
 
     virtual void	DecrementOutstandingIO(void);
     virtual void	IncrementOutstandingIO(void);
@@ -192,8 +258,8 @@ public:
     virtual IOReturn	SetIdleMillisecs(UInt16 msecs);
     
 private:
-        
-	IOReturn 	GetHIDDescriptor(UInt8 inDescriptorType, UInt8 inDescriptorIndex, UInt8 *vOutBuf, UInt32 *vOutSize);
+
+        IOReturn 	GetHIDDescriptor(UInt8 inDescriptorType, UInt8 inDescriptorIndex, UInt8 *vOutBuf, UInt32 *vOutSize);
 	IOReturn 	GetReport(UInt8 inReportType, UInt8 inReportID, UInt8 *vInBuf, UInt32 *vInSize);
 	IOReturn 	SetReport(UInt8 outReportType, UInt8 outReportID, UInt8 *vOutBuf, UInt32 vOutSize);
 	IOReturn 	GetIndexedString(UInt8 index, UInt8 *vOutBuf, UInt32 *vOutSize, UInt16 lang = 0x409) const;
@@ -207,7 +273,9 @@ private:
 #endif
 
 public:
-    OSMetaClassDeclareReservedUnused(IOUSBHIDDriver,  0);
+    OSMetaClassDeclareReservedUsed(IOUSBHIDDriver,  0);
+    virtual IOReturn    RearmInterruptRead();
+    
     OSMetaClassDeclareReservedUnused(IOUSBHIDDriver,  1);
     OSMetaClassDeclareReservedUnused(IOUSBHIDDriver,  2);
     OSMetaClassDeclareReservedUnused(IOUSBHIDDriver,  3);

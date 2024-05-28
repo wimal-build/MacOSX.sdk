@@ -3,21 +3,22 @@
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * Portions Copyright (c) 1999 Apple Computer, Inc.  All Rights
- * Reserved.  This file contains Original Code and/or Modifications of
- * Original Code as defined in and that are subject to the Apple Public
- * Source License Version 1.1 (the "License").  You may not use this file
- * except in compliance with the License.  Please obtain a copy of the
- * License at http://www.apple.com/publicsource and read it before using
- * this file.
+ * Copyright (c) 1999-2003 Apple Computer, Inc.  All Rights Reserved.
+ * 
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
  * 
  * The Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON- INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
@@ -64,47 +65,12 @@ struct objc_class {
 #define CLS_JAVA_CLASS		0x400L
 // thread-safe +initialize
 #define CLS_INITIALIZING	0x800
-
-/*
- * (true as of 2001-9-24)
- * Thread-safety note: changes to these flags are not atomic, so 
- * the only thing preventing lost updates is the timing of the changes.
- *
- * As long as the following are isolated from each other for any one class, 
- * nearly all flag updates will be safe:
- * - compile-time
- * - loading in one thread (not including +load) without messaging
- * - initializing in one thread with messaging from that thread only
- * - multi-threaded messaging with method caching
- *
- * The current code doesn't protect loading yet.
- *
- * Times when the flags may change:
- * CLS_CLASS: compile-time, hand-built classes
- * CLS_META: compile time, hand-built classes
- * CLS_INITIALIZED: initialize
- * CLS_POSING: unsafe, but posing has other thread-safety problems
- * CLS_MAPPED: compile-time
- * CLS_FLUSH_CACHE: messaging
- * CLS_GROW_CACHE: messaging
- *   FLUSH_CACHE and GROW_CACHE are protected from each other by the 
- *   cacheUpdateLock.
- * CLS_NEED_BIND: load, initialize
- * CLS_METHOD_ARRAY: load
- * CLS_JAVA_HYBRID: hand-built classes
- * CLS_JAVA_CLASS: hand-built classes, initialize
- * CLS_INITIALIZING: initialize
- *
- * The only unsafe updates are:
- * - posing (unsafe anyway)
- * - hand-built classes (including JavaBridge classes)
- *   There is a short time between objc_addClass inserts the new class 
- *   into the class_hash and the builder setting the right flags. 
- *   A thread looking at the class_hash could send a message to the class 
- *   and trigger initialization, and the changes to the initialization 
- *   flags and the hand-adjusted flags could collide. 
- *   Solution: don't do that. 
- */
+// bundle unloading
+#define CLS_FROM_BUNDLE		0x1000L
+// C++ ivar support
+#define CLS_HAS_CXX_STRUCTORS	0x2000L
+// Lazy method list arrays
+#define CLS_NO_METHOD_ARRAY	0x4000L
 
 
 /* 
@@ -168,7 +134,11 @@ struct objc_method_list {
 
 /* Protocol support */
 
+#ifdef __OBJC__
 @class Protocol;
+#else
+typedef struct objc_object Protocol;
+#endif
 
 struct objc_protocol_list {
 	struct objc_protocol_list *next;

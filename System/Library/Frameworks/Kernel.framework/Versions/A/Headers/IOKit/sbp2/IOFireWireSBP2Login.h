@@ -50,8 +50,8 @@ enum
     kFWSBP2NormalCommandReset	= 9
 };
 
-#define kIOMessageFWSBP2ReconnectComplete	iokit_fw_err(1000)
-#define kIOMessageFWSBP2ReconnectFailed		iokit_fw_err(1001)
+#define kIOMessageFWSBP2ReconnectComplete	iokit_fw_err(0x3E8)
+#define kIOMessageFWSBP2ReconnectFailed		iokit_fw_err(0x3E9)
 
 /*! 
     @typedef FWSBP2LoginResponse
@@ -265,7 +265,8 @@ protected:
         kLoginStateLoggingIn	= 1,
         kLoginStateConnected	= 2,
         kLoginStateReconnect	= 3,
-        kLoginStateLoggingOut	= 4
+        kLoginStateLoggingOut	= 4,
+		kLoginStateTerminated	= 5
     };
 
     // rom keys
@@ -618,6 +619,9 @@ protected:
 	
 	UInt32					fUserLoginGeneration;
 	bool					fUserLoginGenerationSet;
+	
+	IOFWDelayCommand *		fFetchAgentRetryTimerCommand;
+    bool					fFetchAgentRetryTimerSet;	
 	
 	virtual IOReturn executeSetBusyTimeout( void );
 	static void setBusyTimeoutCompleteStatic( void *refcon, IOReturn status, IOFireWireNub *device, IOFWCommand *fwCmd );
@@ -1036,6 +1040,14 @@ public:
 	
 	virtual void setLoginGeneration( UInt32 generation );
 	virtual void clearLoginGeneration( void );
+
+protected:
+	void startFetchAgentRetryTimer( UInt32 duration );
+	void stopFetchAgentRetryTimer( void );
+	static void fetchAgentRetryTimerStatic( void *refcon, IOReturn status, IOFireWireBus *bus, IOFWBusCommand *fwCmd );
+	void fetchAgentRetryTimer( IOReturn status, IOFireWireBus *bus, IOFWBusCommand *fwCmd );
+	
+	void terminateNotify( void );
 	
 private:
     

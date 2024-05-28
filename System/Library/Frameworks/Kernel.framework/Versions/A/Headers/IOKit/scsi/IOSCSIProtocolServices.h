@@ -32,12 +32,17 @@
 //	Includes
 //ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 
+// Mach includes
+#include <kern/queue.h>
+
 // General IOKit headers
 #include <IOKit/IOLib.h>
 #include <IOKit/IOCommandGate.h>
 
 // SCSI Architecture Model Family includes
+#include <IOKit/scsi/SCSITask.h>
 #include <IOKit/scsi/IOSCSIProtocolInterface.h>
+#include <IOKit/scsi/SCSICmds_REQUEST_SENSE_Defs.h>
 
 
 //ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
@@ -67,7 +72,7 @@ class IOSCSIProtocolServices : public IOSCSIProtocolInterface
 private:
 	
 	// The head pointer for the queue of waiting SCSI Tasks.
-	SCSITask *		fSCSITaskQueueHead;
+	SCSITask *		fSCSITaskQueueHead;		/* OBSOLETE */
 	
 	// This is the lock for preventing multiple access while
 	// manipulating the SCSI Task queue.
@@ -80,7 +85,15 @@ private:
 protected:
 	
 	// Reserve space for future expansion.
-	struct IOSCSIProtocolServicesExpansionData { };
+	struct IOSCSIProtocolServicesExpansionData
+	{
+		// For internal use only. Do not use.
+		UInt32				fSemaphore;
+		bool				fRequiresAutosenseDescriptor;
+		SCSITaskCompletion	fCompletionRoutine;
+		queue_head_t		fTaskQueueHead;
+		queue_head_t		fAutoSenseQueueHead;
+	};
 	IOSCSIProtocolServicesExpansionData * fIOSCSIProtocolServicesReserved;
 	
 	// ---- Protocol transport methods overridden by each subclass ----
@@ -147,6 +160,8 @@ protected:
 	
 	UInt32	GetTimeoutDuration ( SCSITaskIdentifier request );
 	
+	UInt64	GetAutosenseRequestedDataTransferCount ( SCSITaskIdentifier	request );
+	
 	// Set the auto sense data that was returned for the SCSI Task.
 	// A return value of true indicates that the data was copied to the member 
 	// sense data structure, false indicates that the data could not be copied.
@@ -156,6 +171,8 @@ protected:
 	bool	SetAutoSenseData ( SCSITaskIdentifier	request,
 							   SCSI_Sense_Data *	senseData,
 							   UInt8				senseDataSize );
+	
+	void	EnsureAutosenseDescriptorExists ( SCSITaskIdentifier request );
 	
 	bool	SetProtocolLayerReference ( 
 				SCSITaskIdentifier 		request, 
@@ -240,11 +257,11 @@ protected:
 	
 public:
 	
-	virtual bool	init	( OSDictionary * propTable );
 	virtual bool	start	( IOService * provider );
 	virtual void	stop	( IOService *  provider );
 	virtual void	free	( void );
 	
+	void RegisterSCSITaskCompletionRoutine ( SCSITaskCompletion completion );
 	
 	// ------- SCSI Architecture Model Task Management Functions ------
 	// The ExecuteCommand method will take a SCSI Task and transport

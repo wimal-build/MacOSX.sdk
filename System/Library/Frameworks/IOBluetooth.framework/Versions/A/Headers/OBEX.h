@@ -62,7 +62,11 @@ enum OBEXErrorCodes
 	kOBEXUnsupportedError				= -21852,		// We don't currently handle whatever you are trying to do.
 	kOBEXInternalError					= -21853,		// A problem has occurred in our internal code.
 	kOBEXBadArgumentError				= -21854,		// A bad argument was passed to an OBEX function.
-
+	kOBEXTimeoutError					= -21855,		// timeout error
+	kOBEXBadRequestError				= -21856,		// bad request error
+	kOBEXCancelledError					= -21857,
+	
+	
 	kOBEXSessionBusyError				= -21875,		// Session is busy with a command already.
 	kOBEXSessionNotConnectedError		= -21876,		// Session does not have an open connection.
 	kOBEXSessionBadRequestError			= -21877,		// Whatever you are trying to do is invalid (trying to send more data than the max packet size supports, e.g.).
@@ -88,14 +92,14 @@ enum OBEXErrorCodes
 	@discussion		The API should shield you from using these, they are included here to completeness.
 */
 
-#define 	GET_HEADER_ID_IS_NULL_TERMINATED_UNICODE_TEXT( HEADER_ID )		( !(HEADER_ID & 0x3F) )
-#define 	GET_HEADER_ID_IS_BYTE_SEQUENCE( HEADER_ID )						( !(HEADER_ID & 0x40) )
-#define 	GET_HEADER_ID_IS_1_BYTE_QUANTITY( HEADER_ID )					( !(HEADER_ID & 0x80) )
-#define 	GET_HEADER_ID_IS_4_BYTE_QUANTITY( HEADER_ID )					( !(HEADER_ID & 0xC0) )
+#define 	GET_HEADER_ID_IS_NULL_TERMINATED_UNICODE_TEXT( HEADER_ID )		( (HEADER_ID & 0xC0) == 0x00 )
+#define 	GET_HEADER_ID_IS_BYTE_SEQUENCE( HEADER_ID )						( (HEADER_ID & 0xC0) == 0x40 )
+#define 	GET_HEADER_ID_IS_1_BYTE_QUANTITY( HEADER_ID )					( (HEADER_ID & 0xC0) == 0x80 )
+#define 	GET_HEADER_ID_IS_4_BYTE_QUANTITY( HEADER_ID )					( (HEADER_ID & 0xC0) == 0xC0 )
 #define 	SET_HEADER_ID_IS_NULL_TERMINATED_UNICODE_TEXT( HEADER_ID )		( (HEADER_ID & 0x3F) )
-#define 	SET_HEADER_ID_IS_BYTE_SEQUENCE( HEADER_ID )						( (HEADER_ID & 0x3F) & 0x40 )
-#define 	SET_HEADER_ID_IS_1_BYTE_QUANTITY( HEADER_ID )					( (HEADER_ID & 0x3F) & 0x80 )
-#define 	SET_HEADER_ID_IS_4_BYTE_QUANTITY( HEADER_ID )					( (HEADER_ID & 0x3F) & 0xC0 )
+#define 	SET_HEADER_ID_IS_BYTE_SEQUENCE( HEADER_ID )						( (HEADER_ID & 0x3F) | 0x40 )
+#define 	SET_HEADER_ID_IS_1_BYTE_QUANTITY( HEADER_ID )					( (HEADER_ID & 0x3F) | 0x80 )
+#define 	SET_HEADER_ID_IS_4_BYTE_QUANTITY( HEADER_ID )					( (HEADER_ID & 0x3F) | 0xC0 )
 #define 	IS_RESPONSE_CODE_FINAL_BIT_SET( RESPONSE_CODE )					( RESPONSE_CODE >> 7L )
 #define 	STRIP_RESPONSE_CODE_FINAL_BIT( RESPONSE_CODE )					( RESPONSE_CODE & 0x7F )
 

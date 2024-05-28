@@ -95,6 +95,12 @@ enum {
 	kBandpassParam_Bandwidth 				= 1
 };
 
+// Some parameters for the AUGraphicEQ Unit
+enum {
+		// Global, Indexed, currently either 10 or 31
+	kGraphicEQParam_NumberOfBands 			= 10000
+};
+
 // Parameters of the AUHipass Unit
 enum {
 		// Global, Hz, 10->(SampleRate/2), 6900
@@ -279,6 +285,36 @@ enum {
 	kVarispeedParam_PlaybackCents				= 1
 };
 
+// Parameters for AUTimePitch, AUOfflineTimePitch, AUPitch
+enum {
+	kTimePitchParam_Rate						= 0,
+	kTimePitchParam_Pitch						= 1,
+	kTimePitchParam_EffectBlend					= 2		// only for AUPitch
+};
+
+// Parameters for AUFilter
+enum
+{
+	kMultibandFilter_LowFilterType  = 0,
+	kMultibandFilter_LowFrequency   = 1,
+	kMultibandFilter_LowGain		= 2,
+
+	kMultibandFilter_CenterFreq1	= 3,
+	kMultibandFilter_CenterGain1	= 4,
+	kMultibandFilter_Bandwidth1		= 5,
+	
+	kMultibandFilter_CenterFreq2	= 6,
+	kMultibandFilter_CenterGain2	= 7,
+	kMultibandFilter_Bandwidth2		= 8,
+	
+	kMultibandFilter_CenterFreq3	= 9,
+	kMultibandFilter_CenterGain3	= 10,
+	kMultibandFilter_Bandwidth3		= 11,
+
+	kMultibandFilter_HighFilterType	= 12,
+	kMultibandFilter_HighFrequency  = 13,
+	kMultibandFilter_HighGain		= 14
+};
 
 // Mixer Units
 // Parameters for the 3DMixer AudioUnit
@@ -339,6 +375,30 @@ enum {
 	kMatrixMixerParam_PostPeakHoldLevelLinear		= 8000
 };
 
+// Parameters for AUNetReceive
+enum {
+	kAUNetReceiveParam_Status = 0,
+	kAUNetReceiveParam_NumParameters = 1
+};
+
+// Parameters for AUNetSend
+enum {
+	kAUNetSendParam_Status = 0,
+	kAUNetSendParam_NumParameters = 1
+};
+
+
+// Status values for AUNetSend and AUNetReceive
+enum {
+	kAUNetStatus_NotConnected = 0,
+	kAUNetStatus_Connected = 1,
+	kAUNetStatus_Overflow = 2,
+	kAUNetStatus_Underflow = 3,
+	kAUNetStatus_Connecting = 4,
+	kAUNetStatus_Listening = 5
+};
+
+
 // Output Units
 // Parameters for the HAL Output Unit (and Default and System Output units)
 enum {
@@ -358,10 +418,10 @@ enum {
 		// Global, dB, -120->40, 0
 	kMusicDeviceParam_ReverbVolume	= 2
 };
-// The music device does NOT currently report parameters in the GroupScope
-// but a parameter value can get set (not get) that corresponds to 
-// controller values that are defined by the MIDI specification
-// This includes the specified MIDI Controller values (for eg. Volume, Mod Wheel, etc)
+// The DLS music device does NOT currently report parameters in the GroupScope
+// but a parameter value can be set (not retrieved) that corresponds to 
+// controller values that are defined by the MIDI specification in Group scope.
+// This includes the specified MIDI Controller values (e.g. Volume, Mod Wheel, etc)
 // as well as the MIDI status messages (such as PitchWheel 0xE0, ChannelPressure 0xD0 - make sure
 // you pass in zero for the "channel part" when using these as parameterID - to distinguish this 
 // from 0-127 values for midi controllers that will take up the first byte) and the MIDI RPN control messages.
@@ -377,9 +437,4 @@ enum {
 //			pitch bend is specified as a 14 bit value
 	
 // See MusicDevice.h for more comments about using the extended control semantics of this component.	
-	
-	
-	
-	
-	
 #endif //__AudioUnitParameters

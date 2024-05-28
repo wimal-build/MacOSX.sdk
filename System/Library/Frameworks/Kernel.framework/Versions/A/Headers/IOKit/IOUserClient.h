@@ -79,6 +79,12 @@ enum {
 #define kIOClientPrivilegeAdministrator	"root"
 #define kIOClientPrivilegeLocalUser	"local"
 
+/*!
+    @class IOUserClient
+    @abstract   Provides a basis for communication between client applications and I/O Kit objects.
+*/
+
+
 class IOUserClient : public IOService
 {
     OSDeclareAbstractStructors(IOUserClient)
@@ -86,11 +92,12 @@ class IOUserClient : public IOService
 protected:
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of this class in the future.
-    */    
+*/    
     struct ExpansionData { };
 
 /*! @var reserved
-    Reserved for future use.  (Internal use only)  */
+    Reserved for future use.  (Internal use only) 
+*/
     ExpansionData * reserved;
 
 public:
@@ -162,12 +169,21 @@ public:
                                     task_t task,
                                     IOOptionBits mapFlags = kIOMapAnywhere,
 				    IOVirtualAddress atAddress = 0 );
+
+    /*!
+        @function removeMappingForDescriptor
+        Remove the first mapping created from the memory descriptor returned by clientMemoryForType() from IOUserClient's list of mappings. If such a mapping exists, it is retained and the reference currently held by IOUserClient is returned to the caller.
+        @param memory The memory descriptor instance previously returned by the implementation of clientMemoryForType().
+        @result A reference to the first IOMemoryMap instance found in the list of mappings created by IOUserClient from that passed memory descriptor is returned, or zero if none exist. The caller should release this reference.
+    */
+    IOMemoryMap * removeMappingForDescriptor(IOMemoryDescriptor * memory);
+
     /*!
         @function exportObjectToClient
         Make an arbitrary OSObject available to the client task.
-        @param task The task
-        @param obj The object we want to export to the client
-        @param clientObj returned value is the client's port name.
+        @param task The task.
+        @param obj The object we want to export to the client.
+        @param clientObj Returned value is the client's port name.
     */
     virtual IOReturn exportObjectToClient(task_t task,
 				OSObject *obj, io_object_t *clientObj);

@@ -30,6 +30,9 @@
  * HISTORY
  *
  * $Log: IOFWLocalIsochPort.h,v $
+ * Revision 1.10  2004/06/10 20:57:36  niels
+ * *** empty log message ***
+ *
  * Revision 1.9  2003/08/30 00:16:44  collin
  * *** empty log message ***
  *
@@ -119,7 +122,9 @@ class IOFWLocalIsochPort : public IOFWIsochPort
 		IOReturn				setIsochResourceFlags (
 										IOFWIsochResourceFlags	flags ) ;
 		IODCLProgram *			getProgramRef() const ;
-										
+
+		IOReturn				synchronizeWithIO() ;
+
 	private:
 
 		OSMetaClassDeclareReservedUnused ( IOFWLocalIsochPort, 0 ) ;

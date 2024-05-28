@@ -269,9 +269,11 @@ enum {
     kPMMinutesToSleep,
     kPMEthernetWakeOnLANSettings,
     kPMSetProcessorSpeed,
-    kPMPowerSource
+    kPMPowerSource,
+    kPMMotionSensor,
+    kPMLastAggressivenessType
 };
-#define kMaxType kPMEthernetWakeOnLANSettings
+#define kMaxType (kPMLastAggressivenessType-1)
 
 // SetAggressiveness values for the kPMPowerSource aggressiveness type
 enum {
@@ -295,6 +297,7 @@ enum {
     kIOBatteryCharge		= (1 << 1),
     kIOBatteryChargerConnect	= (1 << 0)
 };
+
 
 // Private power management message indicating battery data has changed
 // Indicates new data resides in the IORegistry

@@ -23,9 +23,16 @@
 #ifndef __OPEN_SOURCE__
 /*
  *
- *	$Id: IOUSBUserClient.h,v 1.20 2003/08/20 19:41:45 nano Exp $
- *
  *	$Log: IOUSBUserClient.h,v $
+ *	Revision 1.22  2004/02/03 22:09:52  nano
+ *	Fix <rdar://problem/3548194>: Remove $ Id $ from source files to prevent conflicts
+ *	
+ *	Revision 1.21  2003/10/14 21:04:01  nano
+ *	Fix for:  3006499 USB: "Rampant" use of unsynchronized getPropertyTable():  we now use setProperty (which is synchronized).
+ *	
+ *	Revision 1.20.42.1  2003/09/26 22:03:27  nano
+ *	Use synchroized setProperty() when merging dictionaries
+ *	
  *	Revision 1.20  2003/08/20 19:41:45  nano
  *	
  *	Bug #:
@@ -128,23 +135,24 @@ enum {
 #if KERNEL
 #include <IOKit/IOService.h>
 
+//================================================================================================
 //
-// This class is used to add an IOCFPlugInTypes dictionary entry to a provider's
+// This class is used to add an IOProviderMergeProperties dictionary entry to a provider's
 // property list, thus providing a tie between hardware and a CFBundle at hardware
-// load time
+// load time.  This property usually contains the user client class name and the CFPlugInTypes UUID's
+// but it can contain other properties.
+//
+//================================================================================================
 //
 class IOUSBUserClientInit : public IOService 
 {
     OSDeclareDefaultStructors(IOUSBUserClientInit);
 
 public:
-	virtual IOService*	probe(IOService* provider, SInt32* score) ;
-	virtual bool		start(IOService*	provider) ;
-	virtual bool		init(OSDictionary*	propTable) ;
-	virtual void		stop(IOService*		provider) ;
-	
-protected:
-	virtual void		mergeProperties(OSObject* dest, OSObject* src) ;
+    
+    virtual bool		start(IOService *  provider) ;
+    virtual bool 		MergeDictionaryIntoProvider(IOService *  provider, OSDictionary *  mergeDict);
+    virtual bool		MergeDictionaryIntoDictionary(OSDictionary *  sourceDictionary,  OSDictionary *  targetDictionary);
 };
 
 #endif // KERNEL

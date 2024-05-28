@@ -52,6 +52,7 @@ typedef struct IOAudioClientBuffer {
     struct IOAudioClientBuffer	*nextClip;
     struct IOAudioClientBuffer	*previousClip;
     struct IOAudioClientBuffer	*nextClient;
+	IOAudioBufferDataDescriptor *bufferDataDescriptor;
 } IOAudioClientBuffer;
 
 typedef struct IOAudioClientBufferExtendedInfo {
@@ -107,14 +108,15 @@ public:
 	virtual IOAudioClientBufferExtendedInfo * findExtendedInfo(UInt32 bufferSetID);
 	virtual IOReturn getNearestStartTime(IOAudioStream *audioStream, IOAudioTimeStamp *ioTimeStamp, UInt32 isInput);
 	virtual IOReturn getClientNearestStartTime(IOAudioStream *audioStream, IOAudioTimeStamp *ioTimeStamp, UInt32 isInput);
+	virtual IOReturn safeRegisterClientBuffer(UInt32 audioStreamIndex, void *sourceBuffer, UInt32 bufSizeInBytes, UInt32 bufferSetID);
 
 private:
     OSMetaClassDeclareReservedUsed(IOAudioEngineUserClient, 0);
     OSMetaClassDeclareReservedUsed(IOAudioEngineUserClient, 1);
     OSMetaClassDeclareReservedUsed(IOAudioEngineUserClient, 2);
     OSMetaClassDeclareReservedUsed(IOAudioEngineUserClient, 3);
+    OSMetaClassDeclareReservedUsed(IOAudioEngineUserClient, 4);
 
-    OSMetaClassDeclareReservedUnused(IOAudioEngineUserClient, 4);
     OSMetaClassDeclareReservedUnused(IOAudioEngineUserClient, 5);
     OSMetaClassDeclareReservedUnused(IOAudioEngineUserClient, 6);
     OSMetaClassDeclareReservedUnused(IOAudioEngineUserClient, 7);
