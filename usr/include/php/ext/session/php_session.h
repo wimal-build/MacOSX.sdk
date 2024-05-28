@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2011 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.101.2.2.2.5.2.6 2009/05/18 16:10:09 jani Exp $ */
+/* $Id: php_session.h 306939 2011-01-01 02:19:59Z felipe $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H

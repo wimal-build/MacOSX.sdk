@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2009 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2011 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        | 
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend.h,v 1.293.2.11.2.9.2.37 2009/06/17 08:55:23 rasmus Exp $ */
+/* $Id: zend.h 307522 2011-01-16 20:39:22Z stas $ */
 
 #ifndef ZEND_H
 #define ZEND_H
@@ -79,18 +79,7 @@
 # include <dlfcn.h>
 #endif
 
-#if HAVE_MACH_O_DYLD_H
-#include <mach-o/dyld.h>
-
-/* MH_BUNDLE loading functions for Mac OS X / Darwin */
-void *zend_mh_bundle_load (char* bundle_path);
-int zend_mh_bundle_unload (void *bundle_handle);
-void *zend_mh_bundle_symbol(void *bundle_handle, const char *symbol_name);
-const char *zend_mh_bundle_error(void);
-
-#endif /* HAVE_MACH_O_DYLD_H */
-
-#if defined(HAVE_LIBDL) && !defined(HAVE_MACH_O_DYLD_H) && !defined(ZEND_WIN32)
+#if defined(HAVE_LIBDL) && !defined(ZEND_WIN32)
 
 # ifndef RTLD_LAZY
 #  define RTLD_LAZY 1    /* Solaris 1, FreeBSD's (2.1.7.1 and older) */
@@ -114,13 +103,6 @@ const char *zend_mh_bundle_error(void);
 #  define DL_FETCH_SYMBOL			dlsym
 # endif
 # define DL_ERROR					dlerror
-# define DL_HANDLE					void *
-# define ZEND_EXTENSIONS_SUPPORT	1
-#elif defined(HAVE_MACH_O_DYLD_H)
-# define DL_LOAD(libname)			zend_mh_bundle_load(libname)
-# define DL_UNLOAD			zend_mh_bundle_unload
-# define DL_FETCH_SYMBOL(h,s)		zend_mh_bundle_symbol(h,s)
-# define DL_ERROR					zend_mh_bundle_error
 # define DL_HANDLE					void *
 # define ZEND_EXTENSIONS_SUPPORT	1
 #elif defined(ZEND_WIN32)
@@ -184,7 +166,7 @@ char *alloca ();
 # define ZEND_ATTRIBUTE_DEPRECATED
 #endif
 
-#if defined(__GNUC__) && ZEND_GCC_VERSION >= 3400 && defined(__i386__)
+#if defined(__GNUC__) && ZEND_GCC_VERSION >= 3004 && defined(__i386__)
 # define ZEND_FASTCALL __attribute__((fastcall))
 #elif defined(_MSC_VER) && defined(_M_IX86)
 # define ZEND_FASTCALL __fastcall
@@ -192,7 +174,7 @@ char *alloca ();
 # define ZEND_FASTCALL
 #endif
 
-#if defined(__GNUC__) && ZEND_GCC_VERSION >= 3400
+#if defined(__GNUC__) && ZEND_GCC_VERSION >= 3004
 #else
 # define __restrict__
 #endif
@@ -645,6 +627,9 @@ extern ZEND_API int (*zend_stream_open_function)(const char *filename, zend_file
 extern int (*zend_vspprintf)(char **pbuf, size_t max_len, const char *format, va_list ap);
 extern ZEND_API char *(*zend_getenv)(char *name, size_t name_len TSRMLS_DC);
 extern ZEND_API char *(*zend_resolve_path)(const char *filename, int filename_len TSRMLS_DC);
+#if SUHOSIN_PATCH
+extern ZEND_API void (*zend_suhosin_log)(int loglevel, char *fmt, ...);
+#endif
 
 ZEND_API void zend_error(int type, const char *format, ...) ZEND_ATTRIBUTE_FORMAT(printf, 2, 3);
 
@@ -728,6 +713,11 @@ END_EXTERN_C()
 		FREE_ZVAL(pzv);						\
 	}										\
 	INIT_PZVAL(&(zv));
+	
+#define MAKE_COPY_ZVAL(ppzv, pzv) \
+	*(pzv) = **(ppzv);            \
+	zval_copy_ctor((pzv));        \
+	INIT_PZVAL((pzv));
 
 #define REPLACE_ZVAL_VALUE(ppzv_dest, pzv_src, copy) {	\
 	int is_ref, refcount;						\
@@ -783,6 +773,19 @@ typedef struct {
 ZEND_API void zend_save_error_handling(zend_error_handling *current TSRMLS_DC);
 ZEND_API void zend_replace_error_handling(zend_error_handling_t error_handling, zend_class_entry *exception_class, zend_error_handling *current TSRMLS_DC);
 ZEND_API void zend_restore_error_handling(zend_error_handling *saved TSRMLS_DC);
+
+#define DEBUG_BACKTRACE_PROVIDE_OBJECT (1<<0)
+#define DEBUG_BACKTRACE_IGNORE_ARGS    (1<<1)
+
+#if SUHOSIN_PATCH
+#include "suhosin_globals.h"
+#include "suhosin_patch.h"
+#include "php_syslog.h"
+
+ZEND_API void zend_canary(void *buf, int len);
+ZEND_API char suhosin_get_config(int element);
+
+#endif
 
 #endif /* ZEND_H */
 

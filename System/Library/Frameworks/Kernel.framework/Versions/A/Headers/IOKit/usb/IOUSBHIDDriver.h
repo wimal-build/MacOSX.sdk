@@ -139,6 +139,8 @@ class IOUSBHIDDriver : public IOHIDDevice
 		bool							_powerStateChanging;
 		unsigned long					_myPowerState;
 		bool							_pendingRead;
+		UInt32							_deviceDeadCheckLock;			// "Lock" to prevent us from executing the device dead check while in progress
+		uint64_t						_handleReportTimeStamp;
     };
     IOUSBHIDDriverExpansionData *_usbHIDExpansionData;
     
@@ -205,7 +207,9 @@ public:
 
     virtual OSNumber * 	newCountryCodeNumber() const;
 
-    virtual IOReturn	getReport( IOMemoryDescriptor * report,
+	virtual OSNumber *	newReportIntervalNumber() const;
+
+	virtual IOReturn	getReport( IOMemoryDescriptor * report,
                                 IOHIDReportType      reportType,
                                 IOOptionBits         options = 0 );
                                 

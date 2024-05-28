@@ -82,6 +82,7 @@ protected:
     #define _currentSizeOfIsocCommandPool		_expansionData->_currentSizeOfIsocCommandPool
     #define _controllerSpeed					_expansionData->_controllerSpeed
 	#define _activeIsochTransfers				_expansionData->_activeIsochTransfers
+	#define _activeInterruptTransfers			_expansionData->_activeInterruptTransfers
 
 	// this class's expansion data
 	#define _isochEPList						_v2ExpansionData->_isochEPList
@@ -329,6 +330,9 @@ public:
 
     OSMetaClassDeclareReservedUsed(IOUSBControllerV2,  18);
     virtual IOUSBControllerIsochListElement		*GetTDfromDoneQueue(IOUSBControllerIsochEndpoint* pED);
+	
+	// 7185026 - this is to make this call from behind the gate
+    static IOReturn		GatedGetTDfromDoneQueue(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
 	
     OSMetaClassDeclareReservedUsed(IOUSBControllerV2,  19);
     virtual void								ReturnIsochDoneQueue(IOUSBControllerIsochEndpoint*);

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2009 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2011 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_vm_def.h,v 1.59.2.29.2.48.2.95 2009/06/07 15:46:51 mattwil Exp $ */
+/* $Id: zend_vm_def.h 309300 2011-03-16 11:14:33Z dmitry $ */
 
 /* If you change this file, please regenerate the zend_vm_execute.h and
  * zend_vm_opcodes.h files by running:
@@ -940,6 +940,7 @@ ZEND_VM_HELPER_EX(zend_fetch_var_address_helper, CONST|TMP|VAR|CV, ANY, int type
 
 	if (opline->op2.u.EA.type == ZEND_FETCH_STATIC_MEMBER) {
 		retval = zend_std_get_static_property(EX_T(opline->op2.u.var).class_entry, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0 TSRMLS_CC);
+		FREE_OP1();
 	} else {
 		target_symbol_table = zend_get_target_symbol_table(opline, EX(Ts), type, varname TSRMLS_CC);
 /*
@@ -1099,7 +1100,7 @@ ZEND_VM_HANDLER(84, ZEND_FETCH_DIM_W, VAR|CV, CONST|TMP|VAR|UNUSED|CV)
 	FREE_OP1_VAR_PTR();
 
 	/* We are going to assign the result by reference */
-	if (opline->extended_value) {
+	if (opline->extended_value && EX_T(opline->result.u.var).var.ptr_ptr) {
 		Z_DELREF_PP(EX_T(opline->result.u.var).var.ptr_ptr);
 		SEPARATE_ZVAL_TO_MAKE_IS_REF(EX_T(opline->result.u.var).var.ptr_ptr);
 		Z_ADDREF_PP(EX_T(opline->result.u.var).var.ptr_ptr);
@@ -2328,16 +2329,12 @@ ZEND_VM_HELPER(zend_do_fcall_common_helper, ANY, ANY)
 			EX_T(opline->result.u.var).var.fcall_returned_reference = EX(function_state).function->common.return_reference;
 		}
 
-#ifndef ZEND_VM_EXPORT
 		if (zend_execute == execute && !EG(exception)) {
 			EX(call_opline) = opline;
 			ZEND_VM_ENTER();
 		} else {
 			zend_execute(EG(active_op_array) TSRMLS_CC);
 		}
-#else
-		zend_execute(EG(active_op_array) TSRMLS_CC);
-#endif
 
 		EG(opline_ptr) = &EX(opline);
 		EG(active_op_array) = EX(op_array);
@@ -2495,6 +2492,12 @@ ZEND_VM_C_LABEL(return_by_value):
 				ALLOC_ZVAL(ret);
 				INIT_PZVAL_COPY(ret, retval_ptr);
 				zval_copy_ctor(ret);
+				*EG(return_value_ptr_ptr) = ret;
+			} else if ((OP1_TYPE == IS_CV || OP1_TYPE == IS_VAR) &&
+			           retval_ptr == &EG(uninitialized_zval)) {
+				zval *ret;
+
+				ALLOC_INIT_ZVAL(ret);
 				*EG(return_value_ptr_ptr) = ret;
 			} else {
 				*EG(return_value_ptr_ptr) = retval_ptr;
@@ -2662,7 +2665,9 @@ ZEND_VM_HANDLER(106, ZEND_SEND_VAR_NO_REF, VAR|CV, ANY)
 	} else {
 		zval *valptr;
 
-		if (!(opline->extended_value & ZEND_ARG_SEND_SILENT)) {
+		if ((opline->extended_value & ZEND_ARG_COMPILE_TIME_BOUND) ?
+			!(opline->extended_value & ZEND_ARG_SEND_SILENT) :
+			!ARG_MAY_BE_SENT_BY_REF(EX(fbc), opline->op2.u.opline_num)) {
 			zend_error(E_STRICT, "Only variables should be passed by reference");
 		}
 		ALLOC_ZVAL(valptr);
@@ -2686,6 +2691,16 @@ ZEND_VM_HANDLER(67, ZEND_SEND_REF, VAR|CV, ANY)
 
 	if (OP1_TYPE == IS_VAR && !varptr_ptr) {
 		zend_error_noreturn(E_ERROR, "Only variables can be passed by reference");
+	}
+
+	if (OP1_TYPE == IS_VAR && *varptr_ptr == EG(error_zval_ptr)) {
+		ALLOC_INIT_ZVAL(varptr);
+		zend_vm_stack_push(varptr TSRMLS_CC);
+		ZEND_VM_NEXT_OPCODE();
+	}
+
+	if (EX(function_state).function->type == ZEND_INTERNAL_FUNCTION && !ARG_SHOULD_BE_SENT_BY_REF(EX(fbc), opline->op2.u.opline_num)) {
+		ZEND_VM_DISPATCH_TO_HELPER(zend_send_by_var_helper);
 	}
 
 	SEPARATE_ZVAL_TO_MAKE_IS_REF(varptr_ptr);
@@ -3571,28 +3586,33 @@ ZEND_VM_HANDLER(77, ZEND_FE_RESET, CONST|TMP|VAR|CV, ANY)
 			ALLOC_ZVAL(tmp);
 			INIT_PZVAL_COPY(tmp, array_ptr);
 			array_ptr = tmp;
+			if (Z_TYPE_P(array_ptr) == IS_OBJECT) {
+				ce = Z_OBJCE_P(array_ptr);
+				if (ce && ce->get_iterator) {
+					Z_DELREF_P(array_ptr);
+				}
+			}
 		} else if (Z_TYPE_P(array_ptr) == IS_OBJECT) {
 			ce = Z_OBJCE_P(array_ptr);
 			if (!ce || !ce->get_iterator) {
 				Z_ADDREF_P(array_ptr);
 			}
-		} else {
-			if ((OP1_TYPE == IS_CV || OP1_TYPE == IS_VAR) &&
-			    !Z_ISREF_P(array_ptr) &&
-			    Z_REFCOUNT_P(array_ptr) > 1) {
-				zval *tmp;
+		} else if (OP1_TYPE == IS_CONST || 
+		           ((OP1_TYPE == IS_CV || OP1_TYPE == IS_VAR) &&
+		            !Z_ISREF_P(array_ptr) &&
+		            Z_REFCOUNT_P(array_ptr) > 1)) {
+			zval *tmp;
 
-				ALLOC_ZVAL(tmp);
-				INIT_PZVAL_COPY(tmp, array_ptr);
-				zval_copy_ctor(tmp);
-				array_ptr = tmp;
-			} else {
-				Z_ADDREF_P(array_ptr);
-			}
+			ALLOC_ZVAL(tmp);
+			INIT_PZVAL_COPY(tmp, array_ptr);
+			zval_copy_ctor(tmp);
+			array_ptr = tmp;
+		} else {
+			Z_ADDREF_P(array_ptr);
 		}
 	}
 
-	if (OP1_TYPE != IS_TMP_VAR && ce && ce->get_iterator) {
+	if (ce && ce->get_iterator) {
 		iter = ce->get_iterator(ce, array_ptr, opline->extended_value & ZEND_FE_RESET_REFERENCE TSRMLS_CC);
 
 		if (iter && !EG(exception)) {
@@ -3683,7 +3703,7 @@ ZEND_VM_HANDLER(78, ZEND_FE_FETCH, VAR, ANY)
 {
 	zend_op *opline = EX(opline);
 	zend_free_op free_op1;
-	zval *array = GET_OP1_ZVAL_PTR(BP_VAR_R);
+	zval *array = EX_T(opline->op1.u.var).var.ptr;
 	zval **value;
 	char *str_key;
 	uint str_key_len;
@@ -3692,8 +3712,6 @@ ZEND_VM_HANDLER(78, ZEND_FE_FETCH, VAR, ANY)
 	zend_object_iterator *iter = NULL;
 	int key_type = 0;
 	zend_bool use_key = (zend_bool)(opline->extended_value & ZEND_FE_FETCH_WITH_KEY);
-
-	PZVAL_LOCK(array);
 
 	switch (zend_iterator_unwrap(array, &iter TSRMLS_CC)) {
 		default:
@@ -3907,7 +3925,7 @@ ZEND_VM_HELPER_EX(zend_isset_isempty_dim_prop_obj_handler, VAR|UNUSED|CV, CONST|
 		zend_free_op free_op2;
 		zval *offset = GET_OP2_ZVAL_PTR(BP_VAR_R);
 
-		if (Z_TYPE_PP(container) == IS_ARRAY) {
+		if (Z_TYPE_PP(container) == IS_ARRAY && !prop_dim) {
 			HashTable *ht;
 			int isset = 0;
 
@@ -4237,11 +4255,12 @@ ZEND_VM_HANDLER(144, ZEND_ADD_INTERFACE, ANY, CONST)
 	zend_class_entry *ce = EX_T(opline->op1.u.var).class_entry;
 	zend_class_entry *iface = zend_fetch_class(Z_STRVAL(opline->op2.u.constant), Z_STRLEN(opline->op2.u.constant), opline->extended_value TSRMLS_CC);
 
-	if (!(iface->ce_flags & ZEND_ACC_INTERFACE)) {
-		zend_error_noreturn(E_ERROR, "%s cannot implement %s - it is not an interface", ce->name, iface->name);
+	if (iface) {
+		if (!(iface->ce_flags & ZEND_ACC_INTERFACE)) {
+			zend_error_noreturn(E_ERROR, "%s cannot implement %s - it is not an interface", ce->name, iface->name);
+		}
+		zend_do_implement_interface(ce, iface TSRMLS_CC);
 	}
-
-	zend_do_implement_interface(ce, iface TSRMLS_CC);
 
 	ZEND_VM_NEXT_OPCODE();
 }
@@ -4254,8 +4273,8 @@ ZEND_VM_HANDLER(149, ZEND_HANDLE_EXCEPTION, ANY, ANY)
 	int catched = 0;
 	zval restored_error_reporting;
  
-	void **stack_frame = (void**)EX(Ts) +
-		(sizeof(temp_variable) * EX(op_array)->T) / sizeof(void*);
+	void **stack_frame = (void**)(((char*)EX(Ts)) +
+		(ZEND_MM_ALIGNED_SIZE(sizeof(temp_variable)) * EX(op_array)->T));
 
 	while (zend_vm_stack_top(TSRMLS_C) != stack_frame) {
 		zval *stack_zval_p = zend_vm_stack_pop(TSRMLS_C);
@@ -4351,6 +4370,10 @@ ZEND_VM_HANDLER(150, ZEND_USER_OPCODE, ANY, ANY)
 			ZEND_VM_CONTINUE();
 		case ZEND_USER_OPCODE_RETURN:
 			ZEND_VM_DISPATCH_TO_HELPER(zend_leave_helper);
+		case ZEND_USER_OPCODE_ENTER:
+			ZEND_VM_ENTER();
+		case ZEND_USER_OPCODE_LEAVE:
+			ZEND_VM_LEAVE();
 		case ZEND_USER_OPCODE_DISPATCH:
 			ZEND_VM_DISPATCH(EX(opline)->opcode, EX(opline));
 		default:

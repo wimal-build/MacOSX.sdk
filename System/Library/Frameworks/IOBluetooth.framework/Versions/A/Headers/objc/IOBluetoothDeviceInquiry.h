@@ -61,6 +61,7 @@
 	
 }
 
+@property(assign) id delegate;
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		inquiryWithDelegate
 	@abstract	Class method to create an inquiry object.
@@ -123,6 +124,23 @@
 - (uint8_t)inquiryLength;
 
 //---------------------------------------------------------------------------------------------------------------------------
+/*!	@method		setSearchType
+	@abstract   Set the devices that are found. 
+	@param		searchType		Bluetooth versions the search will discover.
+	@discussion A default of kIOBluetoothDeviceSearchClassic is used, unless a different value is specified using this method.
+*/
+
+- (void)setSearchType:(IOBluetoothDeviceSearchTypes)searchType;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@method		searchType
+	@abstract   Returns the search type that will be performed.
+	@result		The search type that will be performed.
+*/
+
+- (IOBluetoothDeviceSearchTypes)searchType;
+
+//---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		setUpdateNewDeviceNames
 	@abstract   Sets whether or not the inquiry object will retrieve the names of devices found during the search.
 	@param		inValue		Pass TRUE if names are to be updated, otherwise pass FALSE.
@@ -138,23 +156,6 @@
 */
 
 - (BOOL)updateNewDeviceNames;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		setDelegate
-	@abstract   Set the delegate that will receive delegate messages, as defined below.
-	@param		id	The object that should receive delegate messages.
-	@discussion All delegate methods are optional, although it would be a good idea to implement them all. The passed object will be retained.
-*/
-
-- (void)setDelegate:(id)delegate;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		delegate
-	@abstract	Returns the current delegate, if any.
-	@result		Returns delegate object, otherwise returns nil.
-*/
-
-- (id)delegate;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		foundDevices
@@ -202,8 +203,8 @@
 					deadlock your process.
 */
 
-@interface NSObject( IOBluetoothDeviceInquiryDelegate )
-
+@protocol IOBluetoothDeviceInquiryDelegate
+@optional
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method			deviceInquiryStarted
 	@discussion 	This message will be delivered when the inquiry actually starts. Since the inquiry could be throttled, this

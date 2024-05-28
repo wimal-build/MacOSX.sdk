@@ -59,10 +59,16 @@
 #define kIOUSBMassStorageDoNotMatch				"Do Not Match MSC"
 #define kIOUSBMassStorageDoNotOperate			"Do Not Operate"
 #define kIOUSBMassStorageEnableSuspendResumePM	"Enable Port Suspend-Resume PM"
+#define kIOUSBMassStoragePostResetCoolDown		"Reset Recovery Time"
 
 enum 
 {
 	kUSBDAddressLength = 10
+};
+
+enum 
+{
+	kIOUSBMassStorageReconfigurationTimeoutMS = 5000
 };
 
 #pragma mark -
@@ -187,6 +193,11 @@ protected:
 		bool					fRequiresResetOnResume;
 		bool					fAutonomousSpinDownWorkAround;
 		UInt8					fConsecutiveResetCount;
+		bool					fClearStallInProgress;				/* OBSOLETE */
+		bool					fTerminationDeferred;
+		UInt32					fRequiredMaxBusStall;
+		bool					fBlockOnResetThread;
+		UInt32					fPostDeviceResetCoolDownInterval;
 	};
     ExpansionData *				reserved;
 	
@@ -207,6 +218,11 @@ protected:
 	#define fRequiresResetOnResume				reserved->fRequiresResetOnResume
 	#define fAutonomousSpinDownWorkAround		reserved->fAutonomousSpinDownWorkAround
 	#define fConsecutiveResetCount				reserved->fConsecutiveResetCount
+	#define fClearStallInProgress				reserved->fClearStallInProgress
+	#define fTerminationDeferred				reserved->fTerminationDeferred
+	#define fRequiredMaxBusStall				reserved->fRequiredMaxBusStall
+	#define fBlockOnResetThread					reserved->fBlockOnResetThread
+	#define fPostDeviceResetCoolDownInterval	reserved->fPostDeviceResetCoolDownInterval
 	
 	// Enumerated constants used to control various aspects of this
 	// driver.
@@ -444,31 +460,43 @@ protected:
 	static IOReturn		sWaitForReset( void * refcon );
 	IOReturn			GatedWaitForReset( void );
 	
-	static IOReturn		sWaitForTaskAbort( void * refcon );
-	IOReturn			GatedWaitForTaskAbort( void );
+	static IOReturn		sWaitForTaskAbort( void * refcon );			/* OBSOLETE */
+	IOReturn			GatedWaitForTaskAbort( void );				/* OBSOLETE */
 	
 	static void			sResetDevice( void * refcon );
-	static void			sAbortCurrentSCSITask( void * refcon );
+	
+	static void			sAbortCurrentSCSITask( void * refcon );		/* OBSOLETE */
 	
     OSMetaClassDeclareReservedUsed( IOUSBMassStorageClass, 1 );
-	virtual IOReturn	StartDeviceRecovery( void );
+	virtual IOReturn	StartDeviceRecovery( void );				/* OBSOLETE */
 
     OSMetaClassDeclareReservedUsed( IOUSBMassStorageClass, 2 );
-	virtual void		FinishDeviceRecovery( IOReturn	status );
+	virtual void		FinishDeviceRecovery( IOReturn	status );	/* OBSOLETE */
 
 	static void			DeviceRecoveryCompletionAction(
 		                	void *			target,
 		                	void *			parameter,
 		                	IOReturn		status,
-		                	UInt32			bufferSizeRemaining );
+		                	UInt32			bufferSizeRemaining );	/* OBSOLETE */
 
     void                ResetDeviceNow( bool waitForReset );
+	
 	void                AbortCurrentSCSITask( void );
 	
 	bool                IsPhysicalInterconnectLocationInternal ( void );
 	    
 	IOReturn            SuspendPort ( bool suspend );
-	 
+	
+private:
+	
+	void				ClearPipeStall ( void );
+	
+	IOReturn			AcceptSCSITask ( SCSITaskIdentifier scsiTask, bool * pAccepted );
+	
+	void				CheckDeferredTermination ( void );
+	
+	void				GatedCompleteSCSICommand ( SCSITaskIdentifier request, SCSIServiceResponse * serviceResponse, SCSITaskStatus * taskStatus );
+	
 	// Space reserved for future expansion.
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 3 );
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 4 );
@@ -484,7 +512,8 @@ protected:
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 14 );
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 15 );
     OSMetaClassDeclareReservedUnused( IOUSBMassStorageClass, 16 );
+	
 };
 
 
-#endif _IOKIT_IOUSBMASSSTORAGECLASS_H
+#endif //_IOKIT_IOUSBMASSSTORAGECLASS_H

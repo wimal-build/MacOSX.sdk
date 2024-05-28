@@ -45,6 +45,9 @@
 #include <IOKit/scsi/SCSICmds_REQUEST_SENSE_Defs.h>
 #include <IOKit/scsi/IOSCSIProtocolInterface.h>
 
+// Build includes
+#include <TargetConditionals.h>
+
 
 //-----------------------------------------------------------------------------
 //	Constants
@@ -93,9 +96,11 @@ class IOSCSIPrimaryCommandsDevice : public IOSCSIProtocolInterface
 	
 	OSDeclareAbstractStructors ( IOSCSIPrimaryCommandsDevice )
 	
+	friend class SCSITaskUserClient;
+	
 private:
 	
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	SCSIPrimaryCommands *			fSCSIPrimaryCommandObject;
 #endif
 
@@ -172,7 +177,7 @@ protected:
 	// the class.  For subclasses, this will be overridden using a
 	// dynamic cast on the base command set object of the subclass.
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	// ------ DEPRECATED API ----------
 	// This should no longer be called by subclasses as the command builder
@@ -189,7 +194,7 @@ protected:
 	// to free its needed command set objects.
 	virtual void					FreeCommandSetObjects ( void );
 
-#endif
+#endif /* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	
 	// This method is called by the start method to obtain information from
@@ -411,7 +416,9 @@ public:
 	OSDictionary *		GetDeviceCharacteristicsDictionary ( void );	
 	UInt8				GetANSIVersion ( void );
 	bool				GetCMDQUE ( void );
+#if !TARGET_OS_EMBEDDED
     OSString *          MapINQUIRYDataToIconFile ( void );
+#endif /* !TARGET_OS_EMBEDDED */
 	UInt32				GetRetryCount ( void );
 	
 	// -- SCSI Protocol Interface Methods	--
@@ -485,7 +492,7 @@ public:
 							IOMemoryDescriptor * 		dataBuffer,
 							UInt64						requiredSize );
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	// SCSI Primary command implementations
 	virtual bool		CHANGE_DEFINITION (
@@ -524,7 +531,7 @@ public:
 							SCSICmdField4Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	virtual bool		INQUIRY (
 							SCSITaskIdentifier			request,
@@ -535,6 +542,8 @@ public:
 							SCSICmdField1Byte 			ALLOCATION_LENGTH, 
 							SCSICmdField1Byte 			CONTROL );
 
+#if !TARGET_OS_EMBEDDED
+	
 	virtual bool		LOG_SELECT (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
@@ -554,6 +563,8 @@ public:
 							SCSICmdField2Byte 			PARAMETER_POINTER,
 							SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 							SCSICmdField1Byte 			CONTROL );  
+	
+#endif /* !TARGET_OS_EMBEDDED */
 	
 	virtual bool		MODE_SELECT_6 (
 							SCSITaskIdentifier			request,
@@ -590,6 +601,8 @@ public:
 	   						SCSICmdField2Byte 			ALLOCATION_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 
+#if !TARGET_OS_EMBEDDED
+	
   	virtual bool		PERSISTENT_RESERVE_IN (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
@@ -604,12 +617,16 @@ public:
 	   						SCSICmdField4Bit 			SCOPE,
 	   						SCSICmdField4Bit 			TYPE,
 							SCSICmdField1Byte 			CONTROL );
+	
+#endif /* !TARGET_OS_EMBEDDED */
 
 	virtual bool		PREVENT_ALLOW_MEDIUM_REMOVAL (
 							SCSITaskIdentifier			request,
 		 					SCSICmdField2Bit 			PREVENT, 
 							SCSICmdField1Byte 			CONTROL );
-
+	
+#if !TARGET_OS_EMBEDDED
+	
 	virtual bool		READ_BUFFER (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
@@ -636,8 +653,10 @@ public:
 	virtual bool		RELEASE_6 (
 							SCSITaskIdentifier			request,
 							SCSICmdField1Byte 			CONTROL );
+	
+#endif /* !TARGET_OS_EMBEDDED */
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 
 	virtual bool		RELEASE_6 (
 							SCSITaskIdentifier			request,
@@ -646,7 +665,9 @@ public:
 							SCSICmdField1Byte 			RESERVATION_IDENTIFICATION,
 							SCSICmdField1Byte 			CONTROL );
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
+	
+#if !TARGET_OS_EMBEDDED
 	
 	virtual bool		RELEASE_10 (
 							SCSITaskIdentifier			request,
@@ -656,8 +677,10 @@ public:
 							SCSICmdField1Byte 			THIRD_PARTY_DEVICE_ID,
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
+	
+#endif /* !TARGET_OS_EMBEDDED */
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 
 	virtual bool		RELEASE_10 (
 							SCSITaskIdentifier			request,
@@ -670,13 +693,17 @@ public:
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
+	
+#if !TARGET_OS_EMBEDDED
 	
 	virtual bool		REPORT_DEVICE_IDENTIFIER ( 
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
 							SCSICmdField4Byte 			ALLOCATION_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
+	
+#endif /* !TARGET_OS_EMBEDDED */
 
    	virtual bool		REPORT_LUNS ( 
 							SCSITaskIdentifier			request,
@@ -690,12 +717,16 @@ public:
 							SCSICmdField1Byte 			ALLOCATION_LENGTH, 
 							SCSICmdField1Byte 			CONTROL );
  	
+#if !TARGET_OS_EMBEDDED
+	
  	virtual bool		RESERVE_6 (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
 							SCSICmdField1Byte 			CONTROL );
+	
+#endif /* !TARGET_OS_EMBEDDED */
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 
  	virtual bool		RESERVE_6 (
 							SCSITaskIdentifier			request,
@@ -705,7 +736,9 @@ public:
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
+	
+#if !TARGET_OS_EMBEDDED
 	
 	virtual bool		RESERVE_10 (
 							SCSITaskIdentifier			request,
@@ -716,7 +749,9 @@ public:
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 
-#ifndef __LP64__
+#endif /* !TARGET_OS_EMBEDDED */
+	
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 
 	virtual bool		RESERVE_10 (
 							SCSITaskIdentifier			request,
@@ -729,7 +764,9 @@ public:
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
+	
+#if !TARGET_OS_EMBEDDED
 	
 	virtual bool		SEND (
 							SCSITaskIdentifier			request,
@@ -756,9 +793,13 @@ public:
 							SCSICmdField4Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 	
+#endif /* !TARGET_OS_EMBEDDED */
+	
 	virtual bool		TEST_UNIT_READY (
 							SCSITaskIdentifier			request,
 							SCSICmdField1Byte 			CONTROL );
+	
+#if !TARGET_OS_EMBEDDED
  	
 	virtual bool		WRITE_BUFFER (
 							SCSITaskIdentifier			request,
@@ -768,6 +809,8 @@ public:
 							SCSICmdField3Byte 			BUFFER_OFFSET,
 							SCSICmdField3Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
+	
+#endif /* !TARGET_OS_EMBEDDED */
 	
 	// The SPC-3 INQUIRY command as defined in section 6.4.1 of SPC-3.
 	bool				INQUIRY (
@@ -780,6 +823,8 @@ public:
 	
 private:
 	
+	
+#if !TARGET_OS_EMBEDDED
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  1 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  2 );
@@ -797,6 +842,7 @@ private:
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice, 14 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice, 15 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice, 16 );
+#endif /* !TARGET_OS_EMBEDDED */
 	
 };
 

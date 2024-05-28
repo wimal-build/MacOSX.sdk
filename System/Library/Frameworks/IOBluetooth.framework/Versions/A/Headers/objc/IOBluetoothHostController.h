@@ -39,30 +39,23 @@
 	void *__strong				_expansion[4];
 }
 
+@property(assign) id delegate;
+
 //---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		controllerWithDelegate
+/*!	@method		defaultController
 	@abstract	Gets the default HCI controller object.
-	@result		A pointer to the created IOBluetoothHostController object.
+	@result		A (autoreleased) pointer to the created IOBluetoothHostController object.
 */
 
 + (IOBluetoothHostController *)defaultController;
 
 //---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		setDelegate
-	@abstract   Set the delegate that will receive delegate messages, as defined below.
-	@param		id	The object that should receive delegate messages.
-	@discussion All delegate methods are optional, although it would be a good idea to implement them all.
-*/
+/*!	@method		powerState
+	@abstract	Gets the controller power state
+	@result		The current controller's power state.  This will be 1 for on, or 0 for off.  Only Apple Bluetooth adapters support power off
+ */
+@property(readonly) BluetoothHCIPowerState powerState;
 
-- (void)setDelegate:(id)delegate;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		delegate
-	@abstract	Returns the current delegate, if any.
-	@result		Returns delegate object, otherwise returns nil.
-*/
-
-- (id)delegate;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		classOfDevice
@@ -70,7 +63,7 @@
 	@result		Returns the current class of device value.
 */
 
-- (BluetoothClassOfDevice)classOfDevice;
+- (BluetoothClassOfDevice)classOfDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		setClassOfDevice:forTimeInterval:
@@ -80,7 +73,7 @@
 	@result		Returns the whether setting the class of device value was successful. 0 if success, error code otherwise.
 */
 
-- (IOReturn)setClassOfDevice:(BluetoothClassOfDevice)classOfDevice		forTimeInterval:(NSTimeInterval)seconds;
+- (IOReturn)setClassOfDevice:(BluetoothClassOfDevice)classOfDevice		forTimeInterval:(NSTimeInterval)seconds DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		getAddress
@@ -89,7 +82,7 @@
 	@result		Returns error, if there was one.
 */
 
-- (IOReturn)getAddress:(BluetoothDeviceAddress*)ioDeviceAddress;
+- (IOReturn)getAddress:(BluetoothDeviceAddress*)ioDeviceAddress DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		addressAsString
@@ -105,7 +98,15 @@
 	@result		Returns error, if there was one.
 */
 
-- (IOReturn)getSupportedFeatures:(BluetoothHCISupportedFeatures*)features;
+- (IOReturn)getSupportedFeatures:(BluetoothHCISupportedFeatures*)features DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@method		nameAsString
+ @abstract	Gets the "friendly" name of HCI controller.
+ @result		Returns NSString with the device name, nil if there is not one or it cannot be read.
+ */
+
+- (NSString *)nameAsString;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		name
@@ -113,7 +114,7 @@
 	@result		Returns NSString with the device name, nil if there is not one or it cannot be read.
 */
 
-- (NSString *)name;
+- (NSString *)name DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		readRSSIForDevice
@@ -121,7 +122,7 @@
 	@result		Returns noErr if the command was successfully sent to the hardware. Results will be returned on the delegate method -readRSSIForDeviceComplete.
 */
 
-- (IOReturn)readRSSIForDevice:(IOBluetoothDevice*)device;
+- (IOReturn)readRSSIForDevice:(IOBluetoothDevice*)device DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		readLinkQualityForDevice
@@ -129,7 +130,7 @@
 	@result		Returns noErr if the command was successfully sent to the hardware. Results will be returned on the delegate method -readLinkQualityForDeviceComplete.
 */
 
-- (IOReturn)readLinkQualityForDevice:(IOBluetoothDevice*)device;
+- (IOReturn)readLinkQualityForDevice:(IOBluetoothDevice*)device DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
 

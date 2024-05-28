@@ -3,7 +3,7 @@
  
      Contains:   Public Code Fragment Manager Interfaces.
  
-     Version:    CarbonCore-859.2~148
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved.
  

@@ -3,7 +3,7 @@
 
      Contains:   API for manipulating Audio Files.
 
-     Copyright:  (c) 1985 - 2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1985 - 2008 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -119,7 +119,13 @@ typedef UInt32			AudioFileTypeID;
     @constant   kAudioFileOperationNotSupportedError 
 		The operation cannot be performed. For example, setting kAudioFilePropertyAudioDataByteCount to increase 
 		the size of the audio data in a file is not a supported operation. Write the data instead.
-*/
+	@constant   kAudioFileEndOfFileError 
+		End of file.
+	@constant   kAudioFilePositionError 
+		Invalid file position.
+	@constant   kAudioFileNotOpenError 
+		The file is closed.
+ */
 enum {
         kAudioFileUnspecifiedError						= 'wht?',
         kAudioFileUnsupportedFileTypeError 				= 'typ?',
@@ -133,7 +139,11 @@ enum {
         kAudioFileDoesNotAllow64BitDataSizeError		= 'off?',
         kAudioFileInvalidPacketOffsetError				= 'pck?',
         kAudioFileInvalidFileError						= 'dta?',
-		kAudioFileOperationNotSupportedError			= 0x6F703F3F // 'op??', integer used because of trigraph
+		kAudioFileOperationNotSupportedError			= 0x6F703F3F, // 'op??', integer used because of trigraph
+		// general file error codes
+		kAudioFileNotOpenError							= -38,
+		kAudioFileEndOfFileError						= -39,
+		kAudioFilePositionError							= -40
 };
 
 /*!
@@ -465,6 +475,9 @@ typedef struct AudioFilePacketTableInfo AudioFilePacketTableInfo;
 #define kAFInfoDictionary_NominalBitRate                "nominal bit rate"
 #define kAFInfoDictionary_ChannelLayout					"channel layout"
 #define kAFInfoDictionary_ApproximateDurationInSeconds  "approximate duration in seconds"
+#define kAFInfoDictionary_SourceBitDepth				"source bit depth"
+#define kAFInfoDictionary_ISRC							"ISRC"					// International Standard Recording Code
+#define kAFInfoDictionary_SubTitle						"subtitle"
 
 //=============================================================================
 //	Routines
@@ -661,7 +674,7 @@ AudioFileOptimize (AudioFileID  	inAudioFile)							__OSX_AVAILABLE_STARTING(__M
     @function	AudioFileReadBytes
     @abstract   Read bytes of audio data from the audio file. 
 				
-    @discussion				Returns eofErr when read encounters end of file.
+    @discussion				Returns kAudioFileEndOfFileError when read encounters end of file.
     @param inAudioFile		an AudioFileID.
     @param inUseCache 		true if it is desired to cache the data upon read, else false
     @param inStartingByte	the byte offset of the audio data desired to be returned
@@ -704,7 +717,7 @@ AudioFileWriteBytes (	AudioFileID  	inAudioFile,
 				If the buffer is too small for the number of packets 
 				requested, ioNumPackets and ioNumBytes will be reduced 
 				to the number of packets that can be accommodated and their byte size.
-				Returns eofErr when read encounters end of file.
+				Returns kAudioFileEndOfFileError when read encounters end of file.
 
     @param inAudioFile				an AudioFileID.
     @param inUseCache 				true if it is desired to cache the data upon read, else false
@@ -935,14 +948,14 @@ AudioFileRemoveUserData ( AudioFileID			inAudioFile,
     @constant   kAudioFilePropertyChunkIDs 
 					returns an array of OSType four char codes for each kind of chunk in the file.
     @constant   kAudioFilePropertyInfoDictionary 
-					returns a CFDictionary filled with information about the data contined in the file. 
+					returns a CFDictionary filled with information about the data contained in the file. 
 					See dictionary key constants already defined for info string types. 
 					AudioFileComponents are free to add keys to the dictionaries that they return for this property...
 					caller is responsible for releasing the CFObject
     @constant   kAudioFilePropertyPacketTableInfo 
 					Gets or sets an AudioFilePacketTableInfo struct for the file types that support it.
 					When setting, the sum of mNumberValidFrames, mPrimingFrames and mRemainderFrames must be the same as the total
-					number of frames in all packets. If not you will get a paramErr. The best way to ensure this is to get the value of
+					number of frames in all packets. If not you will get a kAudio_ParamError. The best way to ensure this is to get the value of
 					the property and make sure the sum of the three values you set has the same sum as the three values you got.
 	@constant	kAudioFilePropertyPacketSizeUpperBound
 					a UInt32 for the theoretical maximum packet size in the file (without actually scanning
@@ -961,7 +974,13 @@ AudioFileRemoveUserData ( AudioFileID			inAudioFile,
 					A void * pointing to memory set up by the caller to contain a fully formatted ID3 tag (get/set v2.2, v2.3, or v2.4, v1 get only).
 					The ID3 tag is not manipulated in anyway either for read or write. 
 					When setting, this property must be called before calling AudioFileWritePackets.
-*/
+	@constant	kAudioFilePropertySourceBitDepth
+					For encoded data this property returns the bit depth of the source as an SInt32, if known.
+					The bit depth is expressed as a negative number if the source was floating point, e.g. -32 for float, -64 for double.
+	@constant	kAudioFilePropertyAlbumArtwork
+					returns a CFDataRef filled with the Album Art. Data will formatted as either JFIF (JPEG) or PNG (PNG) 
+					The caller is responsible for releasing the CFObject.
+ */
 enum
 {
 	kAudioFilePropertyFileFormat			=	'ffmt',
@@ -989,7 +1008,9 @@ enum
 	kAudioFilePropertyReserveDuration		=	'rsrv',
 	kAudioFilePropertyEstimatedDuration		=	'edur',
 	kAudioFilePropertyBitRate				=	'brat',
-	kAudioFilePropertyID3Tag				=	'id3t'
+	kAudioFilePropertyID3Tag				=	'id3t',
+	kAudioFilePropertySourceBitDepth		=	'sbtd',
+	kAudioFilePropertyAlbumArtwork			=	'aart'
 };
 
 

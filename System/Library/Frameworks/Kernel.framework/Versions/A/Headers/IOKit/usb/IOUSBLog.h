@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright © 1998-20010 Apple Inc.  All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -49,7 +49,7 @@
 
 // Allow clients to define their own debug level.
 
-#if( !defined( DEBUG_LEVEL ) )
+#if ( !defined( DEBUG_LEVEL ) )
 	#define	DEBUG_LEVEL			DEBUG_LEVEL_FINAL
 #endif
 
@@ -64,11 +64,31 @@ enum
     kUSBControllerUserClientSetDebuggingType,
     kUSBControllerUserClientGetDebuggingLevel,
     kUSBControllerUserClientGetDebuggingType,
+#ifndef __OPEN_SOURCE__
     kUSBControllerUserClientSetTestMode,
     kUSBControllerUserClientReadRegister,
     kUSBControllerUserClientWriteRegister,
+    kUSBControllerUserClientMessageController,
+#endif
     kNumUSBControllerMethods
 };
+
+#ifndef __OPEN_SOURCE__
+// Enums for the private kIOUSBMessageController message
+enum
+{
+	kIOUSBMessageControllerDoGPIOReset = 0x00000001,
+	kIOUSBMessageControllerDoPrintACPI = 0x00000002,
+	
+	kIOUSBMessageControllerDumpQueues						= 0x00000003,
+	kIOUSBMessageControllerDumpQueuesMask					= 0x0000FFFF,			// for this message, we use the top 16 bits for options
+	kIOUSBMessageControllerDumpQueuesOptionsMask			= 0xFFFF0000,
+	kIOUSBMessageControllerDumpQueuesPrintSkippedOptionMask = (1 << 16),
+	kIOUSBMessageControllerDumpQueuesPrintTDsMask			= (1 << 17),
+	kIOUSBMessageControllerDumpQueuesPrintDoneQueue			= (1 << 18)				// For OHCI
+	
+};
+#endif
 
 // Info Debug Output Types.
 
@@ -115,7 +135,7 @@ void 			KernelDebugLogDataInternal( UInt32 inLevel,  UInt32 inTag, void *buffer,
 // Handy macros.
 
 #define REQUIRE_NO_ERR_PRINTF( VALUE, LABEL, ARGS... )							\
-	if( VALUE != kIOReturnSuccess )									\
+	if ( VALUE != kIOReturnSuccess )									\
 	{												\
 		KernelDebugLogInternal( kDebugInfoLevel, 'BluD', ## ARGS );				\
 		goto LABEL;										\
@@ -124,7 +144,7 @@ void 			KernelDebugLogDataInternal( UInt32 inLevel,  UInt32 inTag, void *buffer,
 #define REQUIRE_PRINTF( TEST, LABEL, ARGS... )								\
 	do												\
 	{												\
-		if( !( TEST ) )										\
+		if ( !( TEST ) )										\
 		{											\
 			KernelDebugLogInternal( kDebugInfoLevel, 'BluD',  ## ARGS );			\
 			goto LABEL;									\

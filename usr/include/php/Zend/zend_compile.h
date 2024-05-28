@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2009 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2011 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_compile.h,v 1.316.2.8.2.12.2.40 2009/06/05 23:20:59 shire Exp $ */
+/* $Id: zend_compile.h 306939 2011-01-01 02:19:59Z felipe $ */
 
 #ifndef ZEND_COMPILE_H
 #define ZEND_COMPILE_H
@@ -606,6 +606,11 @@ ZEND_API zend_bool zend_is_auto_global(const char *name, uint name_len TSRMLS_DC
 ZEND_API int zend_auto_global_disable_jit(const char *varname, zend_uint varname_length TSRMLS_DC);
 ZEND_API size_t zend_dirname(char *path, size_t len);
 
+#if SUHOSIN_PATCH
+extern void *suhosin_zend_destroy_property_info_internal;
+extern void *suhosin_zend_destroy_property_info;
+#endif
+
 int zendlex(znode *zendlval TSRMLS_DC);
 
 /* BEGIN: OPCODES */
@@ -687,9 +692,9 @@ int zendlex(znode *zendlval TSRMLS_DC);
 #define ZEND_CT	(1<<0)
 #define ZEND_RT (1<<1)
 
-#define ZEND_FETCH_STANDARD		0
-#define ZEND_FETCH_ADD_LOCK		(1<<0)
-#define ZEND_FETCH_MAKE_REF		(1<<1)
+#define ZEND_FETCH_STANDARD	    0x00000000
+#define ZEND_FETCH_ADD_LOCK	    0x08000000
+#define ZEND_FETCH_MAKE_REF	    0x04000000
 
 #define ZEND_FE_FETCH_BYREF	1
 #define ZEND_FE_FETCH_WITH_KEY	2

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2009 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2010 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -167,6 +167,28 @@
 #define kIOAudioEngineFlavorKey							"IOAudioEngineFlavor"
 
 #define	kIOAudioEngineAlwaysLoadCoreAudioPlugInKey		"IOAudioEngineAlwaysLoadCoreAudioPlugIn"
+
+/*!
+ * @defined kIOAudioEngineInputChannelLayoutKey
+ * @abstract The key in the IORegistry for the IOAudioEngine's dictionary describes an array of OSNumber data that describe the spatial position of each channel.  See IOAudioTypes.h.
+ * @discussion
+ */
+
+#ifndef __OPEN_SOURCE__
+//	<rdar://6868206>
+#endif
+#define kIOAudioEngineInputChannelLayoutKey				"IOAudioEngineInputChannelLayout"
+
+/*!
+ * @defined kIOAudioEngineOutputChannelLayoutKey
+ * @abstract The key in the IORegistry for the IOAudioEngine's dictionary describes an array of OSNumber data that describe the spatial position of each channel.  See IOAudioTypes.h.
+ * @discussion
+ */
+
+#ifndef __OPEN_SOURCE__
+//	<rdar://6868206>
+#endif
+#define kIOAudioEngineOutputChannelLayoutKey			"IOAudioEngineOutputChannelLayout"
 
 /*****
  *
@@ -437,7 +459,30 @@
 #define kIOAudioSelectorControlAvailableSelectionsKey	"IOAudioSelectorControlAvailableSelections"
 #define kIOAudioSelectorControlSelectionValueKey		"IOAudioSelectorControlSelectionValue"
 #define kIOAudioSelectorControlSelectionDescriptionKey	"IOAudioSelectorControlSelectionDescriptionKey"
+#define kIOAudioSelectorControlTransportValueKey		"IOAudioSelectorControlTransportValue"					// <rdar://8202424>
 
 #define kIOAudioSelectorControlClockSourceKey				"IOAudioSelectorControlClockSourceKey"
+
+#ifndef __OPEN_SOURCE__
+
+// <rdar://problem/8642774>
+
+// Device description
+#define kIOAudioEngineDeviceDescription								"IOAudioEngineDeviceDescription"
+#define kIOAudioEngineDeviceDescriptionKey_InputDigitalBoostGain	"driver digital input gain"
+#define kIOAudioEngineDeviceDescriptionKey_PostprocessingInputGain	"post-processing input gain"
+
+// Client descriptions
+#define kIOAudioEngineClientDescription						"IOAudioEngineClientDescription"
+
+#define kIOAudioEngineClientDescriptionKey					"kind"
+
+enum
+{
+	kIOAudioEngineGeneralClient    = 0,
+	kIOAudioEngineVoiceClient      = 1
+};
+
+#endif
 
 #endif /* _IOAUDIODEFINES_H */

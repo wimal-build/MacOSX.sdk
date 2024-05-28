@@ -4,6 +4,10 @@
 	@abstract	Baseclass of Headset and Handsfree objects.  Implements
 				basic interface to the audio driver and remote device
 	@copywrite	(C) 2006 by Apple Computer, Inc., all rights reserved.
+ 	@discussion
+				 ***		DEPRECATED IN 10.7
+				 ***		You should transition your code to IOBluetoothHandsFree class.
+				 ***		This API may be removed any time in the future. 
  */
 
 
@@ -34,7 +38,8 @@ enum IOBluetoothSCODriverPropertiesPublic
 	kIOBluetoothSCOAudioDriverPropertyUsesExternalErrorUI				= 'scoa',
 };
 
-
+// Notification when the button is pressed
+#define kIOBluetoothRFCOMMAudioControllerButtonPressedNotification	@"IOBluetoothRFCOMMAudioControllerButtonPressed"
 
 //====================================================================================================================
 //	IOBluetoothRFCOMMAudioController
@@ -61,6 +66,8 @@ enum IOBluetoothSCODriverPropertiesPublic
 	
 }
 
+@property(assign) id delegate;
+
 // ---------------------------------------------------
 // Init's
 //
@@ -76,7 +83,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 */
 - (id) initWithIncomingDevice: (IOBluetoothDevice *)device 
 	  incomingRFCOMMChannelID: (BluetoothRFCOMMChannelID)incomingRFCOMMChannelID
-					 delegate: (id)inDelegate;
+					 delegate: (id)inDelegate DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	 @method		initForConnectionToDevice:delegate:
@@ -88,22 +95,27 @@ enum IOBluetoothSCODriverPropertiesPublic
 	 @result		A newly created IOBluetoothRFCOMMAudioController object on success, nil on failure
 */
 - (id) initForConnectionToDevice: (IOBluetoothDevice *)device
-						delegate: (id)inDelegate;
-
-- (void) dealloc;
-- (void) setDelegate:(id)delegate;
-
+						delegate: (id)inDelegate DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 // ---------------------------------------------------
 // CoreAudio stuff
 //
+
+/*!
+ @method		getDriverIDForDevice
+ @abstract		Get the driver ID string used by the device
+ @discussion	
+ @result		The driver ID this object is attached to, nil if not attached
+ */
++ (NSString *)getDriverIDForDevice:(IOBluetoothDevice*)inDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+
 /*!
 	@method		getAudioDeviceID
 	@abstract	Get the audio device ID this object is attached to
 	@discussion	
 	@result		The audio device ID this object is attached to, NULL if not attached
 */
-- (AudioDeviceID) getAudioDeviceID;
+- (AudioDeviceID) getAudioDeviceID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 // ---------------------------------------------------
@@ -115,7 +127,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	
 	@result		The bluetooth device this object is using, otherwise NULL
 */
-- (IOBluetoothDevice *) getBluetoothDevice;
+- (IOBluetoothDevice *) getBluetoothDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		isDeviceConnected
@@ -123,7 +135,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	
 	@result		The connection state of the device, FALSE if no device or not connected
 */
-- (BOOL) isDeviceConnected;
+- (BOOL) isDeviceConnected DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		openDeviceConnection
@@ -131,7 +143,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	Look for final result in the provided delegate method
 	@result		The result of the first stage of connection, kIOReturnNoDevice if no device.
 */
-- (IOReturn) openDeviceConnection;
+- (IOReturn) openDeviceConnection DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		closeDeviceConnection
@@ -139,7 +151,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	Look for final result in the provided delegate method
 	@result		The result of the first stage of disconnection, kIOReturnNoDevice if no device.
 */
-- (IOReturn) closeDeviceConnection;
+- (IOReturn) closeDeviceConnection DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 
@@ -152,7 +164,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	
 	@result		The RFCOMM channel ID of the remote device, 0 if none
 */
-- (BluetoothRFCOMMChannelID) getIncomingRFCOMMChannelID;
+- (BluetoothRFCOMMChannelID) getIncomingRFCOMMChannelID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		getOutgoingRFCOMMChannelID
@@ -160,7 +172,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	
 	@result		The RFCOMM channel ID of the remote device, 0 if none
 */
-- (BluetoothRFCOMMChannelID) getOutgoingRFCOMMChannelID;
+- (BluetoothRFCOMMChannelID) getOutgoingRFCOMMChannelID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		isRFCOMMChannelOpen
@@ -168,7 +180,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	
 	@result		TRUE if open, FALSE if closed or device is nil
 */
-- (BOOL) isRFCOMMChannelOpen;
+- (BOOL) isRFCOMMChannelOpen DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		setRFCOMMChannel
@@ -176,7 +188,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	
 	@param		rfcommChannel The channel to use or nil to release the current one
 */
-- (void) setRFCOMMChannel:(IOBluetoothRFCOMMChannel *)rfcommChannel;
+- (void) setRFCOMMChannel:(IOBluetoothRFCOMMChannel *)rfcommChannel DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		openRFCOMMChannel
@@ -184,7 +196,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	Look for final result in the provided delegate method
 	@result		Result will be value returned from IOBluetoothDevice openRFCOMMChannelAsync if device is valid, kIOReturnError if no device is set
 */
-- (IOReturn) openRFCOMMChannel;
+- (IOReturn) openRFCOMMChannel DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		closeRFCOMMChannel
@@ -192,7 +204,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	Look for final results in the provided delegate method
 	@result		Result will be value returned from the channels' "closeChannel" method, kIOReturnNotAttached if no channel is set
 */
-- (IOReturn) closeRFCOMMChannel;
+- (IOReturn) closeRFCOMMChannel DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		sendRFCOMMData:length:
@@ -202,7 +214,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@param		length Length of the data
 	@result		Result will be value returned from the channels' "writeAsync" method, kIOReturnNotAttached if no channel is set
 */
-- (IOReturn) sendRFCOMMData:(const void *)data length:(UInt16)length;
+- (IOReturn) sendRFCOMMData:(const void *)data length:(uint16_t)length DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 //
 //  Various RFCOMM delegate methods.  Developers, you can override the rfcommChannelData method to 
@@ -212,10 +224,10 @@ enum IOBluetoothSCODriverPropertiesPublic
 //	Its also suggested that you use the standard delegate method below and not touch these guys unless
 // you absolutely have to.
 //
-- (void) handleIncomingRFCOMMChannelOpened:(IOBluetoothUserNotification *)notification channel:(IOBluetoothRFCOMMChannel *)channel;
-- (void) rfcommChannelOpenComplete:(IOBluetoothRFCOMMChannel *)rfcommChannel status:(IOReturn)status;
-- (void) rfcommChannelClosed:(IOBluetoothRFCOMMChannel *)rfcommChannel;
-- (void) rfcommChannelData:(IOBluetoothRFCOMMChannel *)rfcommChannel data:(void *)data length:(size_t)length;
+- (void) handleIncomingRFCOMMChannelOpened:(IOBluetoothUserNotification *)notification channel:(IOBluetoothRFCOMMChannel *)channel DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+- (void) rfcommChannelOpenComplete:(IOBluetoothRFCOMMChannel *)rfcommChannel status:(IOReturn)status DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+- (void) rfcommChannelClosed:(IOBluetoothRFCOMMChannel *)rfcommChannel DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+- (void) rfcommChannelData:(IOBluetoothRFCOMMChannel *)rfcommChannel data:(void *)data length:(size_t)length DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 // ---------------------------------------------------
@@ -227,7 +239,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	
 	@result		TRUE if open, FALSE if closed or device is nil
 */
-- (BOOL) isSCOConnected;
+- (BOOL) isSCOConnected DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		openSCOConnection
@@ -235,7 +247,7 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	Look for final result in the provided delegate method
 	@result		kIOReturnSuccess on success or if still open, various errors if failed
 */
-- (IOReturn) openSCOConnection;
+- (IOReturn) openSCOConnection DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		closeSCOConnection
@@ -243,16 +255,16 @@ enum IOBluetoothSCODriverPropertiesPublic
 	@discussion	Look for final results in the provided delegate method
 	@result		kIOReturnSuccess on success or if already closed, various errors if failed
 */
-- (IOReturn) closeSCOConnection;
+- (IOReturn) closeSCOConnection DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 @end
 
 
 //===============================================
-//  Delegate Inteface
+//  Delegate Inteface - DEPRECATED in 10.7
 //===============================================
-@interface NSObject( IOBluetoothRFCOMMAudioDelegate )
-
+@protocol IOBluetoothRFCOMMAudioDelegate
+@optional
 - (void) audioDevice:(id)device deviceConnectionOpened:(IOReturn)status;
 - (void) audioDevice:(id)device deviceConnectionClosed:(IOReturn)status;
 
@@ -260,11 +272,11 @@ enum IOBluetoothSCODriverPropertiesPublic
 - (void) audioDevice:(id)device rfcommChannelClosed:(IOReturn)status;
 
 - (void) audioDevice:(id)device serviceLevelConnectionOpened:(IOReturn)status;
-- (void) audioDevice:(id)device serviceLevelConnectionComplete:(IOReturn)status;
 - (void) audioDevice:(id)device serviceLevelConnectionClosed:(IOReturn)status;
 
 - (void) audioDevice:(id)device scoConnectionOpened:(IOReturn)status;
 - (void) audioDevice:(id)device scoConnectionClosed:(IOReturn)status;
+- (void) audioDevice:(id)device scoDone:(IOReturn)status;
 
 @end
 

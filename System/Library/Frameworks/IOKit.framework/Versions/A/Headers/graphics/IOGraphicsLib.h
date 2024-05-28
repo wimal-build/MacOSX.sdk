@@ -41,10 +41,10 @@ The functions in IOGraphicsLib use a number of special types. The display mode i
 
 extern kern_return_t
 IOFramebufferOpen(
-	io_service_t    service,
-	task_port_t	owningTask,
-	unsigned int	type,
-	io_connect_t  *	connect );
+        io_service_t    service,
+        task_port_t     owningTask,
+        unsigned int    type,
+        io_connect_t  * connect );
 
 /*! @function IOFBCreateSharedCursor
     @abstract Create shared cursor memory.
@@ -57,8 +57,8 @@ IOFramebufferOpen(
 
 extern kern_return_t
 IOFBCreateSharedCursor( io_connect_t connect,
-	unsigned int version,
-	unsigned int maxWidth, unsigned int maxHeight );
+        unsigned int version,
+        unsigned int maxWidth, unsigned int maxHeight );
 
 /*! @function IOFBGetFramebufferInformationForAperture
     @abstract Get framebuffer information for a pixel format.
@@ -70,8 +70,8 @@ IOFBCreateSharedCursor( io_connect_t connect,
 
 extern kern_return_t
 IOFBGetFramebufferInformationForAperture( io_connect_t connect,
-	    IOPixelAperture		  aperture,
-	    IOFramebufferInformation	* info );
+            IOPixelAperture               aperture,
+            IOFramebufferInformation    * info );
 
 /*! @function IOFBGetFramebufferOffsetForAperture
     @abstract Get the byte offset for a framebuffer's VRAM.
@@ -83,8 +83,8 @@ IOFBGetFramebufferInformationForAperture( io_connect_t connect,
 
 extern kern_return_t
 IOFBGetFramebufferOffsetForAperture( mach_port_t connect,
-	    IOPixelAperture		  aperture,
-	    IOByteCount			* offset );
+            IOPixelAperture               aperture,
+            IOByteCount                 * offset );
 
 /*! @function IOFBSetBounds
     @abstract Set the location of the framebuffer within display space.
@@ -95,8 +95,42 @@ IOFBGetFramebufferOffsetForAperture( mach_port_t connect,
 
 extern kern_return_t
 IOFBSetBounds( io_connect_t connect,
-	    IOGBounds	* rect );
+            IOGBounds   * rect );
 
+/*!
+ * @function IOFBSetVirtualBounds
+ *
+ * @abstract
+ * Set the location of the framebuffer within display space and
+ * within desktop space.
+ *
+ * @param connect       The connect handle from <code>IOServiceOpen</code>
+ *                      to an IOFramebuffer service with a
+ *                      <code>kIOFBServerConnectType</code> connection.
+ * @param screenBounds  An <code>IOGBounds</code> structure specifying
+ *                      a rectangular region of the framebuffer
+ *                      in display space.
+ * @param desktopBounds An <code>IOGBounds</code> structure specifying
+ *                      a rectangular region of the framebuffer
+ *                      in desktop space.
+ * @result              A <code>kern_return_t</code> error code.
+ *
+ * @discussion
+ * If there is more than one screen in use, the locations of the screens relative
+ * to each other must be specified. Each physical screen will have a rectangular 
+ * region of "display space" that it is responsible for showing. When the "display 
+ * space" does not have a 1:1 mapping to the "desktop space" (e.g when using zooming, 
+ * or HiDPI), this function is used to define how "desktop space" maps into "display 
+ * space". Note that "desktop space" and "display space" should be contiguous, and 
+ * the mapping between them should be functional (i.e. 1-to-1, though not necessarily 
+ * contiguous).
+ */
+    
+extern kern_return_t
+IOFBSetVirtualBounds(io_connect_t connect,
+                     IOGBounds   * screenBounds,
+                     IOGBounds   * desktopBounds );
+    
 /*! @function IOFBGetCurrentDisplayModeAndDepth
     @abstract Get the current display mode and depth.
     @discussion The display mode index returned by this function can be used to determine information about the current display mode and its supported pixel formats through calls to IOFBGetDisplayModeInformation(), IOFBGetPixelFormats(), and IOFBGetPixelInformation().
@@ -107,8 +141,8 @@ IOFBSetBounds( io_connect_t connect,
 
 extern kern_return_t
 IOFBGetCurrentDisplayModeAndDepth( io_connect_t connect,
-	IODisplayModeID * displayMode,
-	IOIndex 	* depth );
+        IODisplayModeID * displayMode,
+        IOIndex         * depth );
 
 /*! @function IOFBGetPixelFormat
     @abstract Get pixel format information.
@@ -122,10 +156,10 @@ IOFBGetCurrentDisplayModeAndDepth( io_connect_t connect,
 
 extern kern_return_t
 IOFBGetPixelFormat( io_connect_t connect,
-	IODisplayModeID displayMode,
-	IOIndex 	depth,
+        IODisplayModeID displayMode,
+        IOIndex         depth,
         IOPixelAperture aperture,
-	IOPixelEncoding * pixelFormat );
+        IOPixelEncoding * pixelFormat );
 
 /*! @function IOFBSetCLUT
     @abstract Set the color table.
@@ -139,10 +173,10 @@ IOFBGetPixelFormat( io_connect_t connect,
 
 extern kern_return_t
 IOFBSetCLUT( io_connect_t connect,
-	UInt32		startIndex,
-	UInt32		numEntries,
-	IOOptionBits	options,
-	IOColorEntry *	colors );
+        UInt32          startIndex,
+        UInt32          numEntries,
+        IOOptionBits    options,
+        IOColorEntry *  colors );
 
 /*! @function IOFBSetGamma
     @abstract Set the gamma data.
@@ -156,10 +190,10 @@ IOFBSetCLUT( io_connect_t connect,
 
 extern kern_return_t
 IOFBSetGamma( io_connect_t connect,
-	UInt32		channelCount,
-	UInt32		dataCount,
-	UInt32		dataWidth,
-	void *		data );
+        UInt32          channelCount,
+        UInt32          dataCount,
+        UInt32          dataWidth,
+        void *          data );
 
 /*! @function IOFBSet888To256Table
     @abstract [place holder]
@@ -170,7 +204,7 @@ IOFBSetGamma( io_connect_t connect,
 
 extern kern_return_t
 IOFBSet888To256Table( io_connect_t connect,
-	const unsigned char *	table );
+        const unsigned char *   table );
 
 /*! @function IOFBSet256To888Table
     @abstract [place holder]
@@ -181,7 +215,7 @@ IOFBSet888To256Table( io_connect_t connect,
 
 extern kern_return_t
 IOFBSet256To888Table( io_connect_t connect,
-	const unsigned int *	table );
+        const unsigned int *    table );
 
 /*! @function IOFBSet444To555Table
     @abstract [place holder]
@@ -192,7 +226,7 @@ IOFBSet256To888Table( io_connect_t connect,
 
 extern kern_return_t
 IOFBSet444To555Table( io_connect_t connect,
-	const unsigned char *	table );
+        const unsigned char *   table );
 
 /*! @function IOFBSet555To444Table
     @abstract [place holder]
@@ -203,7 +237,7 @@ IOFBSet444To555Table( io_connect_t connect,
 
 extern kern_return_t
 IOFBSet555To444Table( io_connect_t connect,
-	const unsigned char *	table );
+        const unsigned char *   table );
 
 // Array of supported display modes
 
@@ -216,7 +250,7 @@ IOFBSet555To444Table( io_connect_t connect,
 
 kern_return_t
 IOFBGetDisplayModeCount( io_connect_t connect,
-	UInt32 * count );
+        UInt32 * count );
 
 /*! @function IOFBGetDisplayModes
     @abstract Get an array of known display modes.
@@ -228,8 +262,8 @@ IOFBGetDisplayModeCount( io_connect_t connect,
 
 kern_return_t
 IOFBGetDisplayModes( io_connect_t connect,
-	UInt32			count,
-	IODisplayModeID	*	allDisplayModes );
+        UInt32                  count,
+        IODisplayModeID *       allDisplayModes );
 
 // Info about a display mode
 
@@ -243,8 +277,8 @@ IOFBGetDisplayModes( io_connect_t connect,
 
 kern_return_t
 IOFBGetDisplayModeInformation( io_connect_t connect,
-	IODisplayModeID		displayMode,
-	IODisplayModeInformation * info );
+        IODisplayModeID         displayMode,
+        IODisplayModeInformation * info );
 
 
 // Mask of pixel formats available in mode and depth
@@ -260,9 +294,9 @@ IOFBGetDisplayModeInformation( io_connect_t connect,
 
 kern_return_t
 IOFBGetPixelFormats( io_connect_t connect,
-	IODisplayModeID		displayMode,
-	IOIndex			depth,
-	UInt32 * 		mask );
+        IODisplayModeID         displayMode,
+        IOIndex                 depth,
+        UInt32 *                mask );
 
 /*! @function IOFBGetPixelInformation
     @abstract Get information about a pixel format.
@@ -271,15 +305,15 @@ IOFBGetPixelFormats( io_connect_t connect,
     @param displayMode A display mode index.
     @param depth A display depth index.
     @param aperture A pixel aperture. The pixel aperture is an index into supported pixel formats for a display mode and depth. To get information on the current aperture, use kIOFBSystemAperture.
-    @param IOPixelInformation A pointer to an IOPixelInformation structure where the pixel information will be returned.
+    @param pixelInfo A pointer to an IOPixelInformation structure where the pixel information will be returned.
     @result A kern_return_t error code. */
 
 kern_return_t
 IOFBGetPixelInformation( io_connect_t connect,
-	IODisplayModeID 	displayMode,
-	IOIndex 		depth,
-        IOPixelAperture		aperture,
-	IOPixelInformation *	pixelInfo );
+        IODisplayModeID         displayMode,
+        IOIndex                 depth,
+        IOPixelAperture         aperture,
+        IOPixelInformation *    pixelInfo );
 
 /*! @function IOFBSetDisplayModeAndDepth
     @abstract Set the current display mode and depth.
@@ -290,8 +324,8 @@ IOFBGetPixelInformation( io_connect_t connect,
 
 kern_return_t
 IOFBSetDisplayModeAndDepth( io_connect_t connect,
-	IODisplayModeID		displayMode,
-	IOIndex 		depth );
+        IODisplayModeID         displayMode,
+        IOIndex                 depth );
 
 /*! @function IOFBSetStartupDisplayModeAndDepth
     @abstract Set the display mode and depth to use on startup.
@@ -302,18 +336,18 @@ IOFBSetDisplayModeAndDepth( io_connect_t connect,
 
 kern_return_t
 IOFBSetStartupDisplayModeAndDepth( io_connect_t connect,
-	IODisplayModeID		displayMode,
-	IOIndex 		depth );
+        IODisplayModeID         displayMode,
+        IOIndex                 depth );
 
 kern_return_t
 IOFBGetDefaultDisplayMode( io_connect_t connect,
-	IODisplayModeID	* displayMode, IOIndex * displayDepth );
+        IODisplayModeID * displayMode, IOIndex * displayDepth );
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 struct IOFBMessageCallbacks {
     IOReturn (*WillPowerOff)    (void * callbackRef, void * notificationID);
-    IOReturn (*DidPowerOn)   	(void * callbackRef, void * notificationID);
+    IOReturn (*DidPowerOn)      (void * callbackRef, void * notificationID);
     IOReturn (*ConnectionChange)(void * callbackRef, void * notificationID);
 };
 typedef struct IOFBMessageCallbacks IOFBMessageCallbacks;
@@ -333,7 +367,7 @@ kern_return_t
 IOFBAcknowledgeNotification( void * notificationID );
 
 enum {
-    kIOFBConnectStateOnline	= 0x00000001
+    kIOFBConnectStateOnline     = 0x00000001
 };
 
 kern_return_t
@@ -357,8 +391,8 @@ IOFBSetAttributeForFramebuffer( io_connect_t connect, io_connect_t otherConnect,
 
 CFDictionaryRef
 IOFBCreateDisplayModeDictionary(
-	io_service_t		framebuffer,
-	IODisplayModeID		displayMode );
+        io_service_t            framebuffer,
+        IODisplayModeID         displayMode );
 
 /*! @function IOFBGetPixelInfoDictionary
     @abstract Get a CFDictionary with information about a pixel format.
@@ -370,9 +404,9 @@ IOFBCreateDisplayModeDictionary(
 
 CFDictionaryRef
 IOFBGetPixelInfoDictionary( 
-	CFDictionaryRef		modeDictionary,
-	IOIndex 		depth,
-	IOPixelAperture		aperture );
+        CFDictionaryRef         modeDictionary,
+        IOIndex                 depth,
+        IOPixelAperture         aperture );
 
 /*! @enum IODisplayDictionaryOptions
     @constant kIODisplayMatchingInfo Include only the keys necessary to match two displays with IODisplayMatchDictionaries().
@@ -380,9 +414,9 @@ IOFBGetPixelInfoDictionary(
     @constant kIODisplayNoProductName The kDisplayProductName property is not included in the returned dictionary.
 */
 enum {
-    kIODisplayMatchingInfo	= 0x00000100,
-    kIODisplayOnlyPreferredName	= 0x00000200,
-    kIODisplayNoProductName	= 0x00000400
+    kIODisplayMatchingInfo      = 0x00000100,
+    kIODisplayOnlyPreferredName = 0x00000200,
+    kIODisplayNoProductName     = 0x00000400
 };
 
 /*! @function IODisplayCreateInfoDictionary
@@ -394,13 +428,13 @@ enum {
 
 CFDictionaryRef
 IODisplayCreateInfoDictionary(
-	io_service_t		framebuffer,
-	IOOptionBits		options );
+        io_service_t            framebuffer,
+        IOOptionBits            options );
 
 /*! @defined IOCreateDisplayInfoDictionary
     @discussion IOCreateDisplayInfoDictionary() was renamed IODisplayCreateInfoDictionary(). IOCreateDisplayInfoDictionary() is now a macro for IODisplayCreateInfoDictionary() for compatibility with older code. */
 
-#define IOCreateDisplayInfoDictionary(f,o)	\
+#define IOCreateDisplayInfoDictionary(f,o)      \
         IODisplayCreateInfoDictionary(f,o)
 
 /*! @function IODisplayMatchDictionaries
@@ -413,63 +447,68 @@ IODisplayCreateInfoDictionary(
 
 SInt32
 IODisplayMatchDictionaries(
-        CFDictionaryRef		matching1,
-        CFDictionaryRef		matching2,
-	IOOptionBits		options );
+        CFDictionaryRef         matching1,
+        CFDictionaryRef         matching2,
+        IOOptionBits            options );
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+io_service_t
+IODisplayForFramebuffer(
+        io_service_t    framebuffer,
+        IOOptionBits    options );
+
 IOReturn
 IODisplaySetParameters(
-	io_service_t	service,
-	IOOptionBits	options,
-        CFDictionaryRef	params );
+        io_service_t    service,
+        IOOptionBits    options,
+        CFDictionaryRef params );
 
 IOReturn
 IODisplaySetFloatParameter(
-	io_service_t	service,
-	IOOptionBits	options,
-        CFStringRef	parameterName,
-        float 		value );
+        io_service_t    service,
+        IOOptionBits    options,
+        CFStringRef     parameterName,
+        float           value );
 IOReturn
 IODisplaySetIntegerParameter(
-	io_service_t	service,
-	IOOptionBits	options,
-        CFStringRef	parameterName,
-        SInt32 		value );
+        io_service_t    service,
+        IOOptionBits    options,
+        CFStringRef     parameterName,
+        SInt32          value );
 
 IOReturn
 IODisplayCopyParameters(
-	io_service_t	  service,
-	IOOptionBits	  options,
+        io_service_t      service,
+        IOOptionBits      options,
         CFDictionaryRef * params );
 
 IOReturn
 IODisplayCopyFloatParameters(
-	io_service_t	  service,
-	IOOptionBits	  options,
+        io_service_t      service,
+        IOOptionBits      options,
         CFDictionaryRef * params );
 
 IOReturn
 IODisplayGetFloatParameter(
-	io_service_t	service,
-	IOOptionBits	options,
-        CFStringRef	parameterName,
-        float *		value );
+        io_service_t    service,
+        IOOptionBits    options,
+        CFStringRef     parameterName,
+        float *         value );
 
 IOReturn
 IODisplayGetIntegerRangeParameter(
-	io_service_t	service,
-	IOOptionBits	options,
-        CFStringRef	parameterName,
-        SInt32 *	value,
-        SInt32 *	min,
-        SInt32 *	max );
+        io_service_t    service,
+        IOOptionBits    options,
+        CFStringRef     parameterName,
+        SInt32 *        value,
+        SInt32 *        min,
+        SInt32 *        max );
 
 IOReturn
 IODisplayCommitParameters(
-	io_service_t	service,
-	IOOptionBits	options );
+        io_service_t    service,
+        IOOptionBits    options );
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -484,9 +523,9 @@ IODisplayCommitParameters(
 
 kern_return_t
 IOFBSetNewCursor( io_connect_t connect,
-	void *			cursor,
-	IOIndex			frame,
-	IOOptionBits		options );
+        void *                  cursor,
+        IOIndex                 frame,
+        IOOptionBits            options );
 
 /*! @function IOFBSetCursorVisible
     @abstract Set the hardware cursor visible or invisible.
@@ -497,7 +536,7 @@ IOFBSetNewCursor( io_connect_t connect,
 
 kern_return_t
 IOFBSetCursorVisible( io_connect_t connect,
-	int			visible );
+        int                     visible );
 
 /*! @function IOFBSetCursorPosition
     @abstract Set the hardware cursor position.
@@ -509,8 +548,8 @@ IOFBSetCursorVisible( io_connect_t connect,
 
 kern_return_t
 IOFBSetCursorPosition( io_connect_t connect,
-	long int		x,
-	long int		y );
+        long int                x,
+        long int                y );
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -521,7 +560,7 @@ IOFBAcknowledgePM( io_connect_t connect );
 
 kern_return_t
 IOPSAllocateBlitEngine( io_connect_t framebuffer,
-		void ** blitterRef, int * quality);
+                void ** blitterRef, int * quality);
 
 kern_return_t
 IOPSBlitReset( void * blitterRef);
@@ -534,34 +573,34 @@ IOPSBlitIdle( void * blitterRef);
 
 kern_return_t
 IOPSBlitFill( void * blitterRef,
-		int dst_x, int dst_y, int width, int height, int data );
+                int dst_x, int dst_y, int width, int height, int data );
 
 kern_return_t
 IOPSBlitCopy( void * blitterRef,
-		int src_x, int src_y, int width, int height,
-		int dst_x, int dst_y );
+                int src_x, int src_y, int width, int height,
+                int dst_x, int dst_y );
 
 kern_return_t
 IOPSBlitInvert( void * blitterRef,
-		int x, int y, int w, int h );
+                int x, int y, int w, int h );
 
 enum {
     // options for IOFBSynchronize
-    kIOFBSynchronizeWaitBeamExit	= kIOBlitSynchronizeWaitBeamExit,
-    kIOFBSynchronizeFlushWrites		= kIOBlitSynchronizeFlushHostWrites
+    kIOFBSynchronizeWaitBeamExit        = kIOBlitSynchronizeWaitBeamExit,
+    kIOFBSynchronizeFlushWrites         = kIOBlitSynchronizeFlushHostWrites
 };
 
 enum {
     // options for IOFBBlitVRAMCopy
-    kIOFBBlitBeamSync			= kIOBlitBeamSync,
-    kIOFBBlitBeamSyncAlways		= kIOBlitBeamSyncAlways,
-    kIOFBBlitBeamSyncSpin		= kIOBlitBeamSyncSpin
+    kIOFBBlitBeamSync                   = kIOBlitBeamSync,
+    kIOFBBlitBeamSyncAlways             = kIOBlitBeamSyncAlways,
+    kIOFBBlitBeamSyncSpin               = kIOBlitBeamSyncSpin
 };
 
 kern_return_t
 IOFBBlitVRAMCopy( void * blitterRef,
-		int src_x, int src_y, int width, int height,
-		int dst_x, int dst_y, IOOptionBits options );
+                int src_x, int src_y, int width, int height,
+                int dst_x, int dst_y, IOOptionBits options );
 
 kern_return_t
 IOFBBlitSurfaceCopy( void * blitterRef, IOOptionBits options, void * surfaceID,
@@ -574,27 +613,27 @@ IOFBBlitSurfaceSurfaceCopy( void * blitterRef, IOOptionBits options,
 
 kern_return_t
 IOFBSynchronize( void * blitterRef,
-               	 UInt32 x, UInt32 y, UInt32 w, UInt32 h, UInt32 options );
+                 UInt32 x, UInt32 y, UInt32 w, UInt32 h, UInt32 options );
 
 kern_return_t
 IOFBBeamPosition( void * blitterRef, UInt32 options, SInt32 * position );
 
 kern_return_t
 IOFBSetupFIFOBurst( void * blitterRef,
-			UInt32 x, UInt32 y, UInt32 w, UInt32 h,
-			UInt32 options, void ** burstRef );
+                        UInt32 x, UInt32 y, UInt32 w, UInt32 h,
+                        UInt32 options, void ** burstRef );
 
 void
 IOFBBurstWrite32( void * p1, void * p2, void * p3, void * p4,
-		  void * p5, void * p6, void * p7, void * p8 );
+                  void * p5, void * p6, void * p7, void * p8 );
 
 void
 IOFBSetBurstRef( void * burstRef );
 
 kern_return_t
 IOFBCommitMemory( void * blitterRef,
-		vm_address_t start, vm_size_t length, IOOptionBits options,
-		void ** memoryRef, IOByteCount * offset );
+                vm_address_t start, vm_size_t length, IOOptionBits options,
+                void ** memoryRef, IOByteCount * offset );
 
 kern_return_t
 IOFBReleaseMemory( void * blitterRef, void * memoryRef );
@@ -604,10 +643,10 @@ IOFBWaitForCompletion( void * blitterRef, SInt32 token );
 
 kern_return_t
 IOFBMemoryCopy( void * blitterRef,
-			UInt32 destLeft, UInt32 destTop,
-			UInt32 width, UInt32 height, 
-			UInt32 srcByteOffset, UInt32 srcRowBytes,
-			SInt32 * token);
+                        UInt32 destLeft, UInt32 destTop,
+                        UInt32 width, UInt32 height, 
+                        UInt32 srcByteOffset, UInt32 srcRowBytes,
+                        SInt32 * token);
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

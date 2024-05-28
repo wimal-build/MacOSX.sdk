@@ -50,6 +50,8 @@
 	__strong void *				_expansion;
 }
 
+@property(assign) id delegate;
+
 /*!
     @method		pairWithDevice:
 	@abstract	Creates an autorelease IOBluetoothDevicePair object with a device as the pairing target.
@@ -66,14 +68,6 @@
 */
 
 - (IOReturn)start;
-
-/*!
-    @method		setDelegate:
-	@abstract	Set the delegate object. It is not retained.
-	@param		device		The IOBluetoothDevice object that the IOBluetoothDevicePair object with which to perform a pairing.
-*/
-
-- (void)setDelegate:(id)delegate;
 
 /*!
     @method		device
@@ -116,7 +110,8 @@
 //	Delegate methods
 //===========================================================================================================================
 
-@interface	NSObject(IOBluetoothDevicePairDelegate)
+@protocol IOBluetoothDevicePairDelegate
+@optional
 
 /*!
     @method		devicePairingStarted:

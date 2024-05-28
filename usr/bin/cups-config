@@ -4,7 +4,7 @@
 # 
 #   CUPS configuration utility.
 #
-#   Copyright 2007-2008 by Apple Inc.
+#   Copyright 2007-2010 by Apple Inc.
 #   Copyright 2001-2006 by Easy Software Products, all rights reserved.
 #
 #   These coded instructions, statements, and computer programs are the
@@ -14,9 +14,9 @@
 #   file is missing or damaged, see the license at "http://www.cups.org/".
 #
 
-VERSION="1.4.0"
-APIVERSION="1.4"
-BUILD="cups-218"
+VERSION="1.5.0"
+APIVERSION="1.5"
+BUILD="cups-297.2"
 
 prefix=/
 exec_prefix=/usr
@@ -35,7 +35,7 @@ INSTALLSTATIC=
 # flags for C++ compiler:
 CFLAGS=""
 LDFLAGS=""
-LIBS="-weak_framework Kerberos -framework CoreFoundation -framework Security -lz -lpthread -lresolv -framework SystemConfiguration -framework CoreFoundation "
+LIBS="-weak_framework Kerberos -weak_framework GSS  -lz -lpthread -lresolv -framework SystemConfiguration -framework CoreFoundation -framework Security  -liconv "
 IMGLIBS="  "
 
 # Check for local invocation...

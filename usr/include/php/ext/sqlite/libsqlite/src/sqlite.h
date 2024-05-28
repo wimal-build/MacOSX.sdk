@@ -12,7 +12,7 @@
 ** This header file defines the interface that the SQLite library
 ** presents to client programs.
 **
-** @(#) $Id: sqlite.h.in,v 1.6.4.1 2005/09/07 15:11:33 iliaa Exp $
+** @(#) $Id: sqlite.h.in 195361 2005-09-07 15:11:33Z iliaa $
 */
 #ifndef _SQLITE_H_
 #define _SQLITE_H_
@@ -46,7 +46,7 @@ extern const char sqlite_version[];
 ** UTF-8 encoded data.  The SQLITE_ISO8859 macro is defined if the
 ** iso8859 encoded should be used.
 */
-#define SQLITE_ISO8859 1
+#define SQLITE_UTF8 1
 
 /*
 ** The following constant holds one of two strings, "UTF-8" or "iso8859",

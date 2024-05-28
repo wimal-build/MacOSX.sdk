@@ -25,6 +25,15 @@
 /*
  *
  *	$Log: IOUSBHubPolicyMaker.h,v $
+ *	Revision 1.11  2011/02/01 21:13:43  rhoads
+ *	roll in 8802864, 8836233, 8894827, 8901515, 8909194
+ *
+ *	Revision 1.10.626.1  2011/01/25 17:46:09  nano
+ *	Get rid of unused extra power properties and rename a #define to make more sense
+ *
+ *	Revision 1.10  2009/05/07 19:43:09  nano
+ *	Move our SnowLeopard branch to TOT
+ *
  *	Revision 1.7.72.3  2008/07/23 17:43:32  nano
  *	<rdar://problem/5939357> IOUSBHIDDriver, IOHIDEventService missing HeaderDoc class declarations
  *	
@@ -148,8 +157,8 @@ protected:
 	bool								_dontAllowSleepPower;		// If true, we will not allow extra sleep power for a self powered hub.
 	SInt32								_powerStateChangingTo;		// a power state if we are changing to one, or -1 if we are stable
 	unsigned long						_myPowerState;				// my current state (since getPowerState doesn't always change in time)
-	UInt32								_extraPower;				// how much extra power we might be able to get from our parent hub
-	UInt32								_extraPowerRemaining;		// how many milliamps we can still give to any one port
+	UInt32								_extraPower;				// DEPRECATED
+	UInt32								_extraPowerRemaining;		// DEPRECATED
 	UInt32								_hubResumeRecoveryTime;		// # of ms that we will wait before issuing any transactions on our port (nominally 10ms)
     struct ExpansionData 
 	{ 

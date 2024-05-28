@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -278,6 +278,7 @@ struct vfs_attr {
 #define	MNT_NODEV	0x00000010	/* don't interpret special files */
 #define	MNT_UNION	0x00000020	/* union with underlying filesystem */
 #define	MNT_ASYNC	0x00000040	/* file system written asynchronously */
+#define	MNT_CPROTECT	0x00000080	/* file system supports content protection */
 
 /*
  * NFS export related mount flags.
@@ -321,7 +322,8 @@ struct vfs_attr {
 			MNT_LOCAL	| MNT_QUOTA | \
 			MNT_ROOTFS	| MNT_DOVOLFS	| MNT_DONTBROWSE | \
 			MNT_IGNORE_OWNERSHIP | MNT_AUTOMOUNTED | MNT_JOURNALED | \
-			MNT_NOUSERXATTR | MNT_DEFWRITE	| MNT_MULTILABEL | MNT_NOATIME)
+			MNT_NOUSERXATTR | MNT_DEFWRITE	| MNT_MULTILABEL | \
+			MNT_NOATIME | MNT_CPROTECT)
 /*
  * External filesystem command modifier flags.
  * Unmount can use the MNT_FORCE flag.
@@ -419,6 +421,7 @@ union union_vfsidctl { /* the fields vc_vers and vc_fsid are compatible */
 #define VFS_CTL_NEWADDR	0x00010004	/* reconnect to new address */
 #define VFS_CTL_TIMEO	0x00010005	/* set timeout for vfs notification */
 #define VFS_CTL_NOLOCKS	0x00010006	/* disable file locking */
+#define VFS_CTL_SADDR	0x00010007	/* get server address */
 
 struct vfsquery {
 	u_int32_t	vq_flags;
@@ -458,7 +461,8 @@ struct vfsioattr {
 	void *		io_reserved[2];		/* extended attribute information */
 };
 
-#define VFS_IOATTR_FLAGS_FUA	0x01	/* Write-through cache supported */
+#define VFS_IOATTR_FLAGS_FUA		0x01	/* Write-through cache supported */
+#define VFS_IOATTR_FLAGS_UNMAP		0x02	/* Unmap (trim) supported */
 
 /*
  * Filesystem Registration information

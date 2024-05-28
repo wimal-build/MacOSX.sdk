@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2011 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.87.2.2.2.3.2.5 2009/04/01 17:05:35 mattwil Exp $ */
+/* $Id: php_string.h 306939 2011-01-01 02:19:59Z felipe $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -127,7 +127,7 @@ PHPAPI void php_stripslashes(char *str, int *len TSRMLS_DC);
 PHPAPI void php_stripcslashes(char *str, int *len);
 PHPAPI void php_basename(char *s, size_t len, char *suffix, size_t sufflen, char **p_ret, size_t *p_len TSRMLS_DC);
 PHPAPI size_t php_dirname(char *str, size_t len);
-PHPAPI char *php_stristr(unsigned char *s, unsigned char *t, size_t s_len, size_t t_len);
+PHPAPI char *php_stristr(char *s, char *t, size_t s_len, size_t t_len);
 PHPAPI char *php_str_to_str_ex(char *haystack, int length, char *needle,
 		int needle_len, char *str, int str_len, int *_new_length, int case_sensitivity, int *replace_count);
 PHPAPI char *php_str_to_str(char *haystack, int length, char *needle,

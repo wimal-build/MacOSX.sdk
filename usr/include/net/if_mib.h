@@ -71,6 +71,7 @@ struct ifmibdata {
 	struct if_data64	ifmd_data; /* generic information and statistics */
 };
 
+
 /*
  * sysctl MIB tags at the net.link.generic level
  */

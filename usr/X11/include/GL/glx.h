@@ -186,6 +186,16 @@ typedef XID GLXWindow;
 typedef XID GLXPbuffer;
 
 
+/*
+** Events.
+** __GLX_NUMBER_EVENTS is set to 17 to account for the BufferClobberSGIX
+**  event - this helps initialization if the server supports the pbuffer
+**  extension and the client doesn't.
+*/
+#define GLX_PbufferClobber	0
+#define GLX_BufferSwapComplete	1
+
+#define __GLX_NUMBER_EVENTS 17
 
 extern XVisualInfo* glXChooseVisual( Display *dpy, int screen,
 				     int *attribList );
@@ -290,17 +300,25 @@ extern void glXSelectEvent( Display *dpy, GLXDrawable drawable,
 extern void glXGetSelectedEvent( Display *dpy, GLXDrawable drawable,
                                  unsigned long *mask );
 
-
-/* GLX 1.4 and later */
-extern void (*glXGetProcAddress(const GLubyte *procname))( void );
-
-
-#ifndef GLX_GLXEXT_LEGACY
-
-#include <GL/glxext.h>
-
-#else
-
+/* GLX 1.3 function pointer typedefs */
+typedef GLXFBConfig * (* PFNGLXGETFBCONFIGSPROC) (Display *dpy, int screen, int *nelements);
+typedef GLXFBConfig * (* PFNGLXCHOOSEFBCONFIGPROC) (Display *dpy, int screen, const int *attrib_list, int *nelements);
+typedef int (* PFNGLXGETFBCONFIGATTRIBPROC) (Display *dpy, GLXFBConfig config, int attribute, int *value);
+typedef XVisualInfo * (* PFNGLXGETVISUALFROMFBCONFIGPROC) (Display *dpy, GLXFBConfig config);
+typedef GLXWindow (* PFNGLXCREATEWINDOWPROC) (Display *dpy, GLXFBConfig config, Window win, const int *attrib_list);
+typedef void (* PFNGLXDESTROYWINDOWPROC) (Display *dpy, GLXWindow win);
+typedef GLXPixmap (* PFNGLXCREATEPIXMAPPROC) (Display *dpy, GLXFBConfig config, Pixmap pixmap, const int *attrib_list);
+typedef void (* PFNGLXDESTROYPIXMAPPROC) (Display *dpy, GLXPixmap pixmap);
+typedef GLXPbuffer (* PFNGLXCREATEPBUFFERPROC) (Display *dpy, GLXFBConfig config, const int *attrib_list);
+typedef void (* PFNGLXDESTROYPBUFFERPROC) (Display *dpy, GLXPbuffer pbuf);
+typedef void (* PFNGLXQUERYDRAWABLEPROC) (Display *dpy, GLXDrawable draw, int attribute, unsigned int *value);
+typedef GLXContext (* PFNGLXCREATENEWCONTEXTPROC) (Display *dpy, GLXFBConfig config, int render_type, GLXContext share_list, Bool direct);
+typedef Bool (* PFNGLXMAKECONTEXTCURRENTPROC) (Display *dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx);
+typedef GLXDrawable (* PFNGLXGETCURRENTREADDRAWABLEPROC) (void);
+typedef Display * (* PFNGLXGETCURRENTDISPLAYPROC) (void);
+typedef int (* PFNGLXQUERYCONTEXTPROC) (Display *dpy, GLXContext ctx, int attribute, int *value);
+typedef void (* PFNGLXSELECTEVENTPROC) (Display *dpy, GLXDrawable draw, unsigned long event_mask);
+typedef void (* PFNGLXGETSELECTEDEVENTPROC) (Display *dpy, GLXDrawable draw, unsigned long *event_mask);
 
 
 /*
@@ -315,6 +333,17 @@ extern __GLXextFuncPtr glXGetProcAddressARB (const GLubyte *);
 #endif /* GLX_ARB_get_proc_address */
 
 
+
+/* GLX 1.4 and later */
+extern void (*glXGetProcAddress(const GLubyte *procname))( void );
+
+/* GLX 1.4 function pointer typedefs */
+typedef __GLXextFuncPtr (* PFNGLXGETPROCADDRESSPROC) (const GLubyte *procName);
+
+
+#ifndef GLX_GLXEXT_LEGACY
+
+#include <GL/glxext.h>
 
 #endif /* GLX_GLXEXT_LEGACY */
 
@@ -386,10 +415,10 @@ extern Bool glXDrawableAttribARB(Display *dpy, GLXDrawable draw, const int *attr
 #ifndef GLX_MESA_swap_frame_usage
 #define GLX_MESA_swap_frame_usage 1
 
-extern GLint glXGetFrameUsageMESA(Display *dpy, GLXDrawable drawable, float *usage);
-extern GLint glXBeginFrameTrackingMESA(Display *dpy, GLXDrawable drawable);
-extern GLint glXEndFrameTrackingMESA(Display *dpy, GLXDrawable drawable);
-extern GLint glXQueryFrameTrackingMESA(Display *dpy, GLXDrawable drawable, int64_t *swapCount, int64_t *missedFrames, float *lastMissedUsage);
+extern int glXGetFrameUsageMESA(Display *dpy, GLXDrawable drawable, float *usage);
+extern int glXBeginFrameTrackingMESA(Display *dpy, GLXDrawable drawable);
+extern int glXEndFrameTrackingMESA(Display *dpy, GLXDrawable drawable);
+extern int glXQueryFrameTrackingMESA(Display *dpy, GLXDrawable drawable, int64_t *swapCount, int64_t *missedFrames, float *lastMissedUsage);
 
 typedef int (*PFNGLXGETFRAMEUSAGEMESAPROC) (Display *dpy, GLXDrawable drawable, float *usage);
 typedef int (*PFNGLXBEGINFRAMETRACKINGMESAPROC)(Display *dpy, GLXDrawable drawable);
@@ -488,8 +517,21 @@ typedef struct {
     int count;			/* if nonzero, at least this many more */
 } GLXPbufferClobberEvent;
 
+typedef struct {
+    int type;
+    unsigned long serial;	/* # of last request processed by server */
+    Bool send_event;		/* true if this came from a SendEvent request */
+    Display *display;		/* Display the event was read from */
+    GLXDrawable drawable;	/* drawable on which event was requested in event mask */
+    int event_type;
+    int64_t ust;
+    int64_t msc;
+    int64_t sbc;
+} GLXBufferSwapComplete;
+
 typedef union __GLXEvent {
     GLXPbufferClobberEvent glxpbufferclobber;
+    GLXBufferSwapComplete glxbufferswapcomplete;
     long pad[24];
 } GLXEvent;
 

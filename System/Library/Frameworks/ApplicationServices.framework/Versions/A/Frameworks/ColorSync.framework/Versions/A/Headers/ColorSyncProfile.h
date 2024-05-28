@@ -229,6 +229,24 @@ CSEXTERN void ColorSyncProfileRemoveTag (ColorSyncMutableProfileRef prof, CFStri
     *   returns true if success or false in case of failure 
     */
 
+CSEXTERN bool ColorSyncProfileGetDisplayTransferFormulaFromVCGT(ColorSyncProfileRef profile,
+                                                 float* redMin,   float* redMax,   float* redGamma,
+                                                 float* greenMin, float* greenMax, float* greenGamma,
+                                                 float* blueMin,  float* blueMax,  float* blueGamma);
+   /*
+    * An utility function converting vcgt tag (if vcgt tag exists in the profile and conversion possible)
+    * to formula components used by CGSetDisplayTransferByFormula.
+    */
+
+CSEXTERN CFDataRef ColorSyncProfileCreateDisplayTransferTablesFromVCGT(ColorSyncProfileRef profile, size_t *nSamplesPerChannel);
+   /*
+    * An utility function creating three tables of floats (redTable, greenTable, blueTable)
+    * each of size nSamplesPerChannel, packed into contiguous memory contained in the CFDataRef
+    *  to be returned from the vcgt tag of the profile (if vcgt tag exists in the profile).
+    * Used by CGSetDisplayTransferByTable.
+    */
+
+
 typedef bool (*ColorSyncProfileIterateCallback)(CFDictionaryRef profileInfo, void* userInfo);
    /*
     * Notes:
@@ -246,6 +264,17 @@ CSEXTERN void ColorSyncIterateInstalledProfiles (ColorSyncProfileIterateCallback
     * error    - (optional) pointer to the error that will be returned in case of failure
     *
     */
+
+    /********************************************************************************************
+    *                                                                                           *
+    *   For further information on ICC profiles refer to ICC profile specification published    *
+    *   by International Color Consortium at www.color.org                                      *
+    *                                                                                           *
+    *   ICC header file (ICC.h) containing programmatic definitions of ICC data types can be    *
+    *   downloaded from the Technical Notes web page of ICC website at                          *
+    *   www.color.org/technotes.xalter                                                          *
+    *                                                                                           *
+    ********************************************************************************************/
 
 #ifdef __cplusplus
 }

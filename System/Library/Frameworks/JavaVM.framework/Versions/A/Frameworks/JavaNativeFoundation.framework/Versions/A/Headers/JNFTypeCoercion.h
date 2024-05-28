@@ -1,7 +1,7 @@
 /*
  JNFTypeCoercion.h
  Java Native Foundation
- Copyright (c) 2008, Apple Inc.
+ Copyright (c) 2008-2009, Apple Inc.
  All rights reserved.
  
  Type Coercion system that translates between Java VM objects and Objective-C Foundation objects.
@@ -22,7 +22,7 @@
  Coercions are passed the Coercion-object that was originally invoked on the
  target object. This permits the lowest level Coercion to be used for subsequent
  object translations for composite objects. The provided List, Map, and Set Coercions
- only handle object heirarchies, and will infinitely recurse if confronted with a
+ only handle object hierarchies, and will infinitely recurse if confronted with a
  cycle in the object graph.
  
  Null and nil are both perfectly valid return types for Coercions, and do not indicate
@@ -65,6 +65,7 @@
 
 + (void) addStringCoercionTo:(JNFTypeCoercer *)coercer;
 + (void) addNumberCoercionTo:(JNFTypeCoercer *)coercer;
++ (void) addDateCoercionTo:(JNFTypeCoercer *)coercer;
 + (void) addListCoercionTo:(JNFTypeCoercer *)coercer;
 + (void) addMapCoercionTo:(JNFTypeCoercer *)coercer;
 + (void) addSetCoercionTo:(JNFTypeCoercer *)coercer;

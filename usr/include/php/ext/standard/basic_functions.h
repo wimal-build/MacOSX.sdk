@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2011 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.139.2.4.2.6.2.11 2008/12/31 11:15:44 sebastian Exp $ */
+/* $Id: basic_functions.h 306939 2011-01-01 02:19:59Z felipe $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -32,7 +32,6 @@
 
 #include "zend_highlight.h"
 
-#include "url_scanner.h"
 #include "url_scanner_ex.h"
 
 extern zend_module_entry basic_functions_module;
@@ -142,7 +141,9 @@ PHP_FUNCTION(stream_bucket_new);
 PHP_MINIT_FUNCTION(user_filters);
 PHP_RSHUTDOWN_FUNCTION(user_filters);
 
+/* Left for BC (not binary safe!) */
 PHPAPI int _php_error_log(int opt_err, char *message, char *opt, char *headers TSRMLS_DC);
+PHPAPI int _php_error_log_ex(int opt_err, char *message, int message_len, char *opt, char *headers TSRMLS_DC);
 PHPAPI int php_prefix_varname(zval *result, zval *prefix, char *var_name, int var_name_len, zend_bool add_underscore TSRMLS_DC);
 
 #if SIZEOF_INT == 4
@@ -207,8 +208,6 @@ typedef struct _php_basic_globals {
 	/* var.c */
 	zend_class_entry *incomplete_class;
 
-	/* url_scanner.c */
-	url_adapt_state_t url_adapt_state;
 	/* url_scanner_ex.re */
 	url_adapt_state_ex_t url_adapt_state_ex;
 

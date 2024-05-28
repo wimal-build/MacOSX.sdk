@@ -37,13 +37,18 @@
 #include <IOKit/IOService.h>
 #include <IOKit/OSMessageNotification.h>
 
+#if IOKITSTATS
+#include <IOKit/IOStatisticsPrivate.h>
+#endif
 
 enum {
     kIOUCTypeMask	= 0x0000000f,
     kIOUCScalarIScalarO = 0,
     kIOUCScalarIStructO = 2,
     kIOUCStructIStructO = 3,
-    kIOUCScalarIStructI = 4
+    kIOUCScalarIStructI = 4,
+
+    kIOUCForegroundOnly = 0x00000010,
 };
 
 /*! @enum
@@ -93,6 +98,7 @@ enum {
 // keys for clientHasPrivilege
 #define kIOClientPrivilegeAdministrator	"root"
 #define kIOClientPrivilegeLocalUser	"local"
+#define kIOClientPrivilegeForeground	"foreground"
 
 /*! @enum
     @abstract Constants to specify the maximum number of scalar arguments in the IOExternalMethodArguments structure. These constants are documentary since the scalarInputCount, scalarOutputCount fields reflect the actual number passed.
@@ -132,7 +138,11 @@ struct IOExternalMethodArguments
     IOMemoryDescriptor * structureOutputDescriptor;
     uint32_t		 structureOutputDescriptorSize;
 
-    uint32_t		__reserved[32];
+    uint32_t		__reservedA;
+
+    OSObject **         structureVariableOutputData;
+
+    uint32_t		__reserved[30];
 };
 
 typedef IOReturn (*IOExternalMethodAction)(OSObject * target, void * reference, 
@@ -147,7 +157,7 @@ struct IOExternalMethodDispatch
 };
 
 enum {
-#define IO_EXTERNAL_METHOD_ARGUMENTS_CURRENT_VERSION	1
+#define IO_EXTERNAL_METHOD_ARGUMENTS_CURRENT_VERSION	2
     kIOExternalMethodArgumentsCurrentVersion = IO_EXTERNAL_METHOD_ARGUMENTS_CURRENT_VERSION
 };
 
@@ -161,17 +171,28 @@ enum {
 class IOUserClient : public IOService
 {
     OSDeclareAbstractStructors(IOUserClient)
+#if IOKITSTATS
+    friend class IOStatistics;
+#endif
 
 protected:
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of this class in the future.
 */    
-    struct ExpansionData { };
+    struct ExpansionData {
+#if IOKITSTATS
+	    IOUserClientCounter *counter;
+#else
+	    void *iokitstatsReserved;
+#endif
+    };
 
 /*! @var reserved
     Reserved for future use.  (Internal use only) 
 */
     ExpansionData * reserved;
+
+    bool reserve();
 
 private:
     OSSet * mappings;

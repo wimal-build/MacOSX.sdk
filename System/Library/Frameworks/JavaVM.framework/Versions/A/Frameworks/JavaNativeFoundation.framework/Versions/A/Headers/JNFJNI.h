@@ -4,7 +4,7 @@
  Copyright (c) 2008, Apple Inc.
  All rights reserved.
  
- The basic building blocks of writing Java JNI code that interacts with Objective C.
+ The basic building blocks of writing Java JNI code that interacts with Objective-C.
  
  All JNI functions should call JNF_COCOA_ENTER()/JNF_COCOA_EXIT() to properly
  catch thrown NSExceptions and periodically flush the autorelease pool for the
@@ -13,14 +13,18 @@
  
  JNF_CLASS_CACHE()/JNF_MEMBER_CACHE()/JNF_STATIC_MEMBER_CACHE()/JNF_CTOR_CACHE()
  all cache references to Java classes, methods, and variables for use by the
- GET/SET/CALL functions. These functions check for Java exceptions, and immediatly
- re-throw them as JNFExceptions, as well as are simpler than their pure JNI equivilants.
+ GET/SET/CALL functions. These functions check for Java exceptions, immediately
+ re-throwing them as JNFExceptions, and are simpler than their pure JNI equivalents.
  */
 
 #import <JavaVM/jni.h>
 
 #if !defined(JNF_EXPORT)
-	#define JNF_EXPORT extern
+	#ifdef __cplusplus
+		#define JNF_EXPORT extern "C"
+	#else
+		#define JNF_EXPORT extern
+	#endif
 #endif
 
 #import <JavaNativeFoundation/JNFException.h>
@@ -30,15 +34,21 @@
 // from jlong.h
 // All pointers in and out of JNI functions should be expressed as jlongs
 // to accomodate for both 32-bit and 64-bit pointer sizes
+#ifndef jlong_to_ptr
 #define jlong_to_ptr(a) ((void *)(uintptr_t)(a))
+#endif
+
+#ifndef ptr_to_jlong
 #define ptr_to_jlong(a) ((jlong)(uintptr_t)(a))
+#endif
 
 // JNF_COCOA_DURING - Outermost exception scope for a JNI native method
 //
 // Use this macro only if you don't want any autorelease pool set or
-// Other JNFThreadContext setup (ie, if the AppKit isn't running
+// other JNFThreadContext setup (ie, if the AppKit isn't running
 // yet).  Usually, you want to use JNF_COCOA_ENTER & JNF_COCOA_EXIT
-#define JNF_COCOA_DURING(env)   @try {
+#define JNF_COCOA_DURING(env)									\
+@try {
 
 
 // JNF_COCOA_HANDLE - Close of JNF_COCOA_DURING
@@ -71,7 +81,9 @@
 // Use this macro to match JNF_COCOA_ENTER.
 #define JNF_COCOA_EXIT(env)										\
 	JNF_COCOA_HANDLE(env)										\
-	if (_token) JNFNativeMethodExit(_token);					\
+	@finally {													\
+		if (_token) JNFNativeMethodExit(_token);				\
+	}															\
 }
 
 // JNF_CHECK_AND_RETHROW_EXCEPTION - rethrows exceptions from Java
@@ -134,7 +146,7 @@ JNFMemberInfo _ ## cache_symbol = {"<init>", sig, NO, &class_cache_symbol, {NULL
 // JNFClassInfo - struct for caching a java class reference
 //
 // Create one of these by using the JNF_CLASS_CACHE macro (below).
-// The class ref gets resolved inside JNFLookupMemberID.
+// The class ref is resolved lazily.
 typedef struct _JNFClassInfo {
 	const char *name;	// fully/qualified/ClassName
 	jclass cls;			// The JNI global class reference.
@@ -143,7 +155,7 @@ typedef struct _JNFClassInfo {
 // JNFMemberInfo - struct for caching a field or method ID
 //
 // Create these by using the JNF_MEMBER_CACHE macro (below).
-// The member ID gets resolved inside JNFLookupMemberID
+// The member ID is resolved lazily.
 typedef struct _JNFMemberInfo {
     const char *name;			// The name of the member
     const char *sig;			// The signature of the member
@@ -161,11 +173,11 @@ typedef struct _JNFMemberInfo {
  * JNI Utility Functions
  *
  * These functions make use of class and method ID caching, so they
- * are more efficient than simply calling their JNI equivilants directly.
+ * are more efficient than simply calling their JNI equivalents directly.
  * They also detect Java exceptions and throw a corresponding
  * NSException when JNI returns with a Java exception.
  * Therefore, you should be prepared to handle exceptions
- * before they propogate either back to the VM or up
+ * before they propagate either back to the VM or up
  * to the run loop.
  */
 
@@ -174,6 +186,17 @@ JNF_EXPORT BOOL JNFIsInstanceOf(JNIEnv *env, jobject obj, JNFClassInfo *clazz);
 
 // Creating instances
 JNF_EXPORT jobject JNFNewObject(JNIEnv *env, JNFMemberInfo *constructor, ...);
+
+// Creating arrays
+JNF_EXPORT jobjectArray		JNFNewObjectArray	(JNIEnv *env, JNFClassInfo *clazz, jsize length);
+JNF_EXPORT jbooleanArray	JNFNewBooleanArray	(JNIEnv *env, jsize length);
+JNF_EXPORT jbyteArray		JNFNewByteArray		(JNIEnv *env, jsize length);
+JNF_EXPORT jcharArray		JNFNewCharArray		(JNIEnv *env, jsize length);
+JNF_EXPORT jshortArray		JNFNewShortArray	(JNIEnv *env, jsize length);
+JNF_EXPORT jintArray		JNFNewIntArray		(JNIEnv *env, jsize length);
+JNF_EXPORT jlongArray		JNFNewLongArray		(JNIEnv *env, jsize length);
+JNF_EXPORT jfloatArray		JNFNewFloatArray	(JNIEnv *env, jsize length);
+JNF_EXPORT jdoubleArray		JNFNewDoubleArray	(JNIEnv *env, jsize length);
 
 // Non-static getters
 JNF_EXPORT jobject  JNFGetObjectField (JNIEnv *env, jobject obj, JNFMemberInfo *field);
@@ -243,6 +266,8 @@ JNF_EXPORT jlong    JNFCallStaticLongMethod   (JNIEnv *env, JNFMemberInfo *metho
 JNF_EXPORT jfloat   JNFCallStaticFloatMethod  (JNIEnv *env, JNFMemberInfo *method, ...);
 JNF_EXPORT jdouble  JNFCallStaticDoubleMethod (JNIEnv *env, JNFMemberInfo *method, ...);
 
-// Global References
+// Global references
 JNF_EXPORT jobject JNFNewGlobalRef(JNIEnv *env, jobject obj);
 JNF_EXPORT void JNFDeleteGlobalRef(JNIEnv *env, jobject globalRef);
+JNF_EXPORT jobject JNFNewWeakGlobalRef(JNIEnv *env, jobject obj);
+JNF_EXPORT void JNFDeleteWeakGlobalRef(JNIEnv *env, jobject globalRef);

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2011 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_json.h,v 1.8.2.2.2.7 2009/05/31 18:55:10 andrei Exp $ */
+/* $Id: php_json.h 306939 2011-01-01 02:19:59Z felipe $ */
 
 #ifndef PHP_JSON_H
 #define PHP_JSON_H
@@ -26,6 +26,12 @@
 
 extern zend_module_entry json_module_entry;
 #define phpext_json_ptr &json_module_entry
+
+#if defined(PHP_WIN32) && defined(JSON_EXPORTS)
+#define PHP_JSON_API __declspec(dllexport)
+#else
+#define PHP_JSON_API PHPAPI
+#endif
 
 #ifdef ZTS
 #include "TSRM.h"
@@ -41,8 +47,18 @@ ZEND_END_MODULE_GLOBALS(json)
 # define JSON_G(v) (json_globals.v)
 #endif
 
-PHPAPI void php_json_encode(smart_str *buf, zval *val, int options TSRMLS_DC);
-PHPAPI void php_json_decode(zval *return_value, char *str, int str_len, zend_bool assoc, long depth TSRMLS_DC);
+PHP_JSON_API void php_json_encode(smart_str *buf, zval *val, int options TSRMLS_DC);
+PHP_JSON_API void php_json_decode(zval *return_value, char *str, int str_len, zend_bool assoc, long depth TSRMLS_DC);
+
+#define PHP_JSON_HEX_TAG	(1<<0)
+#define PHP_JSON_HEX_AMP	(1<<1)
+#define PHP_JSON_HEX_APOS	(1<<2)
+#define PHP_JSON_HEX_QUOT	(1<<3)
+#define PHP_JSON_FORCE_OBJECT	(1<<4)
+#define PHP_JSON_NUMERIC_CHECK	(1<<5)
+
+#define PHP_JSON_OUTPUT_ARRAY 0
+#define PHP_JSON_OUTPUT_OBJECT 1
 
 #endif  /* PHP_JSON_H */
 

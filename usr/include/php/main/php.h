@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2011 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.221.2.4.2.8.2.13 2009/06/26 15:44:19 johannes Exp $ */
+/* $Id: php.h 306939 2011-01-01 02:19:59Z felipe $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -309,6 +309,9 @@ PHPAPI void php_error_docref1(const char *docref TSRMLS_DC, const char *param1, 
 	PHP_ATTRIBUTE_FORMAT(printf, PHP_ATTR_FMT_OFFSET + 4, PHP_ATTR_FMT_OFFSET + 5);
 PHPAPI void php_error_docref2(const char *docref TSRMLS_DC, const char *param1, const char *param2, int type, const char *format, ...)
 	PHP_ATTRIBUTE_FORMAT(printf, PHP_ATTR_FMT_OFFSET + 5, PHP_ATTR_FMT_OFFSET + 6);
+#ifdef PHP_WIN32
+PHPAPI void php_win32_docref2_from_error(DWORD error, const char *param1, const char *param2 TSRMLS_DC);
+#endif
 END_EXTERN_C()
 
 #define php_error_docref php_error_docref0
@@ -449,6 +452,10 @@ END_EXTERN_C()
 #define XtOffsetOf(s_type, field) XtOffset(s_type*, field)
 #endif
 #endif /* !XtOffsetOf */
+
+#if SUHOSIN_PATCH
+#include "suhosin_patch.h"
+#endif
 
 #endif
 

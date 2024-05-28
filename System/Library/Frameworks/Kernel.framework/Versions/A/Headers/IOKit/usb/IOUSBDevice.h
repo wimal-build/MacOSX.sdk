@@ -24,6 +24,57 @@
 /*
  *
  *	$Log: IOUSBDevice.h,v $
+ *	Revision 1.68  2010/12/21 21:31:19  rhoads
+ *	roll in 8673433, 8774469, 8775377
+ *
+ *	Revision 1.67.118.1  2010/12/20 00:35:14  arulchan
+ *	call DeviceRequest GetDeviceStatus GetConfiguration APIs via gate
+ *
+ *	Revision 1.67  2010/08/30 20:41:22  rhoads
+ *	roll in 8312279
+ *
+ *	Revision 1.66.58.1  2010/08/27 17:11:34  nano
+ *	8312279:  Make ReEnumerateDevice be asynchronous again -- this will allow us to work with drivers that call the API from start where the device will be busy when reenumreate tryies to terminate it
+ *
+ *	Revision 1.66  2010/07/07 18:26:41  rhoads
+ *	committing a multitude of bugs which comprised 415.3.9
+ *
+ *	Revision 1.65.236.4  2010/06/05 01:40:13  arulchan
+ *	move reset and reenumerate behind a gate
+ *
+ *	Revision 1.65.236.3  2010/05/27 22:16:59  arulchan
+ *	IOUSBDevice cleanup take 2
+ *
+ *	Revision 1.65.236.2  2010/05/26 17:30:25  arulchan
+ *	IOUSBDevice cleanup take 1
+ *
+ *	Revision 1.65.236.1  2010/05/25 18:37:44  arulchan
+ *	Merge with PR-6606167-Ebony
+ *
+ *	Revision 1.65  2009/10/18 20:20:37  nano
+ *	Bring in fixes in 390.4.0 QL:  7310698 7301024 7307079 and 7310698
+ *
+ *	Revision 1.64.32.4  2009/10/15 21:17:43  nano
+ *	If OverrideAtLocationID does not see a override property, return true
+ *	
+ *	Revision 1.64.32.3.2.1  2009/10/15 21:36:27  nano
+ *	If OverrideAtLocationID does not see a override property, return true
+ *	
+ *	Revision 1.64.32.3  2009/10/14 19:16:15  nano
+ *	Minor name changes
+ *	
+ *	Revision 1.64.32.2  2009/10/14 19:05:21  nano
+ *	7284477 7293893 Simplify scheme to decide whether we want to override a property for a hub at a particular ID for a particular MacModel.  Added a IOUSBDevice API that tells us if we are in the right model and locationID to override a property
+ *	
+ *	Revision 1.64.32.1  2009/10/08 19:55:56  nano
+ *	rdar://7284477 Allow us to overide the config descriptor of a 2514 hub on a K23F
+ *	
+ *	Revision 1.64  2009/09/08 12:28:45  nano
+ *	<rdar://problem/7195788> IOUSBDevice headerdoc comment problem - GetNumConfigs name is wrong, should be GetNumConfigurations
+ *	
+ *	Revision 1.63  2009/05/07 19:43:09  nano
+ *	Move our SnowLeopard branch to TOT
+ *	
  *	Revision 1.57.84.6  2009/03/13 22:45:11  nano
  *	Bring in branches to fix 6676089 6675858 6567987 6490273
  *	
@@ -160,12 +211,12 @@ protected:
     IOUSBDeviceDescriptor			_descriptor;
     UInt32							_busPowerAvailable;
     UInt8							_speed;
-    IOUSBEndpointDescriptor			_endpointZero; 				// Fake ep for control pipe
+    IOUSBEndpointDescriptor			_endpointZero; 			// Fake ep for control pipe
     void *							_port;					// Obsolete, do not use
     IOBufferMemoryDescriptor**		_configList;
-    IOUSBInterface**				_interfaceList;
+    IOUSBInterface**				_interfaceList;			// Obsolete, do not use
     UInt8							_currentConfigValue;
-    UInt8							_numInterfaces;
+    UInt8							_numInterfaces;			// Obsolete, do not use
     
     struct ExpansionData 
     {
@@ -202,7 +253,10 @@ protected:
 		bool					_deviceIsInternal;					// Will be set if all our upstream hubs are captive (internal to the computer)
 		bool					_deviceIsInternalIsValid;			// true if we have already determined whether the device is internal
 		bool					_newGetConfigLock;					// new lock, taken within the WL gate, when doing a GetConfig
-		UInt32					_resetAndReEnumerateLock;			// "Lock" to prevent us from doing a reset or a re-enumerate while the other one is in progress				
+		UInt32					_resetAndReEnumerateLock;			// "Lock" to prevent us from doing a reset or a re-enumerate while the other one is in progress		
+		UInt32					_locationID;
+		IOLock*					_interfaceArrayLock;
+	    OSArray*				_interfaceArray;
     };	
     ExpansionData * _expansionData;
 
@@ -357,7 +411,7 @@ public:
     */
     virtual UInt16 GetDeviceRelease(void);
     /*!
-        @function GetNumConfigs
+        @function GetNumConfigurations
         returns the number of configs in the device config descriptor
     */
     virtual UInt8 GetNumConfigurations(void);
@@ -565,12 +619,20 @@ public:
 	 @function				GetExtraPowerAllocated
 	 @abstract				Clients can use this API to ask how much extra power has already been reserved by this device.  Units are milliAmps (mA).
 	 @param type			Indicates whether the allocated power was to be used during wake or sleep (One of kUSBPowerDuringSleep or kUSBPowerDuringWake)
-	 @result				Amount of power allocated, in mA.  .
+	 @result				Amount of power allocated, in mA.
 	 
 	 */
-	virtual UInt32	GetExtraPowerAllocated(UInt32 type);
+	virtual UInt32			GetExtraPowerAllocated(UInt32 type);
     
-    OSMetaClassDeclareReservedUnused(IOUSBDevice,  12);
+    OSMetaClassDeclareReservedUsed(IOUSBDevice,  12);
+    /*!
+	 @function				DoLocationOverrideAndModelMatch
+	 @abstract				Will look for a kOverrideIfAtLocationID array proerty with locationID entries and a "MacModel" property.  If any of the locationIDs match to the Mac Model, will return true.
+	 						If there is no kOverrideAtLocationID property, it will also return true.
+	 @result				True if we have a match, false otherwise
+	 */
+	virtual	bool			DoLocationOverrideAndModelMatch();
+	
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  13);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  14);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  15);
@@ -581,19 +643,19 @@ public:
     
 private:
 
-    static void 	ProcessPortResetEntry(OSObject *target);
-    void 		ProcessPortReset(void);
+    static void			ProcessPortResetEntry(__unused OSObject *target){};			// obsolete
+    void				ProcessPortReset(void){};									// obsolete
 
-    void 		TerminateInterfaces(void);
+    void				TerminateInterfaces(bool terminate);
 
-    static void 	ProcessPortReEnumerateEntry(OSObject *target, thread_call_param_t options);
-    void 		ProcessPortReEnumerate(UInt32 options);
+    static void			ProcessPortReEnumerateEntry(OSObject *target, thread_call_param_t options);
+    void				ProcessPortReEnumerate(UInt32 options);
 	
-    static void 	DoMessageClientsEntry(OSObject *target, thread_call_param_t messageStruct);
-    void 		DoMessageClients( void * messageStructPtr);
+    static void			DoMessageClientsEntry(OSObject *target, thread_call_param_t messageStruct);
+    void				DoMessageClients( void * messageStructPtr);
 	
-    static void 	DisplayUserNotificationForDeviceEntry (OSObject *owner, IOTimerEventSource *sender);
-    void		DisplayUserNotificationForDevice( );
+    static void			DisplayUserNotificationForDeviceEntry (OSObject *owner, IOTimerEventSource *sender);
+    void				DisplayUserNotificationForDevice( );
     
     UInt32              SimpleUnicodeToUTF8(UInt16 uChar, UInt8 utf8Bytes[4]);
     void                SwapUniWords (UInt16  **unicodeString, UInt32 uniSize);
@@ -601,6 +663,18 @@ private:
     IOReturn			TakeGetConfigLock(void);
     IOReturn			ReleaseGetConfigLock(void);
     static IOReturn		ChangeGetConfigLock(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	
+	void				RegisterInterfaces(void);
+	
+    static IOReturn		_ResetDevice(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+    static IOReturn		_ReEnumerateDevice(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn		_DeviceRequest(OSObject *target, void *arg0, void *arg1, __unused void *arg2, __unused void *arg3);
+	static IOReturn		_DeviceRequestDesc(OSObject *target, void *arg0, void *arg1, __unused void *arg2, __unused void *arg3);
+	static IOReturn		_GetConfiguration(OSObject *target, void *arg0,  __unused void *arg1, __unused void *arg2, __unused void *arg3);
+	static IOReturn		_GetDeviceStatus(OSObject *target, void *arg0,  __unused void *arg1, __unused void *arg2, __unused void *arg3);
+	static IOReturn		_DeviceRequestWithTimeout(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn		_DeviceRequestDescWithTimeout(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+
 };
 
 #endif /* _IOKIT_IOUSBDEVICE_H */
