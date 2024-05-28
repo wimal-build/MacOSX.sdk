@@ -3,7 +3,7 @@
  
      Contains:   Pasteboard Manager Interfaces.
  
-     Version:    HIServices-382.2~1
+     Version:    HIServices-416~44
  
      Copyright:  © 2003-2008 by Apple Computer, Inc., all rights reserved.
  
