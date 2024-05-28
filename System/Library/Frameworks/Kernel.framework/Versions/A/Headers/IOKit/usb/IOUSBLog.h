@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -21,44 +21,6 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef __OPEN_SOURCE__
-/*
- *
- *	$Log: IOUSBLog.h,v $
- *	Revision 1.23  2004/10/26 22:32:01  nano
- *	Remove USB Loggging for Tiger
- *	
- *	Revision 1.22  2004/02/03 22:09:49  nano
- *	Fix <rdar://problem/3548194>: Remove $ Id $ from source files to prevent conflicts
- *	
- *	Revision 1.21  2003/10/14 22:05:38  nano
- *	Logging enabled.
- *	
- *	Revision 1.20.10.1  2003/09/17 20:57:44  nano
- *	Change some logging to level 5 and add more info, just for testing
- *	
- *	Revision 1.20.14.1  2003/09/25 19:58:30  nano
- *	Back to logging
- *	
- *	Revision 1.20  2003/09/05 22:38:50  nano
- *	Removed logging --set to Production
- *	
- *	Revision 1.19  2003/08/20 19:41:40  nano
- *	
- *	Bug #:
- *	New version's of Nima's USB Prober (2.2b17)
- *	3382540  Panther: Ejecting a USB CardBus card can freeze a machine
- *	3358482  Device Busy message with Modems and IOUSBFamily 201.2.14 after sleep
- *	3385948  Need to implement device recovery on High Speed Transaction errors to full speed devices
- *	3377037  USB EHCI: returnTransactions can cause unstable queue if transactions are aborted
- *	
- *	Also, updated most files to use the id/log functions of cvs
- *	
- *	Submitted by: nano
- *	Reviewed by: rhoads/barryt/nano
- *	
- */
-#endif
 #ifndef _IOKIT_IOUSBLOG_H
 #define _IOKIT_IOUSBLOG_H
 
@@ -147,7 +109,7 @@ void			KernelDebugEnable( bool enable );
 //	KernelIOLog, you get the benefit of having your logs compiled out when you set the
 //	DEBUG_LEVEL to production mode and recompile. Dude. Sweet. What's mine say?
 
-void			KernelDebugLogInternal( KernelDebugLevel inLevel, UInt32 inTag, char const *inFormatString, ... );
+void			KernelDebugLogInternal( KernelDebugLevel inLevel, UInt32 inTag, char const *inFormatString, ... )  __attribute__ ((format(printf,3,4)));;
 void 			KernelDebugLogDataInternal( UInt32 inLevel,  UInt32 inTag, void *buffer, UInt32 byteCount, bool preBuffer);
 
 // Handy macros.
@@ -172,7 +134,7 @@ void 			KernelDebugLogDataInternal( UInt32 inLevel,  UInt32 inTag, void *buffer,
 // Some macros to call the debugging outputs. We'll strip out the debug logs if we are production code.
 
 #if DEBUG_LEVEL != DEBUG_LEVEL_PRODUCTION
-	#define	KernelDebugLog( LEVEL, ARGS... )			KernelDebugLogInternal( ( LEVEL ), 'KDbg', ## ARGS )
+#define	KernelDebugLog( LEVEL, ARGS... )			KernelDebugLogInternal( ( LEVEL ), 'KDbg', ## ARGS ) __attribute__ ((format(printf,1,2)));
 	#define	KernelDebugLogTag( LEVEL, TAG, ARGS... )		KernelDebugLogInternal( ( LEVEL ), ( TAG ),  ## ARGS )
 	#define KernelDebugLogData( LEVEL, TAG, BUFFER, SIZE, HOLD)	KernelDebugLogDataInternal( ( LEVEL ), ( TAG ), ( BUFFER ), ( SIZE ), ( HOLD ))
 #else

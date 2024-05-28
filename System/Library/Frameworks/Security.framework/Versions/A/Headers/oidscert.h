@@ -140,6 +140,7 @@ extern const CSSM_OID
 	CSSMOID_EmailProtection,
 	CSSMOID_TimeStamping,
 	CSSMOID_OCSPSigning,
+	CSSMOID_EKU_IPSec,
 	CSSMOID_DOTMAC_CERT_EXTENSION,
 	CSSMOID_DOTMAC_CERT_IDENTITY,
 	CSSMOID_DOTMAC_CERT_EMAIL_SIGN,
@@ -157,7 +158,10 @@ extern const CSSM_OID
  */
 extern const CSSM_OID	
 	CSSMOID_NetscapeCertType,
-	CSSMOID_NetscapeCertSequence;
+	CSSMOID_NetscapeCertSequence,
+	CSSMOID_NetscapeSGC;
+
+extern const CSSM_OID CSSMOID_MicrosoftSGC;
 
 /*
  * Field values for CSSMOID_NetscapeCertType, a bit string.

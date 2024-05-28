@@ -3,9 +3,9 @@
  
      Contains:   ATSUI drawing, measuring, and highlighting functions.
  
-     Version:    Quickdraw-185~4
+     Version:    Quickdraw-192.24~58
  
-     Copyright:  © 2003-2005 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

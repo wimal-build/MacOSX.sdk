@@ -3,9 +3,9 @@
  
      Contains:   CoreFoundation CFHost header
  
-     Version:    CFNetwork-126~4
+     Version:    CFNetwork-129.20~93
  
-     Copyright:  © 2001-2005 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 2001-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

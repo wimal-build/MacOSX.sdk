@@ -3,9 +3,9 @@
  
      Contains:   AppleScript Component Implementor's Interfaces.
  
-     Version:    OSA-86~14
+     Version:    OSA-97~629
  
-     Copyright:  © 1992-2005 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2006 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

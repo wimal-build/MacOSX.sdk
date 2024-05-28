@@ -29,6 +29,15 @@
  */
 /*
 	$Log: IOFireWireFamilyCommon.h,v $
+	Revision 1.55.4.2  2006/03/10 03:59:44  collin
+	*** empty log message ***
+	
+	Revision 1.55.4.1  2005/08/06 01:31:31  collin
+	*** empty log message ***
+	
+	Revision 1.55  2005/03/12 03:27:51  collin
+	*** empty log message ***
+	
 	Revision 1.54  2005/01/12 06:34:53  collin
 	*** empty log message ***
 	
@@ -621,7 +630,9 @@ enum
 typedef enum
 {
 	kFWIsochPortDefaultOptions = 0,
-	kFWIsochPortUseSeparateKernelThread		= BIT(1)
+	kFWIsochPortUseSeparateKernelThread		= BIT(1),
+	kFWIsochEnableRobustness			= BIT(2),
+	kFWIsochBigEndianUpdates			= BIT(3)
 } IOFWIsochPortOptions ;
 
 // =================================================================
@@ -882,7 +893,8 @@ enum
 enum IOFWWriteFlags
 {
 	kIOFWWriteFlagsNone				= 0x0000000,
-	kIOFWWriteFlagsDeferredNotify 	= 0x00000001
+	kIOFWWriteFlagsDeferredNotify 	= 0x00000001,
+	kIOFWWriteFastRetryOnBusy		= 0x00000002
 };
 
 //

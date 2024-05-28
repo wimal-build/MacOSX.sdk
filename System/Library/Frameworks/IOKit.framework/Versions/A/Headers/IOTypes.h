@@ -56,12 +56,8 @@ extern "C" {
 #ifndef __MACTYPES__	/* CF MacTypes.h */
 #ifndef __TYPES__	/* guess... Mac Types.h */
 
+#include <stdbool.h>
 #include <libkern/OSTypes.h>
-
-#ifndef __cplusplus
-#if !TYPE_BOOL
-#endif
-#endif
 
 #endif /* __TYPES__ */
 #endif /* __MACTYPES__ */
@@ -100,12 +96,23 @@ struct IOVirtualRange
     IOVirtualAddress	address;
     IOByteCount		length;
 };
+struct IOAddressRange
+{
+    mach_vm_address_t	address;
+    mach_vm_size_t	length;
+};
 #else
 typedef struct 
 {
     IOVirtualAddress	address;
     IOByteCount		length;
 } IOVirtualRange;
+
+struct IOAddressRange
+{
+    mach_vm_address_t	address;
+    mach_vm_size_t	length;
+};
 #endif
 
 /*

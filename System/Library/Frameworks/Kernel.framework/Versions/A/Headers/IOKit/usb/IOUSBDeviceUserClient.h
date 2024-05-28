@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -20,41 +20,7 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
-#ifndef __OPEN_SOURCE__
-/*
- *
- *	$Log: IOUSBDeviceUserClient.h,v $
- *	Revision 1.24  2004/05/17 21:42:00  nano
- *	Made the Device and Interface User Clients subclassable.
- *	
- *	Revision 1.23.16.1  2004/05/17 15:57:29  nano
- *	API Changes for Tiger
- *	
- *	Revision 1.23  2004/02/03 22:09:52  nano
- *	Fix <rdar://problem/3548194>: Remove $ Id $ from source files to prevent conflicts
- *	
- *	Revision 1.22.48.2  2004/04/28 17:26:11  nano
- *	Remove $ ID $ so that we don't get conflicts on merge
- *	
- *	Revision 1.22.48.1  2003/11/04 22:27:39  nano
- *	Work in progress to add time stamping to interrupt handler
- *	
- *	Revision 1.22  2003/08/20 19:41:45  nano
- *	
- *	Bug #:
- *	New version's of Nima's USB Prober (2.2b17)
- *	3382540  Panther: Ejecting a USB CardBus card can freeze a machine
- *	3358482  Device Busy message with Modems and IOUSBFamily 201.2.14 after sleep
- *	3385948  Need to implement device recovery on High Speed Transaction errors to full speed devices
- *	3377037  USB EHCI: returnTransactions can cause unstable queue if transactions are aborted
- *	
- *	Also, updated most files to use the id/log functions of cvs
- *	
- *	Submitted by: nano
- *	Reviewed by: rhoads/barryt/nano
- *	
- */
-#endif
+
 #ifndef _IOKIT_IOUSBDEVICEUSERCLIENT_H
 #define _IOKIT_IOUSBDEVICEUSERCLIENT_H
 
@@ -137,6 +103,9 @@ public:
     virtual void                        free();
     virtual bool                        willTerminate( IOService * provider, IOOptionBits options );
     virtual bool                        didTerminate( IOService * provider, IOOptionBits options, bool * defer );
+#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
+    virtual IOReturn					message( UInt32 type, IOService * provider,  void * argument = 0 );
+#endif
 
     // pseudo IOKit methods - these methods are NOT the IOService:: methods, since both IOService::open
     // and IOService::close require an IOService* as the first parameter
@@ -146,7 +115,7 @@ public:
 
     // IOUserClient methods
     //
-    virtual bool			initWithTask(task_t owningTask, void *security_id, UInt32 type);
+    virtual bool			initWithTask(task_t owningTask, void *security_id, UInt32 type, OSDictionary *properties);
     virtual IOExternalMethod * 		getTargetAndMethodForIndex(IOService **target, UInt32 index);
     virtual IOExternalAsyncMethod * 	getAsyncTargetAndMethodForIndex(IOService **target, UInt32 index);
     virtual IOReturn 			clientClose( void );
@@ -197,7 +166,13 @@ public:
 
     // padding methods
     //
+#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
+    OSMetaClassDeclareReservedUsed(IOUSBDeviceUserClient,  0);
+    virtual IOReturn                    DeviceReqInOOLv2(IOUSBDevRequestTO *reqIn, UInt32 *sizeOut, IOByteCount inCount, IOByteCount *outCount);
+#else
     OSMetaClassDeclareReservedUnused(IOUSBDeviceUserClient,  0);
+#endif
+
     OSMetaClassDeclareReservedUnused(IOUSBDeviceUserClient,  1);
     OSMetaClassDeclareReservedUnused(IOUSBDeviceUserClient,  2);
     OSMetaClassDeclareReservedUnused(IOUSBDeviceUserClient,  3);

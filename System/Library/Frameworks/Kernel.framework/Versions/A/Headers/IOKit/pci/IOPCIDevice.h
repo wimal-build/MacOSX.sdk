@@ -75,7 +75,12 @@ enum {
     kIOPCIAGP8Capability       		= 0x0e,
     kIOPCISecureCapability       	= 0x0f,
     kIOPCIPCIExpressCapability       	= 0x10,
-    kIOPCIMSIXCapability       		= 0x11
+    kIOPCIMSIXCapability       		= 0x11,
+
+    kIOPCIExpressErrorReportingCapability     = -1UL,
+    kIOPCIExpressVirtualChannelCapability     = -2UL,
+    kIOPCIExpressDeviceSerialNumberCapability = -3UL,
+    kIOPCIExpressPowerBudgetCapability        = -4UL
 };
 
 /* Space definitions */
@@ -207,6 +212,11 @@ struct IOPCIPhysicalAddress {
 // property to control PCI default config space save on sleep
 #define kIOPMPCIConfigSpaceVolatileKey	"IOPMPCIConfigSpaceVolatile"
 
+// pci express link status
+#define kIOPCIExpressLinkStatusKey	 "IOPCIExpressLinkStatus"
+// pci express link capabilities
+#define kIOPCIExpressLinkCapabilitiesKey "IOPCIExpressLinkCapabilities"
+
 enum {
     kIOPCIDevicePowerStateCount = 3,
     kIOPCIDeviceOffState	= 0,
@@ -214,9 +224,15 @@ enum {
     kIOPCIDeviceOnState		= 2,
 };
 
+enum
+{
+    // bits getInterruptType result
+    kIOInterruptTypePCIMessaged = 0x00010000
+};
+
 /*! @class IOPCIDevice : public IOService
     @abstract An IOService class representing a PCI device.
-    @discussion The discovery of an PCI device by the PCI bus family results in an instance of the IOPCIDevice being created and published. It provides services for looking up and mapping memory mapped hardware, and access to the PCI configuration and I/O spaces. 
+    @discussion The discovery of a PCI device by the PCI bus family results in an instance of the IOPCIDevice being created and published. It provides services for looking up and mapping memory mapped hardware, and access to the PCI configuration and I/O spaces. 
 
 <br><br>Matching Supported by IOPCIDevice<br><br>
 
@@ -276,12 +292,16 @@ Matches a device whose class code is 0x0200zz, an ethernet device.
 
 */
 
+class IOPCIBridge;
+class IOPCI2PCIBridge;
+
 class IOPCIDevice : public IOService
 {
     OSDeclareDefaultStructors(IOPCIDevice)
 
     friend class IOPCIBridge;
     friend class IOPCI2PCIBridge;
+    friend class IOPCIMessagedInterruptController;
 
 protected:
     IOPCIBridge *	parent;
@@ -295,6 +315,11 @@ protected:
 	bool					PMsleepEnabled;		// T if a client has enabled PCI Power Management
 	UInt8					PMcontrolStatus;	// if >0 this device supports PCI Power Management
 	UInt16					sleepControlBits;	// bits to set the control/status register to for sleep
+
+	UInt16					expressConfig;
+	UInt16					msiConfig;
+	UInt8					msiBlockSize;
+	UInt8					msiMode;
     };
 
 /*! @var reserved
@@ -315,11 +340,13 @@ public:
     virtual bool attach( IOService * provider );
     virtual void detach( IOService * provider );
     virtual IOReturn setPowerState( unsigned long, IOService * );
+
     virtual bool compareName( OSString * name, OSString ** matched = 0 ) const;
     virtual bool matchPropertyTable( OSDictionary *	table,
                                      SInt32       *	score );
     virtual IOService * matchLocation( IOService * client );
     virtual IOReturn getResources( void );
+    virtual IOReturn setProperties(OSObject * properties);
 
     /* Config space accessors */
 
@@ -421,7 +448,7 @@ public:
 
 /*! @function findPCICapability
     @abstract Search configuration space for a PCI capability register.
-    @discussion This method searchs the device's config space for a PCI capability register matching the passed capability ID, if the device supports PCI capabilities.
+    @discussion This method searches the device's config space for a PCI capability register matching the passed capability ID, if the device supports PCI capabilities. To search for PCI Express extended capabilities or for multiple capablities with the same ID, use the extendedFindPCICapability() method.
     @param capabilityID An 8-bit PCI capability ID.
     @param offset An optional pointer to return the offset into config space where the capability was found.
     @result The 32-bit value of the capability register if one was found, zero otherwise. */
@@ -554,8 +581,8 @@ public:
     OSMetaClassDeclareReservedUsed(IOPCIDevice,  2);
 /*! @function extendedFindPCICapability
     @abstract Search configuration space for a PCI capability register.
-    @discussion This method searchs the device's config space for a PCI capability register matching the passed capability ID, if the device supports PCI capabilities.
-    @param capabilityID An PCI capability ID.
+    @discussion This method searches the device's config space for a PCI capability register matching the passed capability ID, if the device supports PCI capabilities.
+    @param capabilityID A PCI capability ID. PCI Express devices may support extended capabilities in config space starting at offset 0x100. To search this space, the ID passed should be the negated value of the PCI-SIG assigned ID for the extended capability.
     @param offset An optional in/out parameter to return the offset into config space where the capability was found, and to set the start point of the next search. Initialize the offset to zero before the first call to extendedFindPCICapability() and subsequent calls will find all capabilty blocks that may exist on the device with the same ID.
     @result The 32-bit value of the capability register if one was found, zero otherwise. */
 
@@ -576,6 +603,7 @@ public:
     OSMetaClassDeclareReservedUnused(IOPCIDevice, 14);
     OSMetaClassDeclareReservedUnused(IOPCIDevice, 15);
 
+public:
 
 /*! @function extendedConfigRead32
     @abstract Reads a 32-bit value from the PCI device's configuration space.

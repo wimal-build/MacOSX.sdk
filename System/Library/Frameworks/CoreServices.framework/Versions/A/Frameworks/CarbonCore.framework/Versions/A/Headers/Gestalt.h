@@ -3,9 +3,9 @@
  
      Contains:   Gestalt Interfaces.
  
-     Version:    CarbonCore-650.1~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1988-2005 by Apple Computer, Inc.  All rights reserved
+     Copyright:  © 1988-2006 by Apple Computer, Inc.  All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -699,7 +699,8 @@ enum {
   gestaltCPUPentium             = 'i586',
   gestaltCPUPentiumPro          = 'i5pr',
   gestaltCPUPentiumII           = 'i5ii',
-  gestaltCPUX86                 = 'ixxx'
+  gestaltCPUX86                 = 'ixxx',
+  gestaltCPUPentium4            = 'i5iv'
 };
 
 enum {
@@ -2309,17 +2310,6 @@ enum {
 };
 
 
-/* gestaltX86VectorUnit returns the vector unit type (if any)
-   available and supported by both the current processor and operating
-   system */
-enum {
-  gestaltX86VectorUnit          = 'x86v',
-  gestaltX86VectorUnitNone      = 0,
-  gestaltX86VectorUnitSSE2      = 4,
-  gestaltX86VectorUnitSSE       = 3,
-  gestaltX86VectorUnitMMX       = 2
-};
-
 /* gestaltX86Features is a convenience for 'cpuid' instruction.  Note
    that even though the processor may support a specific feature, the
    OS may not support all of these features.  These bitfields
@@ -2356,6 +2346,24 @@ enum {
   gestaltX86HasSS               = 27,   /* Self-Snoop*/
   gestaltX86HasHTT              = 28,   /* Hyper-Threading Technology*/
   gestaltX86HasTM               = 29    /* Thermal Monitor*/
+};
+
+/* 'cpuid' now returns a 64 bit value, and the following 
+    gestalt selector and field definitions apply
+    to the extended form of this instruction */
+enum {
+  gestaltX86AdditionalFeatures  = 'x86a',
+  gestaltX86HasSSE3             = 0,    /* Prescott New Inst.*/
+  gestaltX86HasMONITOR          = 3,    /* Monitor/mwait*/
+  gestaltX86HasDSCPL            = 4,    /* Debug Store CPL*/
+  gestaltX86HasVMX              = 5,    /* VMX*/
+  gestaltX86HasSMX              = 6,    /* SMX*/
+  gestaltX86HasEST              = 7,    /* Enhanced SpeedsTep (GV3)*/
+  gestaltX86HasTM2              = 8,    /* Thermal Monitor 2*/
+  gestaltX86HasSupplementalSSE3 = 9,    /* Supplemental SSE3 instructions*/
+  gestaltX86HasCID              = 10,   /* L1 Context ID*/
+  gestaltX86HasCX16             = 13,   /* CmpXchg16b instruction*/
+  gestaltX86HasxTPR             = 14    /* Send Task PRiority msgs*/
 };
 
 enum {

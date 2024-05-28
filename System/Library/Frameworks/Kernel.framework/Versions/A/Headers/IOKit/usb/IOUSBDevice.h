@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2007 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -20,74 +20,14 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef __OPEN_SOURCE__
-/*
- *
- *	$Log: IOUSBDevice.h,v $
- *	Revision 1.44  2004/08/23 20:00:47  nano
- *	Merge fix for rdar://3769499 (UTF16-UTF8 conversion)
- *	
- *	Revision 1.43.20.1  2004/08/20 16:32:09  nano
- *	Make string descriptor deal with unicode characters that are > 127, so we create correct UTF-8 strings
- *	
- *	Revision 1.43  2004/05/21 16:57:47  nano
- *	Merged branches
- *	
- *	Revision 1.42.2.1  2004/05/20 22:35:33  nano
- *	Change headers back to using IOUSBController instead of IOUSBControllerV2.
- *	
- *	Revision 1.42  2004/05/17 21:52:50  nano
- *	Add timeStamp and useTimeStamp to our commands.
- *	
- *	Revision 1.41.6.1  2004/05/17 15:57:27  nano
- *	API Changes for Tiger
- *	
- *	Revision 1.41  2004/04/22 04:09:47  nano
- *	Integrate fixes for rdar://3630366 -- Bluetooth extra reset time workaround
- *	
- *	Revision 1.40  2004/02/03 22:09:49  nano
- *	Fix <rdar://problem/3548194>: Remove $ Id $ from source files to prevent conflicts
- *	
- *	Revision 1.39.44.1  2004/04/06 18:11:23  nano
- *	Add _addExtraResetTime field
- *	
- *	Revision 1.39.18.2  2004/04/28 17:26:09  nano
- *	Remove $ ID $ so that we don't get conflicts on merge
- *	
- *	Revision 1.39.18.1  2003/11/04 22:27:37  nano
- *	Work in progress to add time stamping to interrupt handler
- *	
- *	Revision 1.39  2003/09/10 19:07:17  nano
- *	Merge in branches to fix #3406994 (make SuspendDevice synchronous)
- *	
- *	Revision 1.38.26.1  2003/09/10 18:33:59  nano
- *	Couple of booleans to support synchronous DeviceSuspend
- *	
- *	Revision 1.38  2003/08/21 21:50:09  nano
- *	Remove use of compatibility slot in IOUSBPipe.h -- it's not necessary
- *	
- *	Revision 1.37  2003/08/20 19:41:40  nano
- *	
- *	Bug #:
- *	New version's of Nima's USB Prober (2.2b17)
- *	3382540  Panther: Ejecting a USB CardBus card can freeze a machine
- *	3358482  Device Busy message with Modems and IOUSBFamily 201.2.14 after sleep
- *	3385948  Need to implement device recovery on High Speed Transaction errors to full speed devices
- *	3377037  USB EHCI: returnTransactions can cause unstable queue if transactions are aborted
- *	
- *	Also, updated most files to use the id/log functions of cvs
- *	
- *	Submitted by: nano
- *	Reviewed by: rhoads/barryt/nano
- *	
- */
-#endif
 #ifndef _IOKIT_IOUSBDEVICE_H
 #define _IOKIT_IOUSBDEVICE_H
 
 #include <IOKit/usb/IOUSBNub.h>
 #include <IOKit/usb/IOUSBPipe.h>
 #include <IOKit/IOBufferMemoryDescriptor.h>
+#include <IOKit/IOWorkLoop.h>
+#include <IOKit/IOCommandGate.h>
 
 #include <kern/thread_call.h>
 
@@ -125,41 +65,47 @@ class IOUSBDevice : public IOUSBNub
 
 protected:
 
-    USBDeviceAddress			_address;
+    USBDeviceAddress				_address;
     IOUSBController *	     		_controller;
-    IOUSBPipe *				_pipeZero;
-    IOUSBDeviceDescriptor 		_descriptor;
-    UInt32				_busPowerAvailable;
-    UInt8				_speed;
-    IOUSBEndpointDescriptor		_endpointZero; 				// Fake ep for control pipe
-    void *				_port;					// Obsolete, do not use
+    IOUSBPipe *						_pipeZero;
+    IOUSBDeviceDescriptor			_descriptor;
+    UInt32							_busPowerAvailable;
+    UInt8							_speed;
+    IOUSBEndpointDescriptor			_endpointZero; 				// Fake ep for control pipe
+    void *							_port;					// Obsolete, do not use
     IOBufferMemoryDescriptor**		_configList;
-    IOUSBInterface**			_interfaceList;
-    UInt8				_currentConfigValue;
-    UInt8				_numInterfaces;
+    IOUSBInterface**				_interfaceList;
+    UInt8							_currentConfigValue;
+    UInt8							_numInterfaces;
     
     struct ExpansionData 
     {
-        UInt32			_portNumber;
-        thread_call_t		_doPortResetThread;
-        IOUSBDevice *		_usbPlaneParent;
-        bool			_portResetThreadActive;
-        bool			_allowConfigValueOfZero;
-        thread_call_t		_doPortSuspendThread;
-        bool			_portSuspendThreadActive;
-        thread_call_t		_doPortReEnumerateThread;
-        bool			_resetInProgress;
-        bool			_portHasBeenReset;
-        bool			_deviceterminating;
-        IORecursiveLock*	_getConfigLock;
-        bool                   _doneWaiting;                   // Obsolete
-        bool                   _notifiedWhileBooting;          // Obsolete
-        IOWorkLoop *		_workLoop;
+        UInt32					_portNumber;
+        thread_call_t			_doPortResetThread;
+        IOUSBDevice *			_usbPlaneParent;
+        bool					_portResetThreadActive;
+        bool					_allowConfigValueOfZero;
+        thread_call_t			_doPortSuspendThread;
+        bool					_portSuspendThreadActive;
+        thread_call_t			_doPortReEnumerateThread;
+        bool					_resetInProgress;
+        bool					_portHasBeenReset;
+        IORecursiveLock*		_getConfigLock;
+        bool					_doneWaiting;                   // Obsolete
+        bool					_notifiedWhileBooting;          // Obsolete
+        IOWorkLoop *			_workLoop;
         IOTimerEventSource *	_notifierHandlerTimer;
-        UInt32			_notificationType;
-        bool			_suspendInProgress;
-        bool			_portHasBeenSuspended;
-        bool			_addExtraResetTime;
+        UInt32					_notificationType;
+        bool					_suspendInProgress;
+        bool					_portHasBeenSuspendedOrResumed;
+        bool					_addExtraResetTime;
+		bool					_suspendCommand;
+		IOCommandGate *			_commandGate;
+		OSSet *					_openInterfaces;
+		bool					_resetCommand;
+		IOReturn				_resetError;
+		IOReturn				_suspendError;
+        thread_call_t			_doMessageClientsThread;
     };
     ExpansionData * _expansionData;
 
@@ -187,13 +133,22 @@ public:
     static IOUSBDevice *NewDevice(void);
     
     // IOService methods
+    virtual bool 	init();
     virtual bool 	attach(IOService *provider);
-    virtual bool 	start( IOService * provider );
-    virtual void 	stop( IOService * provider );
+    virtual bool 	start( IOService *provider );
+    virtual void 	stop( IOService *provider );
     virtual bool 	finalize(IOOptionBits options);
     virtual IOReturn 	message( UInt32 type, IOService * provider,  void * argument = 0 );
     virtual bool 	willTerminate( IOService * provider, IOOptionBits options );
     virtual bool 	didTerminate( IOService * provider, IOOptionBits options, bool * defer );
+	
+#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
+	virtual bool	handleIsOpen(const IOService *forClient) const;
+	virtual bool	handleOpen(IOService *forClient, IOOptionBits options, void *arg);
+	virtual void	handleClose(IOService *forClient, IOOptionBits options);
+    virtual bool	terminate( IOOptionBits options = 0 );
+    virtual bool	requestTerminate( IOService * provider, IOOptionBits options );
+#endif
 
     virtual void SetPort(void *port);			// Obsolete, do NOT use
 
@@ -388,9 +343,10 @@ public:
 
     virtual void 	DisplayNotEnoughPowerNotice();
     
-    // this is a non-virtual function so that we don't have to take up a binary compatibility slot.
+    // these are non-virtual functions so that we don't have to take up a binary compatibility slot.
     UInt16	GetbcdUSB(void);
     UInt8	GetProtocol(void);
+	void	SetBusPowerAvailable(UInt32 newPower);
 
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  0);
     /*!
@@ -444,7 +400,20 @@ public:
      */
     virtual void	DisplayUserNotification(UInt32 notificationType);
     
+#if !(defined(__ppc__) && defined(KPI_10_4_0_PPC_COMPAT))
+    OSMetaClassDeclareReservedUsed(IOUSBDevice,  5);
+	/*!
+        @function MakePipe
+	 @abstract build a pipe on a given endpoint
+	 @param ep A description of the endpoint
+	 returns the desired IOUSBPipe object
+	 */
+    virtual IOUSBPipe*	MakePipe(const IOUSBEndpointDescriptor *ep, IOUSBInterface *interface);
+    
+#else
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  5);
+#endif
+	
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  6);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  7);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  8);
@@ -472,7 +441,10 @@ private:
    
     static void 	ProcessPortReEnumerateEntry(OSObject *target, thread_call_param_t options);
     void 		ProcessPortReEnumerate(UInt32 options);
-
+	
+    static void 	DoMessageClientsEntry(OSObject *target, thread_call_param_t messageStruct);
+    void 		DoMessageClients( void * messageStructPtr);
+	
     static void 	DisplayUserNotificationForDeviceEntry (OSObject *owner, IOTimerEventSource *sender);
     void		DisplayUserNotificationForDevice( );
     

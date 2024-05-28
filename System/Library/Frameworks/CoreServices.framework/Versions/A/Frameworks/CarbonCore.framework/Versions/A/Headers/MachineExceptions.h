@@ -3,9 +3,9 @@
  
      Contains:   Processor Exception Handling Interfaces.
  
-     Version:    CarbonCore-650.1~1
+     Version:    CarbonCore-682.11~29
  
-     Copyright:  © 1993-2005 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 1993-2005 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -24,6 +24,10 @@
 #include <CarbonCore/MixedMode.h>
 #endif
 
+
+#if TARGET_CPU_X86
+#include <xmmintrin.h>
+#endif
 
 
 #include <AvailabilityMacros.h>
@@ -107,7 +111,7 @@ struct FPUInformationPowerPC {
 };
 typedef struct FPUInformationPowerPC    FPUInformationPowerPC;
 union Vector128 {
-#ifdef __VEC__
+#ifdef __APPLE_ALTIVEC__
  vector unsigned int         v;
 #endif
   unsigned long       l[4];
@@ -209,14 +213,17 @@ typedef VectorInformationPowerPC        VectorInformation;
 
 #if TARGET_CPU_X86
 struct MachineInformationIntel {
-  unsigned short      CS;
-  unsigned short      DS;
-  unsigned short      SS;
-  unsigned short      ES;
-  unsigned short      FS;
-  unsigned short      GS;
+  unsigned long       CS;
+  unsigned long       DS;
+  unsigned long       SS;
+  unsigned long       ES;
+  unsigned long       FS;
+  unsigned long       GS;
   unsigned long       EFLAGS;
   unsigned long       EIP;
+  unsigned long       ExceptTrap;
+  unsigned long       ExceptErr;
+  unsigned long       ExceptAddr;
 };
 typedef struct MachineInformationIntel  MachineInformationIntel;
 struct RegisterInformationIntel {
@@ -243,8 +250,15 @@ struct FPUInformationIntel {
   unsigned int        DS;
 };
 typedef struct FPUInformationIntel      FPUInformationIntel;
+union Vector128Intel {
+  __m128              s;
+  __m128i             si;
+  __m128d             sd;
+  unsigned char       c[16];
+};
+typedef union Vector128Intel            Vector128Intel;
 struct VectorInformationIntel {
-  UnsignedWide        Registers[8];
+  Vector128Intel      Registers[8];
 };
 typedef struct VectorInformationIntel   VectorInformationIntel;
 

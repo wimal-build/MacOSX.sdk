@@ -2,7 +2,7 @@
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * Copyright (c) 1998-2003 Apple Computer, Inc.  All Rights Reserved.
+ * Copyright (c) 1998-2006 Apple Computer, Inc.  All Rights Reserved.
  * 
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
@@ -22,25 +22,6 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef __OPEN_SOURCE__
-/*
- *
- *	$Log: IOUSBCompositeDriver.h,v $
- *	Revision 1.4  2004/06/04 04:03:49  nano
- *	Fix rdar://3658665 where ReConfigureDevice() was using an united variable
- *	
- *	Revision 1.3  2004/05/28 14:36:24  nano
- *	Don't virutalize inline calls
- *	
- *	Revision 1.2  2004/05/17 21:39:42  nano
- *	New subclassable driver for USB Composite devices.
- *	
- *	Revision 1.1.2.1  2004/05/17 15:57:25  nano
- *	API Changes for Tiger
- *	
- *	
- */
-#endif
 #ifndef _IOKIT_IOUSBCompositeDriver_H
 #define _IOKIT_IOUSBCompositeDriver_H
 
@@ -88,9 +69,9 @@ class IOUSBCompositeDriver : public IOService
     
 public:
         
-    // IOService Methods
-    //
-    virtual bool            start(IOService * provider);
+		// IOService Methods
+		//
+		virtual bool            start(IOService * provider);
     virtual IOReturn        message( UInt32 type, IOService * provider,  void * argument = 0 );
     virtual bool            willTerminate( IOService * provider, IOOptionBits options );
     virtual bool            didTerminate( IOService * provider, IOOptionBits options, bool * defer );
@@ -100,7 +81,7 @@ public:
     virtual bool            ConfigureDevice();
     virtual IOReturn        ReConfigureDevice();
     /*!
-     @function SetConfiguration
+		@function SetConfiguration
      @abstract Call IOUSBDevice to do a SetConfiguration call to the device.
      @param configValue The desired configuration value.
      @param startInterfaceMatching A boolean specifying whether IOKit should begin the process of finding
@@ -114,7 +95,7 @@ public:
     UInt8                               GetConfigValue()            { return fConfigValue; }
     UInt8                               GetConfigbmAttributes()     { return fConfigbmAttributes; }
     IONotifier *                        GetNotifier()               { return fNotifier; }
-
+	
     OSMetaClassDeclareReservedUnused(IOUSBCompositeDriver,  0);
     OSMetaClassDeclareReservedUnused(IOUSBCompositeDriver,  1);
     OSMetaClassDeclareReservedUnused(IOUSBCompositeDriver,  2);

@@ -60,6 +60,8 @@ class IOFireWireLocalNode;
 class IOFWWorkLoop;
 class IOFireWireIRM;
 class IOFireWirePowerManager;
+class IOFWSimplePhysicalAddressSpace;
+class IOFWSimpleContiguousPhysicalAddressSpace;
 
 #if FIRELOGCORE
 class IOFireLog;
@@ -340,6 +342,14 @@ protected:
 	virtual UInt8									getMaxRec( void );
 	virtual IOFWBufferFillIsochPort *				createBufferFillIsochPort() const ;
 	
+	virtual UInt64 getFireWirePhysicalAddressMask( void );
+	virtual UInt32 getFireWirePhysicalAddressBits( void );
+	virtual UInt64 getFireWirePhysicalBufferMask( void );
+	virtual UInt32 getFireWirePhysicalBufferBits( void );
+	
+	virtual IOFWSimpleContiguousPhysicalAddressSpace * createSimpleContiguousPhysicalAddressSpace( vm_size_t size, IODirection direction );
+	virtual IOFWSimplePhysicalAddressSpace * createSimplePhysicalAddressSpace( vm_size_t size, IODirection direction );
+	
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireControllerAux, 0);
     OSMetaClassDeclareReservedUnused(IOFireWireControllerAux, 1);
@@ -520,6 +530,13 @@ protected:
 	bool						fBadIRMsKnown;
 	
 	UInt32						fPreviousGap;
+	IONotifier *				fPowerEventNotifier;
+	
+	bool fStarted;
+
+	UInt32 fIOCriticalSectionCount;
+
+	UInt32 fHubPort;
 	
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the class in the future.
@@ -547,7 +564,7 @@ protected:
 
     // Process read from a local address, return rcode
     virtual UInt32 doReadSpace(UInt16 nodeID, IOFWSpeed &speed, FWAddress addr, UInt32 len,
-                                      IOMemoryDescriptor **buf, IOByteCount * offset,
+                                      IOMemoryDescriptor **buf, IOByteCount * offset, IODMACommand **dma_command,
                                       IOFWRequestRefCon refcon);
 
     // Process write to a local address, return rcode
@@ -702,7 +719,6 @@ public:
     virtual IOFWPseudoAddressSpace *createPseudoAddressSpace(FWAddress *addr, UInt32 len,
                                 FWReadCallback reader, FWWriteCallback writer, void *refcon);
 
-
     // Extract info about the async request 
     virtual bool isLockRequest(IOFWRequestRefCon refcon);
     virtual bool isQuadRequest(IOFWRequestRefCon refcon);
@@ -718,7 +734,7 @@ public:
     bool checkGeneration(UInt32 gen) const;
     UInt32 getGeneration() const;
     UInt16 getLocalNodeID() const;
-    IOReturn getIRMNodeID(UInt32 &generation, UInt16 &id) const;
+    IOReturn getIRMNodeID(UInt32 &generation, UInt16 &id);
     
     const AbsoluteTime * getResetTime() const;
 
@@ -793,7 +809,7 @@ protected:
 	virtual IOReturn createPendingQ( void );
 	virtual void destroyPendingQ( void );
 
-	virtual UInt32 countNodeIDChildren( UInt16 nodeID );
+	virtual UInt32 countNodeIDChildren( UInt16 nodeID, int hub_port = 0, int * hubChildRemainder = NULL, bool * hubParentFlag = NULL );
 
 public:
 	virtual UInt32 hopCount(UInt16 nodeAAddress, UInt16 nodeBAddress );
@@ -846,6 +862,19 @@ public:
 	void disablePhyPortOnSleepForNodeID( UInt32 nodeID );
 
 	IOReturn handleAsyncCompletion( IOFWCommand *cmd, IOReturn status );
+
+	static IOReturn systemShutDownHandler( void * target, void * refCon,
+                                    UInt32 messageType, IOService * service,
+                                    void * messageArgument, vm_size_t argSize );
+
+	IOReturn beginIOCriticalSection( void );
+	void endIOCriticalSection( void );
+
+protected:	
+	IOReturn poweredStart( void );
+
+public:
+	bool isPhysicalAccessEnabledForNodeID( UInt16 nodeID );
 	
 private:
     OSMetaClassDeclareReservedUnused(IOFireWireController, 0);

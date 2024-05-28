@@ -26,7 +26,7 @@
 
 /* default list of mibs to load */
 
-#define DEFAULT_MIBS "IP-MIB:IF-MIB:TCP-MIB:UDP-MIB:HOST-RESOURCES-MIB:SNMPv2-MIB:RFC1213-MIB:NOTIFICATION-LOG-MIB:UCD-SNMP-MIB:UCD-DEMO-MIB:SNMP-TARGET-MIB:NET-SNMP-AGENT-MIB:HOST-RESOURCES-TYPES:SNMP-VIEW-BASED-ACM-MIB:SNMP-COMMUNITY-MIB:NET-SNMP-EXTEND-MIB:UCD-DLMOD-MIB:SNMP-FRAMEWORK-MIB:SNMP-MPD-MIB:SNMP-USER-BASED-SM-MIB:SNMP-NOTIFICATION-MIB:SNMPv2-TM"
+#define DEFAULT_MIBS "SNMPv2-MIB:RFC1213-MIB:SNMP-VIEW-BASED-ACM-MIB:SNMP-COMMUNITY-MIB:HOST-RESOURCES-MIB:HOST-RESOURCES-TYPES:SNMP-FRAMEWORK-MIB:SNMP-MPD-MIB:SNMP-USER-BASED-SM-MIB"
 
 /* default location to look for mibs to load using the above tokens
    and/or those in the MIBS envrionment variable*/
@@ -109,7 +109,7 @@
 /* SNMPLIBDIR contains important files */
 #define SNMPLIBPATH "/usr/lib/snmp"
 #define SNMPSHAREPATH "/usr/share/snmp"
-#define SNMPCONFPATH "/usr/etc/snmp"
+#define SNMPCONFPATH "/etc"
 #define SNMPDLMODPATH "/usr/lib/snmp/dlmod"
 
 /* LOGFILE:  If defined it closes stdout/err/in and opens this in out/err's
@@ -117,13 +117,13 @@
 #define LOGFILE "/var/log/snmpd.log"
 
 /* default system contact */
-#define SYS_CONTACT "root@@no.where"
+#define SYS_CONTACT "postmaster@example.com"
 
 /* system location */
 #define SYS_LOC "Unknown"
 
 /* Use libwrap to handle allow/deny hosts? */
-#define USE_LIBWRAP 1
+/* #undef USE_LIBWRAP */
 
 /* Use dmalloc to do malloc debugging? */
 /* #undef HAVE_DMALLOC_H */
@@ -154,7 +154,7 @@
 /* #undef NO_ROOT_ACCESS */
 
 /* If we don't want to use kmem. */
-/* #undef NO_KMEM_USAGE */
+#define NO_KMEM_USAGE 1
 
 /* If you don't want the agent to report on variables it doesn't have data for */
 #define NO_DUMMY_VALUES 1
@@ -288,6 +288,9 @@
 
 /* Define to 1 if you have the `if_nameindex' function. */
 #define HAVE_IF_NAMEINDEX 1
+
+/* Define to 1 if you have the `if_nametoindex' function. */
+#define HAVE_IF_NAMETOINDEX 1
 
 /* Define to 1 if you have the `index' function. */
 #define HAVE_INDEX 1
@@ -931,13 +934,13 @@
 #define PACKAGE_NAME "Net-SNMP"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Net-SNMP 5.2"
+#define PACKAGE_STRING "Net-SNMP 5.2.1"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "net-snmp"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "5.2"
+#define PACKAGE_VERSION "5.2.1"
 
 /* Define as the return type of signal handlers (`int' or `void'). */
 #define RETSIGTYPE void
@@ -1022,7 +1025,7 @@
 #define HAVE_NETINET_IN_PCB_H 1
 
 /* define if you have <sys/disklabel.h> */
-#define HAVE_SYS_DISKLABEL_H 1
+/* #undef HAVE_SYS_DISKLABEL_H */
 
 /* define if you are using linux and /proc/net/dev has the compressed
    field, which exists in linux kernels 2.2 and greater. */
@@ -1336,7 +1339,7 @@
 #define LASTFIELD -1      /* internal define */
 
 /* configure options specified */
-#define CONFIGURE_OPTIONS "\"'--mandir=/usr/share/man' '--infodir=/usr/share/info' '--with-libwrap' '--with-defaults' '--prefix=/usr' '--with-persistent-directory=/var/db/net-snmp' '--with-mib-modules=host' 'CPPFLAGS=-I/System/Library/Frameworks/System.framework/PrivateHeaders' 'CFLAGS=-arch i386 -arch ppc -g -Os -pipe -arch i386 -arch ppc -pipe' 'LDFLAGS=-arch i386 -arch ppc            '\""
+#define CONFIGURE_OPTIONS "\"'--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--prefix=/usr' '--sysconfdir=/etc' '--with-persistent-directory=/var/db/net-snmp' '--with-defaults' '--with-mib-modules=host' '--with-out-mib-modules=mibII/icmp host/hr_swrun' '--with-sys-contact=postmaster@example.com' '--enable-mini-agent' '--without-kmem-usage' 'CFLAGS=-arch i386 -arch ppc -g -Os -pipe -DBUILD=19.1 -DMACOSX_DEPLOYMENT_TARGET=10.4 -I/System/Library/Frameworks/System.framework/PrivateHeaders -arch i386 -arch ppc -pipe' 'LDFLAGS=-arch i386 -arch ppc            '\""
 
 /* got socklen_t? */
 #define HAVE_SOCKLEN_T 1
@@ -1527,7 +1530,7 @@
  *    static NETSNMP_INLINE function(int parm) { return parm -1; }
  *
  */
-/* #undef NETSNMP_BROKEN_INLINE */
+#define NETSNMP_BROKEN_INLINE 1
 #ifdef NETSNMP_BROKEN_INLINE
 #   define NETSNMP_ENABLE_INLINE 0
 #else

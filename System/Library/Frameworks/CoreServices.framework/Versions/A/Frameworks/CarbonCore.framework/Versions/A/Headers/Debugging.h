@@ -3,9 +3,9 @@
  
      Contains:   Macros to handle exceptions and assertions.
  
-     Version:    CarbonCore-650.1~1
+     Version:    CarbonCore-682.26~1
  
-     Copyright:  © 1989-2005 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1989-2006 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

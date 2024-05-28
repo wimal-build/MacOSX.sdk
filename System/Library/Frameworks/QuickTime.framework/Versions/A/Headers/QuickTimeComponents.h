@@ -3,9 +3,9 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime_6
+     Version:    QuickTime 7.2.1
  
-     Copyright:  © 1990-2005 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1990-2006 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -34,6 +34,7 @@
 
 
 
+
 #include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
@@ -44,7 +45,11 @@
 extern "C" {
 #endif
 
-#pragma options align=mac68k
+#pragma pack(push, 2)
+
+/* QuickTime is not available to 64-bit clients */
+
+#if !__LP64__
 
 enum {
   clockComponentType            = 'clok',
@@ -504,7 +509,7 @@ enum {
   /*
    * The settings to control multi pass encoding.
    */
-  scVideoMultiPassEncodingSettingsType = 'mpes' /* pointer to SCVideoMutiPassEncodingSettings struct*/
+  scVideoMultiPassEncodingSettingsType = 'mpes' /* pointer to SCVideoMultiPassEncodingSettings struct*/
 };
 
 
@@ -608,9 +613,9 @@ enum {
    * list includes all the kAudioEncoderComponentType components and
    * kSoundCompressor type components on the system. The list may be
    * restricted by clients using the
-   * kQTSCAudioPropertyID_CompressionFormatList property. Use
-   * QTGetComponentPropertyInfo to discover the number of bytes you
-   * should allocate to hold the array.
+   * kQTSCAudioPropertyID_ClientRestrictedCompressionFormatList
+   * property. Use QTGetComponentPropertyInfo to discover the number of
+   * bytes you should allocate to hold the array.
    */
   kQTSCAudioPropertyID_AvailableCompressionFormatList = 'acf#', /* C-style array of OSType's, Read/Listen */
 
@@ -881,6 +886,15 @@ enum {
    * passing the entire array.
    */
   kQTSCAudioPropertyID_CodecSpecificSettingsArray = 'cdst', /* CFArrayRef, Read/Write */
+
+  /*
+   * kQTSCAudioPropertyID_BitRate: Specifies the current bitrate of the
+   * output audio format in bit per second. Note that this property may
+   * not be available for formats that are inherently very variable in
+   * bitrate and highly source-data dependent (such as Apple Lossless).
+   *  This property is available in QT 7.1 and later.
+   */
+  kQTSCAudioPropertyID_BitRate  = kQTSoundDescriptionPropertyID_BitRate, /* UInt32, Read*/
                                         /* Old Sound Get/SetInfo types as property id's.*/
 
   /*
@@ -912,6 +926,39 @@ enum {
   kQTSCAudioPropertyID_SettingsState = scSettingsStateType, /* Handle, Read/Write */
 
   /*
+   * kQTSCAudioPropertyID_MaximumOutputPacketSize: Specifies the
+   * greatest size in bytes of a packet obtained using the
+   * SCAudioFillBuffer call. This size is dependent on the output
+   * format of the compression/decompression/transcode operation being
+   * performed.  This property is available in QT 7.1 and later.
+   * Maximum output packet size is a read-only property.
+   */
+  kQTSCAudioPropertyID_MaximumOutputPacketSize = 'xops', /* UInt32, Read*/
+
+  /*
+   * kQTSCAudioPropertyID_OutputFormatIsExternallyFramed: Specifies
+   * whether the output format currently selected requires external
+   * framing information.  This information is necessary when using the
+   * SCAudioFillBuffer API call to determine whether
+   * AudioStreamPacketDescriptions must be passed.  If the format is
+   * externally framed, an array of AudioStreamPacketDescriptions must
+   * be passed to SCAudioFillBuffer, otherwise not.  This property is
+   * available in QT 7.1 and later. This property is read-only.
+   */
+  kQTSCAudioPropertyID_OutputFormatIsExternallyFramed = 'fexf', /* Boolean, Read*/
+
+  /*
+   * kQTSCAudioPropertyID_RenderQuality: Specifies the quality with
+   * which QuickTime should render the audio stream during the
+   * compression/decompression/transcode operation.  Accepted constants
+   * are defined in Movies.h: kQTAudioRenderQuality_Max,
+   * kQTAudioRenderQuality_High, kQTAudioRenderQuality_Medium,
+   * kQTAudioRenderQuality_Low, kQTAudioRenderQuality_Min. This
+   * property is available in QT 7.1 and later.
+   */
+  kQTSCAudioPropertyID_RenderQuality = 'qlty', /* UInt32, Read/Write/Listen*/
+
+  /*
    * kQTSCAudioPropertyID_ExtendedProcs: Used to get/set an
    * SCExtendedProcs struct.
    */
@@ -929,7 +976,28 @@ enum {
    * window, so that it can draw itself as a sheet on top of the parent
    * window.
    */
-  kQTSCAudioPropertyID_WindowOptions = scWindowOptionsType /* SCWindowSettings struct, Read/Write/Listen */
+  kQTSCAudioPropertyID_WindowOptions = scWindowOptionsType, /* SCWindowSettings struct, Read/Write/Listen */
+
+  /*
+   * kQTSCAudioPropertyID_PreviewSourceMovie: Used for audio preview
+   * purposes. If a source movie has been specified prior to invoking
+   * the StdAudio dialog using SCRequestImageSettings(), the StdAudio
+   * dialog ui will contain an additional "preview/stop" button and a
+   * "play source" check box to allow quick toggling between the source
+   * audio and the encoded result.  The StdAudio dialog ui previews
+   * from the movie's current time (obtained from GetMovieTime()) and
+   * loops a segment of up to 10 seconds, starting at that time.  If
+   * the current movie time is at the end of the movie, the preview
+   * begins at the start of the movie instead.
+   */
+  kQTSCAudioPropertyID_PreviewSourceMovie = 'prmv', /* Movie, Read/Write*/
+
+  /*
+   * kQTSCAudioPropertyID_PreviewSourceTrack: Used to specify a
+   * particular track for audio preview. The track must be found in the
+   * movie specified by kQTSCAudioPropertyID_PreviewSourceMovie.
+   */
+  kQTSCAudioPropertyID_PreviewSourceTrack = 'prtk' /* Track, Read/Write*/
 };
 
 
@@ -976,6 +1044,176 @@ struct SCAudioFormatFlagsRestrictions {
   UInt32              formatFlagsValues;
 };
 typedef struct SCAudioFormatFlagsRestrictions SCAudioFormatFlagsRestrictions;
+/*
+ *  SCAudioInvokeLegacyCodecOptionsDialog()
+ *  
+ *  Discussion:
+ *    If kQTSCAudioPropertyID_HasLegacyCodecOptionsDialog is true,
+ *    SCAudioInvokeLegacyCodecOptionsDialog invokes the compressor's
+ *    options dialog. Note - this call blocks until the options dialog
+ *    "OK" or "Cancel" buttons are pressed.
+ *  
+ *  Parameters:
+ *    
+ *    ci:
+ *      The client's connection to a StdAudio Compression component
+ *  
+ *  Result:
+ *    ComponentResult
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern ComponentResult 
+SCAudioInvokeLegacyCodecOptionsDialog(ComponentInstance ci)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+
+
+
+
+/*
+   *************************************************
+   StandardCompressionSubTypeAudio Compression API's
+   *************************************************
+*/
+
+/*
+   The StandardCompressionSubTypeAudio component provides an SCAudioFillBuffer
+   call with the same parameters and behaviors of AudioConverterFillComplexBuffer.
+   One important difference between the AudioConverter and SCAudio component is
+   that the SCAudio compression API's can do mixing as well as n -> n channels 
+   conversion.  A client wishes to compress/decompress/transcode audio using
+   the SCAudioFillBuffer interface configures the StandardCompressionSubTypeAudio 
+   component with the desired input and output formats (or uses the SCRequestImageSettings
+   API to present a dialog and let a user pick an output format), then calls
+   SCAudioFillBuffer, providing an SCAudioInputDataProc callback which will be
+   called for audio in the specified source format.
+*/
+
+
+/*
+ *  SCAudioInputDataProc
+ *  
+ *  Discussion:
+ *    Clients using the SCAudioFillBuffer API call must provide an
+ *    input data proc in which they provide source packets of audio.
+ *    SCAudioInputDataProc is available in QT 7.1 and later.
+ *  
+ *  Parameters:
+ *    
+ *    ci:
+ *      The client's connection to a StdAudio Compression component
+ *    
+ *    ioNumberDataPackets:
+ *      On input, the number of audio packets requested. On output, the
+ *      number of audio packets you've actually provided.
+ *    
+ *    ioData:
+ *      An AudioBufferList in which you store the requested data.
+ *    
+ *    outDataPacketDescription:
+ *      An array of AudioStreamPacketDescriptions you provide to inform
+ *      downstream components how to decode your externally framed
+ *      audio packets.
+ *    
+ *    inRefCon:
+ *      The ref con you provided to SCAudioFillBuffer.
+ *  
+ *  Result:
+ *    ComponentResult An error code you return.
+ */
+typedef CALLBACK_API_C( ComponentResult , SCAudioInputDataProc )(ComponentInstance ci, UInt32 *ioNumberDataPackets, AudioBufferList *ioData, AudioStreamPacketDescription **outDataPacketDescription, void *inRefCon);
+
+
+/*
+ *  SCAudioFillBuffer()
+ *  
+ *  Discussion:
+ *    Used to pull compressed frames from the StdAudio component in
+ *    kQTSCAudioPropertyID_BasicDescription format.  The StdAudio
+ *    component can perform any combination of
+ *    decompression/mixing/compression, combining the facilities of
+ *    CoreAudio AudioConverters and Matrix Mixer AudioUnits.  The
+ *    behavior of the SCAudioFillBuffer call (signalling end of data,
+ *    etc.) is identical to the AudioConverter's
+ *    AudioConverterFillComplexBuffer API.
+ *  
+ *  Parameters:
+ *    
+ *    ci:
+ *      The client's connection to a StdAudio Compression component
+ *    
+ *    inInputDataProc:
+ *      The proc address of the function that will be called to supply
+ *      data in the kQTSCAudioPropertyID_InputBasicDescription format
+ *      to SCAudio.
+ *    
+ *    inInputDataProcRefCon:
+ *      The client refcon that will be passed to the user-provided
+ *      SCAudioInputDataProc function.
+ *    
+ *    ioOutputDataPacketSize:
+ *      On input, the number of desired packets.  On output, the actual
+ *      number of packets delivered (can be fewer than the input
+ *      desired packets).
+ *    
+ *    outOutputData:
+ *      An AudioBufferList providing sufficiently large buffers to hold
+ *      the requested number of packets.
+ *    
+ *    outPacketDescription:
+ *      An array of AudioStreamPacketDescriptions.  If the requested
+ *      output format requires external framing info (i.e. a VBR format
+ *      such as AAC), allocate and pass an array of packet descriptions
+ *      as large as the number of packets you are requesting.
+ *  
+ *  Result:
+ *    ComponentResult
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern ComponentResult 
+SCAudioFillBuffer(
+  ComponentInstance               ci,
+  SCAudioInputDataProc            inInputDataProc,
+  void *                          inInputDataProcRefCon,
+  UInt32 *                        ioOutputDataPacketSize,
+  AudioBufferList *               outOutputData,
+  AudioStreamPacketDescription *  outPacketDescription)       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+
+/*
+ *  SCAudioReset()
+ *  
+ *  Discussion:
+ *    Used to reset an SCAudio conversion chain, flushing any latency
+ *    present in internal buffers
+ *  
+ *  Parameters:
+ *    
+ *    ci:
+ *      The client's connection to a StdAudio Compression component
+ *  
+ *  Result:
+ *    ComponentResult
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern ComponentResult 
+SCAudioReset(ComponentInstance ci)                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+
+
 
 #define SCGetCompression(ci, params, where) SCGetCompressionExtended(ci,params,where,0,0,0,0)
 /** These are Progress procedures **/
@@ -1459,32 +1697,6 @@ SCCopyCompressionSessionOptions(
   ICMCompressionSessionOptionsRef *  outOptions)              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
-/*
- *  SCAudioInvokeLegacyCodecOptionsDialog()
- *  
- *  Discussion:
- *    If kQTSCAudioPropertyID_HasLegacyCodecOptionsDialog is true,
- *    SCAudioInvokeLegacyCodecOptionsDialog invokes the compressor's
- *    options dialog. Note - this call blocks until the options dialog
- *    "OK" or "Cancel" buttons are pressed.
- *  
- *  Parameters:
- *    
- *    ci:
- *      The client's connection to a StdAudio Compression component
- *  
- *  Result:
- *    ComponentResult
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern ComponentResult 
-SCAudioInvokeLegacyCodecOptionsDialog(ComponentInstance ci)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-
 
 
 
@@ -1608,6 +1820,8 @@ struct TCTextOptions {
 };
 typedef struct TCTextOptions            TCTextOptions;
 typedef TCTextOptions *                 TCTextOptionsPtr;
+
+typedef SInt64                          TimeCode64Counter;
 /*
  *  TCGetCurrentTimeCode()
  *  
@@ -1788,6 +2002,289 @@ TCGetDisplayOptions(
   MediaHandler       mh,
   TCTextOptionsPtr   textOptions)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/* The following are the 64-bit TimeCode Media API's*/
+/*
+ *  TCGetCurrentFrameAndTimeCodeDef()
+ *  
+ *  Summary:
+ *    Retrieves the frame number and time code format information for
+ *    the current movie time.
+ *  
+ *  Parameters:
+ *    
+ *    mh:
+ *      The time code media handler.
+ *    
+ *    outFrameNum:
+ *      Pointer to a field that receives the current frame number.
+ *    
+ *    outTCDef:
+ *      Pointer to field that receives the time code format information.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HandlerError 
+TCGetCurrentFrameAndTimeCodeDef(
+  MediaHandler   mh,
+  SInt64 *       outFrameNum,
+  TimeCodeDef *  outTCDef)                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  TCGetFrameAndTimeCodeDefAtTime()
+ *  
+ *  Summary:
+ *    Retrieves the frame number and time code format information for a
+ *    specific movie time.
+ *  
+ *  Parameters:
+ *    
+ *    mh:
+ *      The time code media handler.
+ *    
+ *    mediaTime:
+ *      A const pointer to the field containing the media time at which
+ *      time code information is required.
+ *    
+ *    outFrameNum:
+ *      Pointer to a field that receives the frame number at time
+ *      mediaTime.
+ *    
+ *    outTCDef:
+ *      Pointer to field that receives the time code format information.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HandlerError 
+TCGetFrameAndTimeCodeDefAtTime(
+  MediaHandler         mh,
+  const TimeValue64 *  mediaTime,
+  SInt64 *             outFrameNum,
+  TimeCodeDef *        outTCDef)                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  TCTimeCodeTimeToString()
+ *  
+ *  Summary:
+ *    Converts a time value into a text string in the (-) HH:MM:SS:FF
+ *    format.
+ *  
+ *  Parameters:
+ *    
+ *    mh:
+ *      The time code media handler.
+ *    
+ *    tCDef:
+ *      A const pointer to a TimeCodeDef that contains time code format
+ *      info for the conversion.
+ *    
+ *    tCTime:
+ *      A const pointer to a SMPTETime structure that contains the time
+ *      value to convert.
+ *    
+ *    outTCStr:
+ *      Pointer to a CFStringRef that is to receive the converted time
+ *      value. Client responsible for disposing string.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HandlerError 
+TCTimeCodeTimeToString(
+  MediaHandler         mh,
+  const TimeCodeDef *  tCDef,
+  const SMPTETime *    tCTime,
+  CFStringRef *        outTCStr)                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  TCTimeCodeCounterToString()
+ *  
+ *  Summary:
+ *    Converts a counter value into a text string.
+ *  
+ *  Parameters:
+ *    
+ *    mh:
+ *      The time code media handler.
+ *    
+ *    tCDef:
+ *      A const pointer to a TimeCodeDef that contains time code format
+ *      info for the conversion.
+ *    
+ *    tCCounter:
+ *      A const pointer to a TimeCode64Counter that contains the
+ *      counter value to convert.
+ *    
+ *    outTCStr:
+ *      Pointer to a CFStringRef that is to receive the converted time
+ *      value. Client reponsible for disposing string.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HandlerError 
+TCTimeCodeCounterToString(
+  MediaHandler               mh,
+  const TimeCodeDef *        tCDef,
+  const TimeCode64Counter *  tCCounter,
+  CFStringRef *              outTCStr)                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  TCTimeCodeTimeToFrameNumber()
+ *  
+ *  Summary:
+ *    Converts a time value into its corresponding frame number.
+ *  
+ *  Parameters:
+ *    
+ *    mh:
+ *      The time code media handler.
+ *    
+ *    tCDef:
+ *      A const pointer to a TimeCodeDef that contains time code format
+ *      info for the conversion.
+ *    
+ *    tCTime:
+ *      A const pointer to a SMPTETime structure that contains the time
+ *      value to convert.
+ *    
+ *    outFrameNum:
+ *      Pointer to a field that is to receive the frame number
+ *      corresponding to the time value in tCTime.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HandlerError 
+TCTimeCodeTimeToFrameNumber(
+  MediaHandler         mh,
+  const TimeCodeDef *  tCDef,
+  const SMPTETime *    tCTime,
+  SInt64 *             outFrameNum)                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  TCTimeCodeCounterToFrameNumber()
+ *  
+ *  Summary:
+ *    Converts a counter value into its corresponding frame number.
+ *  
+ *  Parameters:
+ *    
+ *    mh:
+ *      The time code media handler.
+ *    
+ *    tCDef:
+ *      A const pointer to a TimeCodeDef that contains format info for
+ *      the conversion.
+ *    
+ *    tCCounter:
+ *      A const pointer to a TimeCode64Counter that contains the
+ *      counter value to convert.
+ *    
+ *    outFrameNum:
+ *      Pointer to a field that is to receive the frame number
+ *      corresponding to the counter value in tCCounter.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HandlerError 
+TCTimeCodeCounterToFrameNumber(
+  MediaHandler               mh,
+  const TimeCodeDef *        tCDef,
+  const TimeCode64Counter *  tCCounter,
+  SInt64 *                   outFrameNum)                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  TCFrameNumberToTimeCodeTime()
+ *  
+ *  Summary:
+ *    Converts a frame number to its corresponding timecode time value.
+ *  
+ *  Parameters:
+ *    
+ *    mh:
+ *      The time code media handler.
+ *    
+ *    frameNumber:
+ *      A const pointer to the field containing the frame number that
+ *      is to be converted.
+ *    
+ *    tCDef:
+ *      A const pointer to a TimeCodeDef that contains format info for
+ *      the conversion.
+ *    
+ *    outTCTime:
+ *      Pointer to a SMPTETime structure that is to receive the time
+ *      value.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HandlerError 
+TCFrameNumberToTimeCodeTime(
+  MediaHandler         mh,
+  const SInt64 *       frameNumber,
+  const TimeCodeDef *  tCDef,
+  SMPTETime *          outTCTime)                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+
+/*
+ *  TCFrameNumberToTimeCodeCounter()
+ *  
+ *  Summary:
+ *    Converts a frame number to its corresponding counter value.
+ *  
+ *  Parameters:
+ *    
+ *    mh:
+ *      The time code media handler.
+ *    
+ *    frameNumber:
+ *      A const pointer to the field containing the frame number that
+ *      is to be converted.
+ *    
+ *    tCDef:
+ *      A const pointer to a TimeCodeDef that contains format info for
+ *      the conversion.
+ *    
+ *    outTCCounter:
+ *      Pointer to a TimeCode64Counter that is to receive the counter
+ *      value.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HandlerError 
+TCFrameNumberToTimeCodeCounter(
+  MediaHandler         mh,
+  const SInt64 *       frameNumber,
+  const TimeCodeDef *  tCDef,
+  TimeCode64Counter *  outTCCounter)                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 
@@ -1990,11 +2487,34 @@ enum {
   kQTSettingsTimeDuration       = 'dura', /* . Time related container*/
   kQTSettingsAudioCDTrack       = 'trak', /* Audio CD track related container*/
   kQTSettingsAudioCDTrackRateShift = 'rshf', /* . Rate shift to be performed (SInt16)*/
-  kQTSettingsDVExportDVFormat   = 'dvcf' /* Exported DV Format, DV('dv  ') or DVCPRO('dvp '). (OSType)*/
+  kQTSettingsDVExportDVFormat   = 'dvcf', /* Exported DV Format, DV('dv  ') or DVCPRO('dvp '). (OSType)*/
+  kQTSettingsVideoSize          = 'isiz', /* Video size related container*/
+  kQTSettingsImageWidth         = 'iwdt', /* . Destination width. If this is zero, it means the source width. (SInt32)*/
+  kQTSettingsImageHeight        = 'ihgt', /* . Destination height. If this is zero, it means the source height. (SInt32)*/
+  kQTSettingsCleanAperture      = 'clap', /* . Clean aperture for compression sessions. If this is all zeros, it means no clean aperture (i.e. full width and height). (CleanApertureImageDescriptionExtension)*/
+  kQTSettingsPixelAspectRatio   = 'pasp', /* . Pixel aspect ratio for compression sessions. If this is all zeros, it means square pixels (i.e. 1:1). (PixelAspectRatioImageDescriptionExtension)*/
+  kQTSettingsScalingMode        = 'scam', /* . Scaling mode for compression sessions. If this is zero, it means scaling mode based on the source aperture mode. (OSType)*/
+  kQTSettingsUseCodecEnforcedDimensions = 'uenf', /* . If true, compressor's enforced dimension overrides the image size settings. (Boolean)*/
+  kQTSettingsDeinterlaceSource  = 'dint' /* . If true, deinterlacing is applied to source frames. (Boolean)*/
 };
 
 
+/*
+ *  Summary:
+ *    Scaling modes
+ */
+enum {
 
+  /*
+   * Adjusts destination dimensions so that the source fits within the
+   * dimensions specified with kQTSettingsImageWidth and
+   * kQTSettingsImageHeight by fitting to the shortest side, and scales
+   * the source to the destination. Internally, the default scaling
+   * mode, which is based on the source aperture mode, Ê       is used
+   * for compression session, instead of this scaling mode.
+   */
+  kQTSpecialScalingMode_FitWithinDimensions = 'fit '
+};
 
 struct MovieExportGetDataParams {
   long                recordSize;
@@ -2261,6 +2781,42 @@ InvokeMovieExportStageReachedCallbackUPP(
   OSType                              inDataRefType,
   void *                              refCon,
   MovieExportStageReachedCallbackUPP  userUPP)                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+#if __MACH__
+  #ifdef __cplusplus
+    inline SCModalFilterUPP                                     NewSCModalFilterUPP(SCModalFilterProcPtr userRoutine) { return userRoutine; }
+    inline SCModalHookUPP                                       NewSCModalHookUPP(SCModalHookProcPtr userRoutine) { return userRoutine; }
+    inline MovieExportGetDataUPP                                NewMovieExportGetDataUPP(MovieExportGetDataProcPtr userRoutine) { return userRoutine; }
+    inline MovieExportGetPropertyUPP                            NewMovieExportGetPropertyUPP(MovieExportGetPropertyProcPtr userRoutine) { return userRoutine; }
+    inline MovieExportStageReachedCallbackUPP                   NewMovieExportStageReachedCallbackUPP(MovieExportStageReachedCallbackProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeSCModalFilterUPP(SCModalFilterUPP) { }
+    inline void                                                 DisposeSCModalHookUPP(SCModalHookUPP) { }
+    inline void                                                 DisposeMovieExportGetDataUPP(MovieExportGetDataUPP) { }
+    inline void                                                 DisposeMovieExportGetPropertyUPP(MovieExportGetPropertyUPP) { }
+    inline void                                                 DisposeMovieExportStageReachedCallbackUPP(MovieExportStageReachedCallbackUPP) { }
+    inline Boolean                                              InvokeSCModalFilterUPP(DialogRef theDialog, EventRecord * theEvent, short * itemHit, long refcon, SCModalFilterUPP userUPP) { return (*userUPP)(theDialog, theEvent, itemHit, refcon); }
+    inline short                                                InvokeSCModalHookUPP(DialogRef theDialog, short itemHit, void * params, long refcon, SCModalHookUPP userUPP) { return (*userUPP)(theDialog, itemHit, params, refcon); }
+    inline OSErr                                                InvokeMovieExportGetDataUPP(void * refCon, MovieExportGetDataParams * params, MovieExportGetDataUPP userUPP) { return (*userUPP)(refCon, params); }
+    inline OSErr                                                InvokeMovieExportGetPropertyUPP(void * refcon, long trackID, OSType propertyType, void * propertyValue, MovieExportGetPropertyUPP userUPP) { return (*userUPP)(refcon, trackID, propertyType, propertyValue); }
+    inline OSErr                                                InvokeMovieExportStageReachedCallbackUPP(OSType inStage, Movie inMovie, ComponentInstance inDataHandler, Handle inDataRef, OSType inDataRefType, void * refCon, MovieExportStageReachedCallbackUPP userUPP) { return (*userUPP)(inStage, inMovie, inDataHandler, inDataRef, inDataRefType, refCon); }
+  #else
+    #define NewSCModalFilterUPP(userRoutine)                    ((SCModalFilterUPP)userRoutine)
+    #define NewSCModalHookUPP(userRoutine)                      ((SCModalHookUPP)userRoutine)
+    #define NewMovieExportGetDataUPP(userRoutine)               ((MovieExportGetDataUPP)userRoutine)
+    #define NewMovieExportGetPropertyUPP(userRoutine)           ((MovieExportGetPropertyUPP)userRoutine)
+    #define NewMovieExportStageReachedCallbackUPP(userRoutine)  ((MovieExportStageReachedCallbackUPP)userRoutine)
+    #define DisposeSCModalFilterUPP(userUPP)
+    #define DisposeSCModalHookUPP(userUPP)
+    #define DisposeMovieExportGetDataUPP(userUPP)
+    #define DisposeMovieExportGetPropertyUPP(userUPP)
+    #define DisposeMovieExportStageReachedCallbackUPP(userUPP)
+    #define InvokeSCModalFilterUPP(theDialog, theEvent, itemHit, refcon, userUPP) (*userUPP)(theDialog, theEvent, itemHit, refcon)
+    #define InvokeSCModalHookUPP(theDialog, itemHit, params, refcon, userUPP) (*userUPP)(theDialog, itemHit, params, refcon)
+    #define InvokeMovieExportGetDataUPP(refCon, params, userUPP) (*userUPP)(refCon, params)
+    #define InvokeMovieExportGetPropertyUPP(refcon, trackID, propertyType, propertyValue, userUPP) (*userUPP)(refcon, trackID, propertyType, propertyValue)
+    #define InvokeMovieExportStageReachedCallbackUPP(inStage, inMovie, inDataHandler, inDataRef, inDataRefType, refCon, userUPP) (*userUPP)(inStage, inMovie, inDataHandler, inDataRef, inDataRefType, refCon)
+  #endif
+#endif
 
 /*
  *  MovieImportHandle()
@@ -3268,7 +3824,8 @@ enum {
   movieExportHeight             = 'hegt', /* pointer to Fixed*/
   movieExportDuration           = 'dura', /* pointer to TimeRecord*/
   movieExportVideoFilter        = 'iflt', /* pointer to QTAtomContainer*/
-  movieExportTimeScale          = 'tmsc' /* pointer to TimeScale*/
+  movieExportTimeScale          = 'tmsc', /* pointer to TimeScale*/
+  movieExportSourceApertureMode = 'srap' /* pointer to OSType. Source movie's aperture mode.ÊSet the aperture mode on the decompression session.*/
 };
 
 /* Component Properties specific to Movie Export components*/
@@ -4835,7 +5392,8 @@ DataHGetDataAvailability64(
   long *        missing_len)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 
-
+/* selector 80 skipped */
+/* selector 81 skipped */
 /*
  *  DataHPlaybackHints()
  *  
@@ -6726,8 +7284,8 @@ typedef struct VDIIDCFeatureSettings    VDIIDCFeatureSettings;
    Flags for use in VDIIDCFeatureCapabilities.flags & VDIIDCFeatureState.flags
    When indicating capabilities, the flag being set indicates that the feature can be put into the given state.
    When indicating/setting state, the flag represents the current/desired state.
-   Note that certain combinations of flags are valid for cababilities (i.e. vdIIDCFeatureFlagOn | vdIIDCFeatureFlagOff)
-   but are mutally exclusive for state.
+   Note that certain combinations of flags are valid for capabilities (i.e. vdIIDCFeatureFlagOn | vdIIDCFeatureFlagOff)
+   but are mutually exclusive for state.
 */
 enum {
   vdIIDCFeatureFlagOn           = (1 << 0),
@@ -6771,8 +7329,8 @@ typedef struct VDIIDCTriggerSettings    VDIIDCTriggerSettings;
    Flags for use in VDIIDCTriggerCapabilities.flags & VDIIDCTriggerState.flags
    When indicating capabilities, the flag being set indicates that the trigger can be put into the given state.
    When indicating/setting state, the flag represents the current/desired state.
-   Note that certain combinations of flags are valid for cababilities (i.e. vdIIDCTriggerFlagOn | vdIIDCTriggerFlagOff)
-   but are mutally exclusive for state.
+   Note that certain combinations of flags are valid for capabilities (i.e. vdIIDCTriggerFlagOn | vdIIDCTriggerFlagOff)
+   but are mutually exclusive for state.
 */
 enum {
   vdIIDCTriggerFlagOn           = (1 << 0),
@@ -6821,8 +7379,8 @@ typedef struct VDIIDCLightingHintSettings VDIIDCLightingHintSettings;
    Flags for use in VDIIDCLightingHintSettings.capabilityFlags & VDIIDCLightingHintSettings.capabilityFlags
    When indicating capabilities, the flag being set indicates that the hint can be applied.
    When indicating/setting state, the flag represents the current/desired hints applied/to apply.
-   Certain combinations of flags are valid for cababilities (i.e. vdIIDCLightingHintNormal | vdIIDCLightingHintLow)
-   but are mutally exclusive for state.
+   Certain combinations of flags are valid for capabilities (i.e. vdIIDCLightingHintNormal | vdIIDCLightingHintLow)
+   but are mutually exclusive for state.
 */
 enum {
   vdIIDCLightingHintNormal      = (1 << 0),
@@ -7755,7 +8313,6 @@ enum {
    */
   channelPlayPostConversion     = 1L << 6
 };
-
 
 /*
  *  SGInitialize()
@@ -10377,10 +10934,34 @@ enum {
   kQTSGAudioPropertyID_ChannelMap = 'cmap', /* Data: C-style array of SInt32's, R/W/L: Read/Write, Class(es): kQTPropertyClass_SGAudioRecordDevice */
 
   /*
+   * kQTSGAudioPropertyID_CodecSpecificSettingsArray: Used to get or
+   * set compressor-specific out-of-band settings.  This property is
+   * only applicable when you are encoding to a compressed output
+   * format (i.e. AAC, AMR).  This property is analogous to SCAudio's
+   * kQTSCAudioPropertyID_CodecSpecificSettingsArray property (defined
+   * in this header), or an AudioConverter's
+   * kAudioConverterPropertySettings property (defined in
+   * <AudioToolbox/AudioConverter.h>).  Note that not all compressed
+   * formats expose a settings array. Older codecs may only expose a
+   * magic cookie for out-of-band data (see the following property). 
+   * When an audio compressor exposes a settings array, prefer it over
+   * a magic cookie, as the settings array is richer. The
+   * CodecSpecificSettingsArray is a CFArray of CFDictionaries, where
+   * each dictionary represents one node in the audio converter's
+   * processing chain.   The dictionary keys are defined in
+   * <AudioUnit/AudioCodec.h>. For further information, see technotes:
+   * <http://developer.apple.com/qa/qa2006/qa1437.html>
+   * <http://developer.apple.com/qa/qa2006/qa1390.html>
+   */
+  kQTSGAudioPropertyID_CodecSpecificSettingsArray = 'cdst', /* Data: CFArrayRef,  Read/Write, Class(es): kQTPropertyClass_SGAudio*/
+
+  /*
    * kQTSGAudioPropertyID_MagicCookie: Used to get or set
    * compressor-specific out-of-band settings.  This is property is
-   * only applicable to compressed formats that use a cookie (i.e. AAC,
-   * AMR)
+   * only applicable to compressed formats that use a cookie.  The
+   * kQTSGAudioPropertyID_CodecSpecificSettingsArray property should be
+   * preferred over kQTSGAudioPropertyID_MagicCookie whenever a
+   * compressor supports it.
    */
   kQTSGAudioPropertyID_MagicCookie = 'kuki', /* Data: void * (opaque), R/W/L: Read/Write, Class(es): kQTPropertyClass_SGAudio     */
 
@@ -10560,6 +11141,24 @@ enum {
    * -1., -1., -1. }.
    */
   kQTSGAudioPropertyID_PerChannelGain = 'cgan', /* Data: C-style array of Float32's, R/W/L: Read/Write, Class(es): kQTPropertyClass_SGAudio, kQTPropertyClass_SGAudioRecordDevice, kQTPropertyClass_SGAudioPreviewDevice              */
+
+  /*
+   * kQTSGAudioPropertyID_GainScalarToDecibels: Both
+   * kQTSGAudioPropertyID_MasterGain and
+   * kQTSGAudioPropertyID_PerChannelGain properties express gain as a
+   * scalar floating point value from 0.0 - 1.0 (for
+   * kQTPropertyClass_SGAudioRecordDevice and
+   * kQTPropertyClass_SGAudioPreviewDevice classes), and from 0.0 - 1.0
+   * or greater (for kQTPropertyClass_SGAudio).  For UI purposes, it
+   * may be useful to map the scalar gain value to a decibel value. 
+   * kQTSGAudioPropertyID_GainScalarToDecibels is a read-only property
+   * that takes a Float32 scalar value and returns the corresponding
+   * decibel value for that scalar value.  Note that this property uses
+   * the outPropValueAddress parameter of QTGetComponentProperty for
+   * both input and output.  This property is available in QT 7.1 and
+   * later.
+   */
+  kQTSGAudioPropertyID_GainScalarToDecibels = 'gsdb', /* Data: Float32, R/W/L: Read, Class(es): kQTPropertyClass_SGAudio, kQTPropertyClass_SGAudioRecordDevice, kQTPropertyClass_SGAudioPreviewDevice*/
 
   /*
    * kQTSGAudioPropertyID_MixerCoefficients: If you wish to perform a
@@ -10898,6 +11497,7 @@ enum {
   sgcAudioPerChannelGain        = kQTSGAudioPropertyID_PerChannelGain,
   sgcAudioLevelMetersEnabled    = kQTSGAudioPropertyID_LevelMetersEnabled,
   sgcAudioChannelLayout         = kQTSGAudioPropertyID_ChannelLayout,
+  sgcAudioCodecSpecificSettingsArray = kQTSGAudioPropertyID_CodecSpecificSettingsArray,
   sgcAudioMagicCookie           = kQTSGAudioPropertyID_MagicCookie,
   sgcAudioHardwarePlaythruEnabled = kQTSGAudioPropertyID_HardwarePlaythruEnabled,
   sgcAudioMixerCoefficients     = kQTSGAudioPropertyID_MixerCoefficients,
@@ -10905,7 +11505,6 @@ enum {
   sgcAudioSoftPreviewLatency    = kQTSGAudioPropertyID_SoftPreviewLatency
 };
 
-#if !TARGET_OS_WIN32
 /* -----------------------------------------------------------------------------
 |                                                                               |
 |   SGAudioMediaType Channel Callback Declarations                              |
@@ -10963,11 +11562,6 @@ struct SGAudioCallbackStruct {
   void *              inputProcRefCon;
 };
 typedef struct SGAudioCallbackStruct    SGAudioCallbackStruct;
-#endif  /* !TARGET_OS_WIN32 */
-
-
-
-
 /*** Sequence Grab SOUND CHANNEL Component Stuff ***/
 
 /*
@@ -12437,6 +13031,138 @@ InvokeSGDisplayCompressBottleUPP(
   long                        refCon,
   SGDisplayCompressBottleUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+#if __MACH__
+  #ifdef __cplusplus
+    inline DataHCompletionUPP                                   NewDataHCompletionUPP(DataHCompletionProcPtr userRoutine) { return userRoutine; }
+    inline VdigIntUPP                                           NewVdigIntUPP(VdigIntProcPtr userRoutine) { return userRoutine; }
+    inline StartDocumentHandlerUPP                              NewStartDocumentHandlerUPP(StartDocumentHandler userRoutine) { return userRoutine; }
+    inline EndDocumentHandlerUPP                                NewEndDocumentHandlerUPP(EndDocumentHandler userRoutine) { return userRoutine; }
+    inline StartElementHandlerUPP                               NewStartElementHandlerUPP(StartElementHandler userRoutine) { return userRoutine; }
+    inline EndElementHandlerUPP                                 NewEndElementHandlerUPP(EndElementHandler userRoutine) { return userRoutine; }
+    inline CharDataHandlerUPP                                   NewCharDataHandlerUPP(CharDataHandler userRoutine) { return userRoutine; }
+    inline PreprocessInstructionHandlerUPP                      NewPreprocessInstructionHandlerUPP(PreprocessInstructionHandler userRoutine) { return userRoutine; }
+    inline CommentHandlerUPP                                    NewCommentHandlerUPP(CommentHandler userRoutine) { return userRoutine; }
+    inline CDataHandlerUPP                                      NewCDataHandlerUPP(CDataHandler userRoutine) { return userRoutine; }
+    inline SGDataUPP                                            NewSGDataUPP(SGDataProcPtr userRoutine) { return userRoutine; }
+    inline SGModalFilterUPP                                     NewSGModalFilterUPP(SGModalFilterProcPtr userRoutine) { return userRoutine; }
+    inline SGGrabBottleUPP                                      NewSGGrabBottleUPP(SGGrabBottleProcPtr userRoutine) { return userRoutine; }
+    inline SGGrabCompleteBottleUPP                              NewSGGrabCompleteBottleUPP(SGGrabCompleteBottleProcPtr userRoutine) { return userRoutine; }
+    inline SGDisplayBottleUPP                                   NewSGDisplayBottleUPP(SGDisplayBottleProcPtr userRoutine) { return userRoutine; }
+    inline SGCompressBottleUPP                                  NewSGCompressBottleUPP(SGCompressBottleProcPtr userRoutine) { return userRoutine; }
+    inline SGCompressCompleteBottleUPP                          NewSGCompressCompleteBottleUPP(SGCompressCompleteBottleProcPtr userRoutine) { return userRoutine; }
+    inline SGAddFrameBottleUPP                                  NewSGAddFrameBottleUPP(SGAddFrameBottleProcPtr userRoutine) { return userRoutine; }
+    inline SGTransferFrameBottleUPP                             NewSGTransferFrameBottleUPP(SGTransferFrameBottleProcPtr userRoutine) { return userRoutine; }
+    inline SGGrabCompressCompleteBottleUPP                      NewSGGrabCompressCompleteBottleUPP(SGGrabCompressCompleteBottleProcPtr userRoutine) { return userRoutine; }
+    inline SGDisplayCompressBottleUPP                           NewSGDisplayCompressBottleUPP(SGDisplayCompressBottleProcPtr userRoutine) { return userRoutine; }
+    inline void                                                 DisposeDataHCompletionUPP(DataHCompletionUPP) { }
+    inline void                                                 DisposeVdigIntUPP(VdigIntUPP) { }
+    inline void                                                 DisposeStartDocumentHandlerUPP(StartDocumentHandlerUPP) { }
+    inline void                                                 DisposeEndDocumentHandlerUPP(EndDocumentHandlerUPP) { }
+    inline void                                                 DisposeStartElementHandlerUPP(StartElementHandlerUPP) { }
+    inline void                                                 DisposeEndElementHandlerUPP(EndElementHandlerUPP) { }
+    inline void                                                 DisposeCharDataHandlerUPP(CharDataHandlerUPP) { }
+    inline void                                                 DisposePreprocessInstructionHandlerUPP(PreprocessInstructionHandlerUPP) { }
+    inline void                                                 DisposeCommentHandlerUPP(CommentHandlerUPP) { }
+    inline void                                                 DisposeCDataHandlerUPP(CDataHandlerUPP) { }
+    inline void                                                 DisposeSGDataUPP(SGDataUPP) { }
+    inline void                                                 DisposeSGModalFilterUPP(SGModalFilterUPP) { }
+    inline void                                                 DisposeSGGrabBottleUPP(SGGrabBottleUPP) { }
+    inline void                                                 DisposeSGGrabCompleteBottleUPP(SGGrabCompleteBottleUPP) { }
+    inline void                                                 DisposeSGDisplayBottleUPP(SGDisplayBottleUPP) { }
+    inline void                                                 DisposeSGCompressBottleUPP(SGCompressBottleUPP) { }
+    inline void                                                 DisposeSGCompressCompleteBottleUPP(SGCompressCompleteBottleUPP) { }
+    inline void                                                 DisposeSGAddFrameBottleUPP(SGAddFrameBottleUPP) { }
+    inline void                                                 DisposeSGTransferFrameBottleUPP(SGTransferFrameBottleUPP) { }
+    inline void                                                 DisposeSGGrabCompressCompleteBottleUPP(SGGrabCompressCompleteBottleUPP) { }
+    inline void                                                 DisposeSGDisplayCompressBottleUPP(SGDisplayCompressBottleUPP) { }
+    inline void                                                 InvokeDataHCompletionUPP(Ptr request, long refcon, OSErr err, DataHCompletionUPP userUPP) { (*userUPP)(request, refcon, err); }
+    inline void                                                 InvokeVdigIntUPP(long flags, long refcon, VdigIntUPP userUPP) { (*userUPP)(flags, refcon); }
+    inline ComponentResult                                      InvokeStartDocumentHandlerUPP(long refcon, StartDocumentHandlerUPP userUPP) { return (*userUPP)(refcon); }
+    inline ComponentResult                                      InvokeEndDocumentHandlerUPP(long refcon, EndDocumentHandlerUPP userUPP) { return (*userUPP)(refcon); }
+    inline ComponentResult                                      InvokeStartElementHandlerUPP(const char * name, const char ** atts, long refcon, StartElementHandlerUPP userUPP) { return (*userUPP)(name, atts, refcon); }
+    inline ComponentResult                                      InvokeEndElementHandlerUPP(const char * name, long refcon, EndElementHandlerUPP userUPP) { return (*userUPP)(name, refcon); }
+    inline ComponentResult                                      InvokeCharDataHandlerUPP(const char * charData, long refcon, CharDataHandlerUPP userUPP) { return (*userUPP)(charData, refcon); }
+    inline ComponentResult                                      InvokePreprocessInstructionHandlerUPP(const char * name, const char *const atts[], long refcon, PreprocessInstructionHandlerUPP userUPP) { return (*userUPP)(name, atts, refcon); }
+    inline ComponentResult                                      InvokeCommentHandlerUPP(const char * comment, long refcon, CommentHandlerUPP userUPP) { return (*userUPP)(comment, refcon); }
+    inline ComponentResult                                      InvokeCDataHandlerUPP(const char * cdata, long refcon, CDataHandlerUPP userUPP) { return (*userUPP)(cdata, refcon); }
+    inline OSErr                                                InvokeSGDataUPP(SGChannel c, Ptr p, long len, long * offset, long chRefCon, TimeValue time, short writeType, long refCon, SGDataUPP userUPP) { return (*userUPP)(c, p, len, offset, chRefCon, time, writeType, refCon); }
+    inline Boolean                                              InvokeSGModalFilterUPP(DialogRef theDialog, const EventRecord * theEvent, short * itemHit, long refCon, SGModalFilterUPP userUPP) { return (*userUPP)(theDialog, theEvent, itemHit, refCon); }
+    inline ComponentResult                                      InvokeSGGrabBottleUPP(SGChannel c, short bufferNum, long refCon, SGGrabBottleUPP userUPP) { return (*userUPP)(c, bufferNum, refCon); }
+    inline ComponentResult                                      InvokeSGGrabCompleteBottleUPP(SGChannel c, short bufferNum, Boolean * done, long refCon, SGGrabCompleteBottleUPP userUPP) { return (*userUPP)(c, bufferNum, done, refCon); }
+    inline ComponentResult                                      InvokeSGDisplayBottleUPP(SGChannel c, short bufferNum, MatrixRecord * mp, RgnHandle clipRgn, long refCon, SGDisplayBottleUPP userUPP) { return (*userUPP)(c, bufferNum, mp, clipRgn, refCon); }
+    inline ComponentResult                                      InvokeSGCompressBottleUPP(SGChannel c, short bufferNum, long refCon, SGCompressBottleUPP userUPP) { return (*userUPP)(c, bufferNum, refCon); }
+    inline ComponentResult                                      InvokeSGCompressCompleteBottleUPP(SGChannel c, short bufferNum, Boolean * done, SGCompressInfo * ci, long refCon, SGCompressCompleteBottleUPP userUPP) { return (*userUPP)(c, bufferNum, done, ci, refCon); }
+    inline ComponentResult                                      InvokeSGAddFrameBottleUPP(SGChannel c, short bufferNum, TimeValue atTime, TimeScale scale, const SGCompressInfo * ci, long refCon, SGAddFrameBottleUPP userUPP) { return (*userUPP)(c, bufferNum, atTime, scale, ci, refCon); }
+    inline ComponentResult                                      InvokeSGTransferFrameBottleUPP(SGChannel c, short bufferNum, MatrixRecord * mp, RgnHandle clipRgn, long refCon, SGTransferFrameBottleUPP userUPP) { return (*userUPP)(c, bufferNum, mp, clipRgn, refCon); }
+    inline ComponentResult                                      InvokeSGGrabCompressCompleteBottleUPP(SGChannel c, UInt8 * queuedFrameCount, SGCompressInfo * ci, TimeRecord * t, long refCon, SGGrabCompressCompleteBottleUPP userUPP) { return (*userUPP)(c, queuedFrameCount, ci, t, refCon); }
+    inline ComponentResult                                      InvokeSGDisplayCompressBottleUPP(SGChannel c, Ptr dataPtr, ImageDescriptionHandle desc, MatrixRecord * mp, RgnHandle clipRgn, long refCon, SGDisplayCompressBottleUPP userUPP) { return (*userUPP)(c, dataPtr, desc, mp, clipRgn, refCon); }
+  #else
+    #define NewDataHCompletionUPP(userRoutine)                  ((DataHCompletionUPP)userRoutine)
+    #define NewVdigIntUPP(userRoutine)                          ((VdigIntUPP)userRoutine)
+    #define NewStartDocumentHandlerUPP(userRoutine)             ((StartDocumentHandlerUPP)userRoutine)
+    #define NewEndDocumentHandlerUPP(userRoutine)               ((EndDocumentHandlerUPP)userRoutine)
+    #define NewStartElementHandlerUPP(userRoutine)              ((StartElementHandlerUPP)userRoutine)
+    #define NewEndElementHandlerUPP(userRoutine)                ((EndElementHandlerUPP)userRoutine)
+    #define NewCharDataHandlerUPP(userRoutine)                  ((CharDataHandlerUPP)userRoutine)
+    #define NewPreprocessInstructionHandlerUPP(userRoutine)     ((PreprocessInstructionHandlerUPP)userRoutine)
+    #define NewCommentHandlerUPP(userRoutine)                   ((CommentHandlerUPP)userRoutine)
+    #define NewCDataHandlerUPP(userRoutine)                     ((CDataHandlerUPP)userRoutine)
+    #define NewSGDataUPP(userRoutine)                           ((SGDataUPP)userRoutine)
+    #define NewSGModalFilterUPP(userRoutine)                    ((SGModalFilterUPP)userRoutine)
+    #define NewSGGrabBottleUPP(userRoutine)                     ((SGGrabBottleUPP)userRoutine)
+    #define NewSGGrabCompleteBottleUPP(userRoutine)             ((SGGrabCompleteBottleUPP)userRoutine)
+    #define NewSGDisplayBottleUPP(userRoutine)                  ((SGDisplayBottleUPP)userRoutine)
+    #define NewSGCompressBottleUPP(userRoutine)                 ((SGCompressBottleUPP)userRoutine)
+    #define NewSGCompressCompleteBottleUPP(userRoutine)         ((SGCompressCompleteBottleUPP)userRoutine)
+    #define NewSGAddFrameBottleUPP(userRoutine)                 ((SGAddFrameBottleUPP)userRoutine)
+    #define NewSGTransferFrameBottleUPP(userRoutine)            ((SGTransferFrameBottleUPP)userRoutine)
+    #define NewSGGrabCompressCompleteBottleUPP(userRoutine)     ((SGGrabCompressCompleteBottleUPP)userRoutine)
+    #define NewSGDisplayCompressBottleUPP(userRoutine)          ((SGDisplayCompressBottleUPP)userRoutine)
+    #define DisposeDataHCompletionUPP(userUPP)
+    #define DisposeVdigIntUPP(userUPP)
+    #define DisposeStartDocumentHandlerUPP(userUPP)
+    #define DisposeEndDocumentHandlerUPP(userUPP)
+    #define DisposeStartElementHandlerUPP(userUPP)
+    #define DisposeEndElementHandlerUPP(userUPP)
+    #define DisposeCharDataHandlerUPP(userUPP)
+    #define DisposePreprocessInstructionHandlerUPP(userUPP)
+    #define DisposeCommentHandlerUPP(userUPP)
+    #define DisposeCDataHandlerUPP(userUPP)
+    #define DisposeSGDataUPP(userUPP)
+    #define DisposeSGModalFilterUPP(userUPP)
+    #define DisposeSGGrabBottleUPP(userUPP)
+    #define DisposeSGGrabCompleteBottleUPP(userUPP)
+    #define DisposeSGDisplayBottleUPP(userUPP)
+    #define DisposeSGCompressBottleUPP(userUPP)
+    #define DisposeSGCompressCompleteBottleUPP(userUPP)
+    #define DisposeSGAddFrameBottleUPP(userUPP)
+    #define DisposeSGTransferFrameBottleUPP(userUPP)
+    #define DisposeSGGrabCompressCompleteBottleUPP(userUPP)
+    #define DisposeSGDisplayCompressBottleUPP(userUPP)
+    #define InvokeDataHCompletionUPP(request, refcon, err, userUPP) (*userUPP)(request, refcon, err)
+    #define InvokeVdigIntUPP(flags, refcon, userUPP)            (*userUPP)(flags, refcon)
+    #define InvokeStartDocumentHandlerUPP(refcon, userUPP)      (*userUPP)(refcon)
+    #define InvokeEndDocumentHandlerUPP(refcon, userUPP)        (*userUPP)(refcon)
+    #define InvokeStartElementHandlerUPP(name, atts, refcon, userUPP) (*userUPP)(name, atts, refcon)
+    #define InvokeEndElementHandlerUPP(name, refcon, userUPP)   (*userUPP)(name, refcon)
+    #define InvokeCharDataHandlerUPP(charData, refcon, userUPP) (*userUPP)(charData, refcon)
+    #define InvokePreprocessInstructionHandlerUPP(name, atts, refcon, userUPP) (*userUPP)(name, atts, refcon)
+    #define InvokeCommentHandlerUPP(comment, refcon, userUPP)   (*userUPP)(comment, refcon)
+    #define InvokeCDataHandlerUPP(cdata, refcon, userUPP)       (*userUPP)(cdata, refcon)
+    #define InvokeSGDataUPP(c, p, len, offset, chRefCon, time, writeType, refCon, userUPP) (*userUPP)(c, p, len, offset, chRefCon, time, writeType, refCon)
+    #define InvokeSGModalFilterUPP(theDialog, theEvent, itemHit, refCon, userUPP) (*userUPP)(theDialog, theEvent, itemHit, refCon)
+    #define InvokeSGGrabBottleUPP(c, bufferNum, refCon, userUPP) (*userUPP)(c, bufferNum, refCon)
+    #define InvokeSGGrabCompleteBottleUPP(c, bufferNum, done, refCon, userUPP) (*userUPP)(c, bufferNum, done, refCon)
+    #define InvokeSGDisplayBottleUPP(c, bufferNum, mp, clipRgn, refCon, userUPP) (*userUPP)(c, bufferNum, mp, clipRgn, refCon)
+    #define InvokeSGCompressBottleUPP(c, bufferNum, refCon, userUPP) (*userUPP)(c, bufferNum, refCon)
+    #define InvokeSGCompressCompleteBottleUPP(c, bufferNum, done, ci, refCon, userUPP) (*userUPP)(c, bufferNum, done, ci, refCon)
+    #define InvokeSGAddFrameBottleUPP(c, bufferNum, atTime, scale, ci, refCon, userUPP) (*userUPP)(c, bufferNum, atTime, scale, ci, refCon)
+    #define InvokeSGTransferFrameBottleUPP(c, bufferNum, mp, clipRgn, refCon, userUPP) (*userUPP)(c, bufferNum, mp, clipRgn, refCon)
+    #define InvokeSGGrabCompressCompleteBottleUPP(c, queuedFrameCount, ci, t, refCon, userUPP) (*userUPP)(c, queuedFrameCount, ci, t, refCon)
+    #define InvokeSGDisplayCompressBottleUPP(c, dataPtr, desc, mp, clipRgn, refCon, userUPP) (*userUPP)(c, dataPtr, desc, mp, clipRgn, refCon)
+  #endif
+#endif
+
 
 /* selectors for component calls */
 enum {
@@ -12452,6 +13178,9 @@ enum {
     kClockGetRateSelect                        = 0x000A,
     kClockGetTimesForRateChangeSelect          = 0x000B,
     kClockGetRateChangeConstraintsSelect       = 0x000C,
+    kSCAudioInvokeLegacyCodecOptionsDialogSelect = 0x0081,
+    kSCAudioFillBufferSelect                   = 0x0082,
+    kSCAudioResetSelect                        = 0x0083,
     kSCGetCompressionExtendedSelect            = 0x0001,
     kSCPositionRectSelect                      = 0x0002,
     kSCPositionDialogSelect                    = 0x0003,
@@ -12481,7 +13210,6 @@ enum {
     kSCCompressSequenceFrameAsyncSelect        = 0x001D,
     kSCAsyncIdleSelect                         = 0x001E,
     kSCCopyCompressionSessionOptionsSelect     = 0x001F,
-    kSCAudioInvokeLegacyCodecOptionsDialogSelect = 0x0081,
     kTweenerInitializeSelect                   = 0x0001,
     kTweenerDoTweenSelect                      = 0x0002,
     kTweenerResetSelect                        = 0x0003,
@@ -12496,6 +13224,14 @@ enum {
     kTCGetTimeCodeFlagsSelect                  = 0x0109,
     kTCSetDisplayOptionsSelect                 = 0x010A,
     kTCGetDisplayOptionsSelect                 = 0x010B,
+    kTCGetCurrentFrameAndTimeCodeDefSelect     = 0x010C,
+    kTCGetFrameAndTimeCodeDefAtTimeSelect      = 0x010D,
+    kTCTimeCodeTimeToStringSelect              = 0x010E,
+    kTCTimeCodeCounterToStringSelect           = 0x010F,
+    kTCTimeCodeTimeToFrameNumberSelect         = 0x0110,
+    kTCTimeCodeCounterToFrameNumberSelect      = 0x0111,
+    kTCFrameNumberToTimeCodeTimeSelect         = 0x0112,
+    kTCFrameNumberToTimeCodeCounterSelect      = 0x0113,
     kMovieImportHandleSelect                   = 0x0001,
     kMovieImportFileSelect                     = 0x0002,
     kMovieImportSetSampleDurationSelect        = 0x0003,
@@ -12952,8 +13688,11 @@ enum {
     kQTVideoOutputCopyIndAudioOutputDeviceUIDSelect = 0x0016
 };
 
+#endif // !__LP64__
 
-#pragma options align=reset
+
+
+#pragma pack(pop)
 
 #ifdef __cplusplus
 }

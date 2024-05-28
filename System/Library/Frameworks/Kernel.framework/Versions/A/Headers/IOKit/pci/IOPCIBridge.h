@@ -32,18 +32,46 @@
 
 #include <IOKit/IOService.h>
 #include <IOKit/IODeviceMemory.h>
+#include <IOKit/IOFilterInterruptEventSource.h>
 #include <IOKit/pci/IOAGPDevice.h>
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+typedef uint64_t IOPCIScalar;
+
+struct IOPCIRange
+{
+    IOPCIScalar         start;
+    IOPCIScalar         size;
+    IOPCIScalar         alignment;
+    UInt32              type;
+    UInt32              flags;
+    struct IOPCIRange * next;
+    struct IOPCIRange * nextSubRange;
+    struct IOPCIRange * subRange;
+};
+
+enum {
+    kIOPCIResourceTypeMemory = 0,
+    kIOPCIResourceTypePrefetchMemory,
+    kIOPCIResourceTypeIO,
+    kIOPCIResourceTypeBusNumber,
+    kIOPCIResourceTypeCount
+};
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*!
     @class IOPCIBridge
     @abstract   Base class for all PCI bridge drivers.
 */
+class IOPCIConfigurator;
+class IOPCIDevice;
 
 class IOPCIBridge : public IOService
 {
     friend class IOPCIDevice;
+    friend class IOPCIConfigurator;
 
     OSDeclareAbstractStructors(IOPCIBridge)
 
@@ -51,14 +79,19 @@ private:
     static void initialize(void);
     IORegistryEntry * findMatching( OSIterator * in, IOPCIAddressSpace space );
     virtual bool isDTNub( IOPCIDevice * nub );
-    static void nvLocation( IORegistryEntry * entry,
-	UInt8 * busNum, UInt8 * deviceNum, UInt8 * functionNum );
     bool checkProperties( IOPCIDevice * entry );
-    bool checkCardBusNumbering(OSArray * children);
-    void checkCardBusResources( const OSArray * nubs,
-                                UInt32 * yentaIndices, UInt32 yentaCount );
+
+    void removeDevice( IOPCIDevice * device, IOOptionBits options = 0 );
+    IOReturn restoreMachineState( IOOptionBits options = 0);
+    IOReturn _restoreDeviceState( IOPCIDevice * device, IOOptionBits options );
+    IOReturn resolveLegacyInterrupts( IOService * provider, IOPCIDevice * nub );
+    IOReturn resolveMSIInterrupts   ( IOService * provider, IOPCIDevice * nub );
 
 protected:
+    static void nvLocation( IORegistryEntry * entry,
+			    UInt8 * busNum, UInt8 * deviceNum, UInt8 * functionNum );
+    static SInt32 compareAddressCell( UInt32 cellCount, UInt32 cleft[], UInt32 cright[] );
+
     IORangeAllocator *	bridgeMemoryRanges;
     IORangeAllocator *	bridgeIORanges;
 
@@ -67,7 +100,9 @@ protected:
 */    
     struct ExpansionData
     {
+	friend class IOPCIConfigurator;
         IORangeAllocator * cardBusMemoryRanges;
+	IOPCIRange *       rangeLists[kIOPCIResourceTypeCount];
     };
 
 /*! @var reserved
@@ -76,6 +111,7 @@ protected:
     ExpansionData *reserved;
 
 protected:
+public:
     virtual void probeBus( IOService * provider, UInt8 busNum );
 
     virtual UInt8 firstBusNum( void );
@@ -223,6 +259,9 @@ protected:
     OSMetaClassDeclareReservedUnused(IOPCIBridge, 29);
     OSMetaClassDeclareReservedUnused(IOPCIBridge, 30);
     OSMetaClassDeclareReservedUnused(IOPCIBridge, 31);
+
+
+
 };
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -246,11 +285,26 @@ protected:
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the IOWorkLoop in the future.
     */    
-    struct ExpansionData { };
+    struct ExpansionData
+    {
+    // /hotp
+	IOByteCount		    xpressCapability;
+	IOFilterInterruptEventSource *    bridgeInterruptSource;
+	IOWorkLoop *		    workLoop;
+	uint32_t		    hotplugCount;
+	uint8_t			    presence;
+	uint8_t			    waitingLinkEnable;
+	uint8_t			    hotplugFirstBus;
+	uint8_t			    hotplugLastBus;
+	uint8_t			    interruptEnablePending;
+	uint8_t			    __reserved[3];
+    // hotp/
+    };
 
 /*! @var reserved
     Reserved for future use.  (Internal use only)  */
     ExpansionData *reserved;
+public:
 
     virtual UInt8 firstBusNum( void );
     virtual UInt8 lastBusNum( void );
@@ -258,14 +312,25 @@ protected:
 public:
     virtual void free();
 
+    virtual bool serializeProperties( OSSerialize * serialize ) const;
+
     virtual IOService * probe(	IOService * 	provider,
                                 SInt32 *	score );
 
+    virtual bool start( IOService * provider );
+
     virtual bool configure( IOService * provider );
+
+    virtual void probeBus( IOService * provider, UInt8 busNum );
+
+    virtual IOReturn requestProbe( IOOptionBits options );
 
     virtual void saveBridgeState( void );
 
     virtual void restoreBridgeState( void );
+
+    IOReturn setPowerState( unsigned long powerState,
+			    IOService * whatDevice );
 
     virtual bool publishNub( IOPCIDevice * nub, UInt32 index );
 
@@ -293,6 +358,13 @@ public:
     OSMetaClassDeclareReservedUnused(IOPCI2PCIBridge,  6);
     OSMetaClassDeclareReservedUnused(IOPCI2PCIBridge,  7);
     OSMetaClassDeclareReservedUnused(IOPCI2PCIBridge,  8);
+
+protected:
+    bool filterInterrupt( IOFilterInterruptEventSource * source);
+			    
+    void handleInterrupt( IOInterruptEventSource * source,
+			     int                      count );
+
 };
 
 #endif /* ! _IOKIT_IOPCIBRIDGE_H */
