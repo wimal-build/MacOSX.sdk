@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 2920200F-3C3A-3C51-A92A-F1F5B8B17637', 'x86_64: 95452952-BA65-3EA9-8282-1796615A4778' ]
+uuids:           [ 'i386: 94A5C14C-F8CB-36A7-BE65-7CD89447AF81', 'x86_64: F70A2346-05D9-3889-8111-B135D4165E93' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/SemanticDocumentManagement.framework/Versions/A/SemanticDocumentManagement
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _DebugPreferences._prefDictionary, _HelpSDMIndex.attributes, 

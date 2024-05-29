@@ -11,7 +11,7 @@
 @class CKRecord, CKRecordID, CKRecordZoneID, CKFetchRecordZoneChangesOptions;
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 @interface CKFetchRecordZoneChangesOperation : CKDatabaseOperation
 
 /* This operation will fetch records changes across the given record zones
@@ -23,9 +23,10 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
  include a previousServerChangeToken.
 
  Change tokens are opaque tokens and clients should not infer any behavior based on their content. */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithRecordZoneIDs:(NSArray<CKRecordZoneID *> *)recordZoneIDs optionsByRecordZoneID:(nullable NSDictionary<CKRecordZoneID *, CKFetchRecordZoneChangesOptions *> *)optionsByRecordZoneID;
 
-@property (nonatomic, copy) NSArray<CKRecordZoneID *> *recordZoneIDs;
+@property (nonatomic, copy, nullable) NSArray<CKRecordZoneID *> *recordZoneIDs;
 @property (nonatomic, copy, nullable) NSDictionary<CKRecordZoneID *, CKFetchRecordZoneChangesOptions *> *optionsByRecordZoneID;
 
 /* When set to YES, this operation will send repeated requests to the server until all record changes have been fetched.
@@ -51,15 +52,15 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 @property (nonatomic, copy, nullable) void (^recordZoneChangeTokensUpdatedBlock)(CKRecordZoneID *recordZoneID, CKServerChangeToken * _Nullable serverChangeToken, NSData * _Nullable clientChangeTokenData);
 @property (nonatomic, copy, nullable) void (^recordZoneFetchCompletionBlock)(CKRecordZoneID *recordZoneID, CKServerChangeToken * _Nullable serverChangeToken, NSData * _Nullable clientChangeTokenData, BOOL moreComing, NSError * _Nullable recordZoneError);
 
-/* serverChangeTokens previously returned via a recordZoneFetchCompletionBlock invocation,
+/* serverChangeTokens previously returned via a recordZoneChangeTokensUpdatedBlock or recordZoneFetchCompletionBlock invocation,
  along with the record changes that preceded it, are valid even if there is a subsequent operationError */
 @property (nonatomic, copy, nullable) void (^fetchRecordZoneChangesCompletionBlock)(NSError * _Nullable operationError);
 
 @end
 
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
-@interface CKFetchRecordZoneChangesOptions : NSObject <NSSecureCoding>
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
+@interface CKFetchRecordZoneChangesOptions : NSObject <NSSecureCoding, NSCopying>
 
 @property (nonatomic, copy, nullable) CKServerChangeToken *previousServerChangeToken;
 
@@ -67,6 +68,5 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 
 /* Declares which user-defined keys should be fetched and added to the resulting CKRecords.  If nil, declares the entire record should be downloaded. If set to an empty array, declares that no user fields should be downloaded.  Defaults to nil. */
 @property (nonatomic, copy, nullable) NSArray<NSString *> *desiredKeys;
-
 @end
 NS_ASSUME_NONNULL_END

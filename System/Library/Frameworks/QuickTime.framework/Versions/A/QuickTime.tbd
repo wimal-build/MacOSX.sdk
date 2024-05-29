@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386 ]
-uuids:           [ 'i386: 23D1D103-3731-39CE-BC21-DACA2275E8BF' ]
+uuids:           [ 'i386: A38CF029-378C-3D67-9359-7DC15452B0E4' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/QuickTime.framework/Versions/A/QuickTime
-current-version: 2974.0
+current-version: 3014
 objc-constraint: none
 exports:         
   - archs:           [ i386 ]

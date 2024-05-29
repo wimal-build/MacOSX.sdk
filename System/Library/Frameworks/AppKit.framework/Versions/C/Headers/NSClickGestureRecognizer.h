@@ -1,7 +1,7 @@
 /*
     NSClickGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2016, Apple Inc.
+    Copyright (c) 2013-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -32,6 +32,7 @@ NS_CLASS_AVAILABLE(10_10, NA)
 /* the number of clicks required to match */
 @property NSInteger numberOfClicksRequired; // Defaults to 1
 
+@property NSInteger numberOfTouchesRequired NS_AVAILABLE_MAC(10_12_2);
 @end
 
 NS_ASSUME_NONNULL_END

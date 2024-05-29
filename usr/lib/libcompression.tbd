@@ -1,7 +1,7 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: 52D0A919-C275-34EC-9CED-8E1B27F357A3', 'x86_64: AEF908E6-C0FE-3884-BD45-FB37A035545D', 
-                   'x86_64h: 1691D6F2-46CD-3DA6-B44F-24CDD9BD0E4E' ]
+uuids:           [ 'i386: F80DDFC1-F96A-3BAD-967D-C1E24253273A', 'x86_64: A1FB6D24-9B71-3DDD-8B12-FABD08CA3F49', 
+                   'x86_64h: E64D4416-DFBF-314B-BBB9-BED23C3A251C' ]
 platform:        macosx
 install-name:    /usr/lib/libcompression.dylib
 objc-constraint: none

@@ -1,7 +1,7 @@
 /*
     NSManagedObject.h
     Core Data
-    Copyright (c) 2004-2016, Apple Inc.
+    Copyright (c) 2004-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -39,7 +39,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0)) NS_REQUIRES_PROPERTY_DEFINITIONS
     NSManagedObjectID*  _cd_objectID;
     uintptr_t           _cd_extraFlags;
     id                  _cd_observationInfo;
-    id*                 _cd_snapshots;
+    void*               _cd_extras;
     uintptr_t           _cd_lockingInfo;
     id                  _cd_queueReference;
 #endif

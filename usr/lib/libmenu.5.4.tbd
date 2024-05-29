@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: AFBF3B2F-DC94-3BAF-A6B7-FB71015470A3', 'x86_64: B6A4EDED-DB6F-381D-B43B-4EBFA427845A' ]
+uuids:           [ 'i386: C28AEA08-2B1E-3153-922E-D7EF1E77F43F', 'x86_64: 1367C6BA-8474-3A51-B65C-0E24710A43F0' ]
 platform:        macosx
 install-name:    /usr/lib/libmenu.5.4.dylib
 current-version: 5.4

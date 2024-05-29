@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 1863C1C6-4A91-3976-B103-C6AA74D382B0', 'x86_64: 4B5CC9CE-3F65-3168-86AF-7E403726EB3C' ]
+uuids:           [ 'i386: C86F272F-B94B-374E-9FF4-FA53DE773919', 'x86_64: D76AB907-3130-382E-B830-C5503042769A' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/DirectoryEditor.framework/Versions/A/DirectoryEditor
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _DEDragReceiverView._dragDelegate, _DEDragReceiverView._dropOperationInProgress, 

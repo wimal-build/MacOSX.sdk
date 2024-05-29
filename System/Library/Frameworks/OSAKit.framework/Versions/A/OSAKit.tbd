@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 17BECF64-054B-3E10-9BCE-4E89CD956736', 'x86_64: DF3CB416-6C99-3220-8DD0-5B72DACBD8BF' ]
+uuids:           [ 'i386: F1C7E956-8CCD-341D-92BC-AAAB7F392468', 'x86_64: 905C96F3-163F-3199-AA98-0F392815CADE' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OSAKit.framework/Versions/A/OSAKit
-current-version: 105.0
-objc-constraint: none
+current-version: 106
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _OSAActiveProc._activeProc, _OSAActiveProc._oldActiveProc, 

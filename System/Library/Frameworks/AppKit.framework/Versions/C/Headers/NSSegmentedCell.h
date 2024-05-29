@@ -1,7 +1,7 @@
 /*
     NSSegmentedCell.h
     Application Kit
-    Copyright (c) 2003-2016, Apple Inc.
+    Copyright (c) 2003-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -32,7 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int flatMinX:1;
         unsigned int flatMaxX:1;
         unsigned int segmentedSeparated:1;
-        unsigned int reserved:10;
+        unsigned int animateNextLayout:1;
+        unsigned int reserved:9;
     } _seFlags;
     id           _segmentTrackingInfo;
     id           _menuUniquer;
@@ -56,7 +57,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)makePreviousSegmentKey;
 
 @property NSSegmentSwitchTracking trackingMode;
-
 
 // per segment info
 

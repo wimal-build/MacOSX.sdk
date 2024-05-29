@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 6A4BBD14-36F1-3812-A00C-FD49F0DDC9C4', 'x86_64: 8656B498-0D3E-32DA-862A-85893E34C40D' ]
+uuids:           [ 'i386: 80DF1650-3C57-352F-B0DC-6CBA11B5CAB1', 'x86_64: 2094BAC4-4F37-3741-B9BD-60158A63C503' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/DiscRecording.framework/Versions/A/DiscRecording
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
     re-exports:      [ /usr/lib/libobjc.A.dylib ]

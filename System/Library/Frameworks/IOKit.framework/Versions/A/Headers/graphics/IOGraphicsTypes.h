@@ -31,7 +31,7 @@
 extern "C" {
 #endif
 
-#define IOGRAPHICSTYPES_REV     44
+#define IOGRAPHICSTYPES_REV     56
 
 typedef SInt32  IOIndex;
 typedef UInt32  IOSelect;
@@ -218,6 +218,11 @@ enum {
 
 //// CLUTs
 
+// IOFBSetGamma Sync Types
+#define kIOFBSetGammaSyncNotSpecified       -1
+#define kIOFBSetGammaSyncNoSync             0
+#define kIOFBSetGammaSyncVerticalBlankSync  1
+
 typedef UInt16 IOColorComponent;
 
 /*!
@@ -268,6 +273,37 @@ enum {
     kIOClamshellStateAttribute          = 'clam',
 
 	kIOFBDisplayPortTrainingAttribute   = 'dpta',
+
+    kIOFBDisplayState                   = 'dstt',
+
+    kIOFBVariableRefreshRate            = 'vrr?',
+
+    kIOFBLimitHDCPAttribute             = 'hdcp',
+    kIOFBLimitHDCPStateAttribute        = 'sHDC',
+
+    kIOFBStop                           = 'stop',
+
+    kIOFBRedGammaScaleAttribute         = 'gslr',    // as of IOGRAPHICSTYPES_REV 54
+    kIOFBGreenGammaScaleAttribute       = 'gslg',    // as of IOGRAPHICSTYPES_REV 54
+    kIOFBBlueGammaScaleAttribute        = 'gslb',    // as of IOGRAPHICSTYPES_REV 54
+};
+
+enum {
+    kIOFBHDCPLimit_AllowAll             = 0,
+    kIOFBHDCPLimit_NoHDCP1x             = 1 << 0,
+    kIOFBHDCPLimit_NoHDCP20Type0        = 1 << 1,
+    kIOFBHDCPLimit_NoHDCP20Type1        = 1 << 2,   // Default case
+};
+
+// <rdar://problem/29184178> IOGraphics: Implement display state attribute for deteriming display state post wake
+// kIOFBDisplayState
+enum {
+    kIOFBDisplayState_AlreadyActive     = (1 << 0),
+    kIOFBDisplayState_RestoredProfile   = (1 << 1),
+    kIOFBDisplayState_PipelineBlack     = (1 << 2),
+    kIOFBDisplayState_Mask              = (kIOFBDisplayState_AlreadyActive |
+                                           kIOFBDisplayState_RestoredProfile |
+                                           kIOFBDisplayState_PipelineBlack)
 };
 
 // values for kIOWindowServerActiveAttribute
@@ -282,7 +318,8 @@ enum {
     kIOWSAA_Transactional       = 0x10,  // If this bit is present, transition is to/from transactional operation model.
     // These attributes are internal
     kIOWSAA_DeferStart          = 0x100,
-    kIOWSAA_DeferEnd            = 0x200
+    kIOWSAA_DeferEnd            = 0x200,
+    kIOWSAA_Reserved            = 0xF0000000
 };
 
 // values for kIOMirrorAttribute
@@ -360,6 +397,7 @@ typedef struct IODetailedTimingInformationV1 IODetailedTimingInformationV1;
  * @field verticalSyncConfig kIOSyncPositivePolarity for positive polarity vertical sync (0 for negative).
  * @field verticalSyncLevel Zero.
  * @field numLinks number of links to be used by a dual link timing, if zero, assume one link.
+ * @field verticalBlankingExtension maximum number of blanking extension lines that is available. (0 for none).
  * @field __reservedB Reserved set to zero.
  */
 
@@ -402,7 +440,9 @@ struct IODetailedTimingInformationV2 {
     UInt32      verticalSyncLevel;              // Future use (init to 0)
     UInt32      numLinks;
 
-    UInt32      __reservedB[7];                 // Init to 0
+    UInt32      verticalBlankingExtension;      // lines (AdaptiveSync: 0 for non-AdaptiveSync support)
+
+    UInt32      __reservedB[6];                 // Init to 0
 };
 typedef struct IODetailedTimingInformationV2 IODetailedTimingInformationV2;
 typedef struct IODetailedTimingInformationV2 IODetailedTimingInformation;
@@ -879,7 +919,8 @@ enum
 enum {
     // connection types for IOServiceOpen
     kIOFBServerConnectType              = 0,
-    kIOFBSharedConnectType              = 1
+    kIOFBSharedConnectType              = 1,
+    kIOFBDiagnoseConnectType            = 2,
 };
 
 enum {
@@ -1327,6 +1368,8 @@ enum {
 #define kIODisplayMinValueKey           "min"
 #define kIODisplayMaxValueKey           "max"
 
+#define kIODisplayBrightnessProbeKey        "brightness-probe"
+#define kIODisplayLinearBrightnessProbeKey  "linear-brightness-probe"
 #define kIODisplayBrightnessKey             "brightness"
 #define kIODisplayLinearBrightnessKey       "linear-brightness"
 #define kIODisplayUsableLinearBrightnessKey "usable-linear-brightness"

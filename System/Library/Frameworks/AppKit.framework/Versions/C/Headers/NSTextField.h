@@ -1,7 +1,7 @@
 /*
 	NSTextField.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (getter=isEditable) BOOL editable;
 @property (getter=isSelectable) BOOL selectable;
 - (void)selectText:(nullable id)sender;
-@property (nullable, assign) id<NSTextFieldDelegate> delegate;
+@property (nullable, weak) id<NSTextFieldDelegate> delegate;
 - (BOOL)textShouldBeginEditing:(NSText *)textObject;
 - (BOOL)textShouldEndEditing:(NSText *)textObject;
 - (void)textDidBeginEditing:(NSNotification *)notification;
@@ -55,6 +55,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+#pragma mark NSTextField NSTouchBar Properties
+@interface NSTextField (NSTouchBar)
+
+@property (getter=isAutomaticTextCompletionEnabled) BOOL automaticTextCompletionEnabled NS_AVAILABLE_MAC(10_12_2);
+@property BOOL allowsCharacterPickerTouchBarItem NS_AVAILABLE_MAC(10_12_2);
+
+@end
+
 @interface NSTextField(NSTextFieldConvenience)
 
 /*!
@@ -62,14 +70,14 @@ NS_ASSUME_NONNULL_BEGIN
  @param stringValue The title text to display in the field.
  @return An initialized text field object.
  */
-+ (instancetype)labelWithString:(NSString *)stringValue NS_SWIFT_NAME(init(labelWithString:)) NS_AVAILABLE_MAC(10_12);
++ (instancetype)labelWithString:(NSString *)stringValue NS_AVAILABLE_MAC(10_12);
 
 /*!
  Creates a wrapping, non-editable, selectable text field that displays text in the default system font.
  @param stringValue The title text to display in the field.
  @return An initialized text field object.
  */
-+ (instancetype)wrappingLabelWithString:(NSString *)stringValue NS_SWIFT_NAME(init(wrappingLabelWithString:)) NS_AVAILABLE_MAC(10_12);
++ (instancetype)wrappingLabelWithString:(NSString *)stringValue NS_AVAILABLE_MAC(10_12);
 
 /*!
  Creates a non-editable, non-selectable text field that displays attributed text.
@@ -77,14 +85,14 @@ NS_ASSUME_NONNULL_BEGIN
  @param attributedStringValue The attributed string to display in the field.
  @return An initialized text field object.
  */
-+ (instancetype)labelWithAttributedString:(NSAttributedString *)attributedStringValue NS_SWIFT_NAME(init(labelWithAttributedString:)) NS_AVAILABLE_MAC(10_12);
++ (instancetype)labelWithAttributedString:(NSAttributedString *)attributedStringValue NS_AVAILABLE_MAC(10_12);
 
 /*!
  Creates a non-wrapping editable text field.
- @param stringValue The initial contents of the text field, or nil for an initially empty text field.
+ @param stringValue The initial contents of the text field, or empty string for an initially empty text field.
  @return An initialized text field object.
  */
-+ (instancetype)textFieldWithString:(nullable NSString *)stringValue NS_AVAILABLE_MAC(10_12);
++ (instancetype)textFieldWithString:(NSString *)stringValue NS_AVAILABLE_MAC(10_12);
 
 @end
 
@@ -94,6 +102,12 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @protocol NSTextFieldDelegate <NSControlTextEditingDelegate>
+@optional
+- (nullable NSArray *)textField:(NSTextField *)textField textView:(NSTextView *)textView candidatesForSelectedRange:(NSRange)selectedRange NS_AVAILABLE_MAC(10_12_2);
+
+- (NSArray<NSTextCheckingResult *> *)textField:(NSTextField *)textField textView:(NSTextView *)textView candidates:(NSArray<NSTextCheckingResult *> *)candidates forSelectedRange:(NSRange)selectedRange NS_AVAILABLE_MAC(10_12_2);
+
+- (BOOL)textField:(NSTextField *)textField textView:(NSTextView *)textView shouldSelectCandidateAtIndex:(NSUInteger)index NS_AVAILABLE_MAC(10_12_2);
 @end
 
 @interface NSTextField(NSDeprecated)

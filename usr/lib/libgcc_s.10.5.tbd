@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 7341F27C-4BF8-310B-937B-CAB1E7FEB4F3', 'x86_64: 3E3A4F49-2739-32C5-B79A-CF371097E5E2' ]
+uuids:           [ 'i386: 09E489A7-0AA4-3946-BF55-0868393AA03E', 'x86_64: 565A0043-A4B6-3286-8000-48B8CA9EF4FD' ]
 platform:        macosx
 install-name:    /usr/lib/libgcc_s.1.dylib
-current-version: 492.0
+current-version: 356
 objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]

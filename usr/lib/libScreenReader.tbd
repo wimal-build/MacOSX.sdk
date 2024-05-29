@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 87BDB26B-90C5-3CF5-BF6A-762D35E042D5', 'x86_64: 89DD8E0A-11C3-3C88-8C30-879C278B40BB' ]
+uuids:           [ 'i386: A2A66CC0-780C-3751-AC41-075118B8EF14', 'x86_64: 107BB2E9-A973-322E-8BDA-5E4DA4061A77' ]
 platform:        macosx
 install-name:    /usr/lib/libScreenReader.dylib
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ __ScreenReaderCopyAudioIntroPath, __ScreenReaderCopyElement, 

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 7327D465-3B01-3097-8CE5-0FE81878228E', 'x86_64: 1AC0AF69-CF2F-3325-A3C4-905E31360E29' ]
+uuids:           [ 'i386: BE0DBB27-564B-369F-9A5D-F061090053B3', 'x86_64: C55535A1-2ABD-3952-972D-E049D45C71EA' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/GLUT.framework/Versions/A/GLUT
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ ___glutGetFCB, ___glutSetFCB, __gle_gc, _gleCreateGC, _gleExtrusion, 

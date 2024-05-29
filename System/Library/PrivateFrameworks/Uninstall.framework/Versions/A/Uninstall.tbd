@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F98585CA-6FD2-3505-A924-049F083646DA' ]
+uuids:           [ 'x86_64: 746EDA3B-D3F7-3932-BEA2-AC4DF35ACA85' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Uninstall.framework/Versions/A/Uninstall
-current-version: 211.0
-objc-constraint: none
+current-version: 211
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _DaemonStatus, _StatusUpdateDemux, _UNUninstallCantBeAbortedNotification, 

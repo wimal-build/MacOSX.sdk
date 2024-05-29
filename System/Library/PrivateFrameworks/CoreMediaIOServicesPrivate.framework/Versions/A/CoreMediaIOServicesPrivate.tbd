@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386 ]
-uuids:           [ 'i386: 0AD6A60D-5DD7-3DED-A9D5-0EEE483F26C5' ]
+uuids:           [ 'i386: 0F16C5C0-4C8F-3665-A24E-E26B86038ECB' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreMediaIOServicesPrivate.framework/Versions/A/CoreMediaIOServicesPrivate
 objc-constraint: none

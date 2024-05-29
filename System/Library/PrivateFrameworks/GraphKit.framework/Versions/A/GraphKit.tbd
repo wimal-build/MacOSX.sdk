@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: B9226E11-47E7-3335-955A-482C9E234E44', 'x86_64: 7BABF1D7-F226-353B-8EC1-5366A3B7F9AD' ]
+uuids:           [ 'i386: A5E23E90-1249-331B-9BEC-5B8ABBB92954', 'x86_64: A0853108-CD57-3580-AFFE-E28CD3834A55' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/GraphKit.framework/Versions/A/GraphKit
-current-version: 25.0
-objc-constraint: none
+current-version: 25
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _GRAxes._extraData, _GRDataSet._autoPlotColorIndex, _GRDataSet.dataPoints, 

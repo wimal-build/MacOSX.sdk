@@ -169,6 +169,15 @@ SK_EXPORT @interface SKSpriteNode : SKNode <SKWarpable>
 
 @property (nonatomic, retain, nullable) SKShader *shader NS_AVAILABLE(10_10, 8_0);
 
+/**
+ Optional dictionary of SKAttributeValues
+ Attributes can be used with custom SKShaders.
+ */
+@property (nonatomic, nonnull, copy) NSDictionary<NSString *, SKAttributeValue *> *attributeValues NS_AVAILABLE(10_12, 10_0);
+
+- (nullable SKAttributeValue*)valueForAttributeNamed:(nonnull NSString *)key NS_AVAILABLE(10_12, 10_0);
+- (void)setValue:(SKAttributeValue*)value forAttributeNamed:(nonnull NSString *)key NS_SWIFT_NAME(setValue(_:forAttribute:)) NS_AVAILABLE(10_12, 10_0);
+
 @end
 
 NS_ASSUME_NONNULL_END

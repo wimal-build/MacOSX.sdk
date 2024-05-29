@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: DA6EE294-C021-319D-994D-DFE234B12B2E', 'x86_64: CEE9F9F9-2A24-3F60-BE73-4703D85E307C' ]
+uuids:           [ 'i386: 8E4DD699-FE42-3B8E-AE2D-FB9AD29C927B', 'x86_64: 1774542A-1E70-3E22-9698-372200D27249' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC
 objc-constraint: none
@@ -13,8 +13,8 @@ exports:
                        _TCCAccessRequest, _TCCAccessReset, _TCCAccessResetForBundle, 
                        _TCCAccessResetForPath, _TCCAccessResetPoliciesExcept, _TCCAccessRestricted, 
                        _TCCAccessSelectPolicyForExtensionWithIdentifier, _TCCAccessSet, 
-                       _TCCAccessSetForAuditToken, _TCCAccessSetForBundle, _TCCAccessSetForPath, 
-                       _TCCAccessSetOverride, _TCCAccessSetPidResponsibleForPid, 
+                       _TCCAccessSetForAuditToken, _TCCAccessSetForBundle, _TCCAccessSetForBundleId, 
+                       _TCCAccessSetForPath, _TCCAccessSetOverride, _TCCAccessSetPidResponsibleForPid, 
                        _TCCTestInternal, _kTCCAccessCheckOptionPrompt, _kTCCAccessRequestOptionPurpose, 
                        _kTCCInfoBundle, _kTCCInfoGranted, _kTCCInfoLastUsed, _kTCCInfoPath, 
                        _kTCCInfoService, _kTCCServiceAccessibility, _kTCCServiceAddressBook, 

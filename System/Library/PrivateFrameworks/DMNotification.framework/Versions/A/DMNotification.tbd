@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: EC1D360F-F1C9-358A-9EBA-1F3A6FAE2EA1', 'x86_64: 2814A2C7-54AB-35B1-90D4-7CBC8D1301B9' ]
+uuids:           [ 'i386: 8AE6BF05-D316-3E9D-8334-99BF8DE2F177', 'x86_64: 1507F275-8689-3BFB-9703-FA5B42320463' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/DMNotification.framework/Versions/A/DMNotification
-current-version: 150.0
+current-version: 150
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]

@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: C2D03A22-8519-3D95-9A1C-70827C9DC3A8', 'x86_64: 23EA6076-ECDF-3A50-81E7-3CE6451DC8C4' ]
+uuids:           [ 'i386: F0AAFDF5-3254-3F8B-9575-6F972A179131', 'x86_64: C8AACF93-9FF5-32FE-A448-E174702509FA' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis
 objc-constraint: none
@@ -75,10 +75,11 @@ exports:
                        _kSpeechVoiceGender, _kSpeechVoiceGenderFemale, _kSpeechVoiceGenderMale, 
                        _kSpeechVoiceGenderNeuter, _kSpeechVoiceID, _kSpeechVoiceIdentifier, 
                        _kSpeechVoiceIndividuallySpokenCharacters, _kSpeechVoiceLanguage, 
-                       _kSpeechVoiceLocaleIdentifier, _kSpeechVoiceName, _kSpeechVoiceNameRoot, 
-                       _kSpeechVoiceNumericID, _kSpeechVoiceSupportedCharacters, 
-                       _kSpeechVoiceSynthesizerNumericID, _kSpeechVoiceUnicodeCharBegin, 
-                       _kSpeechVoiceUnicodeCharEnd, _kSpeechVoiceVersion, _kSpeechVolumeProperty, 
-                       _kSpeechWordCFCallBack, _kSpeechWordCallBack, _kVoiceIndividuallySpokenCharacters, 
+                       _kSpeechVoiceLocaleIdentifier, _kSpeechVoiceLocalizedNames, 
+                       _kSpeechVoiceName, _kSpeechVoiceNameRoot, _kSpeechVoiceNumericID, 
+                       _kSpeechVoiceSupportedCharacters, _kSpeechVoiceSynthesizerNumericID, 
+                       _kSpeechVoiceUnicodeCharBegin, _kSpeechVoiceUnicodeCharEnd, 
+                       _kSpeechVoiceVersion, _kSpeechVolumeProperty, _kSpeechWordCFCallBack, 
+                       _kSpeechWordCallBack, _kVoiceIndividuallySpokenCharacters, 
                        _kVoiceSupportedCharacters ]
 ...

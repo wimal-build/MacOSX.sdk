@@ -1,11 +1,11 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 46865398-7B5A-35C6-AC50-DE81BE6BFA3E', 'x86_64: 89185BC7-B151-3C98-85C7-A4A83F080F18' ]
+uuids:           [ 'i386: 859DBCDA-070D-30D1-A6BD-13C5F391B57F', 'x86_64: 690F0D29-8202-3F35-BE45-BB62DEB3CCF1' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/ICALogging.framework/Versions/A/ICALogging
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
-    symbols:         [ _ICALog, _InitICALogWithCategory, _VerboseDebugging, _sInternalDebug, 
-                       _sSeedDebug ]
+    symbols:         [ _ICALog, _ICLoggingLevelBasicInfo, _ICLoggingLevelError, _ICLoggingLevelTimingInfo, 
+                       _ICLoggingLevelVerboseInfo, _ICLoggingLevelWarning, _InitICALogWithCategory, 
+                       ___ICOSLog ]
 ...

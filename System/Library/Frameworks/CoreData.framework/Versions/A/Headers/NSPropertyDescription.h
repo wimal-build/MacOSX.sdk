@@ -1,7 +1,7 @@
 /*
     NSPropertyDescription.h
     Core Data
-    Copyright (c) 2004-2016, Apple Inc.
+    Copyright (c) 2004-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -20,12 +20,14 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 #if (!__OBJC2__)
 @private
 	NSString *_versionHashModifier;
-	id _underlyingProperty;
+	id _underlyingProperty2;
 	NSData *_versionHash;
     NSEntityDescription *_entity;
     NSString *_name;
     NSArray *_validationPredicates;
     NSArray *_validationWarnings;
+    __strong void *_extraIvars;
+    NSMutableDictionary *_userInfo;
     struct __propertyDescriptionFlags {
         unsigned int _isReadOnly:1;
         unsigned int _isTransient:1;
@@ -36,10 +38,15 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
         unsigned int _isStoredInExternalRecord:1;
 		unsigned int _extraIvarsAreInDataBlob:1;
         unsigned int _isOrdered:1;
-        unsigned int _reservedPropertyDescription:23;
+        
+        unsigned int _hasMaxValueInExtraIvars:1;
+        unsigned int _hasMinValueInExtraIvars:1;
+        unsigned int _storeBinaryDataExternally:1;
+        unsigned int _preserveValueOnDelete:1;
+        unsigned int _reservedAttributeFlagOne:1;
+
+        unsigned int _reservedPropertyDescription:18;
     } _propertyDescriptionFlags;    
-    __strong void *_extraIvars;
-    NSMutableDictionary *_userInfo;
 	long _entitysReferenceIDForProperty;
 #endif
 }
@@ -63,7 +70,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 
 /* Returns a boolean value indicating if the property is important for searching.  NSPersistentStores can optionally utilize this information upon store creation for operations like defining indexes.
 */
-@property (getter=isIndexed) BOOL indexed API_AVAILABLE(macosx(10.5),ios(3.0));
+@property (getter=isIndexed) BOOL indexed API_DEPRECATED( "Use NSEntityDescription.indexes instead", macosx(10.5,10.13),ios(3.0,11.0),tvos(10.0, 11.0),watchos(3.0, 4.0));
 
 /* Returns the version hash for the property.  The version hash is used to uniquely identify a property based on its configuration.  The version hash uses only values which affect the persistence of data and the user-defined versionHashModifier value.  (The values which affect persistence are the name of the property, the flags for isOptional, isTransient, and isReadOnly).  This value is stored as part of the version information in the metadata for stores, as well as a definition of a property involved in an NSPropertyMapping.
 */
@@ -79,7 +86,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 
 /* Returns a boolean value indicating if the property data should be written out to the external record file.
 */
-@property (getter=isStoredInExternalRecord) BOOL storedInExternalRecord API_AVAILABLE(macosx(10.6),ios(3.0));
+@property (getter=isStoredInExternalRecord) BOOL storedInExternalRecord API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13),ios(3.0,11.0));
 
 @property (nullable, copy) NSString *renamingIdentifier API_AVAILABLE(macosx(10.6),ios(3.0));
 

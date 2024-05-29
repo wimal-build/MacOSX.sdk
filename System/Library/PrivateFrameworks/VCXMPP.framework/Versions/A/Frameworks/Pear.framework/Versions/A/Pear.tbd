@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 90B7B821-43CD-386F-844E-099B021E14AD', 'x86_64: 9CA2BA4F-0849-31A2-8B64-B40FFCD30D8B' ]
+uuids:           [ 'i386: 760F9712-8C71-3CA7-98DB-5E43875A438F', 'x86_64: CD0B9616-36E3-32CB-B2D2-3A695C53F538' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/Pear.framework/Versions/A/Pear
-objc-constraint: none
 exports:         
   - archs:           [ i386 ]
     objc-classes:    [ ____PearSendInterface ]

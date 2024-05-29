@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 52B6AACD-B72B-34F1-971A-6C19BCC6DA09', 'x86_64: B26845C6-A336-34F2-9FF1-AD188734E041' ]
+uuids:           [ 'i386: 96309D00-55F1-36DB-9A6B-94DE5E7167E4', 'x86_64: BBBE6ABC-FD84-30A3-B699-95F1D6EFB334' ]
 platform:        macosx
 install-name:    /usr/lib/libSystem.B.dylib
-current-version: 1238.0
+current-version: 1252
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
@@ -15,7 +15,7 @@ exports:
                        /usr/lib/system/libquarantine.dylib, /usr/lib/system/libremovefile.dylib, 
                        /usr/lib/system/libsystem_asl.dylib, /usr/lib/system/libsystem_blocks.dylib, 
                        /usr/lib/system/libsystem_c.dylib, /usr/lib/system/libsystem_configuration.dylib, 
-                       /usr/lib/system/libsystem_coreservices.dylib, /usr/lib/system/libsystem_coretls.dylib, 
+                       /usr/lib/system/libsystem_coreservices.dylib, /usr/lib/system/libsystem_darwin.dylib, 
                        /usr/lib/system/libsystem_dnssd.dylib, /usr/lib/system/libsystem_info.dylib, 
                        /usr/lib/system/libsystem_kernel.dylib, /usr/lib/system/libsystem_m.dylib, 
                        /usr/lib/system/libsystem_malloc.dylib, /usr/lib/system/libsystem_network.dylib, 

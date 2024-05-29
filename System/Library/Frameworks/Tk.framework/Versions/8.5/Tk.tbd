@@ -1,11 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A7D1EC0B-7C6E-3B60-A762-467D97463B98', 'x86_64: 04EF18A3-2CE7-3785-89C8-18459932630C' ]
+uuids:           [ 'i386: 685D4DD3-670A-33EB-88F3-9657C167A3F1', 'x86_64: CB936412-BC2A-301D-A37D-64FB41F66500' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Tk.framework/Versions/8.5/Tk
 current-version: 8.5.9
 compatibility-version: 8.5
-objc-constraint: none
 exports:         
   - archs:           [ i386 ]
     objc-classes:    [ _TKApplication, _TKContentView, _TKMenu, _TKWindow ]
@@ -177,6 +176,6 @@ exports:
                        _XSetWindowBorderPixmap, _XSetWindowBorderWidth, _XSetWindowColormap, 
                        _XStringListToTextProperty, _XStringToKeysym, _XSync, _XUngrabKeyboard, 
                        _XUngrabPointer, _XUnmapWindow, _XWarpPointer, __XInitImageFuncPtrs, 
-                       _tkIntPlatStubsPtr, _tkIntStubsPtr, _tkIntXlibStubsPtr, _tkPlatStubsPtr, 
-                       _tkStubsPtr ]
+                       _mt_log_BSDServices_ScriptingLanguageUse, _pswhitelist, _tkIntPlatStubsPtr, 
+                       _tkIntStubsPtr, _tkIntXlibStubsPtr, _tkPlatStubsPtr, _tkStubsPtr ]
 ...

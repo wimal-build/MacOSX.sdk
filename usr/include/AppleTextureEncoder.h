@@ -11,6 +11,30 @@
 #ifndef _AppleTextureEncoder_h_
 #define _AppleTextureEncoder_h_     1
 
+/*  ************************************************
+ *  ***  SAVE YOURSELF SOME TIME -- Please Read  ***
+ *  ************************************************
+ *
+ *  This is a low level interface into a software ASTC encoder / decoder.
+ *  The same code is also usable through ImageIO.framework and the 
+ *  CGImageSource / CGImageDestination APIs on iOS/tvOS 10.0 and macOS 12.0 and 
+ *  later. In some cases, particularly for CGImageRef interoperability, 
+ *  that framework can do some things you can not, such as read/write the 
+ *  CGImageRef data directly without making a copy, and defer decoding until 
+ *  needed and then only decode the regions that are needed by the CoreGraphics
+ *  compositor. It also saves a lot of complexity managing alpha information,
+ *  channel order, color spaces an the like and may allow for fast path
+ *  conversion to MTLTexture behind the scenes, without decompression if the 
+ *  hardware supports it.  
+ *
+ *  When possible, you should use the higher level APIs. You may use the MIME
+ *  types CFSTR("org.khronos.astc") or CFSTR("org.khronos.ktx") for ASTC data.
+ *  The latter encodes a richer set of metadata to go with the image such as 
+ *  orientation, alpha and colorspace to help make sure that it is drawn
+ *  correctly. The .astc file format is very basic and should only be used
+ *  when this other information is implicitly assumed and the readers of the
+ *  file are known to handle it correctly.
+ */
 
 #include <os/object.h>
 #include <stdint.h>
@@ -22,22 +46,27 @@
 /*
  *  Availability information for AppleTextureEncoder.
  *  Release info:
- *      version 1 (v1): MacOS X.12, iOS 10, tvOS 10
+ *      version 1a (AT_AVAILABILITY_v1): MacOS X.12, iOS 10, tvOS 10    (library version 1.12.x)
  *          ASTC compression for 4x4 and 8x8 block sizes
  *          ASTC decompression of all LDR (not HDR, not 3D) textures
  *          unorm8, unorm16 and fp16 texel support for l, la, and rgba color models.
  *          sRGB->linear conversions for ASTC decode.
  *          various alpha operations.
+ *      version 1b (AT_AVAILABILITY_v1): MacOS X.13, iOS 11, tvOS 11    (library version 1.13.x)
+ *          Improvements to ASTC 8x8 block image quality
+ *          Fix giant values in macOS/iOS/tvOS availability macros
+ *          no new API, so still AT_AVAILABILITY_v1. See at_encoder_get_version() to identify these improvements.
+ *
  *
  *  The major field of the at_encoder_get_version build version corresponds with
  *  the availability version (e.g. AT_AVAILABILITY_v1) here.
  */
 #   ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-#       define  AT_AVAILABILITY_v1      __IOS_AVAILABLE(__IPHONE_10_0)
+#       define  AT_AVAILABILITY_v1      __IOS_AVAILABLE(10.0)
 #   elif defined __MAC_OS_X_VERSION_MIN_REQUIRED
-#       define  AT_AVAILABILITY_v1      __OSX_AVAILABLE(__MAC_10_12)
+#       define  AT_AVAILABILITY_v1      __OSX_AVAILABLE(10.12)
 #   elif __has_feature(attribute_availability_tvos)
-#       define  AT_AVAILABILITY_v1      __TVOS_AVAILABLE(__TVOS_10_0)
+#       define  AT_AVAILABILITY_v1      __TVOS_AVAILABLE(10.0)
 #   elif __has_feature(attribute_availability_watchos)
 #       define  AT_AVAILABILITY_v1      __WATCHOS_UNAVAILABLE
 #   else
@@ -46,11 +75,11 @@
 
 #   if __has_extension(enumerator_attributes)
 #       ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-#           define  AT_ENUM_AVAILABILITY_v1      __IOS_AVAILABLE(__IPHONE_10_0)
+#           define  AT_ENUM_AVAILABILITY_v1      __IOS_AVAILABLE(10.0)
 #       elif defined __MAC_OS_X_VERSION_MIN_REQUIRED
-#           define  AT_ENUM_AVAILABILITY_v1      __OSX_AVAILABLE(__MAC_10_12)
+#           define  AT_ENUM_AVAILABILITY_v1      __OSX_AVAILABLE(10.12)
 #       elif __has_feature(attribute_availability_tvos)
-#           define  AT_ENUM_AVAILABILITY_v1      __TVOS_AVAILABLE(__TVOS_10_0)
+#           define  AT_ENUM_AVAILABILITY_v1      __TVOS_AVAILABLE(10.0)
 #       elif __has_feature(attribute_availability_watchos)
 #           define  AT_ENUM_AVAILABILITY_v1      __WATCHOS_UNAVAILABLE
 #       else

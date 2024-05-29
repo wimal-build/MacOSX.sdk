@@ -1,10 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 906E9D6C-06CF-330E-89F8-41164322FCCE', 'x86_64: 9BDF97C5-53D4-3567-B6B5-0FBC86F4E54E' ]
+uuids:           [ 'i386: 97268FFB-244D-3E6C-8A2E-4EA229483765', 'x86_64: 053A2EDF-A24C-3F8D-AB83-1C1F4711CE94' ]
 platform:        macosx
 install-name:    /usr/lib/libiodbc.2.dylib
 current-version: 4.18
-compatibility-version: 4.0
+compatibility-version: 4
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]

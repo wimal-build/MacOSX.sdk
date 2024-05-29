@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 9883A1BE-A1D0-372E-8B2B-AB5924211DDB', 'x86_64: 86090855-C9DF-36EA-A72C-E9717ED7D093' ]
+uuids:           [ 'i386: 84C90923-1729-3A26-B7FB-635FEFEB0F26', 'x86_64: CA435431-0D9C-32E2-9ACF-41A52C27120D' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/UIRecording.framework/Versions/A/UIRecording
-current-version: 28.0
-objc-constraint: none
+current-version: 28
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _ActionTextField._action, _UIRAccessibilityElement._name, 

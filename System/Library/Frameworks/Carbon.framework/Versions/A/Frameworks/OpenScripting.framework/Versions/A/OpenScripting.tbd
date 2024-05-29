@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 524EBB38-902E-30CA-B772-8A3F866CC397', 'x86_64: B204BF70-C4AA-3699-8493-66E6645A92A8' ]
+uuids:           [ 'i386: DFBC4482-0915-3C4F-8C9A-7A7A1620C3B8', 'x86_64: 1CF64DD1-144D-3702-A728-1F476E1A00ED' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting
-objc-constraint: none
 parent-umbrella: Carbon
 exports:         
   - archs:           [ i386 ]

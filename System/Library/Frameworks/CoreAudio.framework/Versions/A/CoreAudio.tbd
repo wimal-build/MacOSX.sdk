@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 157CF73B-8B24-31C7-8806-5CA025B9E2EE', 'x86_64: 0352D931-596B-3AFE-B5C6-5925CF9F870E' ]
+uuids:           [ 'i386: 9D1B217E-03F6-38F6-B737-DE5D5DC6DA15', 'x86_64: 505A5EFB-6BCD-3E94-936F-1722C67F608E' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _AudioConvertHostTimeToNanos, _AudioConvertNanosToHostTime, 

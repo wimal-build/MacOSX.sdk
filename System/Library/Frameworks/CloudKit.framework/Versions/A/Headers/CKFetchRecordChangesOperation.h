@@ -14,7 +14,7 @@
  Any serverChangeTokens saved from a CKFetchRecordChangesOperation are usable as a serverRecordZoneChangeToken in CKFetchRecordZoneChangesOperation */
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_DEPRECATED(10_10, 10_12, 8_0, 10_0, "Use CKFetchRecordZoneChangesOperation instead")
+API_DEPRECATED_WITH_REPLACEMENT("CKFetchRecordZoneChangesOperation", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0))
 @interface CKFetchRecordChangesOperation : CKDatabaseOperation
 
 /* This operation will fetch records changes in the given record zone.
@@ -25,9 +25,10 @@ NS_CLASS_DEPRECATED(10_10, 10_12, 8_0, 10_0, "Use CKFetchRecordZoneChangesOperat
    If this is your first fetch or if you wish to re-fetch all records, pass nil for the change anchor.
 
    Change anchors are opaque tokens and clients should not infer any behavior based on their content. */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithRecordZoneID:(CKRecordZoneID *)recordZoneID previousServerChangeToken:(nullable CKServerChangeToken *)previousServerChangeToken;
 
-@property (nonatomic, copy) CKRecordZoneID *recordZoneID;
+@property (nonatomic, copy, nullable) CKRecordZoneID *recordZoneID;
 @property (nonatomic, copy, nullable) CKServerChangeToken *previousServerChangeToken;
 
 @property (nonatomic, assign) NSUInteger resultsLimit;

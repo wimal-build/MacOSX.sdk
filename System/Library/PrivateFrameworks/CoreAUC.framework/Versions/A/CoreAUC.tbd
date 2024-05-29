@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 69040788-6C72-365A-875C-DE900487A932', 'x86_64: 8DF6075A-0711-33A9-9031-6FDA22E85C4F' ]
+uuids:           [ 'i386: 77A27B7D-9EB4-39E0-9411-C9B7BDF0B1A8', 'x86_64: 7F406271-A215-3C75-BDAA-B9611BA2822E' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreAUC.framework/Versions/A/CoreAUC
 objc-constraint: none

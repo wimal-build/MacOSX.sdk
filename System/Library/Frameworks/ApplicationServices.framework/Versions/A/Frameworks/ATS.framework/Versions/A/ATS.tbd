@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 2F722264-3943-304D-820C-39373CF321CD', 'x86_64: 521E41BF-D495-3233-B6BF-C0B83DD1A8C0' ]
+uuids:           [ 'i386: 1C8196A6-CF4F-3E08-B067-61B870F72DA3', 'x86_64: 2303339C-5E2A-37DB-B2B0-E4E5DA9121E5' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS
-current-version: 236.0
-objc-constraint: none
+current-version: 236
 parent-umbrella: ApplicationServices
 exports:         
   - archs:           [ i386 ]

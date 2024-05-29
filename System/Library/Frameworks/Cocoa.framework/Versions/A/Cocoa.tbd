@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 65D7E4E6-447F-3894-ABA0-EE95CAE4B035', 'x86_64: 5EEB0A26-F1C2-3D57-8441-52C0B80C2A6A' ]
+uuids:           [ 'i386: 8DD7C94D-EB2A-30B8-8C39-A446A38AD9DD', 'x86_64: E8D8C806-AB5C-37F2-BC36-DF55A566CF7A' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa
-current-version: 22.0
+current-version: 22
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]

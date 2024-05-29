@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 0B00A5C9-988A-32FE-B236-9F7D954EA99D', 'x86_64: 94969E2F-0790-3F51-9F62-5688460AF9D8' ]
+uuids:           [ 'i386: B6B11024-4E23-3158-8378-6009F0056B4F', 'x86_64: 9D271340-4DFC-3294-8BFC-6C6FD5086E44' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/DiscRecordingUI.framework/Versions/A/DiscRecordingUI
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _DRBurnIcon, _DRBurnProgressPanelDidFinishNotification, _DRBurnProgressPanelWillBeginNotification, 

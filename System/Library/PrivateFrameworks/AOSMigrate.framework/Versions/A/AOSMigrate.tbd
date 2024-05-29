@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 1CEDB7BD-05A2-3AC5-9E36-23B833C2374E', 'x86_64: 17287A8D-1469-3DAD-898D-BEA0339745AB' ]
+uuids:           [ 'i386: F93A9BCB-ADDB-3B8B-BAB9-727DFAF3F375', 'x86_64: 933982ED-580B-39E1-A29C-BC7873917D9B' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AOSMigrate.framework/Versions/A/AOSMigrate
 objc-constraint: none

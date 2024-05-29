@@ -1,7 +1,7 @@
 /*
 	NSSlider.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) CGFloat knobThickness;
 - (BOOL)acceptsFirstMouse:(nullable NSEvent *)event;
 @property (readwrite, getter=isVertical) BOOL vertical NS_AVAILABLE_MAC(10_12);
+
+@property (nullable, copy) NSColor *trackFillColor NS_AVAILABLE_MAC(10_12_2); // The color of the filled portion of the track, in appearances that support it
 
 @end
 

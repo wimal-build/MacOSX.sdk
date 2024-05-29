@@ -1,7 +1,7 @@
 /*
     NSPanGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2016, Apple Inc.
+    Copyright (c) 2013-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -40,6 +40,10 @@ NS_CLASS_AVAILABLE(10_10, NA)
 /* velocity of the pan in points/second in the coordinate system of the specified view */
 - (NSPoint)velocityInView:(nullable NSView*)view;
 
+@end
+
+@interface NSPanGestureRecognizer (NSTouchBar)
+@property NSInteger numberOfTouchesRequired NS_AVAILABLE_MAC(10_12_2);
 @end
 
 NS_ASSUME_NONNULL_END

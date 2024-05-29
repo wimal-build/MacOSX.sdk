@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 48B9B22B-B8B4-38BB-B173-58D4EDE8183E' ]
+uuids:           [ 'x86_64: 8A0AFCCE-6BEB-3FEE-BBA1-A3CC1FD62EC4' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/SpanMatcher.framework/Versions/A/SpanMatcher
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _SpanMatcherVersionNumber, _SpanMatcherVersionString, __isOneOf, 

@@ -1,7 +1,7 @@
 /*
     NSPressGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2016, Apple Inc.
+    Copyright (c) 2013-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -34,6 +34,7 @@ NS_CLASS_AVAILABLE(10_10, NA)
 */
 @property CGFloat allowableMovement; // in screen points. Defaults to double-click distance
 
+@property NSInteger numberOfTouchesRequired NS_AVAILABLE_MAC(10_12_2);
 @end
 
 NS_ASSUME_NONNULL_END

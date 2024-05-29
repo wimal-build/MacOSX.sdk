@@ -1,10 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 0E7EC5F2-B06D-3D04-9C88-4C90142C21B7', 'x86_64: 26676155-64CE-323F-B73C-AD77AF5982E8' ]
+uuids:           [ 'i386: 3E1F9E3D-6C44-3437-AB2B-E5ACE1927F81', 'x86_64: 49544596-BCF8-3765-8DC5-DB1A9A90EF92' ]
 platform:        macosx
 install-name:    /usr/lib/libxml2.2.dylib
 current-version: 10.9
-compatibility-version: 10.0
+compatibility-version: 10
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]

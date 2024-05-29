@@ -2,7 +2,7 @@
 //  Intents.h
 //  Intents
 //
-//  Copyright © 2016 Apple. All rights reserved.
+//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -25,12 +25,19 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INInteraction.h>
 #import <Intents/INSpeakable.h>
 
+// Intents & Intent Responses
+#import <Intents/INIntents.h>
+#import <Intents/INIntentResponses.h>
+
 // Common Types
 #import <Intents/INPersonHandle.h>
 #import <Intents/INDateComponentsRange.h>
 #import <Intents/INImage.h>
 #import <Intents/INPerson.h>
+#import <Intents/INRecurrenceRule.h>
 #import <Intents/INSpeakableString.h>
+#import <Intents/INPersonHandleLabel.h>
+#import <Intents/INPersonRelationship.h>
 
 // Common Resolution Results
 #import <Intents/INDateComponentsRangeResolutionResult.h>
@@ -40,22 +47,17 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INStringResolutionResult.h>
 
 // Calls Domain
-#import <Intents/INStartAudioCallIntent.h>
-#import <Intents/INStartAudioCallIntentResponse.h>
-#import <Intents/INStartVideoCallIntent.h>
-#import <Intents/INStartVideoCallIntentResponse.h>
-#import <Intents/INSearchCallHistoryIntent.h>
-#import <Intents/INSearchCallHistoryIntentResponse.h>
-
+#import <Intents/INCallRecord.h>
 #import <Intents/INCallRecordType.h>
 #import <Intents/INCallRecordTypeResolutionResult.h>
+#import <Intents/INCallDestinationType.h>
+#import <Intents/INCallDestinationTypeResolutionResult.h>
+#import <Intents/INCallCapability.h>
 #import <Intents/INCallCapabilityOptions.h>
+#import <Intents/INCallRecordTypeOptionsResolutionResult.h>
 
 // Messages Domain
-#import <Intents/INSendMessageIntent.h>
-#import <Intents/INSendMessageIntentResponse.h>
-#import <Intents/INSearchForMessagesIntent.h>
-#import <Intents/INSearchForMessagesIntentResponse.h>
+#import <Intents/INSendMessageRecipientResolutionResult.h>
 
 #import <Intents/INMessage.h>
 #import <Intents/INMessageAttributeOptions.h>
@@ -64,3 +66,10 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 // Utilities
 #import <Intents/CLPlacemark+IntentsAdditions.h>
 #import <Intents/NSUserActivity+IntentsAdditions.h>
+
+// Deprecated
+#import <Intents/INPerson_Deprecated.h>
+#import <Intents/INSearchCallHistoryIntent_Deprecated.h>
+#import <Intents/INStartAudioCallIntent_Deprecated.h>
+#import <Intents/INSearchForMessagesIntent_Deprecated.h>
+#import <Intents/INSendMessageIntent_Deprecated.h>

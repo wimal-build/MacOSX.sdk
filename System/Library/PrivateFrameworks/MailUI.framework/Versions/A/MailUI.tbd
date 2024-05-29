@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0F55705E-BC25-379A-BB6E-B251AA4FCC8D' ]
+uuids:           [ 'x86_64: 685AF91B-0DA3-3D97-A6CF-0611B17AA1B6' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/MailUI.framework/Versions/A/MailUI
-current-version: 3218.0
-objc-constraint: none
+current-version: 3445.1.6
 exports:         
   - archs:           [ x86_64 ]
     allowable-clients: [ Mail, MailShareExtension, MailUIWebBundle ]
@@ -59,5 +58,6 @@ exports:
                        _MUITokenAddressTextStorage, _MUITokenAddressTextView, _MUIWKWebView, 
                        _MUIWKWebViewConfigurationManager, _MUIWKWebViewController, 
                        _MUIWebAttachment, _MUIWebAttachmentController, _MUIWebDocument, 
-                       _MUIWebDocumentView, __MUIAddContactsButton, __MUISnapshotView ]
+                       _MUIWebDocumentView, __AutoCompleteTouchBarItem, __MUIAddContactsButton, 
+                       __MUISnapshotView ]
 ...

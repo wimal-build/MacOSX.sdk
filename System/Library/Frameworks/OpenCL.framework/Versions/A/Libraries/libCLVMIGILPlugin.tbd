@@ -1,8 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A0F79CB4-1E55-3622-A6DE-65CDE2412DFB', 'x86_64: AE2241BB-0C95-3F4C-B280-24932BE55F36' ]
+uuids:           [ 'i386: C8CE8664-9837-3A88-9886-6DDFFA140448', 'x86_64: 7254ACDF-7B27-387C-82AC-BE459CAC6FE6' ]
 platform:        macosx
-install-name:    '/Library/Caches/com.apple.xbs/Binaries/GPUDriversIntel/GPUDriversIntel-10.18.63~6/Symbols/libCLVMIGILPlugin.dylib'
+install-name:    /Library/Caches/com.apple.xbs/Binaries/GPUDriversIntel/install/Symbols/libCLVMIGILPlugin.dylib
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]

@@ -202,7 +202,7 @@ SK_EXPORT @interface SKEmitterNode : SKNode
 @property (nonatomic, retain, nullable) SKKeyframeSequence *particleAlphaSequence;
 
 /**
- The rate at which to modify the alpha for each particle. Defaults to 1.0.
+ Specifies an action executed by new particles.
  */
 @property (nonatomic, copy, nullable) SKAction *particleAction;
 
@@ -218,6 +218,15 @@ SK_EXPORT @interface SKEmitterNode : SKNode
 @property (nonatomic, weak, nullable) SKNode *targetNode;
 
 @property (nonatomic, retain, nullable) SKShader *shader;
+
+/**
+ Optional dictionary of SKAttributeValues
+ Attributes can be used with custom SKShaders.
+ */
+@property (nonatomic, nonnull, copy) NSDictionary<NSString *, SKAttributeValue *> *attributeValues NS_AVAILABLE(10_12, 10_0);
+
+- (nullable SKAttributeValue*)valueForAttributeNamed:(nonnull NSString *)key NS_AVAILABLE(10_12, 10_0);
+- (void)setValue:(SKAttributeValue*)value forAttributeNamed:(nonnull NSString *)key NS_SWIFT_NAME(setValue(_:forAttribute:)) NS_AVAILABLE(10_12, 10_0);
 
 
 /**

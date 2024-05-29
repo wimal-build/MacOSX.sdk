@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 4EAF6CEF-F134-3FFC-9BDD-CD10A37999BA', 'x86_64: 6B88562D-86DB-3EFA-8C55-0148C30DC642' ]
+uuids:           [ 'i386: 2574DF31-C6E6-3C4B-953A-81C0C6413794', 'x86_64: 030DF747-F71B-367A-83EE-2F30B7947929' ]
 platform:        macosx
 install-name:    /usr/lib/libncurses.5.4.dylib
 current-version: 5.4

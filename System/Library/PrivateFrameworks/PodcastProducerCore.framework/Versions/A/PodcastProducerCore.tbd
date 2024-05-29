@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6227C2D6-6603-30C3-A088-16D352C84074' ]
+uuids:           [ 'x86_64: FB050290-5CE8-331E-B1E8-BA12D1FF964C' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PodcastProducerCore.framework/Versions/A/PodcastProducerCore
-current-version: 79.0
-objc-constraint: none
+current-version: 79
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _KRB5CredentialCacheAPIType, _KRB5CredentialCacheFileType, 

@@ -1,8 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4E47B202-DBE2-3F75-86A9-F62EBE06D3D8' ]
+uuids:           [ 'x86_64: 856C3A56-46CA-38A0-93E9-F708D6C72692' ]
 platform:        macosx
-install-name:    '@rpath/WatchdogService.framework/Versions/A/WatchdogService'
+install-name:    /System/Library/PrivateFrameworks/WatchdogService.framework/Versions/A/WatchdogService
 objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]

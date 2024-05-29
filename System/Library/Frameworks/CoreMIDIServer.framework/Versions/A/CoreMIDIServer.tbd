@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 23635CDF-32DF-348A-BA5F-01D8A71A3B69', 'x86_64: 1B3C26DB-C01F-36E9-BA40-22759675F007' ]
+uuids:           [ 'i386: 8621E51A-F601-394B-BFF9-65B82DCCC25A', 'x86_64: EC9BBEEB-E339-3CC5-86E2-638DBA4C67F0' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreMIDIServer.framework/Versions/A/CoreMIDIServer
-current-version: 69.0
+current-version: 69
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]

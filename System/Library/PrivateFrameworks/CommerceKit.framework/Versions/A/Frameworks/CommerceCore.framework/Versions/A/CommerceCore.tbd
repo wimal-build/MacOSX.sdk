@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 42B340E2-C362-3B0C-BFAB-270845B92D5B', 'x86_64: 815381FF-0B5A-3386-9D54-E5994A4E8FC6' ]
+uuids:           [ 'i386: 09835594-9B3C-336A-8DC7-2144386F5F03', 'x86_64: 48E017D3-2D6C-372C-824D-5120F682195F' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore
-current-version: 379.0
-objc-constraint: none
+current-version: 379
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _ISPurchaseReceipt._createdFromCoder, _ISPurchaseReceipt.mAdamID, 
@@ -28,6 +27,7 @@ exports:
     symbols:         [ _CKAdoptionInfoPlistPath, _CKCheckBookDownloadQueue, _CKCreateArchiveAtURL, 
                        _CKCreateCriticalUpdateTimeStamp, _CKCriticalUpdateTimeStamp, 
                        _CKDownloadDirectory, _CKInstallPathForIAP, _CKInstallPathForSharedIAP, 
+                       _CKMDMCheckMajorOSUpdateStatus, _CKMDMDownloadAndInstallMajorOSUpdate, 
                        _CKMDMDownloadOptionAllowRedownload, _CKMDMDownloadOptionDsidFailback, 
                        _CKMDMDownloadOptionPerformPreflightCheck, _CKMDMDownloadSoftwareProductByBundleIdentifierAndType, 
                        _CKMDMDownloadSoftwareProductByItemIdentifierAndType, _CKMDMProcessManifestAtURL, 

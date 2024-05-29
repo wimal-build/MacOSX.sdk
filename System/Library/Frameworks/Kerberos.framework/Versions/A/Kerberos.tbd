@@ -1,10 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: CE9145D9-9319-3182-B90A-D1BE626B4298', 'x86_64: 49DCBE1A-130C-3FBF-AAEA-AF9A518913AC' ]
+uuids:           [ 'i386: 8A399DB7-5440-3EC0-A241-3DD10E82DDB2', 'x86_64: CAF075C0-4C24-3ACE-9AE6-77BEFDEA3622' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos
-current-version: 6.0
-compatibility-version: 5.0
+current-version: 6
+compatibility-version: 5
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]

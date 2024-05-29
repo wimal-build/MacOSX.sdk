@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: AEA23A4D-52C0-39A4-8B5A-46D2C34E5009', 'x86_64: 031F4717-6AA7-38BA-B6D9-AB439C98E4BA' ]
+uuids:           [ 'i386: FEBACD04-5B1D-3CA2-BA5E-7222992B32C2', 'x86_64: 1C82A093-18C9-3421-9DB8-DAA578BF9912' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/InstantMessage.framework/Versions/A/InstantMessage
-current-version: 800.0
-objc-constraint: none
+current-version: 800
 exports:         
   - archs:           [ i386 ]
     symbols:         [ '$ld$add$os10.4$.objc_class_name_IMService', '$ld$add$os10.4$.objc_class_name_IMServiceAgent', 

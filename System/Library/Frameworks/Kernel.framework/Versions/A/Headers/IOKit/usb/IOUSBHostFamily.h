@@ -206,7 +206,7 @@ enum
 #define kUSBHostMessageRenegotiateCurrent             iokit_usbhost_msg(0x01)       // 0xe0005001  Request clients to renegotiate bus current allocations
 
 #define kUSBHostMessageUpdateIdlePolicy               iokit_usbhost_msg(0x100)      // 0xe0005100  Apple Internal use only.  IOUSBHostInterface -> IOUSBHostDevice to update its idle policy.
-#define kUSBHostMessageRemoteWake                     iokit_usbhost_msg(0x101)      // 0xe0005101  Apple Internal use only.  AppleUSBHostPort -> IOUSBHostDevice upon a remote wake event.
+#define kUSBHostMessageRemoteWake                     iokit_usbhost_msg(0x101)      // 0xe0005101  Apple Internal use only.  AppleUSBHostController -> AppleUSBHostPort -> IOUSBHostDevice upon a remote wake event.  Argument is locationID of remote wake.
 #define kUSBHostMessageDeviceSuspend                  iokit_usbhost_msg(0x102)      // 0xe0005102  Apple Internal use only.  IOUSBHostDevice -> clients upon a suspend event.
 #define kUSBHostMessageDeviceResume                   iokit_usbhost_msg(0x103)      // 0xe0005103  Apple Internal use only.  IOUSBHostDevice -> clients upon a resume event.
 #define kUSBHostMessagePortsCreated                   iokit_usbhost_msg(0x104)      // 0xe0005104  Apple Internal use only.  AppleUSBHostController and AppleUSBHub -> clients after all ports have been created.
@@ -369,6 +369,8 @@ enum
 #define kUSBHostPropertyWakePortCurrentLimit                    "kUSBWakePortCurrentLimit"
 #define kUSBHostPropertySleepPortCurrentLimit                   "kUSBSleepPortCurrentLimit"
 #define kUSBHostPropertyFailedRemoteWake                        "kUSBFailedRemoteWake"
+#define kUSBHostPropertyBusCurrentPoolID                        "UsbBusCurrentPoolID"
+#define kUSBHostPropertyUserClientEntitlementRequired           "UsbUserClientEntitlementRequired"
 
 // Legacy power properties
 #define kAppleMaxPortCurrent                "AAPL,current-available"
@@ -394,6 +396,7 @@ enum
 #define kUSBHostDevicePropertyFailedRequestedPower              "kUSBFailedRequestedPower"
 #define kUSBHostDevicePropertyResumeRecoveryTime                "kUSBResumeRecoveryTime"
 #define kUSBHostDevicePropertyPreferredConfiguration            "kUSBPreferredConfiguration"
+#define kUSBHostDevicePropertyPreferredRecoveryConfiguration    "kUSBPreferredRecoveryConfiguration"
 #define kUSBHostDevicePropertyCurrentConfiguration              "kUSBCurrentConfiguration"
 #define kUSBHostDevicePropertyRemoteWakeOverride                "kUSBRemoteWakeOverride"
 #define kUSBHostDevicePropertyConfigurationDescriptorOverride   "kUSBConfigurationDescriptorOverride"
@@ -401,6 +404,12 @@ enum
 #define kUSBHostDevicePropertyResetDurationOverride             "kUSBResetDurationOverride"
 #define kUSBHostDevicePropertyDesiredChargingCurrent            "kUSBDesiredChargingCurrent"
 #define kUSBHostDevicePropertyDescriptorOverride                "kUSBDescriptorOverride"
+#define kUSBHostDescriptorOverrideVendorStringIndex             "UsbDescriptorOverrideVendorStringIndex"
+#define kUSBHostDescriptorOverrideProductStringIndex            "UsbDescriptorOverrideProductStringIndex"
+#define kUSBHostDescriptorOverrideSerialNumberStringIndex       "UsbDescriptorOverrideSerialNumberStringIndex"
+#define kUSBHostDevicePropertyDeviceECID                        "kUSBDeviceECID"
+#define kUSBHostDevicePropertyEnableLPM                         "kUSBHostDeviceEnableLPM"
+#define kUSBHostDevicePropertyDisablePortLPM                    "kUSBHostDeviceDisablePortLPM"         // Disable port initiated LPM for this device
 
 #define kUSBHostBillboardDevicePropertyNumberOfAlternateModes   "bNumberOfAlternateModes"
 #define kUSBHostBillboardDevicePropertyPreferredAlternateMode   "bPreferredAlternateMode"
@@ -414,6 +423,7 @@ enum
 #define kUSBHostBillboardDevicePropertyAlternateModeString      "AlternateModeString"
 #define kUSBHostBillboardDevicePropertyAddtionalInfoURLIndex    "iAddtionalInfoURL"
 #define kUSBHostBillboardDevicePropertyAddtionalInfoURL         "AddtionalInfoURL"
+#define kUSBHostBillboardDevicePropertydwAlternateModeVdo       "dwAlternateModeVdo"
 
 #if TARGET_OS_EMBEDDED
 #define kUSBHostInterfacePropertyStringIndex                    "iInterface"
@@ -435,8 +445,8 @@ enum
 #define kUSBHostPortPropertyCompanionIndex                      "kUSBCompanionIndex"
 #define kUSBHostPortPropertyDisconnectInterval                  "kUSBDisconnectInterval"
 #define kUSBHostPortPropertyUsbCPortNumber                      "UsbCPortNumber"
-#define kUSBHostPortPropertyCompanionPresent                    "UsbCompanionPortPresent"               // OSNumber used to determine presence of companion properties
 #define kUSBHostPortPropertyCompanionPortNumber                 "UsbCompanionPortNumber"                // OSData  key to set/get the port number of the companion port
+#define kUSBHostPortPropertyPowerSource                         "UsbPowerSource"
 
 #define kUSBHostHubPropertyPowerSupply                          "kUSBHubPowerSupply"                    // OSNumber mA available for downstream ports, 0 for bus-powered
 #define kUSBHostHubPropertyIdlePolicy                           "kUSBHubIdlePolicy"                     // OSNumber ms to be used as device idle policy
@@ -453,8 +463,8 @@ enum
 #define kUSBHostControllerPropertyHighSpeedCompanion            "kUSBHighSpeedCompanion"                // OSBoolean false to disable high-speed companion controller
 #define kUSBHostControllerPropertySuperSpeedCompanion           "kUSBSuperSpeedCompanion"               // OSBoolean false to disable superspeed companion controller
 #define kUSBHostControllerPropertyRevision                      "Revision"                              // OSData    Major/minor revision number of controller
-#define kUSBHostControllerPropertyCompanionPresent              "UsbCompanionControllerPresent"         // OSNumber used to determine presence of companion properties
 #define kUSBHostControllerPropertyCompanionControllerName       "UsbCompanionControllerName"            // OSString  key to set/get the name of the service, i.e. companion controller dictionary.
+#define kUSBHostControllerPropertyDisableUSB3LPM                "kUSBHostControllerDisableUSB3LPM"      // OSBoolean true to disable USB3 LPM on a given controller
 
 #define kUSBHostPortPropertyExternalDeviceResetController       "kUSBHostPortExternalDeviceResetController"
 #define kUSBHostPortPropertyExternalDevicePowerController       "kUSBHostPortExternalDevicePowerController"
@@ -488,6 +498,20 @@ typedef enum
     kUSBHostConnectorTypeProprietary    = 0xFF
 } tUSBHostConnectorType;
 
+/*!
+ * @enum tUSBHostPowerSourceType
+ * @brief Power sources used internally by IOUSBHostFamily
+ * @constant kUSBHostPowerSourceTypeStaticPool The power source is a statically allocated pool for software to manage.
+ * @constant kUSBHostPowerSourceTypeSMC        The power source is managed by the SMC.
+ * @constant kUSBHostPowerSourceTypeHardware   The power source is guaranteed by the hardware and can always allocate the port current limit.
+ */
+typedef enum
+{
+    kUSBHostPowerSourceTypeStaticPool   = 0,
+    kUSBHostPowerSourceTypeSMC,
+    kUSBHostPowerSourceTypeHardware
+}tUSBHostPowerSourceType;
+
 #if !TARGET_OS_EMBEDDED
 
 #ifndef kACPIDevicePathKey
@@ -516,15 +540,70 @@ typedef enum
 #define kReconfiguredCount                              "RCFG"
 #define kUSBPlatformProperties                          "USBX"
 #define kUSBTypeCCableDetectACPIMethod                  "MODU"
+#define kUSBTypeCCableDetectACPIMethodSupported         "RTPC"
+#define kGPEOCACPIString                                "GPOC"
+#define kACPIPortTimingOverride                         "TMG"
 
 // connection types returned by MODU method
 typedef enum
 {
     kUSBTypeCCableTypeNone              = 0,
     kUSBTypeCCableTypeUSB               = 1,
-    kUSBTypeCCableTypeError             = 0xFF
 } tUSBCTypeCableType;
 
 #endif
+
+typedef enum
+{
+    kLinkStateU0                = 0,                // USB3 Link State U0 (On)
+    kLinkStateU1                = 1,                // USB3 Link State U1 (Standby, fast exit)
+    kLinkStateU2                = 2,                // USB3 Link State U2 (Standby, slower exit)
+    kLinkStateU3                = 3,                // USB3 Link State U3 (Suspend)
+    
+    kLinkStateL0                = 0,                // USB2 Link State L0 (On)
+    kLinkStateL1                = 1,                // USB2 Link State L1 (Sleep)
+    kLinkStateL2                = 2,                // USB2 Link State L2 (Suspend)
+    kLinkStateL3                = 3,                // USB2 Link State L3 (Off)
+    
+} tUSBLinkState;
+
+typedef enum
+{
+    kDescriptorExitLatency,                         // Descriptor Exit Latencies (DEL).
+    kDeviceExitLatency,                             // Device Initiated Exit Latencies (PEL)
+    kSystemExitLatency,                             // System Exit Latency (SEL)
+    kMaxExitLatency,                                // Max Exit Latency (MEL)
+    
+} tUSBLPMExitLatency;
+
+enum
+{
+    kUSB3LPMMaxU1SEL             = 0xFF,
+    kUSB3LPMMaxU1PEL             = 0xFF,
+    
+    kUSB3LPMMaxU2SEL             = 0xFFFF,
+    kUSB3LPMMaxU2PEL             = 0xFFFF,
+    
+    kUSB3LPMMaxU1Timeout         = 0x7F,
+    kUSB3LPMU1Disabled           = 0,
+    kUSB3LPMU1AcceptOnly         = 0xFF,
+    
+    kUSB3LPMMaxU2Timeout         = 0xFE00,          // In Micro Seconds
+    kUSB3LPMU2Disabled           = 0,               // In Micro Seconds
+    kUSB3LPMU2AcceptOnly         = 0xFF00,          // In Micro Seconds
+    
+    kUSB3LPMMaxT3SEL             = 100,             // SEL:T3 value as per USB 3.0 Section C.1.5.1 in Nano Seconds
+    kUSB3LPMMaxHostSchDelay      = 1000,            // Maximum Host Scheduling Delay for Max Exit Latency Calculations
+    
+    kUSB3LPMExtraDeviceEL        = 4000,            // An additional delay(buffer) in Nano Seconds added to Exit Latency reported by the device in its BOS descriptor
+};
+
+typedef enum
+{
+    kUSBDeviceLPMStatusDefault   = 0,
+    kUSBDeviceLPMStatusDisabled  = 1,
+    kUSBDeviceLPMStatusEnabled   = 2
+    
+} tUSBDeviceLPMStatus;
 
 #endif

@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 7FEC1EB0-4C8F-3D74-A663-848BF8EE5B55', 'x86_64: 0BEE0F72-B234-32C3-AED2-331BF16A1076' ]
+uuids:           [ 'i386: 7FB86A4B-5DC0-3267-AC40-3A99436D3FF1', 'x86_64: A5003E93-68B3-3A0E-8252-454CC4CFEC4D' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreMediaAuthoring.framework/Versions/A/CoreMediaAuthoring
 objc-constraint: none

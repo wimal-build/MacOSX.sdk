@@ -1,13 +1,14 @@
 /*
     NSTouch.h
     Application Kit
-    Copyright (c) 2009-2016, Apple Inc.
+    Copyright (c) 2009-2017, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#import <Foundation/NSDate.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,6 +25,17 @@ typedef NS_OPTIONS(NSUInteger, NSTouchPhase) {
     NSTouchPhaseAny             = NSUIntegerMax
 } NS_ENUM_AVAILABLE_MAC(10_7);
 
+typedef NS_ENUM(NSInteger, NSTouchType) {
+    NSTouchTypeDirect,      // A direct touch from a finger (on a screen)
+    NSTouchTypeIndirect,      // An indirect touch (not a screen)
+} NS_ENUM_AVAILABLE_MAC(10_12_2);
+
+typedef NS_OPTIONS(NSUInteger, NSTouchTypeMask) {
+    NSTouchTypeMaskDirect      = (1 <<  NSTouchTypeDirect),      // A direct touch from a finger (on a screen)
+    NSTouchTypeMaskIndirect    = (1 <<  NSTouchTypeIndirect),      // An indirect touch (not a screen)
+} NS_ENUM_AVAILABLE_MAC(10_12_2);
+
+NS_INLINE NSTouchTypeMask NSTouchTypeMaskFromType(NSTouchType type) { return (1 << type); }
 
 /* Unlike the iPhone, NSTouch objects do not persist for the life of the touch.
 */
@@ -41,10 +53,9 @@ NS_CLASS_AVAILABLE(10_6, NA)
     NSInteger _reserved4;
     id _device;
     NSSize  _deviceSize;
+    NSInteger _contextId;
+    NSTimeInterval _timestamp;
 #if ! __LP64__
-    id _reserved5;
-    id _reserved6;
-    id _reserved7;
     id _reserved8;
 #endif
 }
@@ -64,6 +75,15 @@ NS_CLASS_AVAILABLE(10_6, NA)
 */
 @property (readonly) NSSize deviceSize;
 
+@end
+
+@interface NSTouch (NSTouchBar)
+/* A touch can only be one type at a time */
+@property(readonly) NSTouchType type NS_AVAILABLE_MAC(10_12_2);
+
+/* These two methods are only valid for Direct touches. A nil view means the touch location in the root container of touch. */
+- (NSPoint)locationInView:(nullable NSView *)view NS_AVAILABLE_MAC(10_12_2);
+- (NSPoint)previousLocationInView:(nullable NSView *)view NS_AVAILABLE_MAC(10_12_2);
 @end
 
 NS_ASSUME_NONNULL_END

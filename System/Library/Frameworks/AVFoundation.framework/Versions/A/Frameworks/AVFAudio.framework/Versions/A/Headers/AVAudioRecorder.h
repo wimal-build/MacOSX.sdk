@@ -10,6 +10,11 @@
 #import <AVFoundation/AVAudioFormat.h>
 #import <Foundation/Foundation.h>
 #import <AVFAudio/AVAudioSettings.h>
+
+#if TARGET_OS_IPHONE
+#import <AVFAudio/AVAudioSession.h>
+#endif // #if TARGET_OS_EMBEDDED
+
 #import <Availability.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,18 +23,18 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSURL, NSError;
 
 
-NS_CLASS_AVAILABLE(10_7, 3_0) __TVOS_UNAVAILABLE __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
 @interface AVAudioRecorder : NSObject {
 @private
     void *_impl;
 }
 
 
-/* The file type to record is inferred from the file extension. Will overwrite a file at the specified url if a file exists */
+/* The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified url if a file exists. */
 - (nullable instancetype)initWithURL:(NSURL *)url settings:(NSDictionary<NSString *, id> *)settings error:(NSError **)outError;
 
-/* The file type to record is inferred from the file extension. Will overwrite a file at the specified url if a file exists */
-- (nullable instancetype)initWithURL:(NSURL *)url format:(AVAudioFormat *)format error:(NSError **)outError NS_AVAILABLE(10_12, 10_0);
+/* The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified url if a file exists. */
+- (nullable instancetype)initWithURL:(NSURL *)url format:(AVAudioFormat *)format error:(NSError **)outError API_AVAILABLE(macos(10.12), ios(10.0), watchos(4.0)) API_UNAVAILABLE(tvos);
 
 /* transport control */
 /* methods that return BOOL return YES on success and NO on failure. */
@@ -53,7 +58,7 @@ NS_CLASS_AVAILABLE(10_7, 3_0) __TVOS_UNAVAILABLE __WATCHOS_PROHIBITED
 @property(readonly) NSDictionary<NSString *, id> *settings;
 
 /* this object is fully valid only when prepareToRecord has been called */
-@property(readonly) AVAudioFormat *format NS_AVAILABLE(10_12, 10_0);
+@property(readonly) AVAudioFormat *format API_AVAILABLE(macos(10.12), ios(10.0), watchos(4.0)) API_UNAVAILABLE(tvos);
 
 /* the delegate will be sent messages from the AVAudioRecorderDelegate protocol */ 
 @property(assign, nullable) id<AVAudioRecorderDelegate> delegate;
@@ -76,14 +81,14 @@ NS_CLASS_AVAILABLE(10_7, 3_0) __TVOS_UNAVAILABLE __WATCHOS_PROHIBITED
 /* The channels property lets you assign the output to record specific channels as described by AVAudioSession's channels property */
 /* This property is nil valued until set. */
 /* The array must have the same number of channels as returned by the numberOfChannels property. */
-@property(nonatomic, copy, nullable) NSArray<NSNumber *> *channelAssignments NS_AVAILABLE(10_9, 7_0); /* Array of AVAudioSessionChannelDescription objects */
+@property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments NS_AVAILABLE(10_9, 7_0); /* Array of AVAudioSessionChannelDescription objects */
 #endif
 
 @end
 
 
 /* A protocol for delegates of AVAudioRecorder */
-__TVOS_UNAVAILABLE __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
 @protocol AVAudioRecorderDelegate <NSObject>
 @optional 
 

@@ -12,12 +12,13 @@
 @class CKShareMetadata, CKFetchShareMetadataOptions;
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 @interface CKFetchShareMetadataOperation : CKOperation
 
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithShareURLs:(NSArray<NSURL *> *)shareURLs;
 
-@property (nonatomic, copy) NSArray<NSURL *> *shareURLs;
+@property (nonatomic, copy, nullable) NSArray<NSURL *> *shareURLs;
 
 /* If set to YES, the resulting CKShareMetadata will have a rootRecord object filled out.  Defaults to NO.
  The resulting CKShareMetadata will have a rootRecordID property regardless of the value of this property. */

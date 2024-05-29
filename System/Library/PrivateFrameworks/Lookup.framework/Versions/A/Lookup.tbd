@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 5565FA13-4EF2-363B-A79B-DACE8A12D13A', 'x86_64: 02555355-6C50-3981-B76E-015BADB9BA9D' ]
+uuids:           [ 'i386: FA5435DD-95E1-373B-AE9C-1303A2ACD5FE', 'x86_64: FC452756-F465-387B-9219-84B65A0BCB57' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Lookup.framework/Versions/A/Lookup
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _LUNotificationPopoverWillClose, _LUPartOfSpeechDataDetectedAddress, 

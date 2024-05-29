@@ -10,7 +10,7 @@
 @class CKNotification, CKServerChangeToken;
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_DEPRECATED("Instead of iterating notifications to enumerate changed record zones, use CKDatabaseSubscription, CKFetchDatabaseChangesOperation, and CKFetchRecordZoneChangesOperation", macos(10.10, 10.13), ios(8.0, 11.0), tvos(9.0, 11.0), watchos(3.0, 4.0))
 @interface CKFetchNotificationChangesOperation : CKOperation
 
 /* This operation will fetch all notification changes.
@@ -18,6 +18,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
     since that anchor will be fetched.
    If this is your first fetch, pass nil for the change anchor.
    Change anchors are opaque tokens and clients should not infer any behavior based on their content. */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithPreviousServerChangeToken:(nullable CKServerChangeToken *)previousServerChangeToken;
 
 @property (nonatomic, copy, nullable) CKServerChangeToken *previousServerChangeToken;

@@ -1,17 +1,18 @@
 /*
     NSGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2016, Apple Inc.
+    Copyright (c) 2013-2017, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <AppKit/NSTouch.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol NSGestureRecognizerDelegate;
-@class NSView, NSEvent, NSPressureConfiguration;
+@class NSView, NSEvent, NSPressureConfiguration, NSTouch;
 
 NS_ENUM_AVAILABLE_MAC(10_10)
 typedef NS_ENUM(NSInteger, NSGestureRecognizerState) {
@@ -56,7 +57,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
      -(void)handleGesture;
      -(void)handleGesture:(NSGestureRecognizer*)gestureRecognizer;
 */
-- (instancetype)initWithTarget:(id)target action:(nullable SEL)action NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTarget:(nullable id)target action:(nullable SEL)action NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @property (nullable, weak) id target;
@@ -93,6 +94,10 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 @end
 
+@interface NSGestureRecognizer (NSTouchBar)
+/* Currently, only NSTouchTypeDirect is supported. Defaults to 0 */
+@property NSTouchTypeMask allowedTouchTypes NS_AVAILABLE_MAC(10_12_2);
+@end
 
 @protocol NSGestureRecognizerDelegate <NSObject>
 @optional
@@ -119,6 +124,9 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 - (BOOL)gestureRecognizer:(NSGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(NSGestureRecognizer *)otherGestureRecognizer;
 - (BOOL)gestureRecognizer:(NSGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(NSGestureRecognizer *)otherGestureRecognizer;
 
+/* called before touchesBegan:withEvent: is called on the gesture recognizer for a new touch. return NO to prevent the gesture recognizer from seeing this touch
+ */
+- (BOOL)gestureRecognizer:(NSGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(NSTouch *)touch NS_AVAILABLE_MAC(10_12_2);
 @end
 
 // the extensions in this header are to be used only by subclasses of NSGestureRecognizer
@@ -138,7 +146,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 - (void)reset;
 
 // same behavior as the equivalent delegate methods, but can be used by subclasses to define class-wide prevention rules
-// for example, a NSTapGestureRecognizer never prevents another NSTapGestureRecognizer with a higher tap count
+// for example, a NSTapGestureRecognizer never prevents another NSClickGestureRecognizer with a higher click count
 - (BOOL)canPreventGestureRecognizer:(NSGestureRecognizer *)preventedGestureRecognizer;
 - (BOOL)canBePreventedByGestureRecognizer:(NSGestureRecognizer *)preventingGestureRecognizer;
 
@@ -165,7 +173,10 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 - (void)magnifyWithEvent:(NSEvent *)event;
 - (void)rotateWithEvent:(NSEvent *)event;
 - (void)pressureChangeWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_10_3);
-
+- (void)touchesBeganWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_12_2);
+- (void)touchesMovedWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_12_2);
+- (void)touchesEndedWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_12_2);
+- (void)touchesCancelledWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_12_2);
 @end
 
 NS_ASSUME_NONNULL_END

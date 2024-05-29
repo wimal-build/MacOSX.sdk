@@ -1,11 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A990F8D9-6A37-3BD7-94B4-43A14DDE2B34', 'x86_64: 27CA0C5F-EC8F-378B-91C6-414E6F96A1D7' ]
+uuids:           [ 'i386: 771BC104-A4A9-37D1-A3C0-232D0968F6EC', 'x86_64: CE75C719-835E-34F8-9449-F08DA654E8FB' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/VideoConference.framework/Versions/A/VideoConference
-current-version: 2.0
-compatibility-version: 2.0
-objc-constraint: none
+current-version: 2
+compatibility-version: 2
 exports:         
   - archs:           [ i386 ]
     objc-classes:    [ _AudioDeviceMonitor, _BWDConfiguration, _CallBackData, _CommNATConfiguration, 
