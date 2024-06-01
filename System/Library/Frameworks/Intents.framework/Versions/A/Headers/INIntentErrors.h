@@ -2,14 +2,14 @@
 //  INIntentErrors.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 #import <Intents/IntentsDefines.h>
 
-INTENTS_EXTERN NSString * const INIntentErrorDomain API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2));
+INTENTS_EXTERN NSString * const INIntentErrorDomain API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx);
 
 typedef NS_ENUM(NSInteger, INIntentErrorCode) {
     // Interactions
@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, INIntentErrorCode) {
     
     // Requests
     INIntentErrorRequestTimedOut = 3001,
+    INIntentErrorMissingInformation = 3002,
     
     // User Vocabulary Sync
     INIntentErrorInvalidUserVocabularyFileLocation = 4000,
@@ -61,4 +62,4 @@ typedef NS_ENUM(NSInteger, INIntentErrorCode) {
     // Decoding
     INIntentErrorDecodingGeneric = 9000,
     
-} API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2));
+} API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx);

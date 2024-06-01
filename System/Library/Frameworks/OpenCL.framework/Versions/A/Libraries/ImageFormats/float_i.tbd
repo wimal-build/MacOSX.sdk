@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 33DF861A-4814-3C1D-AE70-D6D3B764A2D9' ]
+uuids:           [ 'x86_64: 94B55912-2D9E-3D3D-9710-7A59B927A3DB' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/float_i.dylib
-objc-constraint: none
+install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/float_i.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ ___FunctionTableTransposed_AVX10, ___FunctionTableTransposed_SSE3, 

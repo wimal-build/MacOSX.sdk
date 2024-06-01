@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8D93776E-946F-3E21-A81B-06FB7B33FEC5' ]
+uuids:           [ 'x86_64: 0A4547F6-4B96-3024-8FED-C3DE5CFD1A4F' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/TTYUtilities.framework/Versions/A/TTYUtilities
+install-name:    '/System/Library/PrivateFrameworks/TTYUtilities.framework/Versions/A/TTYUtilities'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AXTTYMessageKeyCallID, _AXTTYMessageKeyContactID, _AXTTYMessageKeyContactPathSearchAction, 

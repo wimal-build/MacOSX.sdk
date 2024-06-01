@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B2405D8C-761E-37CB-8314-0F5F5665114F' ]
+uuids:           [ 'x86_64: A5EAA3DF-8BCC-3223-B1A1-27AA923380E2' ]
 platform:        macosx
-install-name:    /usr/lib/libScreenReader.dylib
+install-name:    '/usr/lib/libScreenReader.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ __ScreenReaderCopyAudioIntroPath, __ScreenReaderCopyElement, 

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 649AA4F1-0DFB-3FEB-A5AE-027B86A9271E' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufGCK.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: 3283584D-67FD-3FA5-9E62-BCDCCC09CE82', 'x86_64: 3283584D-67FD-3FA5-9E62-BCDCCC09CE82' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufGCK.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ __ZN3awd7metrics19GCKLinkStatusReport10SharedCtorEv, __ZN3awd7metrics19GCKLinkStatusReport10SharedDtorEv, 

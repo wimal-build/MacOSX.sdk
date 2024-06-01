@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D6C3D594-3D37-39BE-B6A2-B8D00BCDD1F8' ]
+uuids:           [ 'x86_64: E9710BD1-F592-37FE-886D-121BEB986299' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AXHearingSupport.framework/Versions/A/AXHearingSupport
+install-name:    '/System/Library/PrivateFrameworks/AXHearingSupport.framework/Versions/A/AXHearingSupport'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AXCloudKitContainerIdentifier, _AXCloudKitErrorDomain, _AXCloudKitFinishedSchemaCheckKey, 
@@ -22,12 +22,12 @@ exports:
                        _HAPerformBlockSynchronouslyOnMainThread, _HAPerformSafeBlock, 
                        __AXAssert, __AXLogWithFacility, __AXLogWithFacilityV, __AXStringForArgs, 
                        _accessibilityHearingAidSupportBundle, _accessibilityTTYSupportBundle, 
-                       _currentProcessIsHeard, _hearingLocString, _hearingPropertyDescription, 
-                       _kAXSAccessibilityPreferenceDomain, _propertyContainsProperty, 
-                       _supportsBinauralStreamingForHearingAid, _ttyImageNamed, _ttyLocString, 
-                       _ttyLocStringAndLocale ]
-    objc-classes:    [ AXAccessQueue, AXAccessQueueTimer, AXCloudKitHelper, AXCloudKitHelperManagedObjectContext, 
-                       AXFakeHearingAidDevice, AXHAController, AXHAControllerBrowser, 
+                       _currentProcessIsHeard, _hearingInputRouteStringForOption, 
+                       _hearingLocString, _hearingPropertyDescription, _kAXSAccessibilityPreferenceDomain, 
+                       _propertyContainsProperty, _supportsBinauralStreamingForHearingAid, 
+                       _ttyImageNamed, _ttyLocString, _ttyLocStringAndLocale ]
+    objc-classes:    [ AXCloudKitHelper, AXCloudKitHelperManagedObjectContext, AXFakeHearingAidDevice, 
+                       AXHAAccessQueue, AXHAAccessQueueTimer, AXHAController, AXHAControllerBrowser, 
                        AXHAFakeXPCClient, AXHAListenerHelper, AXHAMessageHandlerContext, 
                        AXHAPacket, AXHARemoteController, AXHASecurityHelper, AXHAServer, 
                        AXHASettings, AXHASettingsListenerHelper, AXHAUtilities, AXHAXPCClient, 

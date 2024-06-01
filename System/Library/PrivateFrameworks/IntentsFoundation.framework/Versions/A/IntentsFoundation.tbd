@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CF9023C9-1B56-37FF-9CF0-F0BD3F41A0B3' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/IntentsFoundation.framework/Versions/A/IntentsFoundation
+uuids:           [ 'x86_64: 564B5D11-F7B6-3CDC-835C-B429665DE62D', 'x86_64: 564B5D11-F7B6-3CDC-835C-B429665DE62D' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/IntentsFoundation.framework/Versions/A/IntentsFoundation'
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _IntentsFoundationVersionNumber, _IntentsFoundationVersionString ]
-    objc-classes:    [ INFGrammarCollection, INFObject, INFPartOfSpeech, INFSentence, 
-                       INFSentenceToken ]
+    symbols:         [ _IFMergeDictionaries, _IntentsFoundationVersionNumber, _IntentsFoundationVersionString ]
+    objc-classes:    [ INFGrammarCollection, INFPartOfSpeech, INFSentence, INFSentenceToken ]
 ...

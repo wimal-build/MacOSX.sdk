@@ -158,7 +158,9 @@ while(deviceCandidate != NULL)
 #include <IOKit/usb/IOUSBHostFamily.h>
 #include <IOKit/usb/IOUSBHostDevice.h>
 
-class IOSimpleReporter;
+#if TARGET_OS_OSX
+#include <USBDriverKit/IOUSBHostInterface.h>
+#endif
 
 /*!
  * @class       IOUSBHostInterface
@@ -167,7 +169,11 @@ class IOSimpleReporter;
  */
 class IOUSBHostInterface : public IOService
 {
+#if TARGET_OS_OSX
+    OSDeclareDefaultStructorsWithDispatch(IOUSBHostInterface)
+#else
     OSDeclareDefaultStructors(IOUSBHostInterface)
+#endif
 
 public:
     /*
@@ -206,11 +212,13 @@ public:
     virtual bool compareProperty(OSDictionary* matching, const char* key);
     virtual bool compareProperty(OSDictionary* matching, const OSString* key);
     virtual bool matchPropertyTable(OSDictionary* table, SInt32* score);
+    virtual bool matchPropertyTable(OSDictionary* table);
+
 
     enum
     {
-        kOpenOptionsSelectAlternateInterface = StandardUSBBit(16)
-    };
+        kOpenOptionsSelectAlternateInterface = kUSBHostOpenOptionSelectAlternateSetting
+    } __attribute__((deprecated));
 
     /*! @functiongroup IOService overrides */
 
@@ -219,7 +227,7 @@ public:
      * @discussion  This method opens a session to an IOUSBHostInterface.  It will acquire the service's workloop lock.  Only one service may open a session at a time.
      * @param       forClient The IOService that is opening a session.
      * @param       options See IOService.h, <code>kOpenOptionsSelectAlternateInterface</code> in the options mask will immediately select the alternate setting passed by value through the <code>arg</code> parameter
-     * @param       arg See IOService.h, or the value of the alt setting to use if <code>kOpenOptionsSelectAlternateInterface</code> is included in the options mask
+     * @param       arg See IOService.h, or the value of the alt setting to use if <code>kUSBHostOpenOptionSelectAlternateSetting</code> is included in the options mask
      * @return      bool true if the session could be opened, otherwise false.
      */
     virtual bool        open(IOService* forClient, IOOptionBits options = 0, void* arg = 0);
@@ -231,11 +239,10 @@ public:
      * @param       options See IOService.h
      */
     virtual void        close(IOService* forClient, IOOptionBits options = 0);
-    
-    virtual IOReturn    message(UInt32 type, IOService* provider,  void* argument = 0);
 
-    virtual IOReturn configureReport(IOReportChannelList* channels, IOReportConfigureAction action, void* result, void* destination);
-    virtual IOReturn updateReport(IOReportChannelList*channels, IOReportUpdateAction action, void* result, void* destination);
+    virtual IOReturn    newUserClient(task_t owningTask, void* securityID, UInt32 type, IOUserClient** handler);
+
+    virtual IOReturn    message(UInt32 type, IOService* provider,  void* argument = 0);
 
     virtual const char* stringFromReturn(IOReturn code);
 
@@ -426,7 +433,8 @@ protected:
     enum
     {
         kInitIORetries       = 3,
-        kInitIORetryInterval = 100
+        kInitIORetryInterval = 100,
+        kDestroyPipesOptionAll = StandardUSBBit(0)
     };
     
     virtual void updateMatchingProperties();
@@ -444,18 +452,14 @@ protected:
 
 
     OSMetaClassDeclareReservedUsed(IOUSBHostInterface, 70);
-    virtual void destroyPipes();
-
+    virtual void destroyPipes(IOOptionBits options = 0);
+    
     OSMetaClassDeclareReservedUsed(IOUSBHostInterface, 71);
-    virtual IOReturn destroyPipesGated();
-
-    OSMetaClassDeclareReservedUsed(IOUSBHostInterface, 72);
-    virtual IOReturn configureReportGated(IOReportChannelList* channels, IOReportConfigureAction action, void* result, void* destination);
-
-    OSMetaClassDeclareReservedUsed(IOUSBHostInterface, 73);
-    virtual IOReturn updateReportGated(IOReportChannelList* channels, IOReportUpdateAction action, void* result, void* destination);
+    virtual IOReturn destroyPipesGated(IOOptionBits options);
 
     // Protected pad slots for alternate setting and pipe management
+    OSMetaClassDeclareReservedUnused(IOUSBHostInterface, 72);
+    OSMetaClassDeclareReservedUnused(IOUSBHostInterface, 73);
     OSMetaClassDeclareReservedUnused(IOUSBHostInterface, 74);
     OSMetaClassDeclareReservedUnused(IOUSBHostInterface, 75);
     OSMetaClassDeclareReservedUnused(IOUSBHostInterface, 76);
@@ -537,9 +541,8 @@ protected:
 protected:
     struct tExpansionData
     {
-        IOLock*             _reportLock;
-        OSSet*              _reports;
-        IOSimpleReporter*   _idlePolicyReport;
+        uint16_t _persistentOutEndpointMask;
+        uint16_t _persistentInEndpointMask;
     };
     tExpansionData* _expansionData;
 };
