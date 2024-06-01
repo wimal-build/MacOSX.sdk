@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 3DB533A8-5E32-3E94-ADD2-F7201775C090', 'x86_64: 357A161D-3D1A-31DB-8CCA-B1E21AE9D04B' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 42A1FE2B-1F06-3711-86F9-E40C81C1C8C5' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/oncrpc.framework/Versions/A/oncrpc
-current-version: 38
+current-version: 38.50.1
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __newrpclib___rpc_createerr, __newrpclib___xdrrec_getrec, 
                        __newrpclib___xdrrec_setnonblock, __newrpclib__authenticate, 
                        __newrpclib__null_auth, __newrpclib__rpc_dtablesize, __newrpclib__seterr_reply, 

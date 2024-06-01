@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: C26C43BC-891C-3A34-8DDC-6C5356BB56CE', 'x86_64: CB3D74CC-1568-3E66-8015-2A3D11BCAF21' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 2D012EB3-83BF-3E51-A2BE-41AF26F2DDF0' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal
-current-version: 309
+current-version: 357
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     allowable-clients: [ CoreFoundation ]
     symbols:         [ __CFURLBookmarkDataCopyDescription, __CFURLBookmarkToAliasHandle, 
                        __CFURLCompareBookmarkData, __CFURLCopySecurityEAs, __CFURLCreateBookmarkData, 

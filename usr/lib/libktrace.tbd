@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CB6D7487-D25F-3DE5-86E2-A82486728705' ]
+uuids:           [ 'x86_64: BC548D60-D52A-30D5-A6FA-04674E5014F1' ]
 platform:        macosx
 install-name:    /usr/lib/libktrace.dylib
 objc-constraint: none

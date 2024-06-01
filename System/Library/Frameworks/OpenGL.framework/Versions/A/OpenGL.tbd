@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: CCA4EA13-DBF6-314D-A6AE-0C273393B425', 'x86_64: 8B17A8DE-89F5-3E2E-897E-315003386475' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: FA76EAA6-D035-3444-87F5-DD95446D651D' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     re-exports:      [ /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib, 
                        /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib ]
     symbols:         [ _CGLAreContextsShared, _CGLBackDispatch, _CGLChoosePixelFormat, 

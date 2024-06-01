@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: CFAA4B36-7A91-3ECE-8EDB-F1B9923CE322', 'x86_64: DC3BEB71-E40B-375C-A64D-8338274FF0D2' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: D47AFC43-1F1F-3314-837A-079F9E0D47BB' ]
 platform:        macosx
 install-name:    /usr/lib/libiodbcinst.2.dylib
 current-version: 4.18
 compatibility-version: 4
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CreateDataSource, _GetAvailableDrivers, _GetPrivateProfileString, 
                        _GetTranslator, _InstallDriverPath, _InstallDriverPathLength, 
                        _InstallODBC, _ManageDataSources, _RemoveDSNFromIni, _RemoveDefaultDataSource, 

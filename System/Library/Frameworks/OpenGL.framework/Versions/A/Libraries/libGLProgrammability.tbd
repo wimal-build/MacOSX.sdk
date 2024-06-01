@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: D5B975A4-D735-3ECD-BE1D-8FF351C37F49', 'x86_64: D4D53DAC-F45B-34AD-AAD0-815D0F53D157' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 8A5E29FF-04DA-33D4-9F5F-B896CC967386' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLProgrammability.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _PPParserAttachStream, _PPParserAttachString, _PPParserBuildErrorString, 
                        _PPParserCreate, _PPParserFree, _PPParserGetErrorString, _PPParserGetImageUnitsUsed, 
                        _PPParserGetLimits, _PPParserGetOptions, _PPParserGetStream, 

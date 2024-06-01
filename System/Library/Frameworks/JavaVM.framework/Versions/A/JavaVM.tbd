@@ -1,12 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 59263C55-C839-377B-81CD-4A67724508F7', 'x86_64: 508F6160-6E2C-3D2A-8768-080B996DC13A' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: CFB13B5D-BF6F-310B-B755-A361983F1BBB' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/JavaVM.framework/Versions/A/JavaVM
 exports:         
   - archs:           [ x86_64 ]
-    objc-ivars:      [ _NSJavaConfiguration._vendorName ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _CheckForInstalledJavaRuntimes, _JAWT_GetAWT, _JNI_CreateJavaVM, 
                        _JNI_GetCreatedJavaVMs, _JNI_GetDefaultJavaVMInitArgs, _JVMCopyDefaultPrefForTaskAndKey, 
                        _JVMCopyUserPrefForTaskAndKey, _JVMCreateCompleteJVMListForTask, 
@@ -28,5 +26,6 @@ exports:
                        _kJVMTaskApplicationKey, _kJVMTaskBundledAppKey, _kJVMTaskCommandLineKey, 
                        _kJVMTaskJNIKey, _kJVMTaskWebStartKey, _scheduleUpdateSharing, 
                        _scheduleUpdateSharingUninstalled, _updateSharing ]
-    objc-classes:    [ _NSJavaConfiguration, _NSJavaVirtualMachine ]
+    objc-classes:    [ NSJavaConfiguration, NSJavaVirtualMachine ]
+    objc-ivars:      [ NSJavaConfiguration._vendorName ]
 ...

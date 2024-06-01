@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 536D7954-7C70-368F-BF63-A02A4E4529D6', 'x86_64: 6C502A55-3B54-3B48-BA7B-FA39F56C0B1E' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 78093D4F-91DB-35C8-981A-13375778B2E7' ]
 platform:        macosx
 install-name:    /usr/lib/system/libcommonCrypto.dylib
-current-version: 60118.1.1
+current-version: 60118.200.6
 objc-constraint: none
 parent-umbrella: System
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CCAESCmac, _CCAESCmacCreate, _CCAESCmacDestroy, _CCAESCmacFinal, 
                        _CCAESCmacOutputSizeFromContext, _CCAESCmacUpdate, _CCBigNumAdd, 
                        _CCBigNumAddI, _CCBigNumBitCount, _CCBigNumByteCount, _CCBigNumClear, 
@@ -42,13 +42,14 @@ exports:
                        _CCDigestOID, _CCDigestOIDLen, _CCDigestOutputSize, _CCDigestReset, 
                        _CCDigestUpdate, _CCECCryptorComputeSharedSecret, _CCECCryptorCreateFromData, 
                        _CCECCryptorExportKey, _CCECCryptorExportPublicKey, _CCECCryptorGeneratePair, 
-                       _CCECCryptorGetKeyComponents, _CCECCryptorImportKey, _CCECCryptorImportPublicKey, 
-                       _CCECCryptorRelease, _CCECCryptorSignHash, _CCECCryptorUnwrapKey, 
-                       _CCECCryptorVerifyHash, _CCECCryptorWrapKey, _CCECGetKeySize, 
-                       _CCECGetKeyType, _CCHmac, _CCHmacClone, _CCHmacCreate, _CCHmacDestroy, 
-                       _CCHmacFinal, _CCHmacInit, _CCHmacOneShot, _CCHmacOutputSize, 
-                       _CCHmacOutputSizeFromRef, _CCHmacUpdate, _CCKeyDerivationHMac, 
-                       _CCKeyDerivationPBKDF, _CCRNGCreate, _CCRNGRelease, _CCRSACryptorCreateFromData, 
+                       _CCECCryptorGetKeyComponents, _CCECCryptorGetPublicKeyFromPrivateKey, 
+                       _CCECCryptorImportKey, _CCECCryptorImportPublicKey, _CCECCryptorRelease, 
+                       _CCECCryptorSignHash, _CCECCryptorUnwrapKey, _CCECCryptorVerifyHash, 
+                       _CCECCryptorWrapKey, _CCECGetKeySize, _CCECGetKeyType, _CCHmac, 
+                       _CCHmacClone, _CCHmacCreate, _CCHmacDestroy, _CCHmacFinal, 
+                       _CCHmacInit, _CCHmacOneShot, _CCHmacOutputSize, _CCHmacOutputSizeFromRef, 
+                       _CCHmacUpdate, _CCKeyDerivationHMac, _CCKeyDerivationPBKDF, 
+                       _CCRNGCreate, _CCRNGRelease, _CCRSACryptorCreateFromData, 
                        _CCRSACryptorCreatePairFromData, _CCRSACryptorCrypt, _CCRSACryptorDecrypt, 
                        _CCRSACryptorEncrypt, _CCRSACryptorExport, _CCRSACryptorGeneratePair, 
                        _CCRSACryptorGetPublicKeyFromPrivateKey, _CCRSACryptorImport, 

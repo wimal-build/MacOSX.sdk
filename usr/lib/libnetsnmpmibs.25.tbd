@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 81F9EC61-E658-319D-AD69-69B3CBE9ECBA', 'x86_64: D58F2A1F-1BD6-3E0E-92AC-4A27C534DE13' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: BC2984BD-6D91-319E-AF8A-113280FEC277' ]
 platform:        macosx
 install-name:    /usr/lib/libnetsnmpmibs.25.dylib
 current-version: 26.2
 compatibility-version: 26
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _Add_Entry, _Check_HR_FileSys_NFS, _End_HR_FileSys, _Exit, 
                        _Get_FSIndex, _Get_FSSize, _Get_HR_Disk_Label, _Get_Next_Device, 
                        _Get_Next_HR_CoProc, _Get_Next_HR_Disk, _Get_Next_HR_Disk_Partition, 

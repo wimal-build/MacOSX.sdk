@@ -1,14 +1,14 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F743F24F-0C88-332E-ABE7-C4B58EB23AE3' ]
+uuids:           [ 'x86_64: B9CE2281-23F1-318B-80A9-C088658B6378' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreSuggestionsUI.framework/Versions/A/CoreSuggestionsUI
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CoreSuggestionsUIVersionNumber, _CoreSuggestionsUIVersionString ]
-    objc-classes:    [ _SGUIAddContactLabelTransformer, _SGUIBannerStringGenerator, 
-                       _SGUIBannerViewController, _SGUIConfirmButtonTextValueTransformer, 
-                       _SGUIDateFormatting, _SGUIDetailsTextValueTransformer, _SGUISuggestedContactPopoverViewController, 
-                       _SGUISuggestedContactStyleProvider, _SGUISuggestedEventDayViewAppearanceDelegate, 
-                       _SGUISuggestedEventPopoverViewController ]
+    objc-classes:    [ SGUIAddContactLabelTransformer, SGUIBannerStringGenerator, 
+                       SGUIBannerViewController, SGUIConfirmButtonTextValueTransformer, 
+                       SGUIDateFormatting, SGUIDetailsTextValueTransformer, SGUISuggestedContactPopoverViewController, 
+                       SGUISuggestedContactStyleProvider, SGUISuggestedEventDayViewAppearanceDelegate, 
+                       SGUISuggestedEventPopoverViewController ]
 ...

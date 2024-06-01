@@ -1,9 +1,9 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 45B0FAC3-F355-3217-8C8F-90A8F17BF61A' ]
+uuids:           [ 'x86_64: 9413C11C-D77C-35B4-869D-959178A6993D' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/SymptomReporter.framework/Versions/A/SymptomReporter
-current-version: 820.1.4
+current-version: 820.207.88
 objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]

@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: FC376789-5FCE-3815-96FB-EF745B1C9966', 'x86_64: 64880595-A94F-3594-A39E-2C05A29A1DA7' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 67D9E907-3524-38AA-9D55-A80A0BAD8831' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLVMPlugin.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _cvmsPluginElementBuild, _cvmsPluginServiceInitialize, _cvmsPluginServiceTerminate, 
                        _oglCodeGenServiceGenerateIR, _oglCodeGenServiceInitialize, 
                        _oglCodeGenServiceTerminate ]

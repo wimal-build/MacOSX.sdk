@@ -1,10 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: F29695CC-31B7-3693-ADC4-E71D4DD5D361', 'x86_64: 5B3ECED2-C4F0-39D9-ADC0-39ECA80CEAF0' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 71FB7DFC-C238-3583-B9D5-195E5E8E3105' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/MTLCompiler.framework/Versions/3802/MTLCompiler
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _MTLCodeGenServiceBuildRequest, _MTLCodeGenServiceCreate, 
                        _MTLCodeGenServiceDestroy, _MTLCodeGenServiceSetPluginPath ]
     weak-def-symbols: [ __ZTINSt3__117bad_function_callE, __ZTISt11logic_error, __ZTISt12length_error, 

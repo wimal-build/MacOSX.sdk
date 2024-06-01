@@ -1,12 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: CA457944-109E-35B5-B558-011724EC63DC', 'x86_64: 249D971D-44BC-3B3C-89BF-263CF0DA6D0B', 
-                   'x86_64h: 3CB66E19-AD25-3C50-A0A8-48B6C6A1187E' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64, x86_64h ]
+uuids:           [ 'x86_64: 1DFB2EC8-D8CA-327C-B817-7756A52622BB', 'x86_64h: 83CA8BEB-34BD-3B58-A704-C6A875984FAD' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64, x86_64h ]
+  - archs:           [ x86_64, x86_64h ]
     symbols:         [ __cg_jcopy_block_row, __cg_jcopy_sample_rows, __cg_jdiv_round_up, 
                        __cg_jinit_1pass_quantizer, __cg_jinit_2pass_quantizer, __cg_jinit_c_coef_controller, 
                        __cg_jinit_c_main_controller, __cg_jinit_c_master_control, 

@@ -1,16 +1,17 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A2A66CC0-780C-3751-AC41-075118B8EF14', 'x86_64: 107BB2E9-A973-322E-8BDA-5E4DA4061A77' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: B2405D8C-761E-37CB-8314-0F5F5665114F' ]
 platform:        macosx
 install-name:    /usr/lib/libScreenReader.dylib
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __ScreenReaderCopyAudioIntroPath, __ScreenReaderCopyElement, 
                        __ScreenReaderCopyFocusedElement, __ScreenReaderCopyInfo, 
                        __ScreenReaderCopyKeyboardFocusedElement, __ScreenReaderGetEFIAudioFileData, 
                        __ScreenReaderIsDisabledByManagedPreferences, __ScreenReaderIsRunning, 
-                       __ScreenReaderSendCommand, __ScreenReaderStart, __ScreenReaderStartWithTarget, 
-                       __ScreenReaderStop, __ScreenReaderSupportsCurrentLocale, __ScreenReaderToggleEnabled, 
+                       __ScreenReaderSendCommand, __ScreenReaderSetEnabledInPreferences, 
+                       __ScreenReaderStart, __ScreenReaderStartWithTarget, __ScreenReaderStop, 
+                       __ScreenReaderSupportsCurrentLocale, __ScreenReaderToggleEnabled, 
                        __kScreenReaderCopyInfoErrorDomain, __kScreenReaderEFIAudioCharacterTypedKey, 
                        __kScreenReaderEFIAudioPasswordKey, __kScreenReaderEFIAudioUsernameKey, 
                        __kScreenReaderEFIAudioUsernameOrPasswordIncorrectKey, __kScreenReaderEFIAudioVoiceOverOffKey, 

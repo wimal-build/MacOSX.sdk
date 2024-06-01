@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 3AFEFBF5-6392-3C75-A5EC-12AA6436B508' ]
+uuids:           [ 'x86_64: 7668FBB3-DCFD-3B32-8F6C-41251629380C' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/StoreJavaScript.framework/Versions/A/StoreJavaScript
 current-version: 379
@@ -19,6 +19,6 @@ exports:
                        _FRJSObjectSetPropertyAction, _FRJSObjectUnprotectAction, 
                        _JSInvalidateJSLogEnabledCache, _JSLogEnabled, __contextMenuName, 
                        __toJSValue, __toObject, _didCreatePage, _didReceiveMessage, 
-                       _globalObjectIsAvailableForFrame ]
-    objc-classes:    [ _FRBundleInterface, _FRJSFunction, _FRJSObject, _FRWKBundleMessage ]
+                       _globalObjectIsAvailableForFrame, _sScript ]
+    objc-classes:    [ FRBundleInterface, FRJSFunction, FRJSObject, FRWKBundleMessage ]
 ...

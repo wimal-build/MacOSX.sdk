@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386 ]
-uuids:           [ 'i386: F116F7A3-8F89-35CC-BC4F-8FBEBCA84140' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: BC004DA1-BE8E-3A3E-9A1E-00188EC4C0C3' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/DVD.framework/Versions/A/DVD
 objc-constraint: none
 exports:         
-  - archs:           [ i386 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _DVDVideoApplySPDCSQ, _DVDVideoBackEndDecode, _DVDVideoBeginDecode, 
                        _DVDVideoClearMP, _DVDVideoClearSP, _DVDVideoCloseDevice, 
                        _DVDVideoContinueDecode, _DVDVideoCreateRenderer, _DVDVideoDecode, 

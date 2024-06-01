@@ -1,12 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: A5E2A4FB-BEE4-3D4E-B80E-5342B6BC02D8', 'x86_64: AE6FE673-DA7D-33FF-B90B-78C9D1BD77C9', 
-                   'x86_64h: 99AA8DE9-04F1-3FBB-995F-6CD2F56AC295' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64, x86_64h ]
+uuids:           [ 'x86_64: 7687D89F-D87F-3C0C-AF55-B439423DD579', 'x86_64h: F420B0DC-D0F7-3DD5-9E17-00462441635C' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64, x86_64h ]
+  - archs:           [ x86_64, x86_64h ]
     symbols:         [ __cg_TIFFClientOpen, __cg_TIFFClientdata, __cg_TIFFClose, 
                        __cg_TIFFComputeTile, __cg_TIFFCurrentDirOffset, __cg_TIFFDefaultStripSize, 
                        __cg_TIFFFindCODEC, __cg_TIFFFreeDirectory, __cg_TIFFGetField, 

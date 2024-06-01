@@ -1,10 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: B7CEDC30-2D17-3896-9EFC-64DB3D11DF00', 'x86_64: 203D2C39-61BB-3713-A502-2D17B04A42AC' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 2EEBF84D-9E00-3570-AC0C-C49C8D25A8BF' ]
 platform:        macosx
 install-name:    /usr/lib/libOpenScriptingUtil.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _OSAIsRecognizedExecutableURL ]
 ...

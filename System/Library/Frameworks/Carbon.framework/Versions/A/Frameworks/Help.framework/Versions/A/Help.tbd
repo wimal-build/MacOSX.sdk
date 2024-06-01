@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 1E913488-5D7B-388E-904D-64EF8C99E704', 'x86_64: 18D02016-119A-33E8-AEB0-E9466BA4AD56' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 4392A63F-9B58-3248-BF73-B46AD3744E6E' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help
-current-version: 64
+current-version: 66
 objc-constraint: none
 parent-umbrella: Carbon
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     allowable-clients: [ PrintingUI ]
     symbols:         [ _AHGotoApplicationHelp, _AHGotoMainTOC, _AHGotoPage, _AHLookupAnchor, 
                        _AHRegisterHelpBook, _AHRegisterHelpBookWithURL, _AHSearch, 

@@ -1,10 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 7DC084CA-1968-318F-8D87-AB077143378F', 'x86_64: 707D6A92-50F9-387E-A4FC-1CD29C12F8CB' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: F844A618-613A-3609-9C31-621D92FB75DD' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/DiskManagement.framework/Versions/A/DiskManagement
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _DMDiskManagementToolDiedNotification, _DMLocalizedUserErrorString, 
                        _DMMediaTypeCDROM, _DMMediaTypeDVDROM, _DMMediaTypeGeneric, 
                        _DMMediaTypeIPod, _DMMediaTypeXsanComponent, _DMMediaTypeXsanFilesystem, 
@@ -18,6 +18,6 @@ exports:
                        _DMProtocolDiskImage, _DMProtocolFibreChannel, _DMProtocolFireWire, 
                        _DMProtocolSAS, _DMProtocolSATA, _DMProtocolSCSI, _DMProtocolUSB, 
                        _DMUnlocalizedTechnicalErrorString ]
-    objc-classes:    [ _DMAPFS, _DMAppleRAID, _DMCoreStorage, _DMDisk, _DMEraseDisk, 
-                       _DMFilesystem, _DMManager, _DMPartitionDisk, _DMRepairDisk ]
+    objc-classes:    [ DMAPFS, DMAppleRAID, DMCoreStorage, DMDisk, DMEraseDisk, DMFilesystem, 
+                       DMManager, DMPartitionDisk, DMRepairDisk ]
 ...

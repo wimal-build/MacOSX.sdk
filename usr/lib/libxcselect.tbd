@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7071D2F3-C54D-35C0-B734-257AE0FC95DC' ]
+uuids:           [ 'x86_64: 1F4F16DF-6D4E-3336-BBEB-E12A8FD617D6' ]
 platform:        macosx
 install-name:    /usr/lib/libxcselect.dylib
 objc-constraint: none

@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 856C3A56-46CA-38A0-93E9-F708D6C72692' ]
+uuids:           [ 'x86_64: 9C0ECE15-4F53-3AFC-8003-73652FF6428E' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/WatchdogService.framework/Versions/A/WatchdogService
 objc-constraint: none

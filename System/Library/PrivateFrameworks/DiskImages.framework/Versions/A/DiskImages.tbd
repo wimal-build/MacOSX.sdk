@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 5F2F6221-052C-34BA-87BF-D313EC7D00B6', 'x86_64: 1034021C-3A55-3792-9A94-FC116C9F7A1A' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 54D2F7DC-DAA6-3667-9590-1407C7B738EC' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/DiskImages
-current-version: 480.1.2
+current-version: 480.201.1
 compatibility-version: 1.0.8
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     re-exports:      [ /usr/lib/libobjc.A.dylib ]
     symbols:         [ _DIADCCompressorCalculateBufferSize, _DIADCCompressorCompressData, 
                        _DIADCCompressorDelete, _DIADCCompressorNew, _DIAddPermission, 

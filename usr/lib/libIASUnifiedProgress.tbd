@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E48B0C4F-F27B-3719-9251-6F9EB2B6D215' ]
+uuids:           [ 'x86_64: 3D22920E-8E7C-3E55-8EDC-3E4BC13198B2' ]
 platform:        macosx
 install-name:    /usr/lib/libIASUnifiedProgress.dylib
 exports:         
@@ -15,7 +15,7 @@ exports:
                        _kIASUnifiedProgressDelegateProgressKey, _kIASUnifiedProgressDelegateStatusKey, 
                        _kIASUnifiedProgressDelegateStatusUpdatedNotificationName, 
                        _kIASUnifiedProgressDelegateUUIDKey, _kIASUnifiedProgressManagerServiceName ]
-    objc-classes:    [ _IASPPhase, _IASPRegistryManager, _IASUPCaller, _IASUnifiedProgressClient, 
-                       _IASUnifiedProgressConnection, _IASUnifiedProgressManager ]
-    objc-ivars:      [ _IASUnifiedProgressConnection._callers, _IASUnifiedProgressConnection._connection ]
+    objc-classes:    [ IASPPhase, IASPRegistryManager, IASUPCaller, IASUnifiedProgressClient, 
+                       IASUnifiedProgressConnection, IASUnifiedProgressManager ]
+    objc-ivars:      [ IASUnifiedProgressConnection._callers, IASUnifiedProgressConnection._connection ]
 ...

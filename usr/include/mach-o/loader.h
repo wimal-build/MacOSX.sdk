@@ -210,6 +210,13 @@ struct mach_header_64 {
 #define MH_APP_EXTENSION_SAFE 0x02000000 /* The code was linked for use in an
 					    application extension. */
 
+#define	MH_NLIST_OUTOFSYNC_WITH_DYLDINFO 0x04000000
+					/* The external symbols listed in the nlist
+   					   symbol table do not include all the symbols
+					   listed in the dyld info. */
+
+#define	MH_SIM_SUPPORT 0x08000000	
+
 /*
  * The load commands directly follow the mach_header.  The total size of all
  * of the commands is given by the sizeofcmds field in the mach_header.  All
@@ -506,6 +513,8 @@ struct section_64 { /* for 64-bit architectures */
 #define S_THREAD_LOCAL_INIT_FUNCTION_POINTERS    0x15  /* functions to call
 							  to initialize TLV
 							  values */
+#define S_INIT_FUNC_OFFSETS                      0x16  /* 32-bit offsets to
+							  initializers */
 
 /*
  * Constants for the section attributes part of the flags field of a section
@@ -1239,6 +1248,10 @@ struct build_tool_version {
 #define PLATFORM_TVOS 3
 #define PLATFORM_WATCHOS 4
 #define PLATFORM_BRIDGEOS 5
+#define PLATFORM_IOSMAC 6
+#define PLATFORM_IOSSIMULATOR 7
+#define PLATFORM_TVOSSIMULATOR 8
+#define PLATFORM_WATCHOSSIMULATOR 9
 
 /* Known values for the tool field above. */
 #define TOOL_CLANG 1
@@ -1414,6 +1427,7 @@ struct dyld_info_command {
 #define EXPORT_SYMBOL_FLAGS_KIND_MASK				0x03
 #define EXPORT_SYMBOL_FLAGS_KIND_REGULAR			0x00
 #define EXPORT_SYMBOL_FLAGS_KIND_THREAD_LOCAL			0x01
+#define EXPORT_SYMBOL_FLAGS_KIND_ABSOLUTE			0x02
 #define EXPORT_SYMBOL_FLAGS_WEAK_DEFINITION			0x04
 #define EXPORT_SYMBOL_FLAGS_REEXPORT				0x08
 #define EXPORT_SYMBOL_FLAGS_STUB_AND_RESOLVER			0x10

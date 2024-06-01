@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: B10792CA-814B-3E00-9D1A-626C2CBCEEC7', 'x86_64: 6EB2A446-73D8-30B6-97DA-31CB1C42BA27' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 2E25A83B-B560-34A1-B474-3027C8B75BA4' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CGLGetCurrentContext, _CGLSetCurrentContext, _glAccum, _glActiveShaderProgram, 
                        _glActiveStencilFaceEXT, _glActiveTexture, _glActiveTextureARB, 
                        _glAlphaFunc, _glAreTexturesResident, _glArrayElement, _glAttachObjectARB, 

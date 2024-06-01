@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 27F73FBF-4737-34AB-8BF3-CA462EB01C67', 'x86_64: D49D06BC-8A91-3171-B050-402AAA556A7C' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 15D4EDA2-AAAC-3CF3-BB2B-3A92AECC932D' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/MediaKit.framework/Versions/A/MediaKit
-current-version: 864
+current-version: 906
 compatibility-version: 302
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _ApplyToHFSPlusCatalogRecords, _ApplyToHFSPlusExtentRecords, 
                        _CFArrayDictionarySearch, _CFArrayDictionarySearchWithIndexOptions, 
                        _GPTuuidHuman2Type, _GPTuuidType2Human, _IOEngineDeinitialize, 

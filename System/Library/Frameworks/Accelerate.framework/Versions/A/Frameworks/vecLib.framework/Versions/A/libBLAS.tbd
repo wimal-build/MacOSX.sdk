@@ -1,12 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: ECA7DF28-62AA-3A71-9D82-DB3A14553E9E', 'x86_64: 3D692F26-6E7E-310B-82D9-FB450923E9B0', 
-                   'x86_64h: 10BFDBE2-C8FB-39E3-A204-BC6420663E57' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64, x86_64h ]
+uuids:           [ 'x86_64: FB3590A2-37AB-353A-878B-E7468BFF1F22', 'x86_64h: 76710990-AE2B-300E-88BB-797ABAD74956' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64, x86_64h ]
+  - archs:           [ x86_64, x86_64h ]
     symbols:         [ _APL_dgemm, _APL_dgemm_LU, _APL_dgemm_QR, _APL_dtrsm, _APL_sgemm, 
                        _APL_sgemm_LU, _APL_sgemm_QR, _APL_strsm, _APPLE_NTHREADS, 
                        _ATLU_DestroyThreadMemory, _CAXPY, _CAXPY_, _CCOPY, _CCOPY_, 

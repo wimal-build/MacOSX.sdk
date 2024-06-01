@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 1548DC77-8F6E-32E5-BAF3-AC85D82F7502', 'x86_64: 14A865BE-EBA9-3B82-B4FA-B6274EE01451' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 339CD341-F9DF-3236-83ED-994349DBF251' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PacketFilter.framework/Versions/A/PacketFilter
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _PFCheckNATRule, _PFCheckRule, _PFManagerAddUser, _PFManagerCheckUserExists, 
                        _PFManagerCreate, _PFManagerDebugLog, _PFManagerErrorLog, 
                        _PFManagerGetExternalAuthorizationObject, _PFManagerGetQueue, 

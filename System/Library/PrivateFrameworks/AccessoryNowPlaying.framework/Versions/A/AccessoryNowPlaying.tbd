@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DE9CE3D1-45BB-3300-9E44-F18B5E9795FA' ]
+uuids:           [ 'x86_64: B8326D27-5D4C-39FA-BE4B-A7397F57B5E9' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AccessoryNowPlaying.framework/Versions/A/AccessoryNowPlaying
 exports:         
@@ -12,6 +12,7 @@ exports:
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_AlbumTrackCount, 
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_AlbumTrackNum, 
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Artist, 
+                       _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_ArtworkID, 
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_ChapterCount, 
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Composer, 
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Genre, 
@@ -57,6 +58,7 @@ exports:
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_AlbumTrackCount, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_AlbumTrackNum, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Artist, 
+                       _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_ArtworkID, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_ChapterCount, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Composer, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Genre, 
@@ -98,5 +100,5 @@ exports:
                        _kCFACCNowPlaying_SetNowPlayingInfo_ElapsedTime, _kCFACCNowPlaying_SetNowPlayingInfo_PlaybackQueueIndex, 
                        _kCFACCNowPlaying_SubscriberList_MediaItemArtwork, _kCFACCNowPlaying_SubscriberList_MediaItemAttributes, 
                        _kCFACCNowPlaying_SubscriberList_PlaybackAttributes, _kCFACCNowPlaying_SubscriberList_PlaybackQueueList ]
-    objc-classes:    [ _AccessoryNowPlayingClient ]
+    objc-classes:    [ AccessoryNowPlayingClient ]
 ...

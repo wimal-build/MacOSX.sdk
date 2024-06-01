@@ -1,12 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: 184F41CE-3897-3F7C-8666-F77829CA9677', 'x86_64: F2152290-FF1C-3C38-9EB8-F9DC28C36C57', 
-                   'x86_64h: 5C071A03-A7F6-33D6-98B7-EACD0D28F72E' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64, x86_64h ]
+uuids:           [ 'x86_64: 0EBA0A9E-CE59-3894-864A-838C3EE5D285', 'x86_64h: 3780EB9B-5219-385D-9472-17B0397697A5' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64, x86_64h ]
+  - archs:           [ x86_64, x86_64h ]
     symbols:         [ __cg_JP2CompressorProcessImage, __cg_JP2CompressorSetDisplayResolution, 
                        __cg_JP2CompressorSetup, __cg_JP2CompressorTearDown, __cg_JP2DecompressBand, 
                        __cg_JP2DecompressBlock, __cg_JP2DecompressLayer, __cg_JP2GetDisplayResolution, 

@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 931C3056-B1AB-3504-AE05-F40B960E76EB', 'x86_64: 523A7C6C-5068-356F-84ED-A51C46DF251F' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 4498F061-7DEA-323C-88AC-3310556CE865' ]
 platform:        macosx
 install-name:    /usr/lib/libsandbox.1.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _SANDBOX_BUILD_ID, ___crashreporter_info__, _sandbox_apply, 
                        _sandbox_apply_container, _sandbox_compile_entitlements, _sandbox_compile_file, 
                        _sandbox_compile_named, _sandbox_compile_string, _sandbox_container_paths_iterate_items, 

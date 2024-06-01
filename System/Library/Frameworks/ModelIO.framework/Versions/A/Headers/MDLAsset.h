@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLAsset : NSObject <NSCopying, NSFastEnumeration>
 
@@ -277,14 +277,14 @@ MDL_EXPORT
 /*!
  @property masters
  @abstract Master objects that can be instanced into the asset's object hierarchy
- @discussion @see MDLObjectContainerComponent
+ @see MDLObjectContainerComponent
  */
 @property (nonatomic, retain) id<MDLObjectContainerComponent> masters;
 
 /*!
  @property animations
  @abstract Animations that can be bound to MDLObjects (@see MDLAnimationBindComponent)
- @discussion @see MDLObjectContainerComponent
+ @see MDLObjectContainerComponent
  */
 @property (nonatomic, retain) id<MDLObjectContainerComponent> animations API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 

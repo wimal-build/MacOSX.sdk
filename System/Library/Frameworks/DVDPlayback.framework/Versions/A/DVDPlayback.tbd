@@ -1,19 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 77432E72-362A-34C5-8F6C-BC4AD228C38C', 'x86_64: 11578A35-FB91-32FF-A38A-FEA9DB6A302E' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 78130A18-C05B-394C-8CDC-60EFC4673542' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/DVDPlayback.framework/Versions/A/DVDPlayback
 current-version: 5960
 compatibility-version: 5000
 objc-constraint: none
 exports:         
-  - archs:           [ i386 ]
-    symbols:         [ _DVDDoMenuClick, _DVDDoMenuMouseOver, _DVDGetNativeVideoCropRect, 
-                       _DVDGetVideoBounds, _DVDGetVideoDevice, _DVDGetVideoDeviceCapabilities, 
-                       _DVDGetVideoKeyColor, _DVDGetVideoPort, _DVDIsSupportedDevice, 
-                       _DVDSetNativeVideoCropRect, _DVDSetVideoBounds, _DVDSetVideoDevice, 
-                       _DVDSetVideoPort, _DVDSwitchToDevice ]
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _DVDClearLastPlayBookmark, _DVDCloseMediaFile, _DVDCloseMediaVolume, 
                        _DVDCopyBuildVersion, _DVDDisableAllAudioFeatures, _DVDDisplayPopUpMenu, 
                        _DVDDisplaySubPicture, _DVDDispose, _DVDDoBDJKeyEvent, _DVDDoBDJKeyEventAction, 

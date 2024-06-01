@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DDC9C084-D848-33FF-BF9C-0E77E3A060AE' ]
+uuids:           [ 'x86_64: 39C354D5-90D4-3DAF-AB18-F1C6F1DC2B7B' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/vmnet.framework/Versions/A/vmnet
 objc-constraint: none
