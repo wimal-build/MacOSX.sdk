@@ -215,6 +215,12 @@ typedef struct modctl {
 	vm_size_t       mod_size;       // total size (of blob)
 	UUID            mod_uuid;
 	struct dtrace_module_symbols* mod_user_symbols;
+	/*
+	 * SDT probe data are directly stored in modctl. That's fine for XNU as modctl serves
+	 * different purpose than on Solaris and is allocated/freed as required.
+	 */
+	int             mod_sdtprobecnt;  // Amount of provided SDT probes
+	void            *mod_sdtdesc;    // Pointer to sdt_probedesc_t
 } modctl_t;
 
 /* Definitions for mod_flags */
@@ -250,7 +256,7 @@ typedef struct modctl {
 
 extern modctl_t *dtrace_modctl_list;
 
-extern int dtrace_addr_in_module(void*, struct modctl*);
+extern int dtrace_addr_in_module(const void*, const struct modctl*);
 
 /*
  * cred_t
@@ -397,13 +403,6 @@ extern void *dt_kmem_alloc_aligned_site(size_t, size_t, int, vm_allocation_site_
 extern void *dt_kmem_zalloc_aligned_site(size_t, size_t, int, vm_allocation_site_t*);
 
 extern void dt_kmem_free_aligned(void*, size_t);
-
-extern kmem_cache_t *
-    kmem_cache_create(const char *, size_t, size_t, int (*)(void *, void *, int),
-    void (*)(void *, void *), void (*)(void *), void *, vmem_t *, int);
-extern void *kmem_cache_alloc(kmem_cache_t *, int);
-extern void kmem_cache_free(kmem_cache_t *, void *);
-extern void kmem_cache_destroy(kmem_cache_t *);
 
 /*
  * kthread

@@ -2,7 +2,7 @@
 //  INSnoozeTasksIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -87,7 +87,7 @@ API_UNAVAILABLE(macos, tvos)
                     withCompletion:(void (^)(NSArray<INSnoozeTasksTaskResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveTasks(for:with:));
 
 - (void)resolveNextTriggerTimeForSnoozeTasks:(INSnoozeTasksIntent *)intent
-                    withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveNextTriggerTime(for:with:));
+                              withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveNextTriggerTime(for:with:));
 
 @end
 

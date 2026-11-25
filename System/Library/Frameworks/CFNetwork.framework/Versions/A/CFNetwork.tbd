@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           347078F9-34AC-3AD5-AA02-B7E5E1D11FB6
+    value:           7FFE1D94-A85E-3AC2-BCA3-BD233899ECB5
   - target:          x86_64-maccatalyst
-    value:           347078F9-34AC-3AD5-AA02-B7E5E1D11FB6
+    value:           7FFE1D94-A85E-3AC2-BCA3-BD233899ECB5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           93368EFC-BBD5-340B-9810-6C714FDF90E7
+    value:           CFDB5CCD-A5E9-3E08-AD4F-087F420DB6A0
   - target:          arm64e-maccatalyst
-    value:           93368EFC-BBD5-340B-9810-6C714FDF90E7
+    value:           CFDB5CCD-A5E9-3E08-AD4F-087F420DB6A0
 install-name:    '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork'
-current-version: 1237
+current-version: 1331.0.7
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ '$ld$hide$os10.9$_NSHTTPCookieComment', '$ld$hide$os10.9$_NSHTTPCookieCommentURL', 
@@ -282,9 +282,11 @@ exports:
                        __CFURLStorageSessionCopyCache, __CFURLStorageSessionCopyCookieStorage, 
                        __CFURLStorageSessionCopyCredentialStorage, __CFURLStorageSessionCopyIdentifier, 
                        __CFURLStorageSessionCopyProcessDefault, __CFURLStorageSessionCreate, 
-                       __CFURLStorageSessionCreateWithData, __CFURLStorageSessionGetTypeID, 
-                       __CFURLWriteDataAndPropertiesToResource, __NSServerConfigurationOutboundConnectionProxyDictionary, 
-                       __NSServerConfigurationSOCKS5ServerCredentials, __NSURLErrorWebSocketHandshakeFailureReasonKey, 
+                       __CFURLStorageSessionCreateWithData, __CFURLStorageSessionDisableCache, 
+                       __CFURLStorageSessionGetTypeID, __CFURLWriteDataAndPropertiesToResource, 
+                       __NSServerConfigurationOutboundConnectionProxyDictionary, 
+                       __NSServerConfigurationSOCKS5ServerCredentials, __NSURLErrorNWPathKey, 
+                       __NSURLErrorPrivacyProxyFailureKey, __NSURLErrorWebSocketHandshakeFailureReasonKey, 
                        ___AuthBrokerMain, ___CFNetworkAgentMessageProcessorMain, 
                        ___CFTubeSetTubeTypeNotifier, __kATSAllowsArbitraryLoadsForMediaKey, 
                        __kCFHTTPCookiePolicyPropertyIsTopLevelNavigation, __kCFHTTPCookiePolicyPropertySiteForCookies, 
@@ -328,18 +330,14 @@ exports:
                        __kCFStreamPropertyTCPAdaptiveReadTimeout, __kCFStreamPropertyTCPAdaptiveWriteTimeout, 
                        __kCFStreamPropertyTCPConnectionMetadata, __kCFStreamPropertyTCPInfo, 
                        __kCFStreamPropertyTCPKeepAliveOffload, __kCFStreamPropertyTCPKeepAliveParameters, 
-                       __kCFStreamPropertyWatchdogTimeout, __kCFStreamSSLDisableEphemeralDiffieHellmanCiphers, 
-                       __kCFStreamSSLShouldSetPeerID, __kCFStreamSSLTrustedLeafCertificates, 
-                       __kCFStreamSSLUseFalseStart, __kCFStreamSocketEnableECN, __kCFStreamSocketSetNoDelay, 
-                       __kCFStreamSocketSetRecvAnyIf, __kCFURLCachePartitionKey, 
-                       __kCFURLConnectionPropertyATSContext, __kCFURLConnectionPropertyATSFrameworkOverrides, 
-                       __kCFURLConnectionPropertyRespectConnectionClose, __kCFURLConnectionPropertyShouldReportTimingDataToAWD, 
-                       __kCFURLConnectionPropertyShouldSniff, __kCFURLConnectionPropertyTimingDataOptions, 
-                       __kCFURLConnectionSessionDelegate, __kCFURLConnectionSessionEventConnectionDidFail, 
-                       __kCFURLConnectionSessionEventConnectionDidFinishLoading, 
-                       __kCFURLConnectionSessionEventConnectionDidReceiveData, __kCFURLConnectionSessionEventConnectionDidReceiveResponse, 
-                       __kCFURLConnectionSessionEventConnectionRequiresAuth, __kCFURLConnectionSessionEventConnectionTerminating, 
-                       __kCFURLConnectionSessionHTTPLoaderLimits, __kCFURLErrorAuthFailedResponseKey, 
+                       __kCFStreamPropertyWakeReadEvent, __kCFStreamPropertyWatchdogTimeout, 
+                       __kCFStreamSSLDisableEphemeralDiffieHellmanCiphers, __kCFStreamSSLShouldSetPeerID, 
+                       __kCFStreamSSLTrustedLeafCertificates, __kCFStreamSSLUseFalseStart, 
+                       __kCFStreamSocketEnableECN, __kCFStreamSocketSetNoDelay, __kCFStreamSocketSetRecvAnyIf, 
+                       __kCFURLCachePartitionKey, __kCFURLConnectionPropertyATSContext, 
+                       __kCFURLConnectionPropertyATSFrameworkOverrides, __kCFURLConnectionPropertyRespectConnectionClose, 
+                       __kCFURLConnectionPropertyShouldReportTimingDataToAWD, __kCFURLConnectionPropertyShouldSniff, 
+                       __kCFURLConnectionPropertyTimingDataOptions, __kCFURLErrorAuthFailedResponseKey, 
                        __kCFURLStorageSessionIsPrivate, __kCFURLStorageSessionProcessSharing, 
                        __kTCPKeepAliveParametersEnabled, __kTCPKeepAliveParametersIdleTime, 
                        __kTCPKeepAliveParametersInterval, _cfnTranslateCFError, _kCFDNSServiceFailureKey, 

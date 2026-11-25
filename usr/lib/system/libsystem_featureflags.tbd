@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FEA91919-A5BB-3606-9445-F2077D90BF87
+    value:           1D848276-387D-39BE-BDCC-6491A766B421
   - target:          x86_64-maccatalyst
-    value:           FEA91919-A5BB-3606-9445-F2077D90BF87
+    value:           1D848276-387D-39BE-BDCC-6491A766B421
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3337B778-D4D3-3EB6-B197-83861DDEE8DB
+    value:           8BCCBE77-3AEB-3BDA-A6B6-4D1D0B7FFBCF
   - target:          arm64e-maccatalyst
-    value:           3337B778-D4D3-3EB6-B197-83861DDEE8DB
+    value:           8BCCBE77-3AEB-3BDA-A6B6-4D1D0B7FFBCF
 install-name:    '/usr/lib/system/libsystem_featureflags.dylib'
-current-version: 28.60.1
+current-version: 56
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

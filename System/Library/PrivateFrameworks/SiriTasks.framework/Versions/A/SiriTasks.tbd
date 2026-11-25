@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F5CDD6AF-8ECF-3EDD-B661-0B4F06A0226B
+    value:           EB491E40-ECE4-3A1F-86B3-3280B9CEE206
   - target:          x86_64-maccatalyst
-    value:           F5CDD6AF-8ECF-3EDD-B661-0B4F06A0226B
+    value:           EB491E40-ECE4-3A1F-86B3-3280B9CEE206
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6043653F-2489-34D3-96B3-892B775F4681
+    value:           446225D0-1730-3707-B4E9-ABE661F6B0AF
   - target:          arm64e-maccatalyst
-    value:           6043653F-2489-34D3-96B3-892B775F4681
+    value:           446225D0-1730-3707-B4E9-ABE661F6B0AF
 install-name:    '/System/Library/PrivateFrameworks/SiriTasks.framework/Versions/A/SiriTasks'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

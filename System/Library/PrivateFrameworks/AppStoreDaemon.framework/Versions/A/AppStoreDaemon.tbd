@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E509DA29-05D2-30BB-A294-ED052FB95829
+    value:           979323C7-0AFA-3E56-AC7D-CF0EB3C8089D
   - target:          x86_64-maccatalyst
-    value:           E509DA29-05D2-30BB-A294-ED052FB95829
+    value:           979323C7-0AFA-3E56-AC7D-CF0EB3C8089D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4B7E3392-26F9-363E-9BDA-35CBFF3F9AB5
+    value:           DAFF1AD9-5F14-38DB-A03B-908B120857F8
   - target:          arm64e-maccatalyst
-    value:           4B7E3392-26F9-363E-9BDA-35CBFF3F9AB5
+    value:           DAFF1AD9-5F14-38DB-A03B-908B120857F8
 install-name:    '/System/Library/PrivateFrameworks/AppStoreDaemon.framework/Versions/A/AppStoreDaemon'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -29,10 +29,12 @@ exports:
                        _ASDDebugLog, _ASDDebugLogV, _ASDDebugSetFileLoggingOptions, 
                        _ASDError, _ASDErrorAskPermissionRequestIdentifier, _ASDErrorBySettingUserInfoValue, 
                        _ASDErrorDomain, _ASDErrorHTTPStatusCodeKey, _ASDErrorIsEqual, 
-                       _ASDErrorIsNilReturn, _ASDErrorWithDescription, _ASDErrorWithSafeUserInfo, 
-                       _ASDErrorWithUnderlyingError, _ASDErrorWithUnderlyingErrorAndDescription, 
+                       _ASDErrorIsNilReturn, _ASDErrorSearch, _ASDErrorWithDescription, 
+                       _ASDErrorWithSafeUserInfo, _ASDErrorWithUnderlyingError, _ASDErrorWithUnderlyingErrorAndDescription, 
                        _ASDErrorWithUnderlyingErrorAndInfo, _ASDErrorWithUserInfoAndFormat, 
-                       _ASDIsDaemon, _ASDLogHandleForCategory, _ASDLookupPropertyBundleIdentifier, 
+                       _ASDIsDaemon, _ASDLocalizedMessageKey, _ASDLocalizedString, 
+                       _ASDLocalizedTextForUserPresentableError, _ASDLocalizedTitleKey, 
+                       _ASDLogHandleForCategory, _ASDLookupPropertyBundleIdentifier, 
                        _ASDLookupPropertyBuyParams, _ASDLookupPropertyContentRating, 
                        _ASDLookupPropertyDisplayVersion, _ASDLookupPropertyExternalVersionIdentifier, 
                        _ASDLookupPropertyFileSize, _ASDLookupPropertyItemIdentifier, 
@@ -41,7 +43,7 @@ exports:
                        _ASDManagedLookupFreeBuyParams, _ASDManagedLookupIs32BitOnly, 
                        _ASDManagedLookupIsActiveAccountAppOwner, _ASDManagedLookupIsAppFree, 
                        _ASDManagedLookupItemID, _ASDManagedLookupUncompressedSize, 
-                       _ASDManagedLookupVendorName, _ASDPurchaseBuyParameterVendorID, 
+                       _ASDManagedLookupVendorName, _ASDOptionsKeyAppName, _ASDPurchaseBuyParameterVendorID, 
                        _ASDPurchaseHistoryDidChangeNotification, _ASDServerErrorDomain, 
                        _ASDServiceAgentMachPort, _ASDServiceBrokerAvailableNotification, 
                        _ASDServiceBrokerConnectedNotification, _ASDServiceBrokerErrorDomain, 
@@ -49,7 +51,6 @@ exports:
                        _ASDSoftwareUpdateRequirementBatterySaver, _ASDSoftwareUpdateRequirementDuet, 
                        _ASDSoftwareUpdateRequirementNetwork, _ASDSoftwareUpdateRequirementPower, 
                        _ASDSoftwareUpdateRequirementWiFi, _ASDSoftwareUpdatesStoreDidChangeNotification, 
-                       _ASDStoreItemMetadataPropertyBundleIdentifier, _ASDStoreItemMetadataPropertyItemIdentifier, 
                        _ASDStoreKitDefaultKeyEnableAppStoreDaemon, _ASDStoreKitDefaultQueueIdentifier, 
                        _ASDStoreKitEntitlementDeveloperRequestData, _ASDStoreKitEntitlementRequestData, 
                        _ASDStoreKitKeyAdditionalBuyParams, _ASDStoreKitKeyAllowBoostrapCellularData, 
@@ -89,35 +90,39 @@ exports:
                        _ASDSubscriptionEntitlementsDidChangeNotification, _ASDSubscriptionEntitlementsMusicDidChangeNotification, 
                        _ASDSubscriptionEntitlementsNewsDidChangeNotification, _ASDSubscriptionEntitlementsPodcastDidChangeNotification, 
                        _ASDSubscriptionEntitlementsTVDidChangeNotification, _ASDSubscriptionEntitlementsiCloudDidChangeNotification, 
-                       _ASDTestFlightFeedbackErrorDomain, _ASDUpdateItemMetricsAvailableDate, 
+                       _ASDTestFlightFeedbackErrorDomain, _ASDTestFlightServiceErrorDomain, 
+                       _ASDTestFlightServiceExtensionPointIdentifier, _ASDUpdateItemMetricsAvailableDate, 
                        _ASDUpdateItemMetricsDiscoveryDate, _ASDUpdateItemMetricsDownloadCompeleteDate, 
                        _ASDUpdateItemMetricsDownloadStartDate, _ASDUpdateItemMetricsInstallComplete, 
                        _ASDUpdateItemMetricsInstallStart, _ASDUpdateItemMetricsPurchaseCompleteDate, 
                        _ASDUpdateItemMetricsPurchaseStartDate, _ASDUpdateServiceDidChangeNotification, 
+                       _ASDUserActivityUniqueIdentifierArcadeTab, _ASDUserPresentableErrorDomain, 
                        _CreateLogContext, _kASDPurchaseHistoryQuerySortOptionDate ]
     objc-classes:    [ ASDAccountLookupRequest, ASDAccountLookupRequestOptions, ASDAccountLookupResponse, 
                        ASDAggregateClusterMappingData, ASDApp, ASDAppClusterMapping, 
-                       ASDAppEvent, ASDAppLibrary, ASDAppQuery, ASDAppReviewAppMetadata, 
-                       ASDAppStoreService, ASDAppUsageStats, ASDAppUsageStore, ASDApplicationMetadata, 
+                       ASDAppEvent, ASDAppLibrary, ASDAppMetricsEvent, ASDAppMetricsService, 
+                       ASDAppQuery, ASDAppReviewAppMetadata, ASDAppStoreService, 
+                       ASDAppUsageStats, ASDAppUsageStore, ASDApplicationMetadata, 
                        ASDArcadeService, ASDBagKeySetAggregator, ASDBaseClient, ASDBetaAppDisplayNames, 
                        ASDBetaAppFeedback, ASDBetaAppFeedbackMetadata, ASDBetaAppLaunchInfo, 
-                       ASDBetaAppVersion, ASDCellularIdentity, ASDCellularSettings, 
+                       ASDBetaAppVersion, ASDBundle, ASDCellularIdentity, ASDCellularSettings, 
                        ASDCheckQueueRequest, ASDCheckQueueRequestOptions, ASDClaimApplicationsRequest, 
                        ASDClaimApplicationsRequestOptions, ASDCoding, ASDCompleteCoordinatorsRequest, 
                        ASDCreatePlaceholdersRequest, ASDCreatePlaceholdersRequestOptions, 
                        ASDCrossfireStore, ASDDiagnosticService, ASDDownloadQueueRequestOptions, 
-                       ASDEnterpriseAppMetadata, ASDEphemeralRequest, ASDExternalManifestRequest, 
-                       ASDExternalManifestRequestOptions, ASDExternalManifestResponse, 
-                       ASDGatherLogsRequest, ASDGatherLogsRequestOptions, ASDIAPHistory, 
-                       ASDIAPInfo, ASDIAPInfoRequest, ASDIAPInfoRequestOptions, ASDIAPInfoResponse, 
-                       ASDIAPInfoUpdateRequest, ASDInstallApps, ASDInstallManifestRequest, 
-                       ASDInstallManifestRequestOptions, ASDInstallManifestRequestResponse, 
-                       ASDJob, ASDJobActivity, ASDJobAsset, ASDJobManager, ASDJobManagerOptions, 
-                       ASDJobManifest, ASDJobOptions, ASDJobResult, ASDJobSchedulerJobMetadata, 
-                       ASDJobSchedulerRequest, ASDJobSchedulerRequestOptions, ASDJobSchedulerResponse, 
-                       ASDLaunchableAppsRequest, ASDLaunchableAppsRequestOptions, 
-                       ASDLaunchableAppsResponse, ASDLogFileOptions, ASDMacDaemonManaged, 
-                       ASDManagedAppService, ASDManagedApplicationRequest, ASDManagedApplicationRequestOptions, 
+                       ASDEnterpriseAppMetadata, ASDEphemeralRequest, ASDExtensionMonitor, 
+                       ASDExtensionRequest, ASDExternalManifestRequest, ASDExternalManifestRequestOptions, 
+                       ASDExternalManifestResponse, ASDGatherLogsRequest, ASDGatherLogsRequestOptions, 
+                       ASDIAPHistory, ASDIAPInfo, ASDIAPInfoRequest, ASDIAPInfoRequestOptions, 
+                       ASDIAPInfoResponse, ASDIAPInfoUpdateRequest, ASDInstallApps, 
+                       ASDInstallManifestRequest, ASDInstallManifestRequestOptions, 
+                       ASDInstallManifestRequestResponse, ASDJob, ASDJobActivity, 
+                       ASDJobAsset, ASDJobManager, ASDJobManagerOptions, ASDJobManifest, 
+                       ASDJobOptions, ASDJobResult, ASDJobSchedulerJobMetadata, ASDJobSchedulerRequest, 
+                       ASDJobSchedulerRequestOptions, ASDJobSchedulerResponse, ASDLaunchableAppsRequest, 
+                       ASDLaunchableAppsRequestOptions, ASDLaunchableAppsResponse, 
+                       ASDLogFileOptions, ASDMacDaemonManaged, ASDManagedAppService, 
+                       ASDManagedApplicationRequest, ASDManagedApplicationRequestOptions, 
                        ASDManagedRequestStatus, ASDManifestRequest, ASDMigrationRequest, 
                        ASDMigrationRequestOptions, ASDMutableIAPInfo, ASDNotification, 
                        ASDNotificationCenter, ASDOcelotStore, ASDPersistentRequest, 
@@ -136,11 +141,14 @@ exports:
                        ASDRestoreDemotedApplicationsRequest, ASDRestoreDemotedApplicationsRequestOptions, 
                        ASDRollableLog, ASDScreenSyncAppMetadata, ASDServiceBroker, 
                        ASDSoftwareUpdate, ASDSoftwareUpdateMac, ASDSoftwareUpdateMetrics, 
-                       ASDSoftwareUpdatesStore, ASDStoreItemMetadata, ASDStoreKitClientBroker, 
-                       ASDStoreKitServiceBroker, ASDSubscriptionEntitlement, ASDSubscriptionEntitlements, 
-                       ASDSystemAppMetadata, ASDSystemAppRequest, ASDTestFlightAppMetadata, 
-                       ASDTestFlightFeedback, ASDUpdateMetricsStore, ASDUpdatePollMetrics, 
-                       ASDUpdateWatchApps, ASDUpdatesService, ASDVPPRequest, ASDWatchAppMetadata ]
+                       ASDSoftwareUpdatesStore, ASDStoreKitClientBroker, ASDStoreKitServiceBroker, 
+                       ASDSubscriptionEntitlement, ASDSubscriptionEntitlements, ASDSystemAppMetadata, 
+                       ASDSystemAppRequest, ASDTestFlightAppMetadata, ASDTestFlightFeedback, 
+                       ASDTestFlightServiceExtension, ASDTestFlightServiceExtensionContext, 
+                       ASDTestFlightServiceExtensionHostContext, ASDTestFlightServiceExtensionPushMessage, 
+                       ASDTestFlightServiceExtensionRemoteContext, ASDUpdateMetricsStore, 
+                       ASDUpdatePollMetrics, ASDUpdateWatchApps, ASDUpdatesService, 
+                       ASDVPPRequest, ASDWatchAppMetadata ]
     objc-ivars:      [ ASDSoftwareUpdate._blockedBy, ASDSoftwareUpdate._installDate, 
                        ASDSoftwareUpdate._metrics, ASDSoftwareUpdate._perDevice, 
                        ASDSoftwareUpdate._profileValidated, ASDSoftwareUpdate._rawUpdateDictionary, 

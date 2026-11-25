@@ -3,9 +3,9 @@
  
      Contains:   vector and matrix functions for AltiVec
  
-     Version:    vecLib-760.100
+     Version:    vecLib-794.100
  
-     Copyright:  Copyright (c) 1999-2021 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 1999-2022 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -61,7 +61,7 @@ extern "C" {
  Following is a list of subprograms and a short description of each one.          
 -------------------------------------------------------------------------------------
 */
-#if defined __arm64__ || defined __SSE__
+
 /*
 -------------------------------------------------------------------------------------
      Level 1
@@ -1072,8 +1072,6 @@ vSgevv(
   API_DEPRECATED("Use cblas_sger on a zero matrix instead", macos(10.0, 10.14))
   API_UNAVAILABLE(ios, tvos, watchos);
 
-
-#endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE__
 
 
 #if __has_feature(assume_nonnull)

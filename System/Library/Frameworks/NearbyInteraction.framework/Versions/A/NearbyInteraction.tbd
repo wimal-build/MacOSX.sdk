@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           353F8EC6-61BE-3C1A-8BD8-83427932D9CE
+    value:           74B390D8-3EBF-3CA6-A886-532D8332A23A
   - target:          x86_64-maccatalyst
-    value:           353F8EC6-61BE-3C1A-8BD8-83427932D9CE
+    value:           74B390D8-3EBF-3CA6-A886-532D8332A23A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D41A31E5-BE72-35F1-8316-53582953EA21
+    value:           6DA039C3-A168-34D3-9C50-BAC20DD0C510
   - target:          arm64e-maccatalyst
-    value:           D41A31E5-BE72-35F1-8316-53582953EA21
+    value:           6DA039C3-A168-34D3-9C50-BAC20DD0C510
 install-name:    '/System/Library/Frameworks/NearbyInteraction.framework/Versions/A/NearbyInteraction'
 current-version: 0
 compatibility-version: 0
@@ -25,8 +25,12 @@ exports:
                        _NINearbyObjectDirectionNotAvailable_Private, _NINearbyObjectDistanceNotAvailable, 
                        _NINearbyObjectDistanceNotAvailable_Private, _NINearbyObjectElevationNotAvailable, 
                        _NINearbyObjectQuaternionNotAvailable, _NINotifySystemShutdownWithReason, 
-                       _kNISystemShutdownCompletionTimeoutSeconds ]
-    objc-classes:    [ NICarKeyConfiguration, NIConfiguration, NIDiscoveryToken, 
-                       NIHomeDeviceConfiguration, NINearbyObject, NINearbyPeerConfiguration, 
-                       NIRegionPredicate, NISession, _NIWiFiRangingTestConfiguration ]
+                       _NITruthTagLabelKey, _NITruthTagSourceClientApp, _NITruthTagSourceDirectUserInput, 
+                       _NITruthTagSourceKey, _kNISystemShutdownCompletionTimeoutSeconds ]
+    objc-classes:    [ NIAlgorithmConvergenceState, NIBluetoothSample, NICarKeyConfiguration, 
+                       NICarKeyEventNotifier, NIConfiguration, NIDeviceCapabilities, 
+                       NIDevicePresenceConfiguration, NIDevicePresenceNotifier, NIDiscoveryToken, 
+                       NIHomeDeviceConfiguration, NINearbyAccessoryConfiguration, 
+                       NINearbyObject, NINearbyPeerConfiguration, NIRegionPredicate, 
+                       NISession, _NIWiFiRangingTestConfiguration ]
 ...

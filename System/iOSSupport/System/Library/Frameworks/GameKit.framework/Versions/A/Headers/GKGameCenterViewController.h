@@ -2,7 +2,7 @@
 //  GKGameCenterViewController.h
 //  Game Center
 //
-//  Copyright 2012-2021 Apple Inc. All rights reserved.
+//  Copyright 2012-2022 Apple Inc. All rights reserved.
 //
 
 #import <GameKit/GKLeaderboard.h>
@@ -16,7 +16,8 @@ typedef NS_ENUM(NSInteger, GKGameCenterViewControllerState) {
     GKGameCenterViewControllerStateAchievements,
     GKGameCenterViewControllerStateChallenges,
     GKGameCenterViewControllerStateLocalPlayerProfile,
-    GKGameCenterViewControllerStateDashboard
+    GKGameCenterViewControllerStateDashboard,
+    GKGameCenterViewControllerStateLocalPlayerFriendsList
 };
 
 #if TARGET_OS_IPHONE

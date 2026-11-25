@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C583157E-4612-3C45-970C-64949B13B8FD
+    value:           041F79DE-0EAF-3CC8-BD69-64A1CF1AFBDB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C8D04E9E-F472-339C-AD0A-22268F915122
+    value:           6424B6AF-1DDA-377F-BFA6-95E4C67FA9FF
 install-name:    '/System/Library/PrivateFrameworks/Noticeboard.framework/Versions/A/Noticeboard'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

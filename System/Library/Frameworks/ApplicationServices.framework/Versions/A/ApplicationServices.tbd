@@ -4,26 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6C4E94EE-63E2-3F79-B038-9F673BC8922F
+    value:           ED20BBDF-51E0-3489-BDE0-944C4D59C312
   - target:          x86_64-maccatalyst
-    value:           6C4E94EE-63E2-3F79-B038-9F673BC8922F
+    value:           ED20BBDF-51E0-3489-BDE0-944C4D59C312
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DA4C7B6A-07B0-3376-B9F0-4DDFAA0A31B0
+    value:           5135F624-1CF2-3795-9662-57B402C64FEF
   - target:          arm64e-maccatalyst
-    value:           DA4C7B6A-07B0-3376-B9F0-4DDFAA0A31B0
+    value:           5135F624-1CF2-3795-9662-57B402C64FEF
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices'
-current-version: 54
+current-version: 56
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS', 
                        '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy', 
                        '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices', 
-                       '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LangAnalysis.framework/Versions/A/LangAnalysis', 
                        '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore', 
                        '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD', 
                        '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis', 
@@ -42,17 +41,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0EC3E4C1-5879-3DB6-8E62-3D734C6C1424
+    value:           E8655C59-3D54-32FB-8113-F25B4792FC5E
   - target:          x86_64-maccatalyst
-    value:           0EC3E4C1-5879-3DB6-8E62-3D734C6C1424
+    value:           E8655C59-3D54-32FB-8113-F25B4792FC5E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EDC7995E-B88B-3615-9D2A-BD99E98CB3F7
+    value:           6B09B034-30FA-3EC8-B82B-22A280E7EC5B
   - target:          arm64e-maccatalyst
-    value:           EDC7995E-B88B-3615-9D2A-BD99E98CB3F7
+    value:           6B09B034-30FA-3EC8-B82B-22A280E7EC5B
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS'
 current-version: 236
 parent-umbrella:
@@ -212,11 +211,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A949815B-B138-3D25-B38A-37EE958A317F
+    value:           1E528D32-6630-3028-8161-FFC7A7EFFC4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E5B9E749-D07E-36CB-998F-529572C308A3
+    value:           56785513-F26C-359C-A711-15CC95A4E794
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -280,11 +279,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D40F3537-EA19-3A52-839D-6D4C09C26AB7
+    value:           B901DBA6-0300-310C-B306-0F5995C13B48
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5A804CA1-3927-3A53-B86A-A99435A6C187
+    value:           1BEE6CFA-0DA4-3DCE-812B-7751F60A9234
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -343,13 +342,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7F4A58B2-2A3A-321D-BD82-536D0E37A759
+    value:           2E58F8CE-D41E-3F70-B13E-CBF282C15648
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C0D1CA98-34BC-385C-8D6D-3B738B80A6AE
+    value:           E6EB06F5-5546-3C97-A88D-DB6EAA655D97
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices'
-current-version: 715
+current-version: 739.1
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -415,15 +414,15 @@ exports:
                        _CoreDockSetWindowLabel, _CoreDockSetWorkspacesAppBindings, 
                        _CoreDockSetWorkspacesCount, _CoreDockSetWorkspacesEnabled, 
                        _CoreDockSetWorkspacesKeyBindings, _CoreDockUpdateWindow, 
-                       _CoreDragCancelDrag, _CoreDragChangeBehaviors, _CoreDragCleanDragState, 
-                       _CoreDragClearAllImageOverrides, _CoreDragCopyTrashLabel, 
-                       _CoreDragCreate, _CoreDragCreateWithPasteboard, _CoreDragCreateWithPasteboardRef, 
-                       _CoreDragDispose, _CoreDragEnableSpringLoading, _CoreDragGetAllowableActions, 
-                       _CoreDragGetAttributes, _CoreDragGetCurrentDrag, _CoreDragGetDragWindow, 
-                       _CoreDragGetDropActions, _CoreDragGetDropLocation, _CoreDragGetForce, 
-                       _CoreDragGetForceStage, _CoreDragGetItemBounds, _CoreDragGetModifiers, 
-                       _CoreDragGetMouseLocation, _CoreDragGetOrigin, _CoreDragGetPasteboard, 
-                       _CoreDragGetPasteboardRef, _CoreDragGetSpringLoadingAttributes, 
+                       _CoreDragAcceptDrag, _CoreDragCancelDrag, _CoreDragChangeBehaviors, 
+                       _CoreDragCleanDragState, _CoreDragClearAllImageOverrides, 
+                       _CoreDragCopyTrashLabel, _CoreDragCreate, _CoreDragCreateWithPasteboard, 
+                       _CoreDragCreateWithPasteboardRef, _CoreDragDispose, _CoreDragEnableSpringLoading, 
+                       _CoreDragGetAllowableActions, _CoreDragGetAttributes, _CoreDragGetCurrentDrag, 
+                       _CoreDragGetDragWindow, _CoreDragGetDropActions, _CoreDragGetDropLocation, 
+                       _CoreDragGetForce, _CoreDragGetForceStage, _CoreDragGetItemBounds, 
+                       _CoreDragGetModifiers, _CoreDragGetMouseLocation, _CoreDragGetOrigin, 
+                       _CoreDragGetPasteboard, _CoreDragGetPasteboardRef, _CoreDragGetSpringLoadingAttributes, 
                        _CoreDragGetStandardDropLocation, _CoreDragGetValueForKey, 
                        _CoreDragHasImageOverrides, _CoreDragInstallContextReceiveMessageHandlerOnConnection, 
                        _CoreDragInstallContextTrackingHandlerOnConnection, _CoreDragInstallReceiveHandler, 
@@ -442,10 +441,10 @@ exports:
                        _CoreDragSetCGEventProcs, _CoreDragSetCGImage, _CoreDragSetCGImageWithScale, 
                        _CoreDragSetDestClippingRect, _CoreDragSetDragRegion, _CoreDragSetDragRegionWithScale, 
                        _CoreDragSetDragWindow, _CoreDragSetDropActions, _CoreDragSetDropLocation, 
-                       _CoreDragSetEventProc, _CoreDragSetExtendedEventProc, _CoreDragSetImage, 
-                       _CoreDragSetImageOptions, _CoreDragSetInputProc, _CoreDragSetItemBounds, 
-                       _CoreDragSetMouseLocation, _CoreDragSetOrigin, _CoreDragSetRootCALayer, 
-                       _CoreDragSetSourceClippingRect, _CoreDragSetStandardDropLocation, 
+                       _CoreDragSetDropProc, _CoreDragSetEventProc, _CoreDragSetExtendedEventProc, 
+                       _CoreDragSetImage, _CoreDragSetImageOptions, _CoreDragSetInputProc, 
+                       _CoreDragSetItemBounds, _CoreDragSetMouseLocation, _CoreDragSetOrigin, 
+                       _CoreDragSetRootCALayer, _CoreDragSetSourceClippingRect, _CoreDragSetStandardDropLocation, 
                        _CoreDragSetTrashDrawProc, _CoreDragSetTrashLabel, _CoreDragSetValueForKey, 
                        _CoreDragStartDragging, _CoreDragUpdatesBegin, _CoreDragUpdatesCommit, 
                        _CoreGetDragInfo, _CoreImagingCreateImage, _CoreMenuCreateKeyEquivalentString, 
@@ -461,9 +460,10 @@ exports:
                        _HIS_XPC_CFNotificationCenterPostNotification, _HIS_XPC_CFPreferencesCopyValue, 
                        _HIS_XPC_CFPreferencesSetValue, _HIS_XPC_CFPreferencesSynchronize, 
                        _HIS_XPC_CopyCapsLockKeyLabel, _HIS_XPC_CopyMacManagerPrefs, 
-                       _HIS_XPC_GetApplicationPolicyForURLs, _HIS_XPC_GetCapsLockLanguageSwitch, 
-                       _HIS_XPC_GetCapsLockModifierState, _HIS_XPC_GetGlobeKeyAvailability, 
-                       _HIS_XPC_GetMicKeyAvailability, _HIS_XPC_RevealFileInFinder, 
+                       _HIS_XPC_CopyPrimaryKeyboardLanguage, _HIS_XPC_GetApplicationPolicyForURLs, 
+                       _HIS_XPC_GetCapsLockLanguageSwitch, _HIS_XPC_GetCapsLockModifierState, 
+                       _HIS_XPC_GetGlobeKeyAvailability, _HIS_XPC_GetMicKeyAvailability, 
+                       _HIS_XPC_ResetMessageConnection, _HIS_XPC_RevealFileInFinder, 
                        _HIS_XPC_SendAppleEventToSystemProcess, _HIS_XPC_SetCapsLockDelayOverride, 
                        _HIS_XPC_SetCapsLockLED, _HIS_XPC_SetCapsLockLEDInhibit, _HIS_XPC_SetCapsLockModifierState, 
                        _HIS_XPC_SetNetworkLocation, _HIShapeContainsPoint, _HIShapeCreateCopy, 
@@ -512,21 +512,28 @@ exports:
                        __AXCopyChildrenHash, __AXCopyRoleDescription, __AXCopyRoleDescriptionWithSubrole, 
                        __AXCopyTitle, __AXCreateElementOrdering, __AXCurrentRequestCanReturnInspectionContent, 
                        __AXCurrentRequestCanReturnProtectedContent, __AXGetClientForCurrentRequestUntrusted, 
+                       __AXInterfaceCopyCursorColorFill, __AXInterfaceCopyCursorColorOutline, 
+                       __AXInterfaceCursorIsOverridden, __AXInterfaceCursorSetAndReturnSeed, 
                        __AXInterfaceGetBristolEnabled, __AXInterfaceGetClassicInvertColorEnabled, 
                        __AXInterfaceGetDifferentiateWithoutColorEnabled, __AXInterfaceGetIncreaseContrastEnabled, 
                        __AXInterfaceGetReduceMotionEnabled, __AXInterfaceGetReduceTransparencyEnabled, 
-                       __AXInterfaceGetRichmondEnabled, __AXInterfaceSetClassicInvertColorEnabled, 
-                       __AXInterfaceSetDifferentiateWithoutColorEnabled, __AXInterfaceSetDifferentiateWithoutColorEnabledOverride, 
+                       __AXInterfaceGetRichmondEnabled, __AXInterfaceGetShowToolbarButtonShapesEnabled, 
+                       __AXInterfaceGetShowWindowTitlebarIconsEnabled, __AXInterfaceSetClassicInvertColorEnabled, 
+                       __AXInterfaceSetCursorColorFill, __AXInterfaceSetCursorColorOutline, 
+                       __AXInterfaceSetCursorIsOverridden, __AXInterfaceSetDifferentiateWithoutColorEnabled, 
+                       __AXInterfaceSetDifferentiateWithoutColorEnabledOverride, 
                        __AXInterfaceSetIncreaseContrastEnabled, __AXInterfaceSetIncreaseContrastEnabledOverride, 
                        __AXInterfaceSetReduceMotionEnabled, __AXInterfaceSetReduceMotionEnabledOverride, 
                        __AXInterfaceSetReduceTransparencyEnabled, __AXInterfaceSetReduceTransparencyEnabledOverride, 
+                       __AXInterfaceSetShowToolbarButtonShapesEnabled, __AXInterfaceSetShowToolbarButtonShapesEnabledOverride, 
+                       __AXInterfaceSetShowWindowTitlebarIconsEnabled, __AXInterfaceSetShowWindowTitlebarIconsEnabledOverride, 
                        __AXIsAppleClientForCurrentRequestUntrusted, __AXRegisterControlComputerAccess, 
-                       __AXSetClientIdentificationOverride, __AXShouldElementBeIgnoredForNavigation, 
-                       __AXUIElementCopyElementAtPositionIncludeIgnored, __AXUIElementCreateApplicationWithPresenterPid, 
-                       __AXUIElementCreateWithData, __AXUIElementCreateWithDataAndPid, 
-                       __AXUIElementCreateWithDataAndPresenterPid, __AXUIElementCreateWithPtr, 
-                       __AXUIElementCreateWithRemoteToken, __AXUIElementGetActualPid, 
-                       __AXUIElementGetData, __AXUIElementGetIsProcessSuspended, 
+                       __AXSetAuditTokenIsAuthenticatedCallback, __AXSetClientIdentificationOverride, 
+                       __AXShouldElementBeIgnoredForNavigation, __AXUIElementCopyElementAtPositionIncludeIgnored, 
+                       __AXUIElementCreateApplicationWithPresenterPid, __AXUIElementCreateWithData, 
+                       __AXUIElementCreateWithDataAndPid, __AXUIElementCreateWithDataAndPresenterPid, 
+                       __AXUIElementCreateWithPtr, __AXUIElementCreateWithRemoteToken, 
+                       __AXUIElementGetActualPid, __AXUIElementGetData, __AXUIElementGetIsProcessSuspended, 
                        __AXUIElementGetWindow, __AXUIElementNotifyProcessSuspendStatus, 
                        __AXUIElementPostNotification, __AXUIElementPostNotificationForObservedElement, 
                        __AXUIElementPostNotificationWithInfo, __AXUIElementRegisterServerWithRunLoop, 
@@ -553,10 +560,13 @@ exports:
                        _kAXForegoundColorTextAttribute, _kAXForegroundColorTextAttribute, 
                        _kAXInterfaceBristolKey, _kAXInterfaceClassicInvertColorKey, 
                        _kAXInterfaceClassicInvertColorStatusDidChangeNotification, 
-                       _kAXInterfaceDifferentiateWithoutColorKey, _kAXInterfaceDifferentiateWithoutColorStatusDidChangeNotification, 
+                       _kAXInterfaceCursorStatusDidChangeNotification, _kAXInterfaceDifferentiateWithoutColorKey, 
+                       _kAXInterfaceDifferentiateWithoutColorStatusDidChangeNotification, 
                        _kAXInterfaceIncreaseContrastKey, _kAXInterfaceIncreaseContrastStatusDidChangeNotification, 
                        _kAXInterfaceReduceMotionKey, _kAXInterfaceReduceMotionStatusDidChangeNotification, 
                        _kAXInterfaceReduceTransparencyKey, _kAXInterfaceReduceTransparencyStatusDidChangeNotification, 
+                       _kAXInterfaceShowToolbarButtonShapesKey, _kAXInterfaceShowToolbarButtonShapesStatusDidChangeNotification, 
+                       _kAXInterfaceShowWindowTitlebarIconsKey, _kAXInterfaceShowWindowTitlebarIconsStatusDidChangeNotification, 
                        _kAXLinkTextAttribute, _kAXListItemIndexTextAttribute, _kAXListItemLevelTextAttribute, 
                        _kAXListItemPrefixTextAttribute, _kAXMarkedMisspelledTextAttribute, 
                        _kAXMisspelledTextAttribute, _kAXNaturalLanguageTextAttribute, 
@@ -576,63 +586,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           27988FBF-93AC-375C-B4B3-3179C3BD6715
+    value:           610A0ABD-918B-3411-8252-75CE7B82DE0F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EDC75306-A4BA-3BF7-870E-EA18B27AAF3D
-install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LangAnalysis.framework/Versions/A/LangAnalysis'
-current-version: 254
-parent-umbrella:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    umbrella:        ApplicationServices
-exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
-    symbols:         [ _DCMAddFoundRecordToIteratorAM, _DCMAddRecord, _DCMCloseDictionary, 
-                       _DCMCompactDictionary, _DCMCopyParametersFromData, _DCMCountObjectIterator, 
-                       _DCMCountRecord, _DCMCountRecordIterator, _DCMCreateAccessMethodIterator, 
-                       _DCMCreateDataWithParameters, _DCMCreateDictionaryIterator, 
-                       _DCMCreateDictionaryIteratorInternal, _DCMCreateFieldInfoRecord, 
-                       _DCMCreateFieldInfoRecordAM, _DCMDeleteDictionary, _DCMDeleteRecord, 
-                       _DCMDeriveNewDictionaryWithURL, _DCMDictionaryServiceWindowShow, 
-                       _DCMDisposeObjectIterator, _DCMDisposeRecordIterator, _DCMFindRecords, 
-                       _DCMGetAccessMethodIDFromName, _DCMGetDictionaryFieldInfo, 
-                       _DCMGetDictionaryIDFromFileWithURL, _DCMGetDictionaryIDFromRef, 
-                       _DCMGetDictionaryProperty, _DCMGetDictionaryPropertyList, 
-                       _DCMGetDictionaryWriteAccess, _DCMGetFieldAttributes, _DCMGetFieldAttributesAM, 
-                       _DCMGetFieldData, _DCMGetFieldDefaultData, _DCMGetFieldDefaultDataAM, 
-                       _DCMGetFieldFindMethods, _DCMGetFieldFindMethodsAM, _DCMGetFieldMaxRecordSize, 
-                       _DCMGetFieldMaxRecordSizeAM, _DCMGetFieldTagAndType, _DCMGetFieldTagAndTypeAM, 
-                       _DCMGetFileFromDictionaryIDWithURL, _DCMGetNextRecord, _DCMGetNthRecord, 
-                       _DCMGetPrevRecord, _DCMGetRecordSequenceNumber, _DCMIterateFoundRecord, 
-                       _DCMIterateFoundRecordFast, _DCMIterateObject, _DCMLibraryVersion, 
-                       _DCMNewDictionaryWithURL, _DCMOpenDictionary, _DCMRegisterDictionaryFileWithURL, 
-                       _DCMReleaseDictionaryWriteAccess, _DCMReorganizeDictionary, 
-                       _DCMResetObjectIterator, _DCMSetDictionaryProperty, _DCMSetFieldData, 
-                       _DCMShowDictionaryServiceWindow, _DCMUnregisterDictionary, 
-                       _LAAddNewWordWithURL, _LAChangeForm, _LACloseAnalysisContext, 
-                       _LACloseContext, _LACloseDictionaryWithURL, _LAConfirmMorpheme, 
-                       _LAContinuousMorphemeAnalysis, _LAContinuousMorphemeAnalysisPriv, 
-                       _LACreateCustomEnvironment, _LADeleteCustomEnvironment, _LAFeedbackPath, 
-                       _LAGetEnvironmentList, _LAGetEnvironmentName, _LAGetEnvironmentProperty, 
-                       _LAGetEnvironmentRef, _LAGetMorphemes, _LAGetMorphemesPriv, 
-                       _LALibraryVersion, _LAListAvailableDictionariesWithURL, _LAMorphemeAnalysis, 
-                       _LAMorphemeAnalysisPriv, _LAOpenAnalysisContext, _LAOpenContext, 
-                       _LAOpenDictionaryPriv, _LAOpenDictionaryWithURL, _LAReanalyzePartially, 
-                       _LAResetAnalysis, _LASetEnvironmentProperty, _LAShiftMorphemes, 
-                       _LATextToMorphemes ]
---- !tapi-tbd
-tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           9299D57A-FA79-30B6-ADA6-580A55EFE95C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           0BA704CB-1069-3855-A3EB-62FDB054E25D
+    value:           BF1E9E9A-21B7-36D7-9C4E-6622F44E65C0
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 531.1
+current-version: 544.1
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -768,14 +728,15 @@ exports:
                        _PMTicketSetItem, _PMTicketSetPMRect, _PMTicketSetSInt32, 
                        _PMTicketSetTicket, _PMTicketSetUInt32, _PMTicketToLightXML, 
                        _PMTicketToXML, _PMUpdateProxy, _PMWorkflowCopyItems, _PMWorkflowSubmitPDFWithOptions, 
-                       _PMWorkflowSubmitPDFWithSettings, _PMXMLToTicket, __ZN12PMBaseObject14SetAppReadOnlyEh, 
-                       __ZN12PMBaseObject15CopyObjectStateEPS_, __ZN12PMBaseObject16CreateEmptyArrayEv, 
-                       __ZN12PMBaseObject21SetUsingRemoteObjectsEh, __ZN14OpaquePMPresetC1EPK14__CFDictionary, 
-                       __ZN14OpaquePMPresetC2EPK14__CFDictionary, __ZN15OpaquePMPrinter14GetPrinterNameEv, 
-                       __ZN15OpaquePMPrinter14IsQueueStoppedEv, __ZN15OpaquePMPrinter16IsGenericPrinterEv, 
-                       __ZN15OpaquePMPrinter19GetPaperListForMenuEv, __ZN15OpaquePMPrinter19SetPaperListForMenuEPK9__CFArray, 
-                       __ZN15OpaquePMPrinter22IsPrinterDirectConnectEv, __ZN18OpaquePMPageFormat21PJCValidPageFormatKeyEPS_, 
-                       __ZN18PMTicketBaseObject12GetTicketRefEv, __ZN18PMTicketBaseObject12SetTicketRefEP17OpaquePMTicketRef, 
+                       _PMWorkflowSubmitPDFWithSettings, _PMXMLToTicket, __PMLog, 
+                       __PMLogPerf, __ZN12PMBaseObject14SetAppReadOnlyEh, __ZN12PMBaseObject15CopyObjectStateEPS_, 
+                       __ZN12PMBaseObject16CreateEmptyArrayEv, __ZN12PMBaseObject21SetUsingRemoteObjectsEh, 
+                       __ZN14OpaquePMPresetC1EPK14__CFDictionary, __ZN14OpaquePMPresetC2EPK14__CFDictionary, 
+                       __ZN15OpaquePMPrinter14GetPrinterNameEv, __ZN15OpaquePMPrinter14IsQueueStoppedEv, 
+                       __ZN15OpaquePMPrinter16IsGenericPrinterEv, __ZN15OpaquePMPrinter19GetPaperListForMenuEv, 
+                       __ZN15OpaquePMPrinter19SetPaperListForMenuEPK9__CFArray, __ZN15OpaquePMPrinter22IsPrinterDirectConnectEv, 
+                       __ZN18OpaquePMPageFormat21PJCValidPageFormatKeyEPS_, __ZN18PMTicketBaseObject12GetTicketRefEv, 
+                       __ZN18PMTicketBaseObject12SetTicketRefEP17OpaquePMTicketRef, 
                        __ZN18PMTicketBaseObject23ReleaseAndReplaceTicketEP17OpaquePMTicketRef, 
                        __ZN20OpaquePMPrintSession10ClearErrorEv, __ZN20OpaquePMPrintSession10SetPreviewEhj, 
                        __ZN20OpaquePMPrintSession12GetJobTicketEv, __ZN20OpaquePMPrintSession16GetXPCConnectionEv, 
@@ -804,11 +765,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           01C30E15-D0D3-3C60-ADCD-6645EE728649
+    value:           FE3CE7F1-B68D-344F-9D27-30E171CFFBA8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           64A4C47A-BC7F-3C49-8ACF-D95B12EB5A63
+    value:           DE7DA4A1-F75B-3EEF-A910-D36D94826195
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1203,11 +1164,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           19106DFB-75CF-3160-B7E5-D529D18D2F28
+    value:           072910C8-2250-3525-A4BD-EB47540A28F7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52B7FA95-369B-32B7-8923-537D81300857
+    value:           2332F71C-26EA-3A98-AE66-809FB60D0186
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1216,7 +1177,8 @@ exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CancelSpokenNotification, _CancelSpokenNotificationForProcess, 
                        _CancelTalkingAlert, _ContinueSpeech, _CopyAvailableIntervals, 
-                       _CopyAvailablePhrases, _CopyIdentifierStringForVoiceSpec, 
+                       _CopyAvailablePhrases, _CopyIdentifierStringForPreferredVoiceInListWithLocale, 
+                       _CopyIdentifierStringForPreferredVoiceWithLocale, _CopyIdentifierStringForVoiceSpec, 
                        _CopyPhonemesFromText, _CopySpeechProperty, _CopySpeechSynthesisVoicesForMode, 
                        _CopyTimeAnnouncementsPreferences, _CountVoices, _CreateSpeechLanguageLocale, 
                        _DisposeSpeechChannel, _GetIdentifierStringForPreferredVoiceInListWithLocale, 
@@ -1365,7 +1327,7 @@ exports:
                        __ZN19SpeechChannelHandle20CopyVoiceDescriptionEPK9VoiceSpecP16VoiceDescription, 
                        __ZN19SpeechChannelHandle22OutputToFileDescriptorEPKv, __ZN19SpeechChannelHandle32CopyIdentifierStringForVoiceSpecEPK9VoiceSpec, 
                        __ZN19SpeechChannelHandle32MakeVoiceSpecForIdentifierStringEPK10__CFStringP9VoiceSpec, 
-                       __ZN19SpeechChannelHandle36GetIdentifierStringForPreferredVoiceEPK9__CFArrayPK10__CFLocale, 
+                       __ZN19SpeechChannelHandle37CopyIdentifierStringForPreferredVoiceEPK9__CFArrayPK10__CFLocale, 
                        __ZN19SpeechChannelHandle8ShutdownEv, __ZN19SpeechChannelHandle9SetRefConEPv, 
                        __ZN19SpeechChannelHandleC1Ev, __ZN19SpeechChannelHandleC2Ev, 
                        __ZN19SpeechChannelHandleD1Ev, __ZN19SpeechChannelHandleD2Ev, 

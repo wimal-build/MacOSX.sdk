@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           88501A84-9510-3A47-B3C5-D5050A7C154D
+    value:           CE80202A-E606-3EF3-80CC-C70CFDE160F0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9DACDE0B-D01E-384F-957C-F6A272066F84
+    value:           58C0F376-0F02-3731-9CB9-95EADC606AD4
 install-name:    '/System/Library/PrivateFrameworks/MobileSoftwareUpdate.framework/Versions/A/MobileSoftwareUpdate'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -24,24 +24,28 @@ exports:
                        _MSURetrievePreviousUpdateDate, _MSURetrievePreviousUpdateFirstToleratedFailure, 
                        _MSURetrievePreviousUpdateResults, _MSURetrievePreviousUpdateState, 
                        _MSUSuspendUpdate, _kCFErrorDomainMobileSoftwareUpdate, _kCFErrorDomainPersonalization, 
-                       _kMSUOptionsAdditionalBootTimeInstalls, _kMSUOptionsBrainLocationKey, 
-                       _kMSUOptionsDoNotFailBack, _kMSUOptionsKeyAllowSpecialCaseDeletions, 
-                       _kMSUOptionsKeyAlternateBlessTargetUUID, _kMSUOptionsKeyAppleConnectCredentials, 
-                       _kMSUOptionsKeyAppleConnectCredentialsSubkeyAccountName, _kMSUOptionsKeyAppleConnectCredentialsSubkeyPassword, 
-                       _kMSUOptionsKeyAppleConnectSsoToken, _kMSUOptionsKeyBootedOSUUID, 
-                       _kMSUOptionsKeyBootedOSVersion, _kMSUOptionsKeyBridgeOSDownloadDirectory, 
-                       _kMSUOptionsKeyBridgeOSIgnoreMinimumVersionCheck, _kMSUOptionsKeyBridgeOSVersionToInstall, 
-                       _kMSUOptionsKeyBuild, _kMSUOptionsKeyClientProvidedTargetUUID, 
-                       _kMSUOptionsKeyCoreDeviceDeviceBoardID, _kMSUOptionsKeyCoreDeviceDeviceClass, 
-                       _kMSUOptionsKeyCoreDeviceHWModelString, _kMSUOptionsKeyCoreDeviceInformation, 
-                       _kMSUOptionsKeyCoreDeviceProductType, _kMSUOptionsKeyCoreDeviceReleaseType, 
-                       _kMSUOptionsKeyDidRequestEraseInstall, _kMSUOptionsKeyDoNotPatch, 
-                       _kMSUOptionsKeyDoNotPersonalize, _kMSUOptionsKeyEnableBridgeOSInstall, 
+                       _kMSUNRDUpdateAttributesDictionaryKey, _kMSUOptionsAdditionalBootTimeInstalls, 
+                       _kMSUOptionsBrainLocationKey, _kMSUOptionsDoNotFailBack, _kMSUOptionsKeyAllowSameVersion, 
+                       _kMSUOptionsKeyAllowSpecialCaseDeletions, _kMSUOptionsKeyAlternateBlessTargetUUID, 
+                       _kMSUOptionsKeyAppleConnectCredentials, _kMSUOptionsKeyAppleConnectCredentialsSubkeyAccountName, 
+                       _kMSUOptionsKeyAppleConnectCredentialsSubkeyPassword, _kMSUOptionsKeyAppleConnectSsoToken, 
+                       _kMSUOptionsKeyBootedOSUUID, _kMSUOptionsKeyBootedOSVersion, 
+                       _kMSUOptionsKeyBridgeOSDownloadDirectory, _kMSUOptionsKeyBridgeOSIgnoreMinimumVersionCheck, 
+                       _kMSUOptionsKeyBridgeOSVersionToInstall, _kMSUOptionsKeyBuild, 
+                       _kMSUOptionsKeyClientProvidedTargetUUID, _kMSUOptionsKeyCoreDeviceDeviceBoardID, 
+                       _kMSUOptionsKeyCoreDeviceDeviceClass, _kMSUOptionsKeyCoreDeviceHWModelString, 
+                       _kMSUOptionsKeyCoreDeviceInformation, _kMSUOptionsKeyCoreDeviceProductType, 
+                       _kMSUOptionsKeyCoreDeviceReleaseType, _kMSUOptionsKeyDescriptorAudienceType, 
+                       _kMSUOptionsKeyDescriptorPreferredUpdateType, _kMSUOptionsKeyDidRequestEraseInstall, 
+                       _kMSUOptionsKeyDoNotPatch, _kMSUOptionsKeyDoNotPersonalize, 
+                       _kMSUOptionsKeyEnableAlternateUpdateRequest, _kMSUOptionsKeyEnableBridgeOSInstall, 
                        _kMSUOptionsKeyEnableEmbeddedOSInstall, _kMSUOptionsKeyEnableManagedRequest, 
                        _kMSUOptionsKeyEnableOSPersonalization, _kMSUOptionsKeyEventStats, 
                        _kMSUOptionsKeyFirstPreflightPhase, _kMSUOptionsKeyGenericUpdaterInfoOverrides, 
                        _kMSUOptionsKeyIcefallSEUpdaterInfoOverride, _kMSUOptionsKeyIsMinorOSUpdate, 
                        _kMSUOptionsKeyLocalAuthenticationContextKey, _kMSUOptionsKeyLocalAuthenticationUserIDKey, 
+                       _kMSUOptionsKeyMSUNRDControllerSupportsRecoveryOS, _kMSUOptionsKeyMSUNRDUpdateError, 
+                       _kMSUOptionsKeyMSUNRDUpdateRequired, _kMSUOptionsKeyMSUNRDUpdateResult, 
                        _kMSUOptionsKeyMediumSecurityDowngrade, _kMSUOptionsKeyPatchdCRCFailOnce, 
                        _kMSUOptionsKeyPatchdFailAt, _kMSUOptionsKeyPatchdFailureType, 
                        _kMSUOptionsKeyPersonalizationServerURL, _kMSUOptionsKeyPersonalizationVariant, 

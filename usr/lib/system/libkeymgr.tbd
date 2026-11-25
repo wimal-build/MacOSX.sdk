@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1A66B854-350D-3064-A606-2D9BFE71C400
+    value:           CCF77FC2-C655-30F7-AE37-9470E1C91C88
   - target:          x86_64-maccatalyst
-    value:           1A66B854-350D-3064-A606-2D9BFE71C400
+    value:           CCF77FC2-C655-30F7-AE37-9470E1C91C88
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           398F9023-1475-3516-9EA6-85C00527229E
+    value:           7B91E34D-FEF4-3CAB-ABA5-B2CBCD2BCDC0
   - target:          arm64e-maccatalyst
-    value:           398F9023-1475-3516-9EA6-85C00527229E
+    value:           7B91E34D-FEF4-3CAB-ABA5-B2CBCD2BCDC0
 install-name:    '/usr/lib/system/libkeymgr.dylib'
 current-version: 31
 parent-umbrella:

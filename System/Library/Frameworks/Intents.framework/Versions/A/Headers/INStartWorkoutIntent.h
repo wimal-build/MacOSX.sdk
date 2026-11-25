@@ -2,7 +2,7 @@
 //  INStartWorkoutIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -95,19 +95,19 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveWorkoutNameForStartWorkout:(INStartWorkoutIntent *)intent
-                    withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveWorkoutName(for:with:));
+                           withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveWorkoutName(for:with:));
 
 - (void)resolveGoalValueForStartWorkout:(INStartWorkoutIntent *)intent
-                    withCompletion:(void (^)(INDoubleResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveGoalValue(for:with:));
+                         withCompletion:(void (^)(INDoubleResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveGoalValue(for:with:));
 
 - (void)resolveWorkoutGoalUnitTypeForStartWorkout:(INStartWorkoutIntent *)intent
-                    withCompletion:(void (^)(INWorkoutGoalUnitTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveWorkoutGoalUnitType(for:with:));
+                                   withCompletion:(void (^)(INWorkoutGoalUnitTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveWorkoutGoalUnitType(for:with:));
 
 - (void)resolveWorkoutLocationTypeForStartWorkout:(INStartWorkoutIntent *)intent
-                    withCompletion:(void (^)(INWorkoutLocationTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveWorkoutLocationType(for:with:));
+                                   withCompletion:(void (^)(INWorkoutLocationTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveWorkoutLocationType(for:with:));
 
 - (void)resolveIsOpenEndedForStartWorkout:(INStartWorkoutIntent *)intent
-                    withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveIsOpenEnded(for:with:));
+                           withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveIsOpenEnded(for:with:));
 
 @end
 

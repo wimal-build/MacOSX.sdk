@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C2B05BBB-8723-39DC-8188-CDE8137BCEB3
+    value:           72FCB168-8102-3C77-86CD-1307AD37BD36
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           07B6D7F0-A64F-35F7-BE3D-5FA6E031358B
+    value:           A822715A-6214-33F6-A48C-0E8C13D99648
 install-name:    '/System/Library/PrivateFrameworks/CoreFollowUpUI.framework/Versions/A/CoreFollowUpUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

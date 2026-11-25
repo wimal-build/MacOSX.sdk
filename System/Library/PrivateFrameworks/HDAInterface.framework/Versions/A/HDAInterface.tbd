@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ABA5D11F-CD65-3747-BBB9-5AD2C93EC348
+    value:           1556FC77-3CB5-3599-AB5A-1866AB73003B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           913A3E0E-605F-30E1-A971-B0B9BDD62B1A
+    value:           3C569990-2135-3339-B458-319B3B5F2E70
 install-name:    '/System/Library/PrivateFrameworks/HDAInterface.framework/Versions/A/HDAInterface'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -20,7 +20,7 @@ exports:
                        IOHDAudioCodecDeviceUserClient.appleHDADriverUserClientBuffer, 
                        IOHDAudioCodecDeviceUserClient.appleHDA_UserClientBuffer, 
                        IOHDAudioCodecDeviceUserClient.gDataPort, IOHDAudioCodecDeviceUserClient.gDriverObject, 
-                       IOHDAudioCodecDeviceUserClient.gMasterPort, IOHDAudioCodecDeviceUserClient.iOHDACodecDeviceUserClientBuffer, 
+                       IOHDAudioCodecDeviceUserClient.gMainPort, IOHDAudioCodecDeviceUserClient.iOHDACodecDeviceUserClientBuffer, 
                        IOHDAudioCodecDeviceUserClient.mCodecRegistryEntryID, IOHDAudioCodecDeviceUserClient.mCodecUserClientIndex, 
                        IOHDAudioCodecDeviceUserClient.mControllerRegistryEntryID, 
                        IOHDAudioCodecDeviceUserClient.mControllerUserClientIndex, 

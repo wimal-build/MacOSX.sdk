@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           029B5632-62B4-39F6-981C-BCA99C1FBF1D
+    value:           CD1AD5BA-470D-33FF-A864-5FC3A18AB7C3
   - target:          x86_64-maccatalyst
-    value:           029B5632-62B4-39F6-981C-BCA99C1FBF1D
+    value:           CD1AD5BA-470D-33FF-A864-5FC3A18AB7C3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0E5B3E8E-D999-3EBC-94E6-C66EA9BCDB46
+    value:           3A021C33-DD59-37F7-9A86-5CEED68FF9BA
   - target:          arm64e-maccatalyst
-    value:           0E5B3E8E-D999-3EBC-94E6-C66EA9BCDB46
+    value:           3A021C33-DD59-37F7-9A86-5CEED68FF9BA
 install-name:    '/usr/lib/system/libsystem_malloc.dylib'
-current-version: 317.100.9
+current-version: 374.100.5
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -55,7 +55,8 @@ exports:
                        _malloc_zone_print_ptr_info, _malloc_zone_realloc, _malloc_zone_register, 
                        _malloc_zone_statistics, _malloc_zone_unregister, _malloc_zone_valloc, 
                        _malloc_zones, _mstats, _pgm_diagnose_fault_from_crash_reporter, 
-                       _posix_memalign, _realloc, '_reallocarray$DARWIN_EXTSN', '_reallocarrayf$DARWIN_EXTSN', 
+                       _posix_memalign, _quarantine_diagnose_fault_from_crash_reporter, 
+                       _realloc, '_reallocarray$DARWIN_EXTSN', '_reallocarrayf$DARWIN_EXTSN', 
                        _scalable_zone_info, _scalable_zone_statistics, _set_malloc_singlethreaded, 
                        _stack_logging_enable_logging, _szone_check_counter, _szone_check_modulo, 
                        _szone_check_start, _tiny_print_region_free_list, _turn_off_stack_logging, 

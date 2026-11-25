@@ -2,7 +2,7 @@
 //  INSearchForMediaIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -80,7 +80,7 @@ API_UNAVAILABLE(macos)
  */
 
 - (void)resolveMediaItemsForSearchForMedia:(INSearchForMediaIntent *)intent
-                    withCompletion:(void (^)(NSArray<INSearchForMediaMediaItemResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveMediaItems(for:with:));
+                            withCompletion:(void (^)(NSArray<INSearchForMediaMediaItemResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveMediaItems(for:with:));
 
 @end
 

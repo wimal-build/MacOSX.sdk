@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           180330A0-E39E-3ACE-A9D0-4F8072853A43
+    value:           7B2E3C73-74C6-3B1E-A7A7-D4AF52B8D18E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A571F2CA-6CB9-3B40-A45A-05F52CE84E1B
+    value:           937E7902-13F8-31B3-9C62-4CCA3564B525
 install-name:    '/System/Library/Frameworks/InstallerPlugins.framework/Versions/A/InstallerPlugins'
 current-version: 815
 exports:

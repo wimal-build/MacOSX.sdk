@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7EF65883-07AF-3598-8872-C9E2BD8E92C5
+    value:           3E2D2071-204E-3537-97DC-C1A978B191B1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F0C27ED9-903D-3833-A6DE-9874E97D1848
+    value:           7459C234-F5D0-3F5E-94C2-1194729079CE
 install-name:    '/System/Library/PrivateFrameworks/iPod.framework/Versions/A/iPod'
 current-version: 25
 exports:

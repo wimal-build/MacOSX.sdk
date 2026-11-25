@@ -3,20 +3,30 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A4881CD-E86E-3B95-9F13-788D3CFDA4ED
+    value:           FAD4F254-B123-3185-BBDA-6F665180D161
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           71595CBB-D58B-3AE2-8ED0-F66AE6C8AC44
+    value:           8F39D776-7328-3E7A-800A-10B12738ADFD
 install-name:    '/System/Library/PrivateFrameworks/MobileObliteration.framework/Versions/A/MobileObliteration'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _Mobile_Obliterate, _Mobile_Obliterate_IsSupported, _kDisplayProgressBarKey, 
+    symbols:         [ _Mobile_Obliterate, _Mobile_Obliterate_IsSupported, _kCommandResultsKey, 
+                       _kDisplayProgressBarKey, _kIPCStatusComplete, _kIPCStatusError, 
+                       _kIPCStatusKey, _kIgnoreInternalKey, _kMobileObliterationDeviceLockedError, 
                        _kMobileObliterationError, _kMobileObliterationInternalError, 
-                       _kMobileObliterationSuccess, _kObliterateDataPartition, _kObliterateEACS, 
+                       _kMobileObliterationInvalidSecretError, _kMobileObliterationRebootError, 
+                       _kMobileObliterationSuccess, _kObliterateDataPartition, _kObliterateMarkAndReboot, 
+                       _kObliterationBrickIncludesFirmwareKey, _kObliterationCallingProcessName, 
+                       _kObliterationCompletedOK, _kObliterationCompletedWithWarning, 
                        _kObliterationDelayAfterReplyKey, _kObliterationExclusionPathsKey, 
+                       _kObliterationFailedOSBroken, _kObliterationFailedOSValid, 
                        _kObliterationIgnoreMissingPathKey, _kObliterationManagedDeviceWipeKey, 
-                       _kObliterationMessageKey, _kObliterationTypeKey, _kObliterationTypeMarkStart, 
-                       _kObliterationTypeWipeAndBrick, _kObliterationVolumePathKey, 
+                       _kObliterationMessageKey, _kObliterationOptionsFilePathKey, 
+                       _kObliterationPreservedItemsDictKey, _kObliterationPreservedVolumeGroupUUID, 
+                       _kObliterationResultStateKey, _kObliterationResultStringKey, 
+                       _kObliterationReturnDictKey, _kObliterationTypeBrickOnly, 
+                       _kObliterationTypeKey, _kObliterationTypeMarkStart, _kObliterationTypeMarkerCreate, 
+                       _kObliterationTypeSafeWipe, _kObliterationTypeWipeAndBrick, 
                        _kSkipDataObliteration ]
 ...

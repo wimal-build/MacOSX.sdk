@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           82E12FE0-B46B-3A4D-BAEE-40FDBBA8533F
+    value:           E9C65118-778C-3D9B-80F9-91E7D7EE395B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9873076D-8A81-3731-A4D7-0D172108D4E0
+    value:           AA6644F3-F135-38C4-AF64-4367894416B2
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontValidation.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

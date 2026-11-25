@@ -30,11 +30,11 @@
  *  be modified in order to use these interfaces instead. No effort has been made to
  *  ensure that all operations in other OpenEXR implementations have a counterpart here.
  *
- *  AppleEXR does not provide pixel type conversion services. Image data is provided
- *  as stored (after decompression) at the same precision found in the file. Most OpenEXR
- *  content is HDR linear gamma and care must be exercised when converting to other
- *  formats, especially traditional unorm based formats. Please see vImageConvert_AnyToAny()
- *  or MPSImageConversion.
+ *  Except for the _rgba interfaces, AppleEXR does not provide pixel type conversion services.
+ *  Image data is provided as stored (after decompression) at the same precision found in the
+ *  file. Most OpenEXR content is HDR linear gamma and care must be exercised when converting
+ *  to other formats, especially traditional unorm based formats. Please see
+ *  vImageConvert_AnyToAny() or MPSImageConversion.
  *
  *  Feature requests and bug reports may be made through to the ImageIO Radar component.
  *  See https://feedbackassistant.apple.com.
@@ -73,7 +73,7 @@
  *                                              See also: axr_decoder_read_rgba_pixels, axr_decoder_create_rgba_colorspace.
  *      axr_decoder_copy                    create a copy of a axr_data_t
  *      axr_decoder_append_channel          Add a new channel to the list to be decoded
- *      axr_decoder_append_constant_value_channel   Add a new channel to the output. The channel doesnt occur in the EXR file. A constant value (e.g. 1.0) will be used.
+ *      axr_decoder_append_constant_value_channel   Add a new channel to the output. The channel doesn't occur in the EXR file. A constant value (e.g. 1.0) will be used.
  *      axr_decoder_clear_channel_list      Delete all of the channels in the list of channels to be decoded
  *      axr_decoder_create_colorspace       Create a CGColorSpaceRef to represent the colorspace of the decoded channels
  *      axr_decoder_create_rgba_colorspace  Like axr_decoder_create_colorspace, but intended for use with axr_decoder_read_rgba_pixels
@@ -105,7 +105,7 @@
  *      part may have many layers. Each layer may have many channels, etc. A rough description of what each is follows:
  *
  *          EXR file:   A serialized file container that starts with little endian int32_t 20000630
- *          part:       A set of layers with shared metadata like a unifed set of coordinates, color space,
+ *          part:       A set of layers with shared metadata like a unified set of coordinates, color space,
  *                      and time stamp. Only channels in the same part can be decoded together.
  *                      Since generally all channels in a part must be at least partially decoded to read
  *                      any channel in the part, the part serves to provide some file segmentation
@@ -205,6 +205,13 @@
 
 
 /*  Availability information for AppleEXR (Apple OpenEXR)
+ *  version 2:
+ *      Version 1 (and 2) requires that your application provide
+ *      image data in full tile sized chunks even when the image
+ *      was not a multiple of the tile size when compressing EXR
+ *      images. It did not however provide a way to find out what
+ *      the tile size is.  To remedy this problem axr_part_get_tile_size()
+ *      is added.
  *  version 1:
  *      Initial feature set.
  *         Decodes OpenEXR 1.7 and 2.0 images
@@ -216,15 +223,19 @@
 #ifdef AXR_SKIP_AVAILABILITY
 #   define AXR_AVAILABILITY_v1
 #   define AXR_ENUM_AVAILABILITY_v1
+#   define AXR_AVAILABILITY_v2
+#   define AXR_ENUM_AVAILABILITY_v2
 #else
 #   define AXR_AVAILABILITY_v1          __API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0))
 #   define AXR_ENUM_AVAILABILITY_v1     __API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0))
+#   define AXR_AVAILABILITY_v2          __API_AVAILABLE(macos(12.3),  ios(15.3), tvos(15.3), watchos(8.3))
+#   define AXR_ENUM_AVAILABILITY_v2     __API_AVAILABLE(macos(12.3),  ios(15.3), tvos(15.3), watchos(8.3))
 #endif
 
     
 /*! @abstract   Get AppleEXR dylib.current_version
  *  @return     A uint32_t encoding library version as major.minor.bugfix  (16.8.8)
- *              The major field of the build version corresponds with the compatability
+ *              The major field of the build version corresponds with the compatibility
  *              version (e.g. AXR_AVAILABILITY_v1) */
 uint32_t  axr_get_version(void)  AXR_AVAILABILITY_v1;
 
@@ -256,6 +267,8 @@ typedef enum axr_error_t
 {
     axr_error_success                       AXR_ENUM_AVAILABILITY_v1  =     0,
     
+    /* Please see axr_error_get_name below before needlessly duplicating this list */
+
     /* All failures are negative */
     axr_error_invalid_parameter             AXR_ENUM_AVAILABILITY_v1  =    -1,
     axr_error_unknown_file_type             AXR_ENUM_AVAILABILITY_v1  =    -2,
@@ -276,6 +289,8 @@ typedef enum axr_error_t
 #else
 OS_ENUM( axr_error, long,
     axr_error_success                       AXR_ENUM_AVAILABILITY_v1  =     0,
+    
+    /* Please see axr_error_get_name below before needlessly duplicating this list */
     
     /* All failures are negative */
     axr_error_invalid_parameter             AXR_ENUM_AVAILABILITY_v1  =    -1,
@@ -355,7 +370,7 @@ const char * __nonnull axr_error_get_name( axr_error_t error ) AXR_AVAILABILITY_
  *
  *  @abstract   Flags to influence the operation of Apple EXR
  *  @constant   axr_flags_default                                                       Default operation
- *  @constant   axr_flags_skip_parameter_checking                         Assume parameters are sane and proceed blindly forward withput parameter error checking.
+ *  @constant   axr_flags_skip_parameter_checking                         Assume parameters are sane and proceed blindly forward without parameter error checking.
  *  @constant   axr_flags_print_debug_info                                       Print additional debug info to stderr in case of error
  *  @constant   axr_flags_disable_multithreading                              Run entirely in the calling thread. May be multithreaded otherwise.
  *  @constant   axr_flags_disable_automatic_line_order_handling   Turn off automatic image flipping for axr_line_order_decreasing_y cases  (See discussion)
@@ -408,17 +423,17 @@ size_t axr_flags_get_name( char * __nonnull buf,
 #if defined(DOXYGEN)
 typedef enum axr_type_t
 {
-    axr_type_uint                    AXR_ENUM_AVAILABILITY_v1  =   0,          //*<  uint32_t
-    axr_type_half                    AXR_ENUM_AVAILABILITY_v1  =   1,          //*<  __fp16 */
-    axr_type_float                   AXR_ENUM_AVAILABILITY_v1  =   2,          //*<  float */
+    axr_type_uint                    AXR_ENUM_AVAILABILITY_v1  =   0,          //*<  uint32_t   */
+    axr_type_half                    AXR_ENUM_AVAILABILITY_v1  =   1,          //*<  __fp16     */
+    axr_type_float                   AXR_ENUM_AVAILABILITY_v1  =   2,          //*<  float      */
     
     /* other values are reserved */
 };
 #else
 OS_ENUM( axr_type, uint32_t,
-    axr_type_uint                    AXR_ENUM_AVAILABILITY_v1  =   0,          //*<  uint32_t
-    axr_type_half                    AXR_ENUM_AVAILABILITY_v1  =   1,          //*<  __fp16 */
-    axr_type_float                   AXR_ENUM_AVAILABILITY_v1  =   2,          //*<  float */
+    axr_type_uint                    AXR_ENUM_AVAILABILITY_v1  =   0,          //*<  uint32_t   */
+    axr_type_half                    AXR_ENUM_AVAILABILITY_v1  =   1,          //*<  __fp16     */
+    axr_type_float                   AXR_ENUM_AVAILABILITY_v1  =   2,          //*<  float      */
 
     /* other bits are reserved */
 );
@@ -443,9 +458,9 @@ const char * __nonnull axr_type_get_name( axr_type_t type ) AXR_AVAILABILITY_v1;
 #if defined(DOXYGEN)
 typedef enum axr_level_mode_t
 {
-    axr_level_mode_one_level         AXR_ENUM_AVAILABILITY_v1  =   0U,          //*<  flat image
-    axr_level_mode_mipmap            AXR_ENUM_AVAILABILITY_v1  =   1U,          //*<  mipmap */
-    axr_level_mode_ripmap            AXR_ENUM_AVAILABILITY_v1  =   2U,          //*<  ripmap */
+    axr_level_mode_one_level         AXR_ENUM_AVAILABILITY_v1  =   0U,         //*<  flat image */
+    axr_level_mode_mipmap            AXR_ENUM_AVAILABILITY_v1  =   1U,         //*<  mipmap */
+    axr_level_mode_ripmap            AXR_ENUM_AVAILABILITY_v1  =   2U,         //*<  ripmap */
     axr_level_mode_format_mask       AXR_ENUM_AVAILABILITY_v1  = 0xfU,         //*<  bits encoding for level mode */
 
     axr_level_mode_round_down        AXR_ENUM_AVAILABILITY_v1  =   0U << 4,    //*<  round odd dimensions down when downsampling */
@@ -456,9 +471,9 @@ typedef enum axr_level_mode_t
 };
 #else
 OS_ENUM( axr_level_mode, uint32_t,
-    axr_level_mode_one_level         AXR_ENUM_AVAILABILITY_v1  =   0U,          //*<  flat image
-    axr_level_mode_mipmap            AXR_ENUM_AVAILABILITY_v1  =   1U,          //*<  mipmap */
-    axr_level_mode_ripmap            AXR_ENUM_AVAILABILITY_v1  =   2U,          //*<  ripmap */
+    axr_level_mode_one_level         AXR_ENUM_AVAILABILITY_v1  =   0U,         //*<  flat image */
+    axr_level_mode_mipmap            AXR_ENUM_AVAILABILITY_v1  =   1U,         //*<  mipmap */
+    axr_level_mode_ripmap            AXR_ENUM_AVAILABILITY_v1  =   2U,         //*<  ripmap */
     axr_level_mode_format_mask       AXR_ENUM_AVAILABILITY_v1  = 0xfU,         //*<  bits encoding for level mode */
 
     axr_level_mode_round_down        AXR_ENUM_AVAILABILITY_v1  =   0U << 4,    //*<  round odd dimensions down when downsampling */
@@ -559,7 +574,7 @@ const char * __nonnull axr_channel_type_get_name( axr_channel_type_t type ) AXR_
  *  @constant   axr_compression_rle       split into even and odd bytes and run length encoded. (l)ossless)
  *  @constant   axr_compression_zips    split into even and odd bytes and compressed with zlib  (lossless)
  *  @constant   axr_compression_zip      split into even and odd bytes and compressed with zlib in larger tiles (lossless)
- *  @constant   axr_compression_piz      wavelet transform, ordinal transform, huffman encoded (lossy?)
+ *  @constant   axr_compression_piz      wavelet transform, ordinal transform, Huffman encoded (lossy?)
  *  @constant   axr_compression_pxr24  each channel byte split into a separate stream and compressed with zlib. last 8 LSBs of float32s rounded off. lossless for fp16 and uint32. lossy for fp32
  *  @constant   axr_compression_b44     each 4x4 block is stored as difference vs. top left pixel with some truncation  (lossy) Excellent for random access into image subregions
  *  @constant   axr_compression_b44a   Same as B44 but an additional smaller encoding for constant color blocks/alpha is added  (lossy)  Not as good for random access into image
@@ -1239,15 +1254,15 @@ __nonnull axr_data_t axr_decoder_get_data( __nonnull axr_decoder_t data) AXR_AVA
  *              reconstruction or the B44 transform. Importantly, the first pass is generally very
  *              serial and not dynamically addressable due to variable code word size and lack of
  *              restart markers or other context clues. The second pass is typically very parallel, easily
- *              vectorizeable and trivial to calculate the location of data leading to any particular pixel.
+ *              vectorizable and trivial to calculate the location of data leading to any particular pixel.
  *
  *              Because prior to 1st pass decompression the file contents are generally not dynamically addressable
  *              below part and chunk granularity, this library may have to do 1st pass decompression on much
  *              more data than is ultimately needed to fulfil the request. For this purpose, image subregions are
- *              rounded outward to the chunks (tiles) that contain them, and there is no dynamic addessability
+ *              rounded outward to the chunks (tiles) that contain them, and there is no dynamic addressability
  *              for channels at all. So, if one channel is needed from a part with 20 channels, the library might be
  *              forced to do 1st pass decoding on all 20 channels to retrieve the one requested.  Since the first pass
- *              may dominate the total decompression time -- recall this stage is also usually not vectorizeable or
+ *              may dominate the total decompression time -- recall this stage is also usually not vectorizable or
  *              trivially multithreaded -- and may have to work on much more data than is needed and AppleEXR
  *              does not currently cache the first pass decoding results for use by later calls to axr_decoder_read_planes
  *              or axr_decoder_read_pixels -- they are big -- it is important that your application acts to minimize the 1st
@@ -1281,10 +1296,10 @@ __nonnull axr_data_t axr_decoder_get_data( __nonnull axr_decoder_t data) AXR_AVA
  * *
  *  @param  decoder      The decoder object that specifies which part of the data to read
  *  @param  destination     A pointer to the top left corner of the place to write the output data. See discussion
- *                          above for special treatment of axr_line_order_decreasing_y.
- *                          Note that addressing here is different from OpenEXR. The OpenEXR setFrameBuffer( ptr, ...)
- *                          call expects ptr to point to {0,0} in the dataWindow coordinate space. Whereas,
- *                          AppleEXR, the destination poiinter points to {dataWindow.min.x, dataWindow.min.y}
+ *                       above for special treatment of axr_line_order_decreasing_y.
+ *                       Note that addressing here is different from OpenEXR. The OpenEXR setFrameBuffer( ptr, ...)
+ *                       call expects ptr to point to {0,0} in the dataWindow coordinate space. Whereas,
+ *                       AppleEXR, the destination pointer points to {dataWindow.min.x, dataWindow.min.y}
  *  @param  destinationRowBytes  The distance in bytes from a sample to the next vertically adjacent sample in the destination buffer. Supports negative rowBytes. See  discussion above for special treatment of axr_line_order_decreasing_y
  *  @param  flags        Options to control the decode process
  *  @return axr_error_success if the operation succeeds.  Another axr_error code otherwise.
@@ -1350,15 +1365,15 @@ typedef enum  { axr_pixel_data_current AXR_ENUM_AVAILABILITY_v1 = 0 } axr_pixel_
  *              reconstruction or the B44 transform. Importantly, the first pass is generally very
  *              serial and not dynamically addressable due to variable code word size and lack of
  *              restart markers or other context clues. The second pass is typically very parallel, easily
- *              vectorizeable and trivial to calculate the location of data leading to any particular pixel.
+ *              vectorizable and trivial to calculate the location of data leading to any particular pixel.
  *
  *              Because prior to 1st pass decompression the file contents are generally not dynamically addressable
  *              below part and chunk granularity, this library may have to do 1st pass decompression on much
- *              more data than is ultimately needed to fulfil the request. For this purpose, image subregions are
- *              rounded outward to the chunks (tiles) that contain them, and there is no dynamic addessability
+ *              more data than is ultimately needed to fulfill the request. For this purpose, image subregions are
+ *              rounded outward to the chunks (tiles) that contain them, and there is no dynamic addressability
  *              for channels at all. So, if one channel is needed from a part with 20 channels, the library might be
  *              forced to do 1st pass decoding on all 20 channels to retrieve the one requested.  Since the first pass
- *              may dominate the total decompression time -- recall this stage is also usually not vectorizeable or
+ *              may dominate the total decompression time -- recall this stage is also usually not vectorizable or
  *              trivially multithreaded -- and may have to work on much more data than is needed and AppleEXR
  *              does not currently cache the first pass decoding results for use by later calls to axr_decoder_read_planes
  *              or axr_decoder_read_pixels -- they are big -- it is important that your application acts to minimize the 1st
@@ -1600,7 +1615,7 @@ void axr_part_set_preview( __nonnull axr_part_t part,
  *  @param  attributeName   A '\0' terminated C-string. See URL in discussion for attribute names.
  *  @param  attributeType   A '\0' terminated C string. See URL in discussion for type names.
  *  @param  attributeSize   The number of bytes in the buffer pointed to by attributeBytes
- *  @param  attributeBytes  A pointer to the data to be store in the EXR metadata. Data should be byteswapped to little endian order. */
+ *  @param  attributeBytes  A pointer to the data to be store in the EXR metadata. Data should be byte-swapped to little endian order. */
 axr_error_t axr_part_append_attribute( __nonnull axr_part_t part,
                                        const char * __nonnull attributeName,
                                        const char * __nonnull attributeType,
@@ -1623,23 +1638,36 @@ axr_part_create_colorspace( __nonnull axr_part_t part,
     
 /*! @abstract  Get the number of rip levels in X and Y dimensions */
 axr_size_t axr_part_get_rip_level_counts( __nonnull axr_part_t part );
+
+/*! @abstract Get the tile size used by the part.
+ *  @discussion This information may be needed to correctly size the pixel information passed to the axr_data_provider_read_t.
+ *  @part            The part
+ *  @return   The tile size used for encoding the part.   */
+axr_size_t axr_part_get_tile_size( __nonnull axr_part_t part ) AXR_AVAILABILITY_v2;
     
 /*! @abstract called to read more pixel data from your data store
  *  @discussion  The callback will not be called until after your application calls axr_encoder_compress
- *                When possible, the data copied to buf should be materialized  lazily to avoid using too much memory.
+ *               When possible, the data copied to buf should be materialized  lazily to avoid using too much memory.
+ *               The encoder will always ask for a full tile sized piece of data, even when a full tile is not available,
+ *               This can happen when the image is not a multiple of the tile size. Your application should fill the
+ *               right and bottom edges of the image, as needed, with extra padding to fill out these regions.
+ *               The data will actually be encoded into the file, so it would be best to either zero the extra regions
+ *               or fill them with the nearest valid pixel value.  Please see axr_part_get_tile_size to get
+ *               the expected tile size for the part.
  *  @param buf    The location to copy the data to
  *  @param size   The number of bytes to copy
  *  @param levelIndex   This is the mip level. If it is a rip level, then ripLevelX = levelIndex % ripLevelCountX.  ripLevelY = levelIndex / ripLevelCountX.
+ *  @param levelSize     The size of the current mip level. For mip level index 0, this is the full image size.
  *  @param userInfo  The userInfo pointer passed to axr_data_provider_create. This is your object. AppleEXR doesn't know what it is.
  *  @return  The number of bytes copied in.   If there is an error, return one of the following error codes:
  *              0:   The read operation is suspended. Do no further encoding.
  *              -1:  There is no more data
  *              -2:  An unrecoverable error occurred. */
 typedef long (*axr_data_provider_read_t)( void * __nonnull buf,
-                                        size_t size,
-                                        unsigned long levelIndex,
-                                        axr_size_t levelSize,
-                                        uintptr_t userInfo ) AXR_AVAILABILITY_v1;
+                                          size_t size,
+                                          unsigned long levelIndex,
+                                          axr_size_t levelSize,
+                                          uintptr_t userInfo ) AXR_AVAILABILITY_v1;
 
 /*! @abstract   Called when the encode operation described by axr_part_append_channels is finished.
  *  @discussion This provides you with an opportunity to destroy or release storage used during encode operations.
@@ -1663,9 +1691,9 @@ typedef void (*axr_data_provider_release_t)( uintptr_t userInfo ) AXR_AVAILABILI
  *              the encoder may work on multiple parts or channel groups concurrently on different threads at the same
  *              time. Your readFunc/releaseFunc callbacks must take appropriate steps to ensure this does
  *              not cause problems for your internal application state. If this can not be accomplished, you may
- *              pass axr_flags_disable_multitheading to axr_encoder_compress to force single threaded operation.
+ *              pass axr_flags_disable_multithreading to axr_encoder_compress to force single threaded operation.
  *              A significant performance penalty may apply in such cases, so it is preferred that your application strive
- *              toward thread safety.  Data acces within a particular channel group (as deliniated by each separate call to
+ *              toward thread safety.  Data access within a particular channel group (as delineated by each separate call to
  *              axr_part_append_channels) is serialized.
  *
  *  @param   part  The part to append the channels
@@ -1674,8 +1702,8 @@ typedef void (*axr_data_provider_release_t)( uintptr_t userInfo ) AXR_AVAILABILI
  *                     with the same part. The channels will all appear to be part of the same
  *                     layer.
  *  @param   channelType  The data type shared by the channels appended by this call
- *  @param   xSampling      The sampling rate in the x dimension.       Values > 1 indicate downsampled channels
- *  @param   ySampling      The sampling rate in the x dimension.        Values > 1 indicate downsampled channels
+ *  @param   xSampling      The sampling rate in the x dimension.        Values > 1 indicate downsampled channels
+ *  @param   ySampling      The sampling rate in the y dimension.        Values > 1 indicate downsampled channels
  *  @param   perceptuallyLinear   True indicates the data is perceptually linear, such as L*a*b* / YCbCr chroma or hue.  Unless you are sure, false is recommended.
  *  @param   channelList   A pointer to a flat array of axr_channel_type_t. The number of elements in the array is given by channel count
  *                       The ordering of the channels should match the ordering of the channels in the interleaved pixel buffer in memory.
@@ -1744,7 +1772,7 @@ typedef void (*axr_encoder_storage_destroy_proc_t)( __nullable axr_encoder_stora
  *               your applications storage object will be serialized.
  *
  *               Flags:
- *                  axr_flags_disable_multitheading — Pass this flag to force the compressor to run synchronously.
+ *                  axr_flags_disable_multithreading — Pass this flag to force the compressor to run synchronously.
  *  @param encoder           A valid AppleEXR encoder
  *  @param storage           A pointer to your storage object.  AppleEXR doesn't know what this object is and will interact with it only through writeProc, seekProc, and destroyProc
  *  @param writeProc       A pointer to a function to write bytes to the storage

@@ -4,30 +4,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E26C7825-8331-3BCC-B734-CA346016BEA2
+    value:           4316E8F2-BE49-38C6-8507-40CA7F705899
   - target:          x86_64-maccatalyst
-    value:           E26C7825-8331-3BCC-B734-CA346016BEA2
+    value:           4316E8F2-BE49-38C6-8507-40CA7F705899
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C4EF365D-6BE8-33DB-AD34-783F2C4C7A91
+    value:           5A9AD2D7-F268-34B6-914E-88CE480D14EE
   - target:          arm64e-maccatalyst
-    value:           C4EF365D-6BE8-33DB-AD34-783F2C4C7A91
+    value:           5A9AD2D7-F268-34B6-914E-88CE480D14EE
 install-name:    '/System/Library/PrivateFrameworks/EmailCore.framework/Versions/A/EmailCore'
-current-version: 3654.80
+current-version: 3696.80.82
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ECAccountCacheKeyEnabled, _ECAccountCacheKeyParentAccount, 
-                       _ECAccountSchemeDataAccess, _ECAccountSchemeEWS, _ECAccountSchemeIMAP, 
-                       _ECAccountSchemeLocal, _ECAccountSchemePOP, _ECAllowNetworkActivityButLog, 
-                       _ECAssertNetworkActivityAllowed, _ECAuthSchemeAPOP, _ECAuthSchemeAppleToken, 
-                       _ECAuthSchemeClearText, _ECAuthSchemeCramMD5, _ECAuthSchemeDigestMD5, 
-                       _ECAuthSchemeExternal, _ECAuthSchemeGSSAPI, _ECAuthSchemeKPop, 
-                       _ECAuthSchemeKerberos4, _ECAuthSchemeNTLM, _ECAuthSchemeNoAuthentication, 
-                       _ECAuthSchemeOAuth2, _ECAuthenticationErrorDomain, _ECAuthenticationSchemeAPOP, 
+                       _ECAllowNetworkActivityButLog, _ECAssertNetworkActivityAllowed, 
+                       _ECAuthSchemeAPOP, _ECAuthSchemeAppleToken, _ECAuthSchemeClearText, 
+                       _ECAuthSchemeCramMD5, _ECAuthSchemeDigestMD5, _ECAuthSchemeExternal, 
+                       _ECAuthSchemeGSSAPI, _ECAuthSchemeKPop, _ECAuthSchemeKerberos4, 
+                       _ECAuthSchemeNTLM, _ECAuthSchemeNoAuthentication, _ECAuthSchemeOAuth2, 
+                       _ECAuthenticationErrorDomain, _ECAuthenticationSchemeAPOP, 
                        _ECAuthenticationSchemeCramMD5, _ECAuthenticationSchemeDigestMD5, 
                        _ECAuthenticationSchemeGSSAPI, _ECAuthenticationSchemeKerberos4, 
                        _ECAuthenticationSchemeNTLM, _ECBeginDisallowingNetworkActivity, 
@@ -41,6 +40,8 @@ exports:
                        _ECGmailLabelTrash, _ECHeadersForPromotionalCategorization, 
                        _ECLocalActionReplayErrorDomain, _ECMailAccountsDidChangeNotification, 
                        _ECMailAccountsDidChangeNotificationAccountsNeedInitializationKey, 
+                       _ECMailAccountsDidChangeNotificationKeyAccountIdentifiers, 
+                       _ECMailAccountsDidChangeNotificationKeyPreviousAccountIdentifiers, 
                        _ECMailDataclassPropertyAccountDirectoryTildeAbbreviatedPath, 
                        _ECMailDataclassPropertyArchiveMailboxName, _ECMailDataclassPropertyBigMessageWarningSize, 
                        _ECMailDataclassPropertyCompactWhenClosingMailboxes, _ECMailDataclassPropertyDateOfLastSync, 
@@ -67,12 +68,13 @@ exports:
                        _ECMessageHeaderKeyContentLanguage, _ECMessageHeaderKeyContentLocation, 
                        _ECMessageHeaderKeyContentTransferEncoding, _ECMessageHeaderKeyContentType, 
                        _ECMessageHeaderKeyDKIMSignature, _ECMessageHeaderKeyDate, 
-                       _ECMessageHeaderKeyFrom, _ECMessageHeaderKeyImageArchiveURL, 
-                       _ECMessageHeaderKeyInReplyTo, _ECMessageHeaderKeyListID, _ECMessageHeaderKeyListUnsubscribe, 
-                       _ECMessageHeaderKeyMIMEVersion, _ECMessageHeaderKeyMessageID, 
-                       _ECMessageHeaderKeyReceived, _ECMessageHeaderKeyReferences, 
-                       _ECMessageHeaderKeyRemoteAttachmentURL, _ECMessageHeaderKeyReplyTo, 
-                       _ECMessageHeaderKeyResentCC, _ECMessageHeaderKeyResentDate, 
+                       _ECMessageHeaderKeyFrom, _ECMessageHeaderKeyHMEAddress, _ECMessageHeaderKeyHMEDraft, 
+                       _ECMessageHeaderKeyImageArchiveURL, _ECMessageHeaderKeyInReplyTo, 
+                       _ECMessageHeaderKeyListID, _ECMessageHeaderKeyListUnsubscribe, 
+                       _ECMessageHeaderKeyListUnsubscribePost, _ECMessageHeaderKeyMIMEVersion, 
+                       _ECMessageHeaderKeyMessageID, _ECMessageHeaderKeyReceived, 
+                       _ECMessageHeaderKeyReferences, _ECMessageHeaderKeyRemoteAttachmentURL, 
+                       _ECMessageHeaderKeyReplyTo, _ECMessageHeaderKeyResentCC, _ECMessageHeaderKeyResentDate, 
                        _ECMessageHeaderKeyResentFrom, _ECMessageHeaderKeyResentMessageID, 
                        _ECMessageHeaderKeyResentTo, _ECMessageHeaderKeySubject, _ECMessageHeaderKeyTo, 
                        _ECMessageHeaderKeyUserAgent, _ECMessageHeaderKeyXAppleUnsubscribe, 
@@ -84,9 +86,12 @@ exports:
                        _ECSASLMechanismCramMD5, _ECSASLMechanismDigestMD5, _ECSASLMechanismExternal, 
                        _ECSASLMechanismGSSAPI, _ECSASLMechanismLogin, _ECSASLMechanismNTLM, 
                        _ECSASLMechanismOAuth2, _ECSASLMechanismPlain, _ECSASLMechanismPlainClientToken, 
+                       _ECTaggedHeaderParserTagHMEAddress, _ECTaggedHeaderParserTagHMEForwardingAddress, 
+                       _ECTaggedHeaderParserTagHMESenderAddress, _ECTaggedHeaderParserTagIsHMEReply, 
                        _ECWhiteMailboxNameGmail, _ECWhiteMailboxNameGoogleMail, _ECWhiteMailboxNameGoogleSpaceMail, 
                        __ECBeginAllowingMainThreadNetworking, __ECEndAllowingMainThreadNetworking, 
-                       __ECIsNetworkActivityAllowed, __ef_log_ECDKIMCryptoUtil, __ef_log_ECDKIMVerifier ]
+                       __ECIsNetworkActivityAllowed, __ef_log_ECDKIMCryptoUtil, __ef_log_ECDKIMVerifier, 
+                       __ef_log_ECTaggedHeaderParser ]
     objc-classes:    [ ECAPOPAuthScheme, ECAccount, ECAccountFactory, ECAccountsObserver, 
                        ECAngleBracketIDHash, ECAppleTokenAuthScheme, ECAuthScheme, 
                        ECAuthenticationScheme, ECCramMD5AuthScheme, ECDKIMCryptoUtil, 
@@ -95,6 +100,7 @@ exports:
                        ECEmailAddressFormatter, ECEmailAddressLists, ECEmailAddressParser, 
                        ECEmailCoreFramework, ECEncodedWordDecoder, ECEncodedWordEncoder, 
                        ECExchangeAccount, ECExternalAuthScheme, ECFlagChangeMessageAction, 
+                       ECFlagChangeMessageActionResults, ECFlagChangeMessageActionResultsBuilder, 
                        ECFlagChangeUndownloadedMessageAction, ECGSSAPIAuthScheme, 
                        ECGmailLabelChangeReplayer, ECHTMLStringAndMIMECharset, ECIDNADecoder, 
                        ECIDNAEncoder, ECIMAPAccount, ECIMAPAppendInfo, ECIMAPCopyInfo, 
@@ -103,10 +109,11 @@ exports:
                        ECLocalMessageActionResults, ECMessageFlagChange, ECMessageFlags, 
                        ECNTLMAuthScheme, ECNWActivity, ECNWConnectionWrapper, ECOAuth2AuthScheme, 
                        ECPOPAccount, ECPlainAuthScheme, ECRawMessageHeader, ECRawMessageHeaders, 
+                       ECRemoteContentParser, ECRemoteContentParserState, ECRemoteContentWebViewObserver, 
                        ECSASLAuthenticator, ECSASLClient, ECSMTPAccount, ECSecureMIMETrustEvaluation, 
                        ECServerMessage, ECSubject, ECSubjectFormatter, ECSubjectParser, 
-                       ECTransferActionIMAPReplayer, ECTransferActionReplayer, ECTransferMessageAction, 
-                       ECTransferMessageActionItem, ECTransferMessageActionResults, 
+                       ECTaggedHeaderParser, ECTransferActionIMAPReplayer, ECTransferActionReplayer, 
+                       ECTransferMessageAction, ECTransferMessageActionItem, ECTransferMessageActionResults, 
                        ECTransferUndownloadedActionIMAPReplayer, ECTransferUndownloadedMessageAction, 
                        _ECSubjectFormatterContext ]
 ...

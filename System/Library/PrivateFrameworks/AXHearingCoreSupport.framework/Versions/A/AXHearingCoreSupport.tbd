@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9B045CA0-557D-3B26-B941-A6CC571FDCB2
+    value:           CB4C05A8-031C-3E2C-82FB-B6799F2FE940
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           26C7D611-A152-379D-B4CB-D9431222C091
+    value:           70E3D158-83F9-365D-8AF8-7C86136ADC45
 install-name:    '/System/Library/PrivateFrameworks/AXHearingCoreSupport.framework/Versions/A/AXHearingCoreSupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

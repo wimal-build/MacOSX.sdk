@@ -29,7 +29,13 @@
 #ifndef XNU_LIBKERN_LIBKERN_CXX_BOUNDED_ARRAY_H
 #define XNU_LIBKERN_LIBKERN_CXX_BOUNDED_ARRAY_H
 
+#if !TAPI
+
+#if DRIVERKIT_FRAMEWORK_INCLUDE
+#include <DriverKit/bounded_ptr.h>
+#else
 #include <libkern/c++/bounded_ptr.h>
+#endif /* DRIVERKIT_FRAMEWORK_INCLUDE */
 #include <stddef.h>
 #include <os/base.h>
 
@@ -100,5 +106,7 @@ struct bounded_array {
 	}
 };
 } // end namespace libkern
+
+#endif /* !TAPI */
 
 #endif // !XNU_LIBKERN_LIBKERN_CXX_BOUNDED_ARRAY_H

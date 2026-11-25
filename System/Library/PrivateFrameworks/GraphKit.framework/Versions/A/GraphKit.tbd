@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5EDC6830-0A0E-3FC9-879F-2E45AA99939D
+    value:           DD11185D-DD07-392D-BEF3-31549DA904F6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BAA47739-E751-3D67-85FE-41370352A8BC
+    value:           56441E29-A1AF-356C-A801-543C3A7104BC
 install-name:    '/System/Library/PrivateFrameworks/GraphKit.framework/Versions/A/GraphKit'
 current-version: 25
 exports:

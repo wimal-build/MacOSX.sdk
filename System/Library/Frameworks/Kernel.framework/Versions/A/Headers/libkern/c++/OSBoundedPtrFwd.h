@@ -29,8 +29,15 @@
 #ifndef XNU_LIBKERN_LIBKERN_CXX_OS_BOUNDED_PTR_FWD_H
 #define XNU_LIBKERN_LIBKERN_CXX_OS_BOUNDED_PTR_FWD_H
 
+#if !TAPI
+
+#if DRIVERKIT_FRAMEWORK_INCLUDE
+#include <DriverKit/IOLib.h>
+#include <DriverKit/bounded_ptr_fwd.h>
+#else
 #include <kern/debug.h>
 #include <libkern/c++/bounded_ptr_fwd.h>
+#endif /* DRIVERKIT_FRAMEWORK_INCLUDE */
 
 namespace os_detail {
 struct panic_trapping_policy;
@@ -38,5 +45,7 @@ struct panic_trapping_policy;
 
 template <typename T>
 using OSBoundedPtr = libkern::bounded_ptr<T, os_detail::panic_trapping_policy>;
+
+#endif /* !TAPI */
 
 #endif /* !XNU_LIBKERN_LIBKERN_CXX_OS_BOUNDED_PTR_FWD_H */

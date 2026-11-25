@@ -107,7 +107,7 @@ nw_content_context_set_is_final(nw_content_context_t context,
 /*!
  * @function nw_content_context_get_expiration_milliseconds
  * @discussion Retrieve the number of milliseconds after which the content will expire.
- *		See nw_content_context_set_expiration_milliseconds for futher discussion.
+ *		See nw_content_context_set_expiration_milliseconds for further discussion.
  * @param context The context object
  * @result Returns content expiration, or 0 if not set.
  */
@@ -132,7 +132,7 @@ nw_content_context_set_expiration_milliseconds(nw_content_context_t context,
 /*!
  * @function nw_content_context_get_relative_priority
  * @discussion Get the relative priority for the content. See
- *		nw_content_context_set_relative_priority for futher discussion.
+ *		nw_content_context_set_relative_priority for further discussion.
  * @param context The context object
  * @result Returns the relative priority, between 0.0 (lowest priority)
  *		to 1.0 (highest priority). The default value is 0.5.
@@ -164,13 +164,13 @@ nw_content_context_set_relative_priority(nw_content_context_t context,
  *		completed. If any of the antecedents fail with an error, this content will
  *		fail as well.
  * @param context The context object
- * @param antecendent_context A context associated with content that should precede
+ * @param antecedent_context A context associated with content that should precede
  *		this content.
  */
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 void
 nw_content_context_set_antecedent(nw_content_context_t context,
-								  _Nullable nw_content_context_t antecendent_context);
+								  _Nullable nw_content_context_t antecedent_context);
 
 /*!
  * @function nw_content_context_copy_antecedent

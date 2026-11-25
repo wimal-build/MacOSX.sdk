@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           82E9EB7F-8B95-349D-AD0A-C6873715E055
+    value:           4CC27CD3-59DB-3093-BFCD-89B2005D1D53
   - target:          x86_64-maccatalyst
-    value:           82E9EB7F-8B95-349D-AD0A-C6873715E055
+    value:           4CC27CD3-59DB-3093-BFCD-89B2005D1D53
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD06C4BB-953D-32E6-83D0-5D676D9C2DE5
+    value:           E4DC2C31-7A07-3F7C-B47C-F8360A281CAD
   - target:          arm64e-maccatalyst
-    value:           FD06C4BB-953D-32E6-83D0-5D676D9C2DE5
+    value:           E4DC2C31-7A07-3F7C-B47C-F8360A281CAD
 install-name:    '/System/Library/PrivateFrameworks/HeimODAdmin.framework/Versions/A/HeimODAdmin'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

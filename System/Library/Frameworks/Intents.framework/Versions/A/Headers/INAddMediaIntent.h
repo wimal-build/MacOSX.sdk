@@ -2,7 +2,7 @@
 //  INAddMediaIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -86,10 +86,10 @@ API_UNAVAILABLE(macos)
  */
 
 - (void)resolveMediaItemsForAddMedia:(INAddMediaIntent *)intent
-                    withCompletion:(void (^)(NSArray<INAddMediaMediaItemResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveMediaItems(for:with:));
+                      withCompletion:(void (^)(NSArray<INAddMediaMediaItemResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveMediaItems(for:with:));
 
 - (void)resolveMediaDestinationForAddMedia:(INAddMediaIntent *)intent
-                    withCompletion:(void (^)(INAddMediaMediaDestinationResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveMediaDestination(for:with:));
+                            withCompletion:(void (^)(INAddMediaMediaDestinationResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveMediaDestination(for:with:));
 
 @end
 

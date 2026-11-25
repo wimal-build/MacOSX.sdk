@@ -2,7 +2,7 @@
 //  INPayBillIntentResponse.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResponse.h>
@@ -21,11 +21,11 @@ typedef NS_ENUM(NSInteger, INPayBillIntentResponseCode) {
     INPayBillIntentResponseCodeFailureRequiringAppLaunch,
     INPayBillIntentResponseCodeFailureCredentialsUnverified,
     INPayBillIntentResponseCodeFailureInsufficientFunds,
-} API_AVAILABLE(ios(10.3), watchos(3.2)) API_UNAVAILABLE(macos, tvos);
+} API_DEPRECATED("INPayBillIntentResponseCode is deprecated. There is no replacement.", ios(10.3, 15.0), watchos(3.2, 8.0)) API_UNAVAILABLE(macos, tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.3), watchos(3.2))
+API_DEPRECATED("INPayBillIntentResponse is deprecated. There is no replacement.", ios(10.3, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INPayBillIntentResponse : INIntentResponse
 

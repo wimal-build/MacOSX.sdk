@@ -655,59 +655,98 @@ typedef struct {
 	uint8_t reserved[64];
 } es_event_iokit_open_t;
 
+typedef enum {
+	// Task port obtained by calling e.g. task_for_pid(), where the caller
+	// obtains a task port for a process identified by pid.
+	ES_GET_TASK_TYPE_TASK_FOR_PID,
+	// Task port obtained by calling e.g. processor_set_tasks(), where the
+	// caller obtains a set of task ports.
+	ES_GET_TASK_TYPE_EXPOSE_TASK,
+	// Task port obtained by calling e.g. task_identity_token_get_task_port(),
+	// where the caller obtains a task port for a process identified by an
+	// identity token.  Task identity tokens generally have to be given up
+	// by the target process voluntarily prior to the conversion into task
+	// ports.
+	ES_GET_TASK_TYPE_IDENTITY_TOKEN,
+} es_get_task_type_t;
+
 /**
  * @brief Get a process's task control port
  *
  * @field target The process for which the task control port will be retrieved.
+ * @field type Type indicating how the process is obtaining the task port for
+ *        the target process.
+ *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task control
  * port (e.g. task_for_pid(), task_identity_token_get_task_port(),
  * processor_set_tasks() and other means).
  *
  * @note Task control ports were formerly known as simply "task ports".
+ *
+ * @note There are many legitimate reasons why a process might need to obtain
+ * a send right to a task control port of another process, not limited to intending
+ * to debug or suspend the target process.  For instance, frameworks and their
+ * daemons may need to obtain a task control port to fulfill requests made by the
+ * target process.  Obtaining a task control port is in itself not indicative of
+ * malicious activity.  Denying system processes acquiring task control ports may
+ * result in breaking system functionality in potentially fatal ways.
  */
 typedef struct {
 	es_process_t * _Nonnull target;
-	uint8_t reserved[64];
+	es_get_task_type_t type; /* field available only if message version >= 5 */
+	uint8_t reserved[60];
 } es_event_get_task_t;
 
 /**
  * @brief Get a process's task read port
  *
  * @field target The process for which the task read port will be retrieved.
+ * @field type Type indicating how the process is obtaining the task port for
+ *        the target process.
+ *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task read
  * port (e.g. task_read_for_pid(), task_identity_token_get_task_port()).
  */
 typedef struct {
 	es_process_t * _Nonnull target;
-	uint8_t reserved[64];
+	es_get_task_type_t type; /* field available only if message version >= 5 */
+	uint8_t reserved[60];
 } es_event_get_task_read_t;
 
 /**
  * @brief Get a process's task inspect port
  *
  * @field target The process for which the task inspect port will be retrieved.
+ * @field type Type indicating how the process is obtaining the task port for
+ *        the target process.
+ *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task inspect
  * port (e.g. task_inspect_for_pid(), task_identity_token_get_task_port()).
  */
 typedef struct {
 	es_process_t * _Nonnull target;
-	uint8_t reserved[64];
+	es_get_task_type_t type; /* field available only if message version >= 5 */
+	uint8_t reserved[60];
 } es_event_get_task_inspect_t;
 
 /**
  * @brief Get a process's task name port
  *
  * @field target The process for which the task name port will be retrieved.
+ * @field type Type indicating how the process is obtaining the task port for
+ *        the target process.
+ *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task name
  * port (e.g. task_name_for_pid(), task_identity_token_get_task_port()).
  */
 typedef struct {
 	es_process_t * _Nonnull target;
-	uint8_t reserved[64];
+	es_get_task_type_t type; /* field available only if message version >= 5 */
+	uint8_t reserved[60];
 } es_event_get_task_name_t;
 
 /**
@@ -825,6 +864,31 @@ typedef struct {
 	es_string_token_t target_name;
 	uint8_t reserved[64];
 } es_event_clone_t;
+
+/**
+ * @brief Copy a file using the copyfile syscall
+ *
+ * @field source The file that will be cloned
+ * @field target_file The file existing at the target path that will be overwritten
+ *                    by the copyfile operation.  NULL if no such file exists.
+ * @field target_dir The directory into which the `source` file will be copied
+ * @field target_name The name of the new file to which `source` will be copied
+ * @field mode Corresponds to mode argument of the copyfile syscall
+ * @field flags Corresponds to flags argument of the copyfile syscall
+ *
+ * @note Not to be confused with copyfile(3).
+ * @note Prior to macOS 12.0, the copyfile syscall fired open, unlink and auth
+ *       create events, but no notify create, nor write or close events.
+ */
+typedef struct {
+	es_file_t * _Nonnull source;
+	es_file_t * _Nullable target_file;
+	es_file_t * _Nonnull target_dir;
+	es_string_token_t target_name;
+	mode_t mode;
+	int32_t flags;
+	uint8_t reserved[56];
+} es_event_copyfile_t;
 
 /**
  * @brief File control
@@ -1072,6 +1136,70 @@ typedef struct {
 } es_event_remote_thread_create_t;
 
 /**
+ * @brief Notification that a process has called setuid().
+ *
+ * @field uid The uid argument to the setuid() syscall.
+ */
+typedef struct {
+	uid_t uid;
+	uint8_t reserved[64];
+} es_event_setuid_t;
+
+/**
+ * @brief Notification that a process has called setgid().
+ *
+ * @field gid The gid argument to the setgid() syscall.
+ */
+typedef struct {
+	uid_t gid;
+	uint8_t reserved[64];
+} es_event_setgid_t;
+
+/**
+ * @brief Notification that a process has called seteuid().
+ *
+ * @field euid The euid argument to the seteuid() syscall.
+ */
+typedef struct {
+	uid_t euid;
+	uint8_t reserved[64];
+} es_event_seteuid_t;
+
+/**
+ * @brief Notification that a process has called setegid().
+ *
+ * @field egid The egid argument to the setegid() syscall.
+ */
+typedef struct {
+	uid_t egid;
+	uint8_t reserved[64];
+} es_event_setegid_t;
+
+/**
+ * @brief Notification that a process has called setreuid().
+ *
+ * @field ruid The ruid argument to the setreuid() syscall.
+ * @field euid The euid argument to the setreuid() syscall.
+ */
+typedef struct {
+	uid_t ruid;
+	uid_t euid;
+	uint8_t reserved[64];
+} es_event_setreuid_t;
+
+/**
+ * @brief Notification that a process has called setregid().
+ *
+ * @field rgid The rgid argument to the setregid() syscall.
+ * @field egid The egid argument to the setregid() syscall.
+ */
+typedef struct {
+	uid_t rgid;
+	uid_t egid;
+	uint8_t reserved[64];
+} es_event_setregid_t;
+
+/**
  * Union of all possible events that can appear in an es_message_t
  */
 typedef union {
@@ -1080,6 +1208,7 @@ typedef union {
 	es_event_chroot_t chroot;
 	es_event_clone_t clone;
 	es_event_close_t close;
+	es_event_copyfile_t copyfile;
 	es_event_create_t create;
 	es_event_cs_invalidated_t cs_invalidated;
 	es_event_deleteextattr_t deleteextattr;
@@ -1125,6 +1254,12 @@ typedef union {
 	es_event_setmode_t setmode;
 	es_event_setowner_t setowner;
 	es_event_settime_t settime;
+	es_event_setuid_t setuid;
+	es_event_setgid_t setgid;
+	es_event_seteuid_t seteuid;
+	es_event_setegid_t setegid;
+	es_event_setreuid_t setreuid;
+	es_event_setregid_t setregid;
 	es_event_signal_t signal;
 	es_event_stat_t stat;
 	es_event_trace_t trace;

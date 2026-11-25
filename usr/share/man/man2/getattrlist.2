@@ -227,6 +227,16 @@ will not follow a symlink if it occurs as
 the last component of
 .Fa path .
 .
+.It FSOPT_NOFOLLOW_ANY
+If this bit is set,
+.Fn getattrlist
+will not follow a symlink if it occurs as
+the last component of
+.Fa path .
+In addition an error is returned if a symlink
+is encountered before the last component of
+.Fa path .
+.
 .It FSOPT_REPORT_FULLSIZE
 The size of the attributes reported (in the first
 .Vt u_int32_t
@@ -790,6 +800,13 @@ is to
 .Fa f_bfree
 in
 .Xr statfs 2 .
+.
+.It ATTR_VOL_SPACEUSED
+An
+.Vt off_t
+containing the total space used on the volume in bytes.
+On space sharing volumes, this value may not be identical to the difference
+between the volume's size and its free space.
 .
 .It ATTR_VOL_MINALLOCATION
 An
@@ -1802,6 +1819,11 @@ Search permission is denied for a component of the path prefix for
 .It Bq Er ELOOP
 Too many symbolic links were encountered in translating the pathname
 for
+.Fn getattrlist .
+.
+.It Bq Er ELOOP
+FSOPT_NOFOLLOW_ANY was passed and a symbolic link was encountered in
+translating the pathname for
 .Fn getattrlist .
 .
 .It Bq Er EFAULT

@@ -4,18 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9764F27A-77B1-3B56-A975-6064A0B1FDB2
+    value:           1BF359A4-6C3D-3CA5-A66A-CB51ABE80787
   - target:          x86_64-maccatalyst
-    value:           9764F27A-77B1-3B56-A975-6064A0B1FDB2
+    value:           1BF359A4-6C3D-3CA5-A66A-CB51ABE80787
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           885FB5A3-10E1-372B-97FE-80436DD89BD0
+    value:           0DB51ABB-323B-3FA3-A128-6747BFE1CE3E
   - target:          arm64e-maccatalyst
-    value:           885FB5A3-10E1-372B-97FE-80436DD89BD0
+    value:           0DB51ABB-323B-3FA3-A128-6747BFE1CE3E
 install-name:    '/usr/lib/swift/libswiftQuartzCore.dylib'
+current-version: 3
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -32,5 +33,9 @@ exports:
                        '_$sSo13CATransform3DV10QuartzCoreE34_conditionallyBridgeFromObjectiveC_6resultSbSo7NSValueC_ABSgztFZ', 
                        '_$sSo13CATransform3DV10QuartzCoreE36_unconditionallyBridgeFromObjectiveCyABSo7NSValueCSgFZ', 
                        '_$sSo13CATransform3DVs21_ObjectiveCBridgeable10QuartzCoreMc', 
+                       '_$sSo16CAFrameRateRangeV10QuartzCoreE2eeoiySbAB_ABtFZ', '_$sSo16CAFrameRateRangeV10QuartzCoreE7minimum7maximum9preferredABSf_S2fSgtcfC', 
+                       '_$sSo16CAFrameRateRangeV10QuartzCoreE9preferredSfSgvM', '_$sSo16CAFrameRateRangeV10QuartzCoreE9preferredSfSgvg', 
+                       '_$sSo16CAFrameRateRangeV10QuartzCoreE9preferredSfSgvpMV', 
+                       '_$sSo16CAFrameRateRangeV10QuartzCoreE9preferredSfSgvs', '_$sSo16CAFrameRateRangeVSQ10QuartzCoreMc', 
                        '__swift_FORCE_LOAD_$_swiftQuartzCore' ]
 ...

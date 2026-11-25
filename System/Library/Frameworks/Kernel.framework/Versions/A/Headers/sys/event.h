@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2019 Apple Inc. All rights reserved.
+ * Copyright (c) 2003-2021 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -58,6 +58,7 @@
 
 #include <machine/types.h>
 #include <sys/cdefs.h>
+#include <sys/queue.h>
 #include <stdint.h>
 
 /*

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E3FE02FF-2812-3A42-8AAC-248A20F5414B
+    value:           3687B554-4237-3639-9408-65A8F0E4D857
   - target:          x86_64-maccatalyst
-    value:           E3FE02FF-2812-3A42-8AAC-248A20F5414B
+    value:           3687B554-4237-3639-9408-65A8F0E4D857
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           487E1711-0032-3E29-9D0F-C0EBCE583BB5
+    value:           B8418B92-F818-399A-835E-B5674FC79DB0
   - target:          arm64e-maccatalyst
-    value:           487E1711-0032-3E29-9D0F-C0EBCE583BB5
+    value:           B8418B92-F818-399A-835E-B5674FC79DB0
 install-name:    '/usr/lib/libutil.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

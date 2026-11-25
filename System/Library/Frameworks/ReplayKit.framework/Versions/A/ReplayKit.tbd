@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           66F212F4-CCED-3858-B5E6-B5BCA36751C8
+    value:           AFF79629-F1FF-37DB-94AA-DA0618045510
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           57920FDC-7389-3EFA-9624-3C105D1E74A6
+    value:           840572EE-43D2-3814-8038-58B43C54A645
 install-name:    '/System/Library/Frameworks/ReplayKit.framework/Versions/A/ReplayKit'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -23,8 +23,9 @@ exports:
                        _RPVideoEditorExtensionAppNameKey, _RPVideoEditorExtensionBundleIdentifierKey, 
                        _RPVideoEditorExtensionFileAttachmentKey, _RPVideoEditorExtensionMoviePathKey, 
                        _RPVideoEditorExtensionOverrideShareMessageKey, _RPVideoEditorExtensionOverrideTintColorKey, 
-                       _RPVideoSampleOrientationKey, _ReplayKitVersionNumber, _ReplayKitVersionString, 
-                       ___RPLogLevel, _kRPBroadcastActivityViewServiceProtocol, _kRPVideoEditorViewServiceProtocol ]
+                       _RPVideoSampleOrientationKey, _RP_Micro, _ReplayKitVersionNumber, 
+                       _ReplayKitVersionString, _SCStreamErrorDomain, ___RPLogLevel, 
+                       _kRPBroadcastActivityViewServiceProtocol, _kRPVideoEditorViewServiceProtocol ]
     objc-classes:    [ RPAppAudioCaptureManager, RPAppAudioHAL, RPAudioHardwareUtility, 
                        RPAudioMixUtility, RPBlurWindow, RPBorderlessEffectWindow, 
                        RPBroadcastActivityController, RPBroadcastActivityExtensionHostContext, 

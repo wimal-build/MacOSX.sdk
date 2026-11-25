@@ -2,7 +2,7 @@
 //  INUpdateMediaAffinityIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -86,10 +86,10 @@ API_UNAVAILABLE(macos)
  */
 
 - (void)resolveMediaItemsForUpdateMediaAffinity:(INUpdateMediaAffinityIntent *)intent
-                    withCompletion:(void (^)(NSArray<INUpdateMediaAffinityMediaItemResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveMediaItems(for:with:));
+                                 withCompletion:(void (^)(NSArray<INUpdateMediaAffinityMediaItemResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveMediaItems(for:with:));
 
 - (void)resolveAffinityTypeForUpdateMediaAffinity:(INUpdateMediaAffinityIntent *)intent
-                    withCompletion:(void (^)(INMediaAffinityTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveAffinityType(for:with:));
+                                   withCompletion:(void (^)(INMediaAffinityTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveAffinityType(for:with:));
 
 @end
 

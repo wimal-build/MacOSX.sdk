@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7009610C-CA39-3A78-9796-CE5DB0602243
+    value:           EB3A5532-347A-3853-8999-E5CD11D6EA6A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4D21E94B-E12F-3785-806A-CB66966A30BF
+    value:           A771384D-5B2F-3EE5-9229-D9D26C9ED5B7
 install-name:    '/usr/lib/libodfde.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

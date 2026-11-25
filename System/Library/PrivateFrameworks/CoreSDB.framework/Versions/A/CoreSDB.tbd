@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5D268536-5519-31E0-AFF6-7C61D0FA42A9
+    value:           C1F51888-2C75-3628-8B4E-59CDCD955E99
   - target:          x86_64-maccatalyst
-    value:           5D268536-5519-31E0-AFF6-7C61D0FA42A9
+    value:           C1F51888-2C75-3628-8B4E-59CDCD955E99
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D258D624-8481-3633-A9AD-3D71906DB6CB
+    value:           CF94C6CA-5106-30F3-A1DE-37C10C2FE192
   - target:          arm64e-maccatalyst
-    value:           D258D624-8481-3633-A9AD-3D71906DB6CB
+    value:           CF94C6CA-5106-30F3-A1DE-37C10C2FE192
 install-name:    '/System/Library/PrivateFrameworks/CoreSDB.framework/Versions/A/CoreSDB'
 current-version: 800
 exports:

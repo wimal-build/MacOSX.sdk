@@ -4,36 +4,36 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9B60DD73-36C6-33DE-A7CC-482ACBFD5234
+    value:           6D5B4E41-DA26-3043-8785-61BC7491CA4C
   - target:          x86_64-maccatalyst
-    value:           9B60DD73-36C6-33DE-A7CC-482ACBFD5234
+    value:           6D5B4E41-DA26-3043-8785-61BC7491CA4C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           74C7E72C-786F-3C83-9938-3A05176CA16B
+    value:           7238A10D-4592-3A16-816C-EAB05EE09761
   - target:          arm64e-maccatalyst
-    value:           74C7E72C-786F-3C83-9938-3A05176CA16B
+    value:           7238A10D-4592-3A16-816C-EAB05EE09761
 install-name:    '/System/Library/PrivateFrameworks/BluetoothManager.framework/Versions/A/BluetoothManager'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _AddressForBTDevice, _BluetoothAccessoryInEarStatusNotification, 
-                       _BluetoothAccessorySealValueStatusNotification, _BluetoothAccessorySettingsChanged, 
-                       _BluetoothAdvertisingStateChangedNotification, _BluetoothAvailabilityChangedNotification, 
-                       _BluetoothBlacklistStateChangedNotification, _BluetoothConnectabilityChangedNotification, 
-                       _BluetoothConnectionStatusChangedNotification, _BluetoothDeviceBatteryChangedNotification, 
-                       _BluetoothDeviceChangedNotification, _BluetoothDeviceConnectFailedNotification, 
-                       _BluetoothDeviceConnectSuccessNotification, _BluetoothDeviceDisconnectFailedNotification, 
-                       _BluetoothDeviceDisconnectSuccessNotification, _BluetoothDeviceDiscoveredNotification, 
-                       _BluetoothDeviceRemovedNotification, _BluetoothDeviceSupportsContactSyncNotification, 
-                       _BluetoothDeviceSupportsMAPClientNotification, _BluetoothDeviceUnpairedNotification, 
-                       _BluetoothDeviceUpdatedNotification, _BluetoothDiscoveryStateChangedNotification, 
-                       _BluetoothDiscoveryStoppedNotification, _BluetoothErrorKey, 
-                       _BluetoothFirstDeviceUnlockCompleted, _BluetoothHandsfreeEndedVoiceCommand, 
-                       _BluetoothHandsfreeInitiatedVoiceCommand, _BluetoothHighPowerDisabled, 
-                       _BluetoothHighPowerEnabled, _BluetoothMagicPairedDeviceNameChangedNotification, 
+    symbols:         [ _AddressForBTDevice, _BluetoothAccessibilityHeadTrackChanged, 
+                       _BluetoothAccessoryInEarStatusNotification, _BluetoothAccessorySealValueStatusNotification, 
+                       _BluetoothAccessorySettingsChanged, _BluetoothAdvertisingStateChangedNotification, 
+                       _BluetoothAvailabilityChangedNotification, _BluetoothBlacklistStateChangedNotification, 
+                       _BluetoothConnectabilityChangedNotification, _BluetoothConnectionStatusChangedNotification, 
+                       _BluetoothDeviceBatteryChangedNotification, _BluetoothDeviceChangedNotification, 
+                       _BluetoothDeviceConnectFailedNotification, _BluetoothDeviceConnectSuccessNotification, 
+                       _BluetoothDeviceDisconnectFailedNotification, _BluetoothDeviceDisconnectSuccessNotification, 
+                       _BluetoothDeviceDiscoveredNotification, _BluetoothDeviceRemovedNotification, 
+                       _BluetoothDeviceSupportsContactSyncNotification, _BluetoothDeviceSupportsMAPClientNotification, 
+                       _BluetoothDeviceUnpairedNotification, _BluetoothDeviceUpdatedNotification, 
+                       _BluetoothDiscoveryStateChangedNotification, _BluetoothDiscoveryStoppedNotification, 
+                       _BluetoothErrorKey, _BluetoothFirstDeviceUnlockCompleted, 
+                       _BluetoothHandsfreeEndedVoiceCommand, _BluetoothHandsfreeInitiatedVoiceCommand, 
+                       _BluetoothHighPowerDisabled, _BluetoothHighPowerEnabled, _BluetoothMagicPairedDeviceNameChangedNotification, 
                        _BluetoothNotificationNameKey, _BluetoothPairedStatusChangedNotification, 
                        _BluetoothPairingPINRequestNotification, _BluetoothPairingPINResultFailedNotification, 
                        _BluetoothPairingPINResultSuccessNotification, _BluetoothPairingPassKeyDisplayNotification, 

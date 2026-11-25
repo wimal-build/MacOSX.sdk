@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           55050D36-C55B-3F32-9E71-C89954D34531
+    value:           AFDDDBBA-05E5-39FB-A9C2-574F4EE1E777
   - target:          x86_64-maccatalyst
-    value:           55050D36-C55B-3F32-9E71-C89954D34531
+    value:           AFDDDBBA-05E5-39FB-A9C2-574F4EE1E777
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C5BF2BFB-1243-3F93-ADE0-5F92ACD18CC5
+    value:           166089D9-7F1F-3665-BF38-3CCE725CCDD7
   - target:          arm64e-maccatalyst
-    value:           C5BF2BFB-1243-3F93-ADE0-5F92ACD18CC5
+    value:           166089D9-7F1F-3665-BF38-3CCE725CCDD7
 install-name:    '/System/Library/CoreServices/Encodings/libThaiConverter.dylib'
-current-version: 90
+current-version: 100
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

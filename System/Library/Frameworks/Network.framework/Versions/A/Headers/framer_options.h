@@ -314,6 +314,53 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 NW_RETURNS_RETAINED nw_protocol_options_t
 nw_framer_create_options(nw_protocol_definition_t framer_definition);
 
+#ifdef __OBJC__
+
+/*!
+ * @function nw_framer_options_set_object_value
+ *
+ * @abstract
+ *		Set a key-value pair on framer options, where the
+ *		value is a reference-counted object.
+ *
+ * @param options
+ *		The framer options object.
+ *
+ * @param key
+ *		The string key to identify the value.
+ *
+ * @param value
+ *		A reference counted object to store.
+ */
+API_AVAILABLE(macos(12.3), ios(15.4), watchos(8.4), tvos(15.4))
+void
+nw_framer_options_set_object_value(nw_protocol_options_t options,
+								   const char *key,
+								   _Nullable id value);
+
+/*!
+ * @function nw_framer_options_copy_object_value
+ *
+ * @abstract
+ *		Copy the stored object value using a key on framer options.
+ *
+ * @param options
+ *		The framer options object.
+ *
+ * @param key
+ *		The string key to identify the value.
+ *
+ * @return
+ *		Returns a reference counted object with a +1 reference count,
+ *		or NULL if no value was found for the specified key.
+ */
+API_AVAILABLE(macos(12.3), ios(15.4), watchos(8.4), tvos(15.4))
+NW_RETURNS_RETAINED _Nullable id
+nw_framer_options_copy_object_value(nw_protocol_options_t options,
+									const char *key);
+
+#endif // __OBJC__
+
 #pragma mark - Framer Implementation Callbacks
 
 /*!
@@ -349,6 +396,13 @@ typedef size_t (^nw_framer_input_handler_t)(nw_framer_t framer);
  *		data is available to be parsed. When this block is
  *		run, the implementation should call functions like
  *		nw_framer_parse_input() and nw_framer_deliver_input().
+ *
+ *		Input events are edge triggered. The input_handler block
+ *		should continue to call nw_framer_parse_input()
+ *		until nw_framer_parse_input() can no longer produce
+ *		enough bytes to satisfy the request, or the protocol
+ *		needs to wait for some other event to continue processing
+ *		later.
  *
  *		This setter is required, and must only be set from within
  *		the invocation of a nw_framer_start_handler_t.
@@ -1024,7 +1078,7 @@ typedef void (^nw_framer_block_t)(void);
  * @abstract
  *		Schedule a block asynchronously on the framer instance. This
  *		must be used anytime the caller wants to perform any other
- *		action on the framer instance while not directly in the callstack
+ *		action on the framer instance while not directly in the call stack
  *		of a callback from the framer.
  *
  * @param framer
@@ -1107,6 +1161,24 @@ nw_framer_copy_local_endpoint(nw_framer_t framer);
 API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 NW_RETURNS_RETAINED nw_parameters_t
 nw_framer_copy_parameters(nw_framer_t framer);
+
+
+/*!
+ * @function nw_framer_copy_options
+ *
+ * @abstract
+ *		Access the protocol options being used for a given
+ *		instance of a framer.
+ *
+ * @param framer
+ *		The framer instance.
+ *
+ * @return
+ *		Returns a retained protocol options object.
+ */
+API_AVAILABLE(macos(12.3), ios(15.4), watchos(8.4), tvos(15.4))
+NW_RETURNS_RETAINED nw_protocol_options_t
+nw_framer_copy_options(nw_framer_t framer);
 
 NW_ASSUME_NONNULL_END
 

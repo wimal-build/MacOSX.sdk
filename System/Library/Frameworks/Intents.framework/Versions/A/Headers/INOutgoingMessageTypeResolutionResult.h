@@ -2,7 +2,7 @@
 //  INOutgoingMessageTypeResolutionResult.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResolutionResult.h>
@@ -11,8 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(14.0), watchos(7.0))
-API_UNAVAILABLE(macos, tvos)
+API_AVAILABLE(ios(14.0), macos(12.0), watchos(7.0))
+API_UNAVAILABLE(tvos)
 @interface INOutgoingMessageTypeResolutionResult : INIntentResolutionResult
 
 // This resolution result is for when the app extension wants to tell Siri to proceed, with a given INOutgoingMessageType. The resolvedValue can be different than the original INOutgoingMessageType. This allows app extensions to apply business logic constraints.

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           19F4EB76-E02E-3650-898B-BA126EE1E211
+    value:           E3194D6C-EB5B-31F8-8AF2-E291F8419C7E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2EED19AF-3CFA-3918-B6D2-5BBDD6CF4E52
+    value:           1742236D-47C2-3C01-9530-D74272EA7C0D
 install-name:    '/System/Library/Frameworks/PreferencePanes.framework/Versions/A/PreferencePanes'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -53,14 +53,14 @@ exports:
                        NSPrefPaneBundle._hardwareTestTool, NSPrefPaneBundle._icon, 
                        NSPrefPaneBundle._iconLabel, NSPrefPaneBundle._iconName, NSPrefPaneBundle._iconNameUsesAssetCatalog, 
                        NSPrefPaneBundle._identifier, NSPrefPaneBundle._ioServiceAttributesToMatch, 
-                       NSPrefPaneBundle._ioServiceToMatch, NSPrefPaneBundle._isDisabledOnServer, 
-                       NSPrefPaneBundle._largeIcon, NSPrefPaneBundle._localizations, 
-                       NSPrefPaneBundle._localizedIconLabels, NSPrefPaneBundle._localizedNames, 
-                       NSPrefPaneBundle._longName, NSPrefPaneBundle._nameIconVariant, 
-                       NSPrefPaneBundle._overrideVisible, NSPrefPaneBundle._path, 
-                       NSPrefPaneBundle._prefPaneObject, NSPrefPaneBundle._remoteViewClass, 
-                       NSPrefPaneBundle._searchAnchors, NSPrefPaneBundle._searchGroupsPath, 
-                       NSPrefPaneBundle._shortName, NSPrefPaneBundle._shortVersion, 
+                       NSPrefPaneBundle._ioServiceToMatch, NSPrefPaneBundle._largeIcon, 
+                       NSPrefPaneBundle._localizations, NSPrefPaneBundle._localizedIconLabels, 
+                       NSPrefPaneBundle._localizedNames, NSPrefPaneBundle._longName, 
+                       NSPrefPaneBundle._nameIconVariant, NSPrefPaneBundle._overrideVisible, 
+                       NSPrefPaneBundle._path, NSPrefPaneBundle._prefPaneObject, 
+                       NSPrefPaneBundle._remoteViewClass, NSPrefPaneBundle._searchAnchors, 
+                       NSPrefPaneBundle._searchGroupsPath, NSPrefPaneBundle._shortName, 
+                       NSPrefPaneBundle._shortVersion, NSPrefPaneBundle._urlSchemes, 
                        NSPrefPaneBundle._visible, NSPrefPaneSearchCenter.mDebug, 
                        NSPrefPaneSearchCenter.mIndexRef, NSPrefPaneSearchCenter.mSKLock, 
                        NSPrefPaneSearchCenter.mValidated, NSPrefPanesCenter._ioIterator, 

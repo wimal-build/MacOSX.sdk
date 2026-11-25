@@ -2,7 +2,7 @@
 //  INVisualCodeTypeResolutionResult.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResolutionResult.h>
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
+API_DEPRECATED("INVisualCodeTypeResolutionResult is deprecated. There is no replacement.", ios(11.0, 15.0), watchos(4.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INVisualCodeTypeResolutionResult : INIntentResolutionResult
 

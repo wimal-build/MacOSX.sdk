@@ -935,10 +935,10 @@ CF_EXPORT
 const CFStringRef kCFURLFileProtectionNone API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos); // The file has no special protections associated with it. It can be read from or written to at any time.
 
 CF_EXPORT
-const CFStringRef kCFURLFileProtectionComplete API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos); // The file is stored in an encrypted format on disk and cannot be read from or written to while the device is locked or booting.
+const CFStringRef kCFURLFileProtectionComplete API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos); // The file is stored in an encrypted format on disk and cannot be read from or written to while the device is locked or booting. Transient data files with this protection type should be excluded from backups using kCFURLIsExcludedFromBackupKey.
 
 CF_EXPORT
-const CFStringRef kCFURLFileProtectionCompleteUnlessOpen API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos); // The file is stored in an encrypted format on disk. Files can be created while the device is locked, but once closed, cannot be opened again until the device is unlocked. If the file is opened when unlocked, you may continue to access the file normally, even if the user locks the device. There is a small performance penalty when the file is created and opened, though not when being written to or read from. This can be mitigated by changing the file protection to kCFURLFileProtectionComplete when the device is unlocked.
+const CFStringRef kCFURLFileProtectionCompleteUnlessOpen API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos); // The file is stored in an encrypted format on disk. Files can be created while the device is locked, but once closed, cannot be opened again until the device is unlocked. If the file is opened when unlocked, you may continue to access the file normally, even if the user locks the device. There is a small performance penalty when the file is created and opened, though not when being written to or read from. This can be mitigated by changing the file protection to kCFURLFileProtectionComplete when the device is unlocked. Transient data files with this protection type should be excluded from backups using kCFURLIsExcludedFromBackupKey.
 
 CF_EXPORT
 const CFStringRef kCFURLFileProtectionCompleteUntilFirstUserAuthentication API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos); // The file is stored in an encrypted format on disk and cannot be accessed until after the device has booted. After the user unlocks the device for the first time, your app can access the file and continue to access it even if the user subsequently locks the device.
@@ -1192,6 +1192,7 @@ typedef CF_OPTIONS(CFOptionFlags, CFURLBookmarkCreationOptions) {
     kCFURLBookmarkCreationSuitableForBookmarkFile = ( 1UL << 10 ), // include the properties required by CFURLWriteBookmarkDataToFile() in the bookmark data created
     kCFURLBookmarkCreationWithSecurityScope API_AVAILABLE(macos(10.7), macCatalyst(13.0))  API_UNAVAILABLE(ios, watchos, tvos) = ( 1UL << 11 ), // Mac OS X 10.7.3 and later, include information in the bookmark data which allows the same sandboxed process to access the resource after being relaunched
     kCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess API_AVAILABLE(macos(10.7), macCatalyst(13.0)) API_UNAVAILABLE(ios, watchos, tvos) = ( 1UL << 12 ), // Mac OS X 10.7.3 and later, if used with kCFURLBookmarkCreationWithSecurityScope, at resolution time only read access to the resource will be granted
+    kCFURLBookmarkCreationWithoutImplicitSecurityScope  API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)) = (1 << 29), // Disable automatic embedding of an implicit security scope. The resolving process will not be able gain access to the resource by security scope, either implicitly or explicitly, through the returned URL. Not applicable to security-scoped bookmarks.
     
     // deprecated
     kCFURLBookmarkCreationPreferFileIDResolutionMask
@@ -1202,7 +1203,8 @@ typedef CF_OPTIONS(CFOptionFlags, CFURLBookmarkResolutionOptions) {
     kCFURLBookmarkResolutionWithoutUIMask = ( 1UL << 8 ), // don't perform any user interaction during bookmark resolution
     kCFURLBookmarkResolutionWithoutMountingMask = ( 1UL << 9 ), // don't mount a volume during bookmark resolution
     kCFURLBookmarkResolutionWithSecurityScope API_AVAILABLE(macos(10.7), macCatalyst(13.0)) API_UNAVAILABLE(ios, watchos, tvos) = ( 1UL << 10 ), // Mac OS X 10.7.3 and later, use the secure information included at creation time to provide the ability to access the resource in a sandboxed process.
-    
+    kCFURLBookmarkResolutionWithoutImplicitStartAccessing API_AVAILABLE(macos(11.2), ios(14.2), watchos(7.2), tvos(14.2)) = ( 1 << 15 ), // Disable implicitly starting access of the ephemeral security-scoped resource during resolution. Instead, call `CFURLStartAccessingSecurityScopedResource` on the returned URL when ready to use the resource. Not applicable to security-scoped bookmarks.
+
     kCFBookmarkResolutionWithoutUIMask = kCFURLBookmarkResolutionWithoutUIMask,
     kCFBookmarkResolutionWithoutMountingMask = kCFURLBookmarkResolutionWithoutMountingMask,
 } API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));

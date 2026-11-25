@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           185B6A49-817D-3DED-A6E1-8EEE521F9544
+    value:           8473B355-9B29-3743-AE52-AA94DAF23D38
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EC533119-C905-3952-93F5-D9794483E984
+    value:           A24247F7-95A8-3134-BF87-3D198E88EFE2
 install-name:    '/System/Library/PrivateFrameworks/iPodSync.framework/Versions/A/iPodSync'
 current-version: 121.1
 exports:

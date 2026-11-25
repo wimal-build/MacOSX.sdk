@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           525AE79A-51CB-3EEA-A836-2A525A7520E6
+    value:           73A64356-D800-3660-8B1C-D4C29092F094
   - target:          x86_64-maccatalyst
-    value:           525AE79A-51CB-3EEA-A836-2A525A7520E6
+    value:           73A64356-D800-3660-8B1C-D4C29092F094
   - target:          x86_64h-macos
-    value:           3D1ED204-33AB-32D5-BAD6-4F4BED50397A
+    value:           28CC5448-97E3-3689-B1A6-94C0FB26C688
   - target:          x86_64h-maccatalyst
-    value:           3D1ED204-33AB-32D5-BAD6-4F4BED50397A
+    value:           28CC5448-97E3-3689-B1A6-94C0FB26C688
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E7A16975-949B-3978-9A6A-EE15CF874C2F
+    value:           F136E5CF-9F34-3913-880F-93CE349C7E2F
   - target:          arm64e-maccatalyst
-    value:           E7A16975-949B-3978-9A6A-EE15CF874C2F
+    value:           F136E5CF-9F34-3913-880F-93CE349C7E2F
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, x86_64h-maccatalyst, x86_64h-macos, 

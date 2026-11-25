@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2016-2017 Apple Inc. All rights reserved.
+    Copyright 2016-2021 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVCaptureOutput.h>
@@ -210,7 +210,7 @@ AV_INIT_UNAVAILABLE
     The time at which this synchronized data was captured.
  
  @discussion
-    Synchronized data is always clocked to the masterClock of the AVCaptureSession to which the data output is connected.
+    Synchronized data is always clocked to the synchronizationClock of the AVCaptureSession to which the data output is connected.
  */
 @property(readonly) CMTime timestamp;
 

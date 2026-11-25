@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 Apple, Inc. All rights reserved.
+// Copyright (c) 2019-2021 Apple, Inc. All rights reserved.
 //
 // @APPLE_OSREFERENCE_LICENSE_HEADER_START@
 //
@@ -29,12 +29,18 @@
 #ifndef XNU_LIBKERN_LIBKERN_CXX_SAFE_ALLOCATION_H
 #define XNU_LIBKERN_LIBKERN_CXX_SAFE_ALLOCATION_H
 
+#if !TAPI
+
 #include <stddef.h>
 #include <stdint.h>
 #include <os/base.h>
+#if DRIVERKIT_FRAMEWORK_INCLUDE
+#include <DriverKit/bounded_ptr.h>
+#else
 #include <libkern/c++/bounded_ptr.h>
+#endif /* DRIVERKIT_FRAMEWORK_INCLUDE */
 
-void* operator new(size_t, void*); // forward declaration needed for placement-new
+void* operator new(size_t, void*) noexcept; // forward declaration needed for placement-new
 
 namespace libkern {
 namespace sa_detail {
@@ -101,6 +107,12 @@ struct allocate_memory_t {
 	allocate_memory_t() = default;
 };
 inline constexpr allocate_memory_t allocate_memory{};
+
+struct allocate_memory_zero_t {
+	explicit constexpr
+	allocate_memory_zero_t() = default;
+};
+inline constexpr allocate_memory_zero_t allocate_memory_zero{};
 
 // Lightweight utility class representing a dynamically allocated slab of
 // memory, with contiguous objects in it.
@@ -204,8 +216,23 @@ struct safe_allocation {
 			data_ = reinterpret_cast<T*>(Allocator::allocate(bytes));
 			size_ = static_cast<uint32_t>(n);
 			using RawT = sa_detail::remove_const_t<T>;
-			RawT* data = const_cast<RawT*>(data_);
+			RawT* const data = const_cast<RawT*>(data_);
 			sa_detail::uninitialized_value_construct(data, data + size_);
+		}
+	}
+
+	// same as allocate_memory_t variant but allocated data is zero-initialized
+	explicit safe_allocation(size_t n, allocate_memory_zero_t)
+	{
+		static_assert(__is_scalar(T) || __is_aggregate(T),
+		    "Creating objects via zero-allocation requires those objects to be scalars or aggregates (more broadly implicit lifetime types)");
+		size_t bytes;
+		if (__improbable(os_mul_overflow(n, sizeof(T), &bytes) || (n > UINT32_MAX))) {
+			data_ = nullptr;
+			size_ = 0;
+		} else {
+			data_ = reinterpret_cast<T*>(Allocator::allocate_zero(bytes));
+			size_ = static_cast<uint32_t>(n);
 		}
 	}
 
@@ -453,5 +480,7 @@ operator!=(sa_detail::nullptr_t, safe_allocation<T, A, P> const& x)
 	return !(x == nullptr);
 }
 } // end namespace libkern
+
+#endif /* !TAPI */
 
 #endif // !XNU_LIBKERN_LIBKERN_CXX_SAFE_ALLOCATION_H

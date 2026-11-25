@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1F7C8E06-E5A7-3421-B14A-E49DBB846EB6
+    value:           B4111FAD-A3DE-37E8-8D8E-EA481D580C24
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D807ECD8-79EA-353A-A241-0147EDC8EF7C
+    value:           91AAA2EB-916A-3C37-A405-C9819DA3B7F9
 install-name:    '/System/Library/PrivateFrameworks/DCERPC.framework/Versions/A/DCERPC'
-current-version: 71.100.1
+current-version: 74
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _dce_error_inq_text, _dcethread_SIGEMT_e, _dcethread_SIGIOT_e, 

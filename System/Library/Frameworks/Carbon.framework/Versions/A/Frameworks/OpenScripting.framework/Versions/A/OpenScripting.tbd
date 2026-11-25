@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B4718F88-6569-3653-81F9-F0256EE89C48
+    value:           65654F7B-B3CF-3779-94A9-8D15229C5D73
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2B7482FA-20D1-3886-8E0B-EA52289B235E
+    value:           F2EB59D8-2CFD-3F92-A972-6DA9C5EC7C0C
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _ASCopySourceAttributes, _ASGetSourceStyleNames, _ASGetSourceStyles, 
                        _ASInit, _ASSetSourceAttributes, _ASSetSourceStyles, _OSAAddStorageType, 
                        _OSAAppletShowStartupScreenKey, _OSAAppletStayOpenKey, _OSAAuthorizeEvent, 

@@ -273,10 +273,15 @@
 #define HAVE_GETGRNAM 1
 #define HAVE_GETGRNAM_R 1
 #define HAVE_GETGROUPS 1
+#define HAVE_GETLOGIN 1
+#define HAVE_GETLOGIN_R 1
 #define HAVE_GETPGID 1
 #define HAVE_GETPGRP 1
 #define HAVE_GETPRIORITY 1
+#define HAVE_GETPWNAM 1
 #define HAVE_GETPWNAM_R 1
+#define HAVE_GETPWUID 1
+#define HAVE_GETPWUID_R 1
 #define HAVE_GETRLIMIT 1
 #define HAVE_GETSID 1
 #define HAVE_GETTIMEOFDAY 1
@@ -411,7 +416,7 @@
 #if defined __x86_64__ &&! defined RUBY_PLATFORM_CPU
 #define RUBY_PLATFORM_CPU "x86_64"
 #endif /* defined __x86_64__ &&! defined RUBY_PLATFORM_CPU */
-#define RUBY_PLATFORM_OS "darwin20"
+#define RUBY_PLATFORM_OS "darwin21"
 #define RUBY_ARCH "universal-"RUBY_PLATFORM_OS
 #define RUBY_PLATFORM "universal."RUBY_PLATFORM_CPU"-"RUBY_PLATFORM_OS
 #endif /* INCLUDE_RUBY_CONFIG_H */

@@ -30,7 +30,7 @@
 /* VERSION_MAJOR, version_major is an integer that represents that major version
  * of the kernel
  */
-#define VERSION_MAJOR		20
+#define VERSION_MAJOR		21
 
 /* VERSION_MINOR, version_minor is an integer that represents the minor version
  * of the kernel
@@ -67,7 +67,7 @@
 #define	OSTYPE		"Darwin"
 
 /* OSRELEASE, osrelease, is a string as returned by uname -r */
-#define OSRELEASE	"20.4.0"
+#define OSRELEASE	"21.4.0"
 
 #ifndef ASSEMBLER
 

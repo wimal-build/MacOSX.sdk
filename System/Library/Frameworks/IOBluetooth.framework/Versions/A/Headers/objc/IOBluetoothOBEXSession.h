@@ -235,7 +235,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 	@discussion	
 */
 
--(BOOL)hasOpenTransportConnection;
+-(Boolean)hasOpenTransportConnection;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@method		closeTransportConnection
@@ -273,7 +273,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 
 -(void)setOpenTransportConnectionAsyncSelector:(SEL)inSelector
 			target:(id)inSelectorTarget
-			refCon:(id)inUserRefCon;
+			refCon:(void *)inUserRefCon;
 			
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		setOBEXSessionOpenConnectionCallback

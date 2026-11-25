@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           84E99C86-747D-30AF-BE8D-C0347019C3FC
+    value:           6A68FDC1-C827-3652-94A2-69BB5E6A34F6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DFAE4B1-FC90-37A9-AA31-B09E8DCCD78C
+    value:           D47CA68B-68F4-3B98-941A-3027360DFBD0
 install-name:    '/System/Library/PrivateFrameworks/CoreCDPUI.framework/Versions/A/CoreCDPUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -17,10 +17,10 @@ exports:
     objc-classes:    [ CDPEnrollViewController, CDPOption, CDPPrintBorderView, CDPRecoveryKeyPrintController, 
                        CDPRecoveryKeySheetBaseController, CDPRecoveryKeySheetController, 
                        CDPStateBaseUIController, CDPStateUIController, CDPStateiCloudPrefUIController, 
-                       CDPTrustedDeviceViewItem, CDPUIDeviceToDeviceEncryptionCancelCreateViewModel, 
+                       CDPTrustedDeviceViewItem, CDPUIAccessCodeEntryTextField, CDPUIDeviceToDeviceEncryptionCancelCreateViewModel, 
                        CDPUIDeviceToDeviceEncryptionFlowContext, CDPUIDeviceToDeviceEncryptionHelper, 
                        CDPUIDeviceToDeviceEncryptionIneligibilityAlertViewModel, 
                        CDPUIDeviceToDeviceEncryptionMessagingViewModel, CDPUIDeviceToDeviceEncryptionUIProviderImp, 
-                       CDPUIDeviceToDeviceEncryptionUpgradeMessageViewModel, CDPiCloudPrefRecoveryKeyController, 
-                       iCDPEnrollDevice ]
+                       CDPUIDeviceToDeviceEncryptionUpgradeMessageViewModel, CDPUIInheritanceUIProviderImpl, 
+                       CDPiCloudPrefRecoveryKeyController, iCDPEnrollDevice ]
 ...

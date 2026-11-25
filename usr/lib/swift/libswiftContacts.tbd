@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9B6108BC-F66A-3CA6-9C77-EFA9ADCA1231
+    value:           6986D9F3-DD71-351E-8750-C59C0C1F99E9
   - target:          x86_64-maccatalyst
-    value:           9B6108BC-F66A-3CA6-9C77-EFA9ADCA1231
+    value:           6986D9F3-DD71-351E-8750-C59C0C1F99E9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25C1E855-EE2B-3A57-9522-433F0948BFCC
+    value:           ED468724-B135-37F2-A16A-F3EE00331EAF
   - target:          arm64e-maccatalyst
-    value:           25C1E855-EE2B-3A57-9522-433F0948BFCC
+    value:           ED468724-B135-37F2-A16A-F3EE00331EAF
 install-name:    '/usr/lib/swift/libswiftContacts.dylib'
 swift-abi-version: 7
 exports:

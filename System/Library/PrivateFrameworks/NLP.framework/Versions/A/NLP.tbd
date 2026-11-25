@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1953348B-3C35-3FF8-84E3-0B5B37382D90
+    value:           08F6A93C-40EA-3982-9D00-35F0DBFF4B34
   - target:          x86_64-maccatalyst
-    value:           1953348B-3C35-3FF8-84E3-0B5B37382D90
+    value:           08F6A93C-40EA-3982-9D00-35F0DBFF4B34
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B6F8469F-C1EB-3370-B2A5-A6255741BBA8
+    value:           A4F24683-CE24-3F30-BBE9-41CCD33B30CB
   - target:          arm64e-maccatalyst
-    value:           B6F8469F-C1EB-3370-B2A5-A6255741BBA8
+    value:           A4F24683-CE24-3F30-BBE9-41CCD33B30CB
 install-name:    '/System/Library/PrivateFrameworks/NLP.framework/Versions/A/NLP'
-current-version: 210.2
+current-version: 215
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

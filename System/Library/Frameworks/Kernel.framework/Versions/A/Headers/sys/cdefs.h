@@ -152,8 +152,16 @@
 #endif /* !NO_ANSI_KEYWORDS */
 #endif /* !(__STDC__ || __cplusplus) */
 
+/*
+ * __pure2 can be used for functions that are only a function of their scalar
+ * arguments (meaning they can't dereference pointers).
+ *
+ * __stateful_pure can be used for functions that have no side effects,
+ * but depend on the state of the memory.
+ */
 #define __dead2         __attribute__((__noreturn__))
 #define __pure2         __attribute__((__const__))
+#define __stateful_pure __attribute__((__pure__))
 
 /* __unused denotes variables and functions that may not be used, preventing
  * the compiler from warning about it if not used.
@@ -179,9 +187,9 @@
  * __exported_push/_exported_pop are pragmas used to delimit a range of
  *  symbols that should be exported even when symbols are hidden by default.
  */
-#define __exported                      __attribute__((__visibility__("default")))
-#define __exported_push         _Pragma("GCC visibility push(default)")
-#define __exported_pop          _Pragma("GCC visibility pop")
+#define __exported      __attribute__((__visibility__("default")))
+#define __exported_push _Pragma("GCC visibility push(default)")
+#define __exported_pop  _Pragma("GCC visibility pop")
 
 /* __deprecated causes the compiler to produce a warning when encountering
  * code using the deprecated functionality.
@@ -221,11 +229,11 @@
 
 #define __kpi_unavailable __unavailable
 
-#if TARGET_OS_OSX && defined(__arm64__)
+#if   defined(__arm64__)
 #define __kpi_deprecated_arm64_macos_unavailable __unavailable
-#else /* !TARGET_OS_OSX || !defined(__arm64__) */
+#else
 #define __kpi_deprecated_arm64_macos_unavailable __deprecated
-#endif /* !TARGET_OS_OSX || !defined(__arm64__) */
+#endif /* XNU_KERNEL_PRIVATE */
 
 /* Delete pseudo-keywords wherever they are not available or needed. */
 #ifndef __dead
@@ -391,11 +399,13 @@
  * types.
  */
 #define __printflike(fmtarg, firstvararg) \
-	        __attribute__((__format__ (__printf__, fmtarg, firstvararg)))
+	__attribute__((__format__ (__printf__, fmtarg, firstvararg)))
 #define __printf0like(fmtarg, firstvararg) \
-	        __attribute__((__format__ (__printf0__, fmtarg, firstvararg)))
+	__attribute__((__format__ (__printf0__, fmtarg, firstvararg)))
 #define __scanflike(fmtarg, firstvararg) \
-	        __attribute__((__format__ (__scanf__, fmtarg, firstvararg)))
+	__attribute__((__format__ (__scanf__, fmtarg, firstvararg)))
+#define __osloglike(fmtarg, firstvararg) \
+	__attribute__((__format__ (__os_log__, fmtarg, firstvararg)))
 
 #define __IDSTRING(name, string) static const char name[] __used = string
 
@@ -762,6 +772,50 @@
 #define __XNU_PRIVATE_EXTERN __attribute__((visibility("hidden")))
 #endif
 
+#if __has_include(<ptrcheck.h>)
+#include <ptrcheck.h>
+#else
+/*
+ * We intentionally define to nothing pointer attributes which do not have an
+ * impact on the ABI. __indexable and __bidi_indexable are not defined because
+ * of the ABI incompatibility that makes the diagnostic preferable.
+ */
+#define __has_ptrcheck 0
+#define __single
+#define __unsafe_indexable
+#define __counted_by(N)
+#define __sized_by(N)
+#define __ended_by(E)
+
+/*
+ * Similarly, we intentionally define to nothing the
+ * __ptrcheck_abi_assume_single and __ptrcheck_abi_assume_unsafe_indexable
+ * macros because they do not lead to an ABI incompatibility. However, we do not
+ * define the indexable and unsafe_indexable ones because the diagnostic is
+ * better than the silent ABI break.
+ */
+#define __ptrcheck_abi_assume_single()
+#define __ptrcheck_abi_assume_unsafe_indexable()
+
+/* __unsafe_forge intrinsics are defined as regular C casts. */
+#define __unsafe_forge_bidi_indexable(T, P, S) ((T)(P))
+#define __unsafe_forge_single(T, P) ((T)(P))
+
+/* decay operates normally; attribute is meaningless without pointer checks. */
+#define __array_decay_dicards_count_in_parameters
+#endif /* !__has_include(<ptrcheck.h>) */
+
+#define __ASSUME_PTR_ABI_SINGLE_BEGIN       __ptrcheck_abi_assume_single()
+#define __ASSUME_PTR_ABI_SINGLE_END         __ptrcheck_abi_assume_unsafe_indexable()
+
+#if __has_ptrcheck
+#define __header_indexable                  __indexable
+#define __header_bidi_indexable             __bidi_indexable
+#else
+#define __header_indexable
+#define __header_bidi_indexable
+#endif
+
 /*
  * Architecture validation for current SDK
  */
@@ -784,17 +838,10 @@
 #define __improbable(x) __builtin_expect(!!(x), 0)
 #endif /* !defined(__probable) && !defined(__improbable) */
 
-#if defined(__cplusplus)
-#define __container_of(ptr, type, field) __extension__({ \
-	        const __typeof__(((type *)nullptr)->field) *__ptr = (ptr); \
-	        (type *)((uintptr_t)__ptr - offsetof(type, field)); \
-	})
-#else
 #define __container_of(ptr, type, field) __extension__({ \
 	        const __typeof__(((type *)NULL)->field) *__ptr = (ptr); \
 	        (type *)((uintptr_t)__ptr - offsetof(type, field)); \
 	})
-#endif
 
 
 #define __compiler_barrier() __asm__ __volatile__("" ::: "memory")
@@ -839,5 +886,27 @@
 #define __options_closed_decl(_name, _type, ...) \
 	        typedef _type _name; enum __VA_ARGS__ __enum_closed __enum_options
 #endif
+
+
+#if defined(KERNEL) && __has_attribute(xnu_usage_semantics)
+/*
+ * These macros can be used to annotate type definitions or scalar structure
+ * fields to inform the compiler about which semantic they have with regards
+ * to the content of the underlying memory represented by such type or field.
+ *
+ * This information is used in the analysis of the types performed by the
+ * signature based type segregation implemented in kalloc.
+ */
+#define __kernel_ptr_semantics __attribute__((xnu_usage_semantics("pointer")))
+#define __kernel_data_semantics __attribute__((xnu_usage_semantics("data")))
+#define __kernel_dual_semantics __attribute__((xnu_usage_semantics("pointer", "data")))
+
+#else  /* defined(KERNEL) && __has_attribute(xnu_usage_semantics) */
+
+#define __kernel_ptr_semantics
+#define __kernel_data_semantics
+#define __kernel_dual_semantics
+
+#endif /* defined(KERNEL) && __has_attribute(xnu_usage_semantics) */
 
 #endif /* !_CDEFS_H_ */

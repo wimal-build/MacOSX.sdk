@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C6202851-E8F3-30D1-B463-30D926F59BE4
+    value:           DC33F629-F7AD-30F8-B495-5F7A4BE1F5A5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A950458F-7224-3CF3-8F0D-81FAF6715DDC
+    value:           5110CE8E-D2C2-322F-8917-DB04F5826497
 install-name:    '/System/Library/PrivateFrameworks/IMAVCore.framework/Versions/A/IMAVCore'
 current-version: 800
 exports:

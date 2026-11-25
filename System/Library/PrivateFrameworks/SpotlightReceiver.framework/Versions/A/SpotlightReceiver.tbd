@@ -3,16 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8F287676-0AE3-3D56-B161-5634BDBD6732
+    value:           B2AF08FE-D29F-3074-912A-BD3E0CAFDD18
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84BE8C62-409A-3889-8A02-B422DFC5D182
+    value:           F9EF936B-ECDC-34AB-A7D8-E779B4BB57F3
 install-name:    '/System/Library/PrivateFrameworks/SpotlightReceiver.framework/Versions/A/SpotlightReceiver'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _SpotlightReceiverEntitlement, _SpotlightReceiverRegister, 
-                       _SpotlightReceiverVersionNumber, _SpotlightReceiverVersionString, 
-                       _SpotlightSenderEntitlement ]
-    objc-classes:    [ CSRecieverConnection ]
+    symbols:         [ _SpotlightDaemonClientRegister, _SpotlightReceiverConnectionUIDKey, 
+                       _SpotlightReceiverConnectionUIDKeyCStr, _SpotlightReceiverEntitlement, 
+                       _SpotlightReceiverRegister, _SpotlightReceiverVersionNumber, 
+                       _SpotlightReceiverVersionString, _SpotlightSenderEntitlement, 
+                       __SpotlightDaemonClientHandleCommand ]
+    objc-classes:    [ CSReceiverConnection, SpotlightDaemonClientConnection ]
 ...

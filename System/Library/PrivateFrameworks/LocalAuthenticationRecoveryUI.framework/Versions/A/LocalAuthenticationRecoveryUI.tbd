@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EC2EB41A-33D7-3A3E-80F2-8C28E06204E9
+    value:           5DC72590-F240-3622-8DE7-280B69088A48
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           15CEDFE8-5A47-312B-B8F4-9276C66B2352
+    value:           5C768CC6-52ED-362E-8766-76B0D22570B7
 install-name:    '/System/Library/PrivateFrameworks/LocalAuthenticationRecoveryUI.framework/Versions/A/LocalAuthenticationRecoveryUI'
-current-version: 827.100.23
+current-version: 985.100.54
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     objc-classes:    [ LARUIAuthenticationDialog ]

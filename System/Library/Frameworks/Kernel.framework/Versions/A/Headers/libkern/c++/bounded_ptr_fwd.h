@@ -29,9 +29,13 @@
 #ifndef XNU_LIBKERN_LIBKERN_CXX_BOUNDED_PTR_FWD_H
 #define XNU_LIBKERN_LIBKERN_CXX_BOUNDED_PTR_FWD_H
 
+#if !TAPI
+
 namespace libkern {
 template <typename T, typename TrappingPolicy>
 struct __attribute__((trivial_abi)) bounded_ptr;
 } // end namespace libkern
+
+#endif /* !TAPI */
 
 #endif // !XNU_LIBKERN_LIBKERN_CXX_BOUNDED_PTR_FWD_H

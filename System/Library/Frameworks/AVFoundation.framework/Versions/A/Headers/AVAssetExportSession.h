@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2020 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -53,6 +53,7 @@ AVF_EXPORT NSString *const AVAssetExportPresetHEVC1920x1080				API_AVAILABLE(mac
 AVF_EXPORT NSString *const AVAssetExportPresetHEVC1920x1080WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT NSString *const AVAssetExportPresetHEVC3840x2160				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT NSString *const AVAssetExportPresetHEVC3840x2160WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString *const AVAssetExportPresetHEVC7680x4320				API_AVAILABLE(macos(12.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*  This export option will produce an audio-only .m4a file with appropriate iTunes gapless playback data */
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4A			API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
@@ -61,6 +62,12 @@ AVF_EXPORT NSString *const AVAssetExportPresetAppleM4A			API_AVAILABLE(macos(10.
    tracks for which passthrough is not possible, usually because of constraints of the container format as indicated by the specified outputFileType.
    This option is not included in the arrays returned by -allExportPresets and -exportPresetsCompatibleWithAsset. */
 AVF_EXPORT NSString *const AVAssetExportPresetPassthrough		API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+
+/* This export option will produce a QuickTime movie with Apple ProRes 422 video and LPCM audio. */
+AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes422LPCM	API_AVAILABLE(macos(10.7), ios(15.0)) API_UNAVAILABLE(tvos, watchos);
+
+/* This export option will produce a QuickTime movie with Apple ProRes 4444 video and LPCM audio. */
+AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes4444LPCM  API_AVAILABLE(macos(10.15), ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 
 #if TARGET_OS_OSX
 
@@ -74,12 +81,6 @@ AVF_EXPORT NSString *const AVAssetExportPresetAppleM4VAppleTV	API_AVAILABLE(maco
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4VWiFi		API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, tvos, watchos);
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4V720pHD	API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, tvos, watchos);
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4V1080pHD	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
-
-/* This export option will produce a QuickTime movie with Apple ProRes 422 video and LPCM audio. */
-AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes422LPCM	API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, tvos, watchos);
-
-/* This export option will produce a QuickTime movie with Apple ProRes 4444 video and LPCM audio. */
-AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes4444LPCM  API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 #endif // TARGET_OS_OSX
 
@@ -252,7 +253,7 @@ AV_INIT_UNAVAILABLE
 	@param outputFileType		An AVFileType indicating a file type to check; or nil, to query whether there are any compatible types.
 	@param handler				A block called with the compatibility result.
  */
-+ (void)determineCompatibilityOfExportPreset:(NSString *)presetName withAsset:(AVAsset *)asset outputFileType:(nullable AVFileType)outputFileType completionHandler:(void (^)(BOOL compatible))handler API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
++ (void)determineCompatibilityOfExportPreset:(NSString *)presetName withAsset:(AVAsset *)asset outputFileType:(nullable AVFileType)outputFileType completionHandler:(void (^)(BOOL compatible))handler API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_ASYNC_NAME(compatibility(ofExportPreset:with:outputFileType:));
 
 @end
 
@@ -269,7 +270,7 @@ AV_INIT_UNAVAILABLE
 								Called when the inspection completes with an array of file types the ExportSession can write.  Note that this may have a count of zero.
 	@discussion					This method is different than the supportedFileTypes property in that it performs an inspection of the AVAsset in order to determine its compatibility with each of the session's supported file types.
 */
-- (void)determineCompatibleFileTypesWithCompletionHandler:(void (^)(NSArray<AVFileType> *compatibleFileTypes))handler API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (void)determineCompatibleFileTypesWithCompletionHandler:(void (^)(NSArray<AVFileType> *compatibleFileTypes))handler API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_ASYNC_NAME(getter:compatibleFileTypes());
 
 @end
 
@@ -294,7 +295,7 @@ AV_INIT_UNAVAILABLE
 	@param						handler
 								A block called with the estimated maximum duration, or kCMTimeInvalid if an error occurs.  The error parameter will be non-nil if an error occurs.
 */
-- (void)estimateMaximumDurationWithCompletionHandler:(void (^)(CMTime estimatedMaximumDuration, NSError * _Nullable error ))handler API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+- (void)estimateMaximumDurationWithCompletionHandler:(void (^)(CMTime estimatedMaximumDuration, NSError * _Nullable error ))handler API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_ASYNC_NAME(getter:estimatedMaximumDuration());
 
 /*!
 	@method						estimateOutputFileLengthWithCompletionHandler:
@@ -303,7 +304,7 @@ AV_INIT_UNAVAILABLE
 	@param						handler
 								A block called with the estimated output file length in bytes, if it can be accurately determined; 0 otherwise.  The error parameter will be non-nil if an error occurs.
  */
-- (void)estimateOutputFileLengthWithCompletionHandler:(void (^)(int64_t estimatedOutputFileLength, NSError * _Nullable error ))handler API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+- (void)estimateOutputFileLengthWithCompletionHandler:(void (^)(int64_t estimatedOutputFileLength, NSError * _Nullable error ))handler API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_ASYNC_NAME(getter:estimatedOutputFileLengthInBytes());
 
 @end
 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2851BEF8-BFFF-38F2-B88B-B692C78FF034
+    value:           14752933-F844-319B-A784-076E2BD70A77
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1CD1C81B-6C29-39AC-B726-20023F2203C6
+    value:           A4AA488D-AEE8-3499-8F31-C8DABDCF8B62
 install-name:    '/System/Library/PrivateFrameworks/CoreUtilsUI.framework/Versions/A/CoreUtilsUI'
 current-version: 0
 compatibility-version: 0

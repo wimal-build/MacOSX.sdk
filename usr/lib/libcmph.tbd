@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7603021E-45F7-31A8-9449-A356A81712DD
+    value:           F5FAE4D0-D36F-33D8-8CBA-E593A9FDAC73
   - target:          x86_64-maccatalyst
-    value:           7603021E-45F7-31A8-9449-A356A81712DD
+    value:           F5FAE4D0-D36F-33D8-8CBA-E593A9FDAC73
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A4A5F6F-1847-3AEF-BD8D-AD6674B8F95E
+    value:           14E4D3B2-922B-38CF-9CEF-E238FA3496BD
   - target:          arm64e-maccatalyst
-    value:           7A4A5F6F-1847-3AEF-BD8D-AD6674B8F95E
+    value:           14E4D3B2-922B-38CF-9CEF-E238FA3496BD
 install-name:    '/usr/lib/libcmph.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A07D5425-F6A7-3BD0-9899-CC225987AC4F
+    value:           2E55A285-5F8B-38C7-B6AC-E8672A9F40E2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8AF38F47-E631-3BD7-A812-04316CDE6AFC
+    value:           2A6F9AFC-C667-30C5-B06C-CB63590821B4
 install-name:    '/System/Library/PrivateFrameworks/SpeechDictionary.framework/Versions/A/SpeechDictionary'
 exports:
   - targets:         [ x86_64-macos ]

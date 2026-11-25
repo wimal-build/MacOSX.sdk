@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C9189B1F-B4F1-3B99-9DA8-E770BE33A8AC
+    value:           F4344E30-A593-3BBD-A596-DDBBF9C0404D
   - target:          x86_64-maccatalyst
-    value:           C9189B1F-B4F1-3B99-9DA8-E770BE33A8AC
+    value:           F4344E30-A593-3BBD-A596-DDBBF9C0404D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           968829D3-3CD9-3074-89FB-F8B3C87B56FC
+    value:           05C6F80E-C71F-300E-B8A9-7F5D1F5EDD34
   - target:          arm64e-maccatalyst
-    value:           968829D3-3CD9-3074-89FB-F8B3C87B56FC
+    value:           05C6F80E-C71F-300E-B8A9-7F5D1F5EDD34
 install-name:    '/usr/lib/libipconfig.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -23,7 +23,7 @@ exports:
                        _IPConfigurationServiceCreate, _IPConfigurationServiceGetNotificationKey, 
                        _IPConfigurationServiceGetTypeID, _IPConfigurationServiceRefreshConfiguration, 
                        _kIPConfigurationServiceOptionAPNName, _kIPConfigurationServiceOptionEnableCLAT46, 
-                       _kIPConfigurationServiceOptionEnableDAD, _kIPConfigurationServiceOptionIPv6Entity, 
-                       _kIPConfigurationServiceOptionIPv6LinkLocalAddress, _kIPConfigurationServiceOptionMTU, 
-                       _kIPConfigurationServiceOptionPerformNUD ]
+                       _kIPConfigurationServiceOptionEnableDAD, _kIPConfigurationServiceOptionIPv4Entity, 
+                       _kIPConfigurationServiceOptionIPv6Entity, _kIPConfigurationServiceOptionIPv6LinkLocalAddress, 
+                       _kIPConfigurationServiceOptionMTU, _kIPConfigurationServiceOptionPerformNUD ]
 ...

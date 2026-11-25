@@ -29,8 +29,21 @@
 #ifndef XNU_LIBKERN_LIBKERN_CXX_OS_BOUNDED_PTR_H
 #define XNU_LIBKERN_LIBKERN_CXX_OS_BOUNDED_PTR_H
 
+#if !TAPI
+
+#if DRIVERKIT_FRAMEWORK_INCLUDE
+#include <DriverKit/IOLib.h>
+#include <DriverKit/OSBoundedPtrFwd.h>
+#if __cplusplus >= 201703L
+#include <DriverKit/bounded_ptr.h>
+#endif /* __cplusplus >= 201703L */
+#else
 #include <kern/debug.h>
 #include <libkern/c++/OSBoundedPtrFwd.h>
+#if __cplusplus >= 201703L
+#include <libkern/c++/bounded_ptr.h>
+#endif /* __cplusplus >= 201703L */
+#endif /* DRIVERKIT_FRAMEWORK_INCLUDE */
 
 namespace os_detail {
 struct panic_trapping_policy {
@@ -43,5 +56,7 @@ struct panic_trapping_policy {
 }
 
 // OSBoundedPtr alias is defined in the fwd decl header
+
+#endif /* !TAPI */
 
 #endif /* !XNU_LIBKERN_LIBKERN_CXX_OS_BOUNDED_PTR_H */

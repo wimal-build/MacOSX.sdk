@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           22E6445D-7977-364B-B9C3-68AF14DB1529
+    value:           C9C9D1DA-7E07-3145-ACD4-B03B165B8BF5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A120C2DC-156D-3A40-AB78-AC9E87963089
+    value:           641FBDDA-5F17-31E7-A2E5-114A8762DF16
 install-name:    '/System/Library/Frameworks/Message.framework/Versions/B/Message'
 current-version: 1604
 exports:

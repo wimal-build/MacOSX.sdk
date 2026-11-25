@@ -2,7 +2,7 @@
 //  INListRideOptionsIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -78,10 +78,10 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolvePickupLocationForListRideOptions:(INListRideOptionsIntent *)intent
-                    withCompletion:(void (^)(INPlacemarkResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePickupLocation(for:with:));
+                                 withCompletion:(void (^)(INPlacemarkResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePickupLocation(for:with:));
 
 - (void)resolveDropOffLocationForListRideOptions:(INListRideOptionsIntent *)intent
-                    withCompletion:(void (^)(INPlacemarkResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDropOffLocation(for:with:));
+                                  withCompletion:(void (^)(INPlacemarkResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDropOffLocation(for:with:));
 
 @end
 

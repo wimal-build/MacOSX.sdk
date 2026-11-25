@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BEE93893-8340-3775-89B7-36F69178F157
+    value:           E37816C8-CC76-37CA-99EF-07486B06070A
   - target:          x86_64-maccatalyst
-    value:           BEE93893-8340-3775-89B7-36F69178F157
+    value:           E37816C8-CC76-37CA-99EF-07486B06070A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A86B8F6D-51A6-3AE7-BAF9-0BD6B0AEDEAC
+    value:           BEF09B11-727C-3474-9B3E-DADF696F2D61
   - target:          arm64e-maccatalyst
-    value:           A86B8F6D-51A6-3AE7-BAF9-0BD6B0AEDEAC
+    value:           BEF09B11-727C-3474-9B3E-DADF696F2D61
 install-name:    '/System/Library/PrivateFrameworks/FTServices.framework/Versions/A/FTServices'
 current-version: 800
 exports:
@@ -39,10 +39,10 @@ exports:
                        _kDualModeDeliveryTypeHeader ]
     objc-classes:    [ FTDeviceSupport, FTEntitlementSupport, FTIDSMessage, FTMessageDelivery, 
                        FTMessageDelivery_APS, FTMessageDelivery_DualMode, FTMessageDelivery_HTTP, 
-                       FTMessageQueue, FTNetworkSupport, FTPasswordManager, FTRegion, 
-                       FTRegionSupport, FTSelectedPNRSubscription, FTServerBag, FTServiceStatus, 
-                       FTURLRequestMessage, FTUserConfiguration, FTiMessageStatus, 
-                       IDSWebTunnelRequestMessage ]
+                       FTMessageQueue, FTNetworkSupport, FTPasswordManager, FTProtobufMessage, 
+                       FTRegion, FTRegionSupport, FTSelectedPNRSubscription, FTServerBag, 
+                       FTServiceStatus, FTShareChannelMessage, FTURLRequestMessage, 
+                       FTUserConfiguration, FTiMessageStatus, IDSWebTunnelRequestMessage ]
     objc-ivars:      [ FTMessageDelivery._retries, FTMessageDelivery_DualMode._apsDelivery, 
                        FTMessageDelivery_DualMode._dualModeQueue, FTMessageDelivery_DualMode._httpDelivery, 
                        FTMessageDelivery_DualMode._userAgentString, FTNetworkSupport._criticalReliabilityEnabledState, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           70A20C12-2F8C-3DCC-9AD2-8F416F1AED74
+    value:           D9A29F5F-39CC-3C2F-9513-6D7CB939ECFA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D1C5C3B1-5EA2-3608-8D3C-00EC3C23AA56
+    value:           7ADC5E3C-0C6C-3D11-A6ED-6F501E7CA56F
 install-name:    '/System/Library/Frameworks/Social.framework/Versions/A/Social'
-current-version: 709
+current-version: 726
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CPFileBuildDirectoriesToPath, _SLErrorDomain, _SLFacebookEnvironmentDidChangeNotification, 

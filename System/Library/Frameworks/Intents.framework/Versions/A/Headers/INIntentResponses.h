@@ -2,7 +2,7 @@
 //  INIntentResponses.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INSearchCallHistoryIntentResponse.h>
@@ -27,6 +27,8 @@
 #import <Intents/INPauseWorkoutIntentResponse.h>
 #import <Intents/INResumeWorkoutIntentResponse.h>
 #import <Intents/INStartWorkoutIntentResponse.h>
+
+#import <Intents/INShareFocusStatusIntentResponse.h>
 
 #import <Intents/INAddMediaIntentResponse.h>
 #import <Intents/INPlayMediaIntentResponse.h>

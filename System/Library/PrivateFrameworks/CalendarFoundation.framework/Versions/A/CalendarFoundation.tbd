@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5A257CEF-8507-38E1-BD56-292A0735FC52
+    value:           9DBC2BC4-596A-3B72-8D33-6340A8655A7E
   - target:          x86_64-maccatalyst
-    value:           5A257CEF-8507-38E1-BD56-292A0735FC52
+    value:           9DBC2BC4-596A-3B72-8D33-6340A8655A7E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E1D4F534-8619-3213-B969-FB5AAE6CE3FE
+    value:           E0C50AF4-48D8-39B6-AA95-9930133EDF06
   - target:          arm64e-maccatalyst
-    value:           E1D4F534-8619-3213-B969-FB5AAE6CE3FE
+    value:           E0C50AF4-48D8-39B6-AA95-9930133EDF06
 install-name:    '/System/Library/PrivateFrameworks/CalendarFoundation.framework/Versions/A/CalendarFoundation'
-current-version: 1178.3.1
+current-version: 1197.4.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -71,22 +71,22 @@ exports:
                        _CalDateIntervalYearMonth, _CalDateIntervalYearMonthDay, _CalDateTimeGetAbsoluteTime, 
                        _CalDateTimeGetGregorianDate, _CalDateTimeRelease, _CalDateTimeSetTimeZone, 
                        _CalDefaultTimeZoneSettingIsAutomatic, _CalDefaultTimeZoneSettingIsImplicit, 
-                       _CalDoNotCallThisInitializer, _CalEqualObjects, _CalEqualStrings, 
-                       _CalExchangeQueueOperationEndedNotification, _CalExchangeSessionDebugOfflineKey, 
-                       _CalExchangeSessionDebugOperationsKey, _CalExchangeSessionErrorNotification, 
-                       _CalFlagForProfiling, _CalFoundationNS_Log, _CalFoundationNS_Log_Accounts, 
-                       _CalFoundationNS_Log_CalEventTimer, _CalFoundationNS_Log_Contacts, 
-                       _CalFoundationNS_Log_Docktile, _CalFoundationNS_Log_Junk, 
-                       _CalFoundationNS_Log_Locations, _CalFoundationNS_Log_Memory, 
-                       _CalFoundationNS_Log_MessageTrace, _CalFoundationNS_Log_Suggestions, 
-                       _CalFoundationNS_Log_Travel, _CalFoundationNS_Notification_LogConfigUpdated, 
-                       _CalFoundationNS_Preference_LogAutoFlush, _CalFoundationNS_Preference_LogEmitUserNotifications, 
-                       _CalFoundationNS_Preference_LogFilePath, _CalFoundationNS_Preference_LogSimpleConfiguration, 
-                       _CalGenerateQualifiedIdentifierWithClassAndSubdomain, _CalGenerateRandomDispatchQueueName, 
-                       _CalGenerateUUID, _CalGetFloatingTimeZone, _CalGetRGBAFromString, 
-                       _CalGregorianDateAddDays, _CalGregorianDateAddUnits, _CalGregorianDateCopyDateTime, 
-                       _CalGregorianDateEqualToGregorianDate, _CalGregorianDateGetAbsoluteTime, 
-                       _CalGregorianDateGetAbsoluteTimeWithFallbackToDefaultTimeZone, 
+                       _CalDescriptionForCalVirtualConferenceSource, _CalDoNotCallThisInitializer, 
+                       _CalEqualObjects, _CalEqualStrings, _CalExchangeQueueOperationEndedNotification, 
+                       _CalExchangeSessionDebugOfflineKey, _CalExchangeSessionDebugOperationsKey, 
+                       _CalExchangeSessionErrorNotification, _CalFlagForProfiling, 
+                       _CalFoundationNS_Log, _CalFoundationNS_Log_Accounts, _CalFoundationNS_Log_CalEventTimer, 
+                       _CalFoundationNS_Log_Contacts, _CalFoundationNS_Log_Docktile, 
+                       _CalFoundationNS_Log_Junk, _CalFoundationNS_Log_Locations, 
+                       _CalFoundationNS_Log_Memory, _CalFoundationNS_Log_MessageTrace, 
+                       _CalFoundationNS_Log_Suggestions, _CalFoundationNS_Log_Travel, 
+                       _CalFoundationNS_Notification_LogConfigUpdated, _CalFoundationNS_Preference_LogAutoFlush, 
+                       _CalFoundationNS_Preference_LogEmitUserNotifications, _CalFoundationNS_Preference_LogFilePath, 
+                       _CalFoundationNS_Preference_LogSimpleConfiguration, _CalGenerateQualifiedIdentifierWithClassAndSubdomain, 
+                       _CalGenerateRandomDispatchQueueName, _CalGenerateUUID, _CalGetFloatingTimeZone, 
+                       _CalGetRGBAFromString, _CalGregorianDateAddDays, _CalGregorianDateAddUnits, 
+                       _CalGregorianDateCopyDateTime, _CalGregorianDateEqualToGregorianDate, 
+                       _CalGregorianDateGetAbsoluteTime, _CalGregorianDateGetAbsoluteTimeWithFallbackToDefaultTimeZone, 
                        _CalGregorianDateGetDayOfWeek, _CalGregorianDateGetDaysInMonth, 
                        _CalGregorianDateGetExtremities, _CalGregorianDateGetGregorianDateForDay, 
                        _CalGregorianDateGetGregorianDateForEndOfDay, _CalGregorianDateGetGregorianDateForMonth, 
@@ -96,8 +96,9 @@ exports:
                        _CalLogActual, _CalLogCurrentLevel, _CalLogFileWriter_Param_Directory, 
                        _CalLogFileWriter_Param_Filename, _CalLogFlush, _CalLogInitialize, 
                        _CalLogLevelGenerateLevelVersion, _CalLogLevelGenerateStringVersion, 
-                       _CalLogPermittedList, _CalMeCardChangedNotification, _CalOAuth2Type, 
-                       _CalOAuthType, _CalPerfLog, _CalRedactURLString, _CalRoundDoubleToNearestMultiple, 
+                       _CalLogPermittedListContainsName, _CalLogPermittedListUnionWithSet, 
+                       _CalMeCardChangedNotification, _CalOAuth2Type, _CalOAuthType, 
+                       _CalPerfLog, _CalRedactURLString, _CalRoundDoubleToNearestMultiple, 
                        _CalRoundToNearestMultiple, _CalRoundWithSigFigs, _CalRouteType_Driving, 
                        _CalRouteType_Transit, _CalRouteType_Walking, _CalSessionDebugErrorKey, 
                        _CalSessionDebugIntervalKey, _CalSessionDebugStatusKey, _CalSetDefaultTimeZone, 
@@ -158,17 +159,18 @@ exports:
                        _mt_log_usage, _timezonesAreEquivalent, _tzload, _tzname, 
                        _tzparse, _tzset, _tzsetwall ]
     objc-classes:    [ CalABCReporter, CalAccountUtils, CalAccountsProvider, CalAccumulatingQueue, 
-                       CalAsyncBlockQueue, CalAttachmentUtils, CalCancelableDispatchBlock, 
-                       CalCancelablePerformSelector, CalCancelableRunLoopPerformBlock, 
-                       CalCancellableSearch, CalChangeHistoryCollector, CalChronometry, 
+                       CalAppleConferenceFormat, CalAsyncBlockQueue, CalAttachmentUtils, 
+                       CalCancelableDispatchBlock, CalCancelablePerformSelector, 
+                       CalCancelableRunLoopPerformBlock, CalCancellableSearch, CalChangeHistoryCollector, 
+                       CalChronometry, CalConferenceDeserializationResult, CalConferencePersistence, 
                        CalConferenceURLDetector, CalContactsProvider, CalCrashReporter, 
                        CalDarwinNotificationListener, CalDateLocalization, CalDateRange, 
                        CalDefaultDictionary, CalDefaults, CalDescriptionBuilder, 
                        CalDeviceLockObserver, CalDisjointDateRange, CalDispatchQueueAsyncBlockPerformer, 
                        CalEmailProvider, CalEntitlementsVerifier, CalFileSensor, 
                        CalFoundationBundle, CalFoundationPreferences, CalGeocoder, 
-                       CalGrantedDelegate, CalLazyCreateUtils, CalLimitingQueue, 
-                       CalLocation, CalLocationAuthorization, CalLocationBundle, 
+                       CalGoogleConferenceFormat, CalGrantedDelegate, CalLazyCreateUtils, 
+                       CalLimitingQueue, CalLocation, CalLocationAuthorization, CalLocationBundle, 
                        CalLocationManager, CalLocationManagerDelegate, CalLocationPrediction, 
                        CalLogBasicTextFormatter, CalLogConfiguration, CalLogEnvelope, 
                        CalLogFileWriter, CalLogFilter, CalLogMaster, CalLogNSLogWriter, 
@@ -180,10 +182,11 @@ exports:
                        CalSpotlightQueryController, CalSpotlightQueryResult, CalStopwatch, 
                        CalStructuredDataArchiver, CalSuggestionsProvider, CalSystemInformation, 
                        CalTimeIntervalLocalization, CalUMCalendarDataContainerProvider, 
-                       CalWellKnownPaths, CalWidgetUtils, CalendarColors, CaliCalendarAnonymizer, 
-                       CaliCalendarPRODID, EKCalendarDate, EKFoundInAppsEventTracker, 
-                       EKMutableCalendarDate, EKProtocolObject_Shared, EKSuggestionsServiceLogger, 
-                       EKTTLEventTracker, EKTimeZone ]
+                       CalVirtualConference, CalVirtualConferenceJoinMethod, CalWellKnownPaths, 
+                       CalWidgetUtils, CalendarColors, CaliCalendarAnonymizer, CaliCalendarPRODID, 
+                       EKCalendarDate, EKFoundInAppsEventTracker, EKMutableCalendarDate, 
+                       EKProtocolObject_Shared, EKSuggestionsServiceLogger, EKTTLEventTracker, 
+                       EKTimeZone, StateData ]
     objc-ivars:      [ CalDefaultDictionary._defaultClass, CalDefaultDictionary._dict, 
                        EKCalendarDate._dateAbs, EKCalendarDate._dateGr, EKCalendarDate._flags, 
                        EKCalendarDate._timeZone ]

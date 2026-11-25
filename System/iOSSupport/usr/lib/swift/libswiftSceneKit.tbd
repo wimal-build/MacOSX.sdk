@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           DDF37A5A-DEF7-3616-9F57-7A4ABE68BE7A
+    value:           75C5D3DD-D8F8-322F-9AFE-C979E5E0F81C
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           A3FF5C7F-81E7-37AD-8E3F-8C23774788DC
+    value:           8EDE38EC-2786-3D17-B7C4-FDF3BDE647DC
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftSceneKit.dylib'
-current-version: 1.1
+current-version: 1.2
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

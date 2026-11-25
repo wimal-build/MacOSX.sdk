@@ -29,8 +29,16 @@
 #ifndef XNU_LIBKERN_LIBKERN_CXX_BOUNDED_ARRAY_REF_H
 #define XNU_LIBKERN_LIBKERN_CXX_BOUNDED_ARRAY_REF_H
 
+#if !TAPI
+
+#if DRIVERKIT_FRAMEWORK_INCLUDE
+#include <DriverKit/bounded_array.h>
+#include <DriverKit/bounded_ptr.h>
+#else
 #include <libkern/c++/bounded_array.h>
 #include <libkern/c++/bounded_ptr.h>
+#endif /* DRIVERKIT_FRAMEWORK_INCLUDE */
+
 #include <stddef.h>
 #include <os/base.h>
 
@@ -279,5 +287,7 @@ operator!=(bar_detail::nullptr_t, bounded_array_ref<T, P> const& x)
 	return x != nullptr;
 }
 } // end namespace libkern
+
+#endif /* !TAPI */
 
 #endif // !XNU_LIBKERN_LIBKERN_CXX_BOUNDED_ARRAY_REF_H

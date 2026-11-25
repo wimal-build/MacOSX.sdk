@@ -2,7 +2,7 @@
 //  INRequestPaymentIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -86,19 +86,19 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolvePayerForRequestPayment:(INRequestPaymentIntent *)intent
-                    withCompletion:(void (^)(INPersonResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePayer(for:with:)) API_DEPRECATED("resolvePayerForRequestPayment:withCompletion: is deprecated. Use resolvePayerForRequestPayment:completion: instead", ios(10.0, 11.0), watchos(3.2, 4.0));
+                       withCompletion:(void (^)(INPersonResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePayer(for:with:)) API_DEPRECATED("resolvePayerForRequestPayment:withCompletion: is deprecated. Use resolvePayerForRequestPayment:completion: instead", ios(10.0, 11.0), watchos(3.2, 4.0));
 
 - (void)resolvePayerForRequestPayment:(INRequestPaymentIntent *)intent
-                    completion:(void (^)(INRequestPaymentPayerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePayer(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0));
+                           completion:(void (^)(INRequestPaymentPayerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePayer(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0));
 
 - (void)resolveCurrencyAmountForRequestPayment:(INRequestPaymentIntent *)intent
-                    withCompletion:(void (^)(INCurrencyAmountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCurrencyAmount(for:with:)) API_DEPRECATED("resolveCurrencyAmountForRequestPayment:withCompletion: is deprecated. Use resolveCurrencyAmountForRequestPayment:completion: instead", ios(10.0, 11.0), watchos(3.2, 4.0));
+                                withCompletion:(void (^)(INCurrencyAmountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCurrencyAmount(for:with:)) API_DEPRECATED("resolveCurrencyAmountForRequestPayment:withCompletion: is deprecated. Use resolveCurrencyAmountForRequestPayment:completion: instead", ios(10.0, 11.0), watchos(3.2, 4.0));
 
 - (void)resolveCurrencyAmountForRequestPayment:(INRequestPaymentIntent *)intent
-                    completion:(void (^)(INRequestPaymentCurrencyAmountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCurrencyAmount(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0));
+                                    completion:(void (^)(INRequestPaymentCurrencyAmountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCurrencyAmount(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0));
 
 - (void)resolveNoteForRequestPayment:(INRequestPaymentIntent *)intent
-                    withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveNote(for:with:));
+                      withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveNote(for:with:));
 
 @end
 

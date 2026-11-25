@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E58A7A2F-67FE-3680-88DB-7E30EAD992D6
+    value:           1AF4B0A5-3143-350A-91E3-5E1EBEFDF6FF
   - target:          x86_64-maccatalyst
-    value:           E58A7A2F-67FE-3680-88DB-7E30EAD992D6
+    value:           1AF4B0A5-3143-350A-91E3-5E1EBEFDF6FF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A6C20814-B915-39B6-9DC8-26DA46A16B47
+    value:           E0B9A195-375C-3E6D-A87F-8E15FB68E8D8
   - target:          arm64e-maccatalyst
-    value:           A6C20814-B915-39B6-9DC8-26DA46A16B47
+    value:           E0B9A195-375C-3E6D-A87F-8E15FB68E8D8
 install-name:    '/System/Library/PrivateFrameworks/AudioServerApplication.framework/Versions/A/AudioServerApplication'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

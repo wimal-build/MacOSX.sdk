@@ -29,10 +29,20 @@
 #ifndef XNU_LIBKERN_LIBKERN_CXX_OS_BOUNDED_ARRAY_REF_H
 #define XNU_LIBKERN_LIBKERN_CXX_OS_BOUNDED_ARRAY_REF_H
 
+#if !TAPI
+
+#if DRIVERKIT_FRAMEWORK_INCLUDE
+#include <DriverKit/bounded_array_ref.h>
+#include <DriverKit/OSBoundedPtr.h>
+#else
 #include <libkern/c++/bounded_array_ref.h>
 #include <libkern/c++/OSBoundedPtr.h>
+#endif /* DRIVERKIT_FRAMEWORK_INCLUDE */
+
 
 template <typename T>
 using OSBoundedArrayRef = libkern::bounded_array_ref<T, os_detail::panic_trapping_policy>;
+
+#endif /* !TAPI */
 
 #endif /* !XNU_LIBKERN_LIBKERN_CXX_OS_BOUNDED_ARRAY_REF_H */

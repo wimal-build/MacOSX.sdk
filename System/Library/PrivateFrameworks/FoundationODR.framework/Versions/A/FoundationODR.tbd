@@ -3,10 +3,10 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4F48B9E4-2E1A-3794-9E5F-880AE3B0926C
+    value:           2BEB56E0-8BC7-38B0-B463-53AE20F25CAC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE5AB846-D0D7-30CB-8075-85C335433DAA
+    value:           E45C1883-632A-3C03-AA63-2BDBB75C01D6
 install-name:    '/System/Library/PrivateFrameworks/FoundationODR.framework/Versions/A/FoundationODR'
 ...

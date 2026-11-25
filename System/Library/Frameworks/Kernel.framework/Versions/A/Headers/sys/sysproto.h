@@ -286,9 +286,12 @@ struct msync_args {
 	char len_l_[PADL_(user_size_t)]; user_size_t len; char len_r_[PADR_(user_size_t)];
 	char flags_l_[PADL_(int)]; int flags; char flags_r_[PADR_(int)];
 };
+#if CONFIG_VFORK
 struct vfork_args {
 	int32_t dummy;
 };
+#else
+#endif
 struct munmap_args {
 	char addr_l_[PADL_(user_addr_t)]; user_addr_t addr; char addr_r_[PADR_(user_addr_t)];
 	char len_l_[PADL_(user_size_t)]; user_size_t len; char len_r_[PADR_(user_size_t)];
@@ -626,7 +629,7 @@ struct sigreturn_args {
 	char token_l_[PADL_(user_addr_t)]; user_addr_t token; char token_r_[PADR_(user_addr_t)];
 };
 struct thread_selfcounts_args {
-	char type_l_[PADL_(int)]; int type; char type_r_[PADR_(int)];
+	char kind_l_[PADL_(uint32_t)]; uint32_t kind; char kind_r_[PADR_(uint32_t)];
 	char buf_l_[PADL_(user_addr_t)]; user_addr_t buf; char buf_r_[PADR_(user_addr_t)];
 	char nbytes_l_[PADL_(user_size_t)]; user_size_t nbytes; char nbytes_r_[PADR_(user_size_t)];
 };
@@ -1433,7 +1436,7 @@ struct bsdthread_terminate_args {
 	char stackaddr_l_[PADL_(user_addr_t)]; user_addr_t stackaddr; char stackaddr_r_[PADR_(user_addr_t)];
 	char freesize_l_[PADL_(user_size_t)]; user_size_t freesize; char freesize_r_[PADR_(user_size_t)];
 	char port_l_[PADL_(uint32_t)]; uint32_t port; char port_r_[PADR_(uint32_t)];
-	char sem_l_[PADL_(uint32_t)]; uint32_t sem; char sem_r_[PADR_(uint32_t)];
+	char sema_or_ulock_l_[PADL_(user_addr_t)]; user_addr_t sema_or_ulock; char sema_or_ulock_r_[PADR_(user_addr_t)];
 };
 #else
 #endif /* CONFIG_WORKQUEUE */
@@ -2231,6 +2234,75 @@ struct necp_client_action_args {
 };
 #else
 #endif /* NECP */
+#if SKYWALK
+struct __nexus_open_args {
+	char init_l_[PADL_(user_addr_t)]; user_addr_t init; char init_r_[PADR_(user_addr_t)];
+	char init_len_l_[PADL_(uint32_t)]; uint32_t init_len; char init_len_r_[PADR_(uint32_t)];
+};
+struct __nexus_register_args {
+	char ctl_l_[PADL_(int)]; int ctl; char ctl_r_[PADR_(int)];
+	char reg_l_[PADL_(user_addr_t)]; user_addr_t reg; char reg_r_[PADR_(user_addr_t)];
+	char reg_len_l_[PADL_(uint32_t)]; uint32_t reg_len; char reg_len_r_[PADR_(uint32_t)];
+	char prov_uuid_l_[PADL_(user_addr_t)]; user_addr_t prov_uuid; char prov_uuid_r_[PADR_(user_addr_t)];
+	char prov_uuid_len_l_[PADL_(uint32_t)]; uint32_t prov_uuid_len; char prov_uuid_len_r_[PADR_(uint32_t)];
+};
+struct __nexus_deregister_args {
+	char ctl_l_[PADL_(int)]; int ctl; char ctl_r_[PADR_(int)];
+	char prov_uuid_l_[PADL_(user_addr_t)]; user_addr_t prov_uuid; char prov_uuid_r_[PADR_(user_addr_t)];
+	char prov_uuid_len_l_[PADL_(uint32_t)]; uint32_t prov_uuid_len; char prov_uuid_len_r_[PADR_(uint32_t)];
+};
+struct __nexus_create_args {
+	char ctl_l_[PADL_(int)]; int ctl; char ctl_r_[PADR_(int)];
+	char prov_uuid_l_[PADL_(user_addr_t)]; user_addr_t prov_uuid; char prov_uuid_r_[PADR_(user_addr_t)];
+	char prov_uuid_len_l_[PADL_(uint32_t)]; uint32_t prov_uuid_len; char prov_uuid_len_r_[PADR_(uint32_t)];
+	char nx_uuid_l_[PADL_(user_addr_t)]; user_addr_t nx_uuid; char nx_uuid_r_[PADR_(user_addr_t)];
+	char nx_uuid_len_l_[PADL_(uint32_t)]; uint32_t nx_uuid_len; char nx_uuid_len_r_[PADR_(uint32_t)];
+};
+struct __nexus_destroy_args {
+	char ctl_l_[PADL_(int)]; int ctl; char ctl_r_[PADR_(int)];
+	char nx_uuid_l_[PADL_(user_addr_t)]; user_addr_t nx_uuid; char nx_uuid_r_[PADR_(user_addr_t)];
+	char nx_uuid_len_l_[PADL_(uint32_t)]; uint32_t nx_uuid_len; char nx_uuid_len_r_[PADR_(uint32_t)];
+};
+struct __nexus_get_opt_args {
+	char ctl_l_[PADL_(int)]; int ctl; char ctl_r_[PADR_(int)];
+	char opt_l_[PADL_(uint32_t)]; uint32_t opt; char opt_r_[PADR_(uint32_t)];
+	char aoptval_l_[PADL_(user_addr_t)]; user_addr_t aoptval; char aoptval_r_[PADR_(user_addr_t)];
+	char aoptlen_l_[PADL_(user_addr_t)]; user_addr_t aoptlen; char aoptlen_r_[PADR_(user_addr_t)];
+};
+struct __nexus_set_opt_args {
+	char ctl_l_[PADL_(int)]; int ctl; char ctl_r_[PADR_(int)];
+	char opt_l_[PADL_(uint32_t)]; uint32_t opt; char opt_r_[PADR_(uint32_t)];
+	char aoptval_l_[PADL_(user_addr_t)]; user_addr_t aoptval; char aoptval_r_[PADR_(user_addr_t)];
+	char optlen_l_[PADL_(uint32_t)]; uint32_t optlen; char optlen_r_[PADR_(uint32_t)];
+};
+struct __channel_open_args {
+	char init_l_[PADL_(user_addr_t)]; user_addr_t init; char init_r_[PADR_(user_addr_t)];
+	char init_len_l_[PADL_(uint32_t)]; uint32_t init_len; char init_len_r_[PADR_(uint32_t)];
+};
+struct __channel_get_info_args {
+	char c_l_[PADL_(int)]; int c; char c_r_[PADR_(int)];
+	char cinfo_l_[PADL_(user_addr_t)]; user_addr_t cinfo; char cinfo_r_[PADR_(user_addr_t)];
+	char cinfolen_l_[PADL_(uint32_t)]; uint32_t cinfolen; char cinfolen_r_[PADR_(uint32_t)];
+};
+struct __channel_sync_args {
+	char c_l_[PADL_(int)]; int c; char c_r_[PADR_(int)];
+	char mode_l_[PADL_(int)]; int mode; char mode_r_[PADR_(int)];
+	char flags_l_[PADL_(int)]; int flags; char flags_r_[PADR_(int)];
+};
+struct __channel_get_opt_args {
+	char c_l_[PADL_(int)]; int c; char c_r_[PADR_(int)];
+	char opt_l_[PADL_(uint32_t)]; uint32_t opt; char opt_r_[PADR_(uint32_t)];
+	char aoptval_l_[PADL_(user_addr_t)]; user_addr_t aoptval; char aoptval_r_[PADR_(user_addr_t)];
+	char aoptlen_l_[PADL_(user_addr_t)]; user_addr_t aoptlen; char aoptlen_r_[PADR_(user_addr_t)];
+};
+struct __channel_set_opt_args {
+	char c_l_[PADL_(int)]; int c; char c_r_[PADR_(int)];
+	char opt_l_[PADL_(uint32_t)]; uint32_t opt; char opt_r_[PADR_(uint32_t)];
+	char aoptval_l_[PADL_(user_addr_t)]; user_addr_t aoptval; char aoptval_r_[PADR_(user_addr_t)];
+	char optlen_l_[PADL_(uint32_t)]; uint32_t optlen; char optlen_r_[PADR_(uint32_t)];
+};
+#else
+#endif /* !SKYWALK */
 struct ulock_wait_args {
 	char operation_l_[PADL_(uint32_t)]; uint32_t operation; char operation_r_[PADR_(uint32_t)];
 	char addr_l_[PADL_(user_addr_t)]; user_addr_t addr; char addr_r_[PADR_(user_addr_t)];
@@ -2358,6 +2430,10 @@ struct log_data_args {
 struct memorystatus_available_memory_args {
 	int32_t dummy;
 };
+struct objc_bp_assist_cfg_np_args {
+	char adr_l_[PADL_(uint64_t)]; uint64_t adr; char adr_r_[PADR_(uint64_t)];
+	char ctl_l_[PADL_(uint64_t)]; uint64_t ctl; char ctl_r_[PADR_(uint64_t)];
+};
 struct shared_region_map_and_slide_2_np_args {
 	char files_count_l_[PADL_(uint32_t)]; uint32_t files_count; char files_count_r_[PADR_(uint32_t)];
 	char files_l_[PADL_(user_addr_t)]; user_addr_t files; char files_r_[PADR_(user_addr_t)];
@@ -2419,6 +2495,22 @@ struct proc_info_extended_id_args {
 	char buffer_l_[PADL_(user_addr_t)]; user_addr_t buffer; char buffer_r_[PADR_(user_addr_t)];
 	char buffersize_l_[PADL_(int32_t)]; int32_t buffersize; char buffersize_r_[PADR_(int32_t)];
 };
+#if SOCKETS
+struct tracker_action_args {
+	char action_l_[PADL_(int)]; int action; char action_r_[PADR_(int)];
+	char buffer_l_[PADL_(user_addr_t)]; user_addr_t buffer; char buffer_r_[PADR_(user_addr_t)];
+	char buffer_size_l_[PADL_(user_size_t)]; user_size_t buffer_size; char buffer_size_r_[PADR_(user_size_t)];
+};
+#else
+#endif /* SOCKETS */
+struct debug_syscall_reject_args {
+	char packed_selectors_l_[PADL_(uint64_t)]; uint64_t packed_selectors; char packed_selectors_r_[PADR_(uint64_t)];
+};
+struct freadlink_args {
+	char fd_l_[PADL_(int)]; int fd; char fd_r_[PADR_(int)];
+	char buf_l_[PADL_(user_addr_t)]; user_addr_t buf; char buf_r_[PADR_(user_addr_t)];
+	char bufsize_l_[PADL_(user_size_t)]; user_size_t bufsize; char bufsize_r_[PADR_(user_size_t)];
+};
 int nosys(struct proc *, struct nosys_args *, int *);
 void exit(struct proc *, struct exit_args *, int32_t *);
 int fork(struct proc *, struct fork_args *, int *);
@@ -2475,7 +2567,10 @@ int execve(struct proc *, struct execve_args *, int *);
 int umask(struct proc *, struct umask_args *, int *);
 int chroot(struct proc *, struct chroot_args *, int *);
 int msync(struct proc *, struct msync_args *, int *);
+#if CONFIG_VFORK
 int vfork(struct proc *, struct vfork_args *, int *);
+#else
+#endif
 int munmap(struct proc *, struct munmap_args *, int *);
 int mprotect(struct proc *, struct mprotect_args *, int *);
 int madvise(struct proc *, struct madvise_args *, int *);
@@ -2954,8 +3049,23 @@ int necp_open(struct proc *, struct necp_open_args *, int *);
 int necp_client_action(struct proc *, struct necp_client_action_args *, int *);
 #else
 #endif /* NECP */
-int ulock_wait(struct proc *, struct ulock_wait_args *, int *);
-int ulock_wake(struct proc *, struct ulock_wake_args *, int *);
+#if SKYWALK
+int __nexus_open(struct proc *, struct __nexus_open_args *, int *);
+int __nexus_register(struct proc *, struct __nexus_register_args *, int *);
+int __nexus_deregister(struct proc *, struct __nexus_deregister_args *, int *);
+int __nexus_create(struct proc *, struct __nexus_create_args *, int *);
+int __nexus_destroy(struct proc *, struct __nexus_destroy_args *, int *);
+int __nexus_get_opt(struct proc *, struct __nexus_get_opt_args *, int *);
+int __nexus_set_opt(struct proc *, struct __nexus_set_opt_args *, int *);
+int __channel_open(struct proc *, struct __channel_open_args *, int *);
+int __channel_get_info(struct proc *, struct __channel_get_info_args *, int *);
+int __channel_sync(struct proc *, struct __channel_sync_args *, int *);
+int __channel_get_opt(struct proc *, struct __channel_get_opt_args *, int *);
+int __channel_set_opt(struct proc *, struct __channel_set_opt_args *, int *);
+#else
+#endif /* !SKYWALK */
+int sys_ulock_wait(struct proc *, struct ulock_wait_args *, int *);
+int sys_ulock_wake(struct proc *, struct ulock_wake_args *, int *);
 int fclonefileat(struct proc *, struct fclonefileat_args *, int *);
 int fs_snapshot(struct proc *, struct fs_snapshot_args *, int *);
 #if CONFIG_UEXC
@@ -2986,6 +3096,7 @@ int coalition_ledger(struct proc *, struct coalition_ledger_args *, int *);
 #endif // CONFIG_COALITIONS
 int log_data(struct proc *, struct log_data_args *, int *);
 int memorystatus_available_memory(struct proc *, struct memorystatus_available_memory_args *, uint64_t *);
+int objc_bp_assist_cfg_np(struct proc *, struct objc_bp_assist_cfg_np_args *, int *);
 int shared_region_map_and_slide_2_np(struct proc *, struct shared_region_map_and_slide_2_np_args *, int *);
 int pivot_root(struct proc *, struct pivot_root_args *, int *);
 int task_inspect_for_pid(struct proc *, struct task_inspect_for_pid_args *, int *);
@@ -2994,8 +3105,14 @@ int sys_preadv(struct proc *, struct preadv_args *, user_ssize_t *);
 int sys_pwritev(struct proc *, struct pwritev_args *, user_ssize_t *);
 int sys_preadv_nocancel(struct proc *, struct preadv_nocancel_args *, user_ssize_t *);
 int sys_pwritev_nocancel(struct proc *, struct pwritev_nocancel_args *, user_ssize_t *);
-int ulock_wait2(struct proc *, struct ulock_wait2_args *, int *);
+int sys_ulock_wait2(struct proc *, struct ulock_wait2_args *, int *);
 int proc_info_extended_id(struct proc *, struct proc_info_extended_id_args *, int *);
+#if SOCKETS
+int tracker_action(struct proc *, struct tracker_action_args *, int *);
+#else
+#endif /* SOCKETS */
+int debug_syscall_reject(struct proc *, struct debug_syscall_reject_args *, int *);
+int freadlink(struct proc *, struct freadlink_args *, int *);
 
 __END_DECLS
 #undef PAD_

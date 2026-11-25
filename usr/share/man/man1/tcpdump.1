@@ -567,9 +567,11 @@ where each character corresponds to a type of packet metadata as follows:
 \fBS\fP     service class
 \fBD\fP     direction
 \fBC\fP     comment
-\fBC\fP     flags
+\fBF\fP     flags
 \fBU\fP     process UUID (not shown by default)
 \fBV\fP     verbose printf of pcap-ng blocks (not shown by default)
+\fBf\fP     flow identifier
+\fBt\fP     trace tag
 \fBA\fP     display all types of metadata
 .fi
 .RE
@@ -2087,6 +2089,14 @@ incoming packet not on interface en0:
 Note that a complex packet metadata filter expression needs to be put in quotes as the option
 .B \-Q
 takes a single string parameter.
+.LP
+Likewise, strings that contain spaces have to be surrounded by quotes. For example:
+.LP
+.RS
+.nf
+\fB-Q "proc = 'Some App'"\fP
+.fi
+.RE
 .SH "SEE ALSO"
 stty(1), pcap(3PCAP), bpf(4), nit(4P), \%pcap-savefile(5),
 \%pcap-filter(7), \%pcap-tstamp(7)

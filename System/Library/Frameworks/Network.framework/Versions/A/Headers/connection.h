@@ -2,7 +2,7 @@
 //  connection.h
 //  Network
 //
-//  Copyright (c) 2015-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2015-2019, 2021 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_CONNECTION_H__
@@ -239,7 +239,9 @@ nw_connection_set_queue(nw_connection_t connection,
  * @abstract
  *		Starts the connection, which will cause the connection
  *		to evaluate its path, do resolution, and try to become
- *		readable and writable.
+ *		readable and writable. Once started, a connection
+ *		must be cancelled using nw_connection_cancel() or
+ *		nw_connection_force_cancel() when it is no longer needed.
  *
  * @param connection
  *		The connection object.
@@ -524,7 +526,7 @@ NW_CONTENT_CONTEXT_TYPE_DECL(default_stream);
  *		in which case the send will be enqueued until the connection is ready to send.
  *		This is an asynchronous send and the completion block can be used to
  *		determine when the send is complete. There is nothing preventing a client
- *		from issuing an excessive number of outstanding sends. To minmize memory
+ *		from issuing an excessive number of outstanding sends. To minimize memory
  *		footprint and excessive latency as a consequence of buffer bloat, it is
  *		advisable to keep a low number of outstanding sends. The completion block
  *		can be used to pace subsequent sends.
@@ -594,6 +596,7 @@ NW_CONTENT_CONTEXT_TYPE_DECL(default_stream);
  *		enqueued to be sent.
  */
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
+NW_SWIFT_DISABLE_ASYNC
 void
 nw_connection_send(nw_connection_t connection,
 				   _Nullable dispatch_data_t content,
@@ -606,7 +609,7 @@ nw_connection_send(nw_connection_t connection,
  *
  * @abstract
  *		Batch several send and/or receive operations together, to hint to
- *		the connection that multiple send or recieve operations are expected
+ *		the connection that multiple send or receive operations are expected
  *		in quick succession.
  *
  * @param connection
@@ -678,7 +681,7 @@ nw_connection_copy_current_path(nw_connection_t connection);
  *
  * @result
  *		Returns a retained protocol metadata object, or NULL if the connection
- *		has not been established yet, or is cancelled.
+ *		has not been established yet or is cancelled.
  */
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 NW_RETURNS_RETAINED _Nullable nw_protocol_metadata_t

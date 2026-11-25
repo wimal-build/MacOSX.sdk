@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A6007569-4C69-3F82-8559-6ADDB4C28D9A
+    value:           57C9A304-1C04-3027-AE6A-01484693481F
   - target:          x86_64-maccatalyst
-    value:           A6007569-4C69-3F82-8559-6ADDB4C28D9A
+    value:           57C9A304-1C04-3027-AE6A-01484693481F
   - target:          x86_64h-macos
-    value:           65AABCAF-99FB-327C-B7B7-BDA8940D6EA5
+    value:           EA4C31CD-8BE7-338E-86FC-093E90AB192A
   - target:          x86_64h-maccatalyst
-    value:           65AABCAF-99FB-327C-B7B7-BDA8940D6EA5
+    value:           EA4C31CD-8BE7-338E-86FC-093E90AB192A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ACD2F2CC-ED19-3A69-94D2-03A046F6426F
+    value:           C96D201B-FC16-343C-9862-1A8AEAB829EA
   - target:          arm64e-maccatalyst
-    value:           ACD2F2CC-ED19-3A69-94D2-03A046F6426F
+    value:           C96D201B-FC16-343C-9862-1A8AEAB829EA
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/Libraries/libCGInterfaces.dylib'
-current-version: 544.4
+current-version: 555.3
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]

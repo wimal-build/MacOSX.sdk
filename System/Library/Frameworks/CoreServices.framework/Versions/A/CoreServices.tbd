@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A1E63C1B-E06B-3DE1-9C96-77E1A412D6DA
+    value:           278C278F-CC41-354C-85D9-A0B4801FBD36
   - target:          x86_64-maccatalyst
-    value:           A1E63C1B-E06B-3DE1-9C96-77E1A412D6DA
+    value:           278C278F-CC41-354C-85D9-A0B4801FBD36
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           66D7385A-F955-3939-BC93-040D74F8E709
+    value:           CD3EB903-4591-3B31-925A-2F314660F87A
   - target:          arm64e-maccatalyst
-    value:           66D7385A-F955-3939-BC93-040D74F8E709
+    value:           CD3EB903-4591-3B31-925A-2F314660F87A
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices'
-current-version: 1122.33
+current-version: 1141.1
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -53,19 +53,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5377134F-CCA8-3610-8888-8598115A8E8F
+    value:           C1696D61-282D-368F-B94A-C3D5E5615943
   - target:          x86_64-maccatalyst
-    value:           5377134F-CCA8-3610-8888-8598115A8E8F
+    value:           C1696D61-282D-368F-B94A-C3D5E5615943
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3737110E-66A8-3E93-AF93-FCD46EAC0AC8
+    value:           0A3AB363-B23B-3956-8E4C-7C5F72680481
   - target:          arm64e-maccatalyst
-    value:           3737110E-66A8-3E93-AF93-FCD46EAC0AC8
+    value:           0A3AB363-B23B-3956-8E4C-7C5F72680481
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
-current-version: 918.4
+current-version: 924
 compatibility-version: 0
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -152,13 +152,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C43BE82A-9E75-39C3-807F-2E87B97B7A78
+    value:           F55FC45F-9089-332B-A6BB-958A809C6C59
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D052CD4F-456B-3F0F-B17E-C3893CB5B602
+    value:           CC39CF0C-A415-3759-9977-CF8699FF5A08
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
-current-version: 1307.2
+current-version: 1319
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        CoreServices
@@ -636,11 +636,11 @@ exports:
                        __CSBackupSystemVersionCompare, __CSBackupURLIsBackupItem, 
                        __CSBackupUnregisterMTMExclusions, __CSBackupWasItemEverBackedUp, 
                        __CSCheckFix, __CSCheckFixDisable, __CSCheckFixSetBundleInformation, 
-                       __CSCheckFixWithInfo, __CSCopyLazyValuesForKey, __CSCreateSeed, 
-                       __CSDestroySeed, __CSFlushNamedData, __CSGetNamedData, __CSGetProcessorArchitecture, 
-                       __CSIncrementSeed, __CSReadSeed, __CSReleaseNamedData, __CSSetNamedData, 
-                       __CSWriteSeed, __CharacterByteType, __ConvertLocalTimeToUTC, 
-                       __ConvertLocalToUTCDateTime, __ConvertUTCToLocalDateTime, 
+                       __CSCheckFixWithInfo, __CSCopyLazyValuesForKey, __CSCopyNamedData, 
+                       __CSCreateSeed, __CSDestroySeed, __CSFlushNamedData, __CSGetNamedData, 
+                       __CSGetProcessorArchitecture, __CSIncrementSeed, __CSReadSeed, 
+                       __CSReleaseNamedData, __CSSetNamedData, __CSWriteSeed, __CharacterByteType, 
+                       __ConvertLocalTimeToUTC, __ConvertLocalToUTCDateTime, __ConvertUTCToLocalDateTime, 
                        __ConvertUTCToLocalTime, __CopyCStringToPascal, __CopyComponentBundleIdentifier, 
                        __CopyPascalStringToC, __CoreServicesServerMain, __EqualString, 
                        __FNNotifyByURL, __FSAccessControlEntryCopyUUID, __FSAccessControlEntryCreateMutableWithUUID, 
@@ -806,19 +806,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FFC38615-B3CC-395B-8658-4B159A9A0AC2
+    value:           A386704C-9FF8-3035-9C26-9A46E178CD7A
   - target:          x86_64-maccatalyst
-    value:           FFC38615-B3CC-395B-8658-4B159A9A0AC2
+    value:           A386704C-9FF8-3035-9C26-9A46E178CD7A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C25BFE81-0A70-3CA9-BBB0-2F0C50F42C86
+    value:           18BFAA45-3471-3B56-96E5-3B7876BD9D44
   - target:          arm64e-maccatalyst
-    value:           C25BFE81-0A70-3CA9-BBB0-2F0C50F42C86
+    value:           18BFAA45-3471-3B56-96E5-3B7876BD9D44
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices'
-current-version: 341
+current-version: 350
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -889,19 +889,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           43164A51-72ED-30E1-8F28-40B3598BCF5C
+    value:           82F6D3F5-3B86-34E0-9BB1-50D47FA242AF
   - target:          x86_64-maccatalyst
-    value:           43164A51-72ED-30E1-8F28-40B3598BCF5C
+    value:           82F6D3F5-3B86-34E0-9BB1-50D47FA242AF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E8B4A343-E15A-3A4D-BFA4-F2318FF8EBA1
+    value:           8DF5D744-BF1F-397D-BA11-429182BF64AB
   - target:          arm64e-maccatalyst
-    value:           E8B4A343-E15A-3A4D-BFA4-F2318FF8EBA1
+    value:           8DF5D744-BF1F-397D-BA11-429182BF64AB
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents'
-current-version: 1290.101.1
+current-version: 1326.100.8
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -925,19 +925,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CBFF2714-646C-3DDB-906D-672E420683E6
+    value:           FEC577DF-B8D6-3037-B510-B8338388B7D6
   - target:          x86_64-maccatalyst
-    value:           CBFF2714-646C-3DDB-906D-672E420683E6
+    value:           FEC577DF-B8D6-3037-B510-B8338388B7D6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           126E5536-55D7-31B0-919A-275EF3EA81A1
+    value:           A6F69AB4-F8A5-3542-84BE-3AB7F1F210A9
   - target:          arm64e-maccatalyst
-    value:           126E5536-55D7-31B0-919A-275EF3EA81A1
+    value:           A6F69AB4-F8A5-3542-84BE-3AB7F1F210A9
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
-current-version: 1122.33
+current-version: 1141.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -965,7 +965,8 @@ exports:
                        _LSCopyDisplayNameForURL, _LSCopyItemAttribute, _LSCopyItemAttributes, 
                        _LSCopyItemInfoForRef, _LSCopyItemInfoForURL, _LSCopyKindStringForMIMEType, 
                        _LSCopyKindStringForRef, _LSCopyKindStringForTypeInfo, _LSCopyKindStringForURL, 
-                       _LSDefaultIconName, _LSDisableURLOverrides, _LSDocumentTypesChangedNotificationName, 
+                       _LSDefaultApplicationManagementDomain, _LSDefaultIconName, 
+                       _LSDisableURLOverrides, _LSDocumentTypesChangedNotificationName, 
                        _LSFileProviderStringKey, _LSFindApplicationForInfo, _LSGeoJSONKey, 
                        _LSGetApplicationForInfo, _LSGetApplicationForItem, _LSGetApplicationForURL, 
                        _LSGetExtensionInfo, _LSGetHandlerOptionsForContentType, _LSGetOpenRoles, 
@@ -981,9 +982,9 @@ exports:
                        _LSSetExtensionHiddenForRef, _LSSetExtensionHiddenForURL, 
                        _LSSetHandlerOptionsForContentType, _LSSetItemAttribute, _LSSimulatorRootPathKey, 
                        _LSSimulatorUserPathKey, _LSSupressNotificationKey, _LSSystemApplicationType, 
-                       _LSTargetBSServiceConnectionEndpointKey, _LSTerm, _LSTypeDeclarationsChangedNotificationName, 
-                       _LSURLTypesChangedNotificationName, _LSUninstallUserDataOnly, 
-                       _LSUpdatePlaceholderIconKey, _LSUserActivityAlwaysEligibleKey, 
+                       _LSSystemPlaceholderType, _LSTargetBSServiceConnectionEndpointKey, 
+                       _LSTerm, _LSTypeDeclarationsChangedNotificationName, _LSURLTypesChangedNotificationName, 
+                       _LSUninstallUserDataOnly, _LSUpdatePlaceholderIconKey, _LSUserActivityAlwaysEligibleKey, 
                        _LSUserActivityAlwaysPickKey, _LSUserActivityHasWebPageURLOptionKey, 
                        _LSUserActivityIsForPairedDeviceOptionKey, _LSUserActivityIsHighPriorityOptionKey, 
                        _LSUserActivityIsNotificationOptionKey, _LSUserActivityManagerActivityContinuationIsEnabledChangedNotification, 
@@ -1053,19 +1054,19 @@ exports:
                        __LSCreateDeviceTypeIdentifierWithModelCode, __LSCreateDeviceTypeIdentifierWithModelCodeAndColorComponents, 
                        __LSCreateHashedBytesForAdvertisingFromString, __LSCreatePackageExtensionsArray, 
                        __LSCreateSurrogateDataForApplication, __LSCreateVisualizerForDatabaseAtURL, 
-                       __LSCreateVisualizerForDatabaseAtURLWithStore, __LSDataContainerPersonalityCopyInfo, 
-                       __LSDataContainerPersonalityRemoveInfo, __LSDataContainerPersonalitySetInfo, 
-                       __LSDataContainerPersonalitySetInfoWithApplicationIdentifier, 
+                       __LSCreateVisualizerForDatabaseAtURLWithStore, __LSDServiceGetXPCProxyForServiceClass, 
+                       __LSDataContainerPersonalityCopyInfo, __LSDataContainerPersonalityRemoveInfo, 
+                       __LSDataContainerPersonalitySetInfo, __LSDataContainerPersonalitySetInfoWithApplicationIdentifier, 
                        __LSDatabaseContextSetDetachProxyObjects, __LSDatabaseCopyURLForUser, 
                        __LSDebugAdvertismentValue, __LSDebugGetSharedMemoryPageAddress, 
-                       __LSDeleteAllQuarantineHistory, __LSDeleteQuarantineHistoryForFileURL, 
+                       __LSDefaultLog, __LSDeleteAllQuarantineHistory, __LSDeleteQuarantineHistoryForFileURL, 
                        __LSDeleteQuarantineHistoryInDateRange, __LSDisplayData, __LSEnumerateApplicationsFromSpotlight, 
                        __LSExceptionsGetAppStoreInfoForBundleIdentifier, __LSExceptionsIsBundleIdentifierInternallyBlocked, 
-                       __LSFindApplications, __LSFindApplicationsItem, __LSGetApplicationInformationSeed, 
-                       __LSGetApplicationListSeed, __LSGetBundle, __LSGetCurrentApplicationASN, 
-                       __LSGetFrontApplicationSeed, __LSGetIconRefForURL, __LSGetMainBundleURL, 
-                       __LSGetMenuBarOwnerApplicationSeed, __LSGetNotificationInformation, 
-                       __LSGetPointerAuthKeyStatePreferenceForCurrentApplication, 
+                       __LSExtensionsLog, __LSFindApplications, __LSFindApplicationsItem, 
+                       __LSGetApplicationInformationSeed, __LSGetApplicationListSeed, 
+                       __LSGetBundle, __LSGetCurrentApplicationASN, __LSGetFrontApplicationSeed, 
+                       __LSGetIconRefForURL, __LSGetMainBundleURL, __LSGetMenuBarOwnerApplicationSeed, 
+                       __LSGetNotificationInformation, __LSGetPointerAuthKeyStatePreferenceForCurrentApplication, 
                        __LSGetRecentItemCount, __LSGetSharedMemoryPageInfoTEST, __LSGetShowAllExtensionsPreference, 
                        __LSGetStatus, __LSGetVersionFromString, __LSGetVisibleApplicationListSeed, 
                        __LSHandlerRankAlternate, __LSHandlerRankDefault, __LSHandlerRankNone, 
@@ -1078,7 +1079,8 @@ exports:
                        __LSOpenURLsUsingASNWithCompletionHandler, __LSOpenURLsUsingBundleIdentifierWithCompletionHandler, 
                        __LSOpenURLsWithCompletionHandler, __LSOrderApplications, 
                        __LSPassDownCurrentEventState, __LSPersistentIdentifierCompare, 
-                       __LSPersistentIdentifierGetDebugDescription, __LSPostLaunchModifiers, 
+                       __LSPersistentIdentifierGetDebugDescription, __LSPersistentIdentifierGetKnowledgeUUID4CoreDevice, 
+                       __LSPersistentIdentifierGetSequenceNumber4CoreDevice, __LSPostLaunchModifiers, 
                        __LSQuarantinePropertiesCreateData, __LSQuarantinePropertiesCreateWithBytes, 
                        __LSReCheckinApplication, __LSReRegisterNotifications, __LSRecentItemsChanged, 
                        __LSRecentsInit, __LSRegisterAsSessionLauncherClient, __LSRegisterExtensionPointInfo, 
@@ -1088,11 +1090,12 @@ exports:
                        __LSRegisterURLWithOptions, __LSRemoveDefaultRoleHandlerForContentType, 
                        __LSRemoveRecentItems, __LSRequestProcessBecomeFrontmost, 
                        __LSSaveAndRefresh, __LSScheduleNotificationFunction, __LSScheduleNotificationFunctionOnQueue_f, 
-                       __LSScheduleNotificationOnQueueWithBlock, __LSSendNotification, 
-                       __LSServerMain, __LSSetApplicationCategories, __LSSetApplicationInformation, 
-                       __LSSetApplicationInformationItem, __LSSetApplicationLaunchServicesServerConnectionStatus, 
-                       __LSSetArchitecturePreferenceForApplicationURL, __LSSetDatabaseIsSeeded, 
-                       __LSSetDefaultSchemeHandlerURL, __LSSetDefaultSchemeHandlerURLWaitingUntilDone, 
+                       __LSScheduleNotificationOnQueueWithBlock, __LSSecretManagementDecryptData, 
+                       __LSSecretManagementEncryptData, __LSSecretManagementVersion, 
+                       __LSSendNotification, __LSServerMain, __LSSetApplicationCategories, 
+                       __LSSetApplicationInformation, __LSSetApplicationInformationItem, 
+                       __LSSetApplicationLaunchServicesServerConnectionStatus, __LSSetArchitecturePreferenceForApplicationURL, 
+                       __LSSetDatabaseIsSeeded, __LSSetDefaultSchemeHandlerURL, __LSSetDefaultSchemeHandlerURLWaitingUntilDone, 
                        __LSSetDefaultWebBrowserWithApplicationURL, __LSSetDefaultWebBrowserWithBundleIdentifierAndVersion, 
                        __LSSetDefaultXPCConnection, __LSSetFrontApplication, __LSSetFrontApplicationLong, 
                        __LSSetFrontApplicationLongWithCompletion, __LSSetMetaApplicationInformation, 
@@ -1133,6 +1136,7 @@ exports:
                        __LSSharedMemorySetSessionLauncherASNLow, __LSSharedMemorySetSystemProcessASNLow, 
                        __LSSharedMemorySetSystemUIPresentationMode, __LSSharedMemorySetSystemUIPresentationOptions, 
                        __LSSharedMemoryUnlock, __LSSignalApplicationReady, __LSStartLaunchedApplication, 
+                       __LSSuggestedFilesystemNameForWrapperWrappingBundleAtURL, 
                        __LSURLBindingReasonKey, __LSURLIsDataContainer4IS, __LSUnregisterPluginsInDirectory, 
                        __LSUnregisterURL, __LSUnregisterURLsRelativeToURL, __LSUnscheduleNotificationFunction, 
                        __LSUpdateRegistrationForURLsRelativeToURL, __LSUseCoreApplicationServices, 
@@ -1156,42 +1160,42 @@ exports:
                        __kLSAddToPermittedFrontASNsArrayKey, __kLSAllowedToBecomeFrontmostKey, 
                        __kLSApplicationBackgroundOnlyTypeKey, __kLSApplicationBackgroundPriorityKey, 
                        __kLSApplicationCountKey, __kLSApplicationDelayLaunchUntilTimeKey, 
-                       __kLSApplicationDesiresAttentionKey, __kLSApplicationForegroundPriorityKey, 
-                       __kLSApplicationForegroundTypeKey, __kLSApplicationHasRegisteredKey, 
-                       __kLSApplicationHasSignalledItIsReadyKey, __kLSApplicationInSandboxKey, 
-                       __kLSApplicationInStoppedStateKey, __kLSApplicationInThrottledStateAfterLaunchKey, 
-                       __kLSApplicationInformationSeedKey, __kLSApplicationIsHiddenKey, 
-                       __kLSApplicationListSeedKey, __kLSApplicationLockedInStoppedStateKey, 
-                       __kLSApplicationOverriddenBackgroundDomainNameKey, __kLSApplicationReadyToBeFrontableKey, 
-                       __kLSApplicationSandboxedInformationItemsKey, __kLSApplicationTypeKey, 
-                       __kLSApplicationTypeToRestoreKey, __kLSApplicationUIElementTypeKey, 
-                       __kLSApplicationVersionKey, __kLSApplicationWasTerminatedByTALKey, 
-                       __kLSApplicationWouldBeTerminatedByTALKey, __kLSApplicationsRecordingAppleEventsKey, 
-                       __kLSArchitectureARM64Value, __kLSArchitectureKey, __kLSArchitecturePowerPC64Value, 
-                       __kLSArchitecturePowerPCValue, __kLSArchitectureUnknownValue, 
-                       __kLSArchitecturei386Value, __kLSArchitecturex86_64Value, 
-                       __kLSAuditTokenKey, __kLSBackgroundPriorityKey, __kLSBackgroundPriorityOnceKey, 
-                       __kLSBindingResourceInfoBadgeableKey, __kLSBindingResourceInfoNameKey, 
-                       __kLSBindingResourceInfoResourceKey, __kLSBindingResourceInfoVariantFlagsKey, 
-                       __kLSBringForwardDelayKey, __kLSBringForwardRequestCausedByUserIntentKey, 
-                       __kLSBringForwardRequestForcedKey, __kLSBringForwardRequestIfFrontReservationExistsKey, 
-                       __kLSBringForwardRequestImmediateKey, __kLSBringForwardRequestStandardActivationKey, 
-                       __kLSBringForwardWindowIDKey, __kLSBringNextApplicationForwardKey, 
-                       __kLSBundleIdentifierLowerCaseKey, __kLSBundleNameLowerCaseKey, 
-                       __kLSBundlePathDeviceIDKey, __kLSBundlePathINodeKey, __kLSBundlePathKey, 
-                       __kLSBundlePathLastComponentLowerCaseKey, __kLSBundlePathSandboxExtensionKey, 
-                       __kLSCheckInTimeKey, __kLSDYLDPlatformKey, __kLSDataContainerPersonalityIconKey, 
-                       __kLSDataContainerPersonalityLocalizedNameKey, __kLSDebugLevelKey, 
-                       __kLSDisableAllPostLaunchBringForwardRequestsKey, __kLSDisplayNameKey, 
-                       __kLSDoNotBFIfFrontApplicationSeedIsChangedKey, __kLSDoNotBringAllWindowsForwardKey, 
-                       __kLSDoNotBringAnyWindowsForwardKey, __kLSDoNotSetTaskPolicyAutomaticallyKey, 
-                       __kLSDontDropRootPermissionsKey, __kLSErrorMessageStringKey, 
-                       __kLSExecutableFilenameLowerCaseKey, __kLSExecutableFormatCFMKey, 
-                       __kLSExecutableFormatKey, __kLSExecutableFormatMachOKey, __kLSExecutableFormatPoundBangKey, 
-                       __kLSExecutablePathDeviceIDKey, __kLSExecutablePathINodeKey, 
-                       __kLSExecutablePathKey, __kLSExecutablePlatformKey, __kLSExecutableSDKVersionKey, 
-                       __kLSExitStatusKey, __kLSExpectedFrontApplicationASNKey, __kLSFileCreatorKey, 
-                       __kLSFileTypeKey, __kLSFlavorKey, __kLSForegroundPriorityKey, 
+                       __kLSApplicationDesiresAttentionKey, __kLSApplicationDoNotTALRelaunchKey, 
+                       __kLSApplicationForegroundPriorityKey, __kLSApplicationForegroundTypeKey, 
+                       __kLSApplicationHasRegisteredKey, __kLSApplicationHasSignalledItIsReadyKey, 
+                       __kLSApplicationInSandboxKey, __kLSApplicationInStoppedStateKey, 
+                       __kLSApplicationInThrottledStateAfterLaunchKey, __kLSApplicationInformationSeedKey, 
+                       __kLSApplicationIsBetaKey, __kLSApplicationIsHiddenKey, __kLSApplicationListSeedKey, 
+                       __kLSApplicationLockedInStoppedStateKey, __kLSApplicationOverriddenBackgroundDomainNameKey, 
+                       __kLSApplicationReadyToBeFrontableKey, __kLSApplicationSandboxedInformationItemsKey, 
+                       __kLSApplicationTypeKey, __kLSApplicationTypeToRestoreKey, 
+                       __kLSApplicationUIElementTypeKey, __kLSApplicationVersionKey, 
+                       __kLSApplicationWasTerminatedByTALKey, __kLSApplicationWouldBeTerminatedByTALKey, 
+                       __kLSApplicationsRecordingAppleEventsKey, __kLSArchitectureARM64Value, 
+                       __kLSArchitectureKey, __kLSArchitecturePowerPC64Value, __kLSArchitecturePowerPCValue, 
+                       __kLSArchitectureUnknownValue, __kLSArchitecturei386Value, 
+                       __kLSArchitecturex86_64Value, __kLSAuditTokenKey, __kLSBackgroundPriorityKey, 
+                       __kLSBackgroundPriorityOnceKey, __kLSBindingResourceInfoBadgeableKey, 
+                       __kLSBindingResourceInfoNameKey, __kLSBindingResourceInfoResourceKey, 
+                       __kLSBindingResourceInfoVariantFlagsKey, __kLSBringForwardDelayKey, 
+                       __kLSBringForwardRequestCausedByUserIntentKey, __kLSBringForwardRequestForcedKey, 
+                       __kLSBringForwardRequestIfFrontReservationExistsKey, __kLSBringForwardRequestImmediateKey, 
+                       __kLSBringForwardRequestStandardActivationKey, __kLSBringForwardWindowIDKey, 
+                       __kLSBringNextApplicationForwardKey, __kLSBundleIdentifierLowerCaseKey, 
+                       __kLSBundleNameLowerCaseKey, __kLSBundlePathDeviceIDKey, __kLSBundlePathINodeKey, 
+                       __kLSBundlePathKey, __kLSBundlePathLastComponentLowerCaseKey, 
+                       __kLSBundlePathSandboxExtensionKey, __kLSCheckInTimeKey, __kLSDYLDPlatformKey, 
+                       __kLSDataContainerPersonalityIconKey, __kLSDataContainerPersonalityLocalizedNameKey, 
+                       __kLSDebugLevelKey, __kLSDisableAllPostLaunchBringForwardRequestsKey, 
+                       __kLSDisplayNameKey, __kLSDoNotBFIfFrontApplicationSeedIsChangedKey, 
+                       __kLSDoNotBringAllWindowsForwardKey, __kLSDoNotBringAnyWindowsForwardKey, 
+                       __kLSDoNotSetTaskPolicyAutomaticallyKey, __kLSDontDropRootPermissionsKey, 
+                       __kLSErrorMessageStringKey, __kLSExecutableFilenameLowerCaseKey, 
+                       __kLSExecutableFormatCFMKey, __kLSExecutableFormatKey, __kLSExecutableFormatMachOKey, 
+                       __kLSExecutableFormatPoundBangKey, __kLSExecutablePathDeviceIDKey, 
+                       __kLSExecutablePathINodeKey, __kLSExecutablePathKey, __kLSExecutablePlatformKey, 
+                       __kLSExecutableSDKVersionKey, __kLSExitStatusKey, __kLSExpectedFrontApplicationASNKey, 
+                       __kLSFileCreatorKey, __kLSFileTypeKey, __kLSFlavorKey, __kLSForegroundPriorityKey, 
                        __kLSForegroundPriorityOnceKey, __kLSFrontASNKey, __kLSFrontApplicationSeedKey, 
                        __kLSFrontReservationExistsKey, __kLSHiddenApplicationCountKey, 
                        __kLSIsProxiedForTALKey, __kLSKeyBeingAddedKey, __kLSKeyBeingChangedKey, 
@@ -1247,14 +1251,15 @@ exports:
                        __kLSOpenOptionHideKey, __kLSOpenOptionHideOthersKey, __kLSOpenOptionInitialAppleEventKey, 
                        __kLSOpenOptionLaunchSessionIDDKey, __kLSOpenOptionLaunchStdErrPathKey, 
                        __kLSOpenOptionLaunchStdInPathKey, __kLSOpenOptionLaunchStdOutPathKey, 
-                       __kLSOpenOptionLaunchUIDKey, __kLSOpenOptionLaunchedByPersistenceKey, 
-                       __kLSOpenOptionOverrideBackgroundPriorityDomainNameKey, __kLSOpenOptionPreferRunningInstanceKey, 
-                       __kLSOpenOptionPrintDocumentsKey, __kLSOpenOptionRequiresUniversalLinksKey, 
-                       __kLSOpenOptionRolesMaskKey, __kLSOpenOptionStopProcessKey, 
-                       __kLSOpenOptionUIElementLaunchKey, __kLSOpenOptionUserInfoKey, 
-                       __kLSOpenOptionWaitForApplicationToCheckInKey, __kLSOriginalExecutablePathDeviceIDKey, 
-                       __kLSOriginalExecutablePathINodeKey, __kLSOriginalExecutablePathKey, 
-                       __kLSOriginalPIDKey, __kLSPIDKey, __kLSPIDsInSessionKey, __kLSPSNToBringForwardAtNextApplicationExitKey, 
+                       __kLSOpenOptionLaunchUIDKey, __kLSOpenOptionLaunchWhenThisProcessExitsKey, 
+                       __kLSOpenOptionLaunchedByPersistenceKey, __kLSOpenOptionOverrideBackgroundPriorityDomainNameKey, 
+                       __kLSOpenOptionPreferRunningInstanceKey, __kLSOpenOptionPrintDocumentsKey, 
+                       __kLSOpenOptionRequiresUniversalLinksKey, __kLSOpenOptionRolesMaskKey, 
+                       __kLSOpenOptionStopProcessKey, __kLSOpenOptionUIElementLaunchKey, 
+                       __kLSOpenOptionUserInfoKey, __kLSOpenOptionWaitForApplicationToCheckInKey, 
+                       __kLSOriginalExecutablePathDeviceIDKey, __kLSOriginalExecutablePathINodeKey, 
+                       __kLSOriginalExecutablePathKey, __kLSOriginalPIDKey, __kLSPIDKey, 
+                       __kLSPIDsInSessionKey, __kLSPSNToBringForwardAtNextApplicationExitKey, 
                        __kLSParentASNKey, __kLSParentASNWasInferredKey, __kLSPermittedFrontASNsArrayKey, 
                        __kLSPersistenceSuppressRelaunchAtLoginKey, __kLSPidThisProcessIsAWrapperForKey, 
                        __kLSPidThisProcessIsWrappingKey, __kLSPluginBundleIdentifierKey, 
@@ -1355,20 +1360,20 @@ exports:
                        _kUTTypeXML, _kUTTypeXMLPropertyList, _kUTTypeXPCService, 
                        _kUTTypeZipArchive ]
     objc-classes:    [ LSAppLink, LSAppTranslocationResult, LSApplicationExtensionRecord, 
-                       LSApplicationProxy, LSApplicationRecord, LSApplicationWorkspace, 
-                       LSApplicationWorkspaceObserver, LSBundleInfoCachedValues, 
+                       LSApplicationIdentity, LSApplicationProxy, LSApplicationRecord, 
+                       LSApplicationWorkspace, LSApplicationWorkspaceObserver, LSBundleInfoCachedValues, 
                        LSBundleProxy, LSBundleRecord, LSBundleWrapperCreator, LSBundleWrapperStagingReceipt, 
                        LSBundleWrapperUpdater, LSClaimBinding, LSClaimBindingConfiguration, 
                        LSClaimRecord, LSCodeEvaluation, LSCodeEvaluationInfo, LSDatabaseContext, 
                        LSDocumentProxy, LSEnumerator, LSExtensionPoint, LSExtensionPointRecord, 
-                       LSIconResource, LSOpenWithMenuConstructor, LSPlugInKitProxy, 
+                       LSIconResource, LSObserver, LSOpenWithMenuConstructor, LSPlugInKitProxy, 
                        LSPlugInQuery, LSPlugInQueryWithIdentifier, LSPlugInQueryWithQueryDictionary, 
-                       LSPlugInQueryWithURL, LSPropertyList, LSRecord, LSResourceProxy, 
-                       LSServiceRecord, UTTypeRecord, _LSApplicationState, _LSDatabase, 
-                       _LSDefaults, _LSDiskUsage, _LSDisplayNameConstructor, _LSExceptions, 
-                       _LSInternetLocator, _LSLazyPropertyList, _LSOpenConfiguration, 
-                       _LSQuery, _LSQueryContext, _LSQueryResult, _LSRecordEnumerator, 
-                       _LSStringLocalizer, _LSURLOverride ]
+                       LSPlugInQueryWithURL, LSPropertyList, LSRecord, LSRecordPromise, 
+                       LSResourceProxy, LSServiceRecord, LSSpotlightAction, UTTypeRecord, 
+                       _LSApplicationState, _LSDatabase, _LSDefaults, _LSDiskUsage, 
+                       _LSDisplayNameConstructor, _LSExceptions, _LSInternetLocator, 
+                       _LSLazyPropertyList, _LSOpenConfiguration, _LSQuery, _LSQueryContext, 
+                       _LSQueryResult, _LSRecordEnumerator, _LSStringLocalizer, _LSURLOverride ]
     objc-ivars:      [ _LSDatabase.schema, _LSDatabase.store ]
 reexports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -1380,19 +1385,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FCCD84AD-EDFA-310E-B607-FFC464419716
+    value:           B7039CC7-ADA4-3888-9DAE-8F1311320AED
   - target:          x86_64-maccatalyst
-    value:           FCCD84AD-EDFA-310E-B607-FFC464419716
+    value:           B7039CC7-ADA4-3888-9DAE-8F1311320AED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D6E78FFE-7627-3A3B-A87B-69F17EB99A1D
+    value:           0623AF12-D03D-3B26-AD78-668832C5CA5C
   - target:          arm64e-maccatalyst
-    value:           D6E78FFE-7627-3A3B-A87B-69F17EB99A1D
+    value:           0623AF12-D03D-3B26-AD78-668832C5CA5C
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2150.16
+current-version: 2183.17
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1578,9 +1583,10 @@ exports:
                        __MDQueryCreateQueryStringToMatchDisplayNameWithOptions, __MDQueryCreateQueryStringToMatchDisplayNamesWithOptions, 
                        __MDQueryCreateQueryStringWithOptions, __MDQueryCreateQueryStringWithOptionsDict, 
                        __MDQueryCreateStringByAddingBackslashEscapes, __MDQueryDontEnforceTopN, 
-                       __MDQueryEnablePerfGathering, __MDQueryExtractTextTerms, __MDQueryFastWillStop, 
-                       __MDQueryGetAttributeValueOfResultAtIndexForGroup, __MDQueryGetAttributeValuesOfResultAtIndex, 
-                       __MDQueryGetGeneration, __MDQueryGetGroupCount, __MDQueryGetResultAtIndexForGroup, 
+                       __MDQueryEnablePerfGathering, __MDQueryEnumerateNodesInQueryString, 
+                       __MDQueryExtractTextTerms, __MDQueryFastWillStop, __MDQueryGetAttributeValueOfResultAtIndexForGroup, 
+                       __MDQueryGetAttributeValuesOfResultAtIndex, __MDQueryGetGeneration, 
+                       __MDQueryGetGroupCount, __MDQueryGetResultAtIndexForGroup, 
                        __MDQueryGetResultCountForAllGroups, __MDQueryGetResultCountForGroup, 
                        __MDQueryGetSortFlagsForAttribute, __MDQueryIgnoreAllLastUsedUpdatesForItem, 
                        __MDQueryIgnoreNextLastUsedUpdateForItem, __MDQueryProcessUpdates, 
@@ -1617,14 +1623,17 @@ exports:
                        __kMDItemExportImporterAvaliable, __kMDItemFSContentType, 
                        __kMDItemFSContentTypeTree, __kMDItemFSDisplayName, __kMDItemFileName, 
                        __kMDItemFinderFlags, __kMDItemFinderLabel, __kMDItemHasCustomIcon, 
-                       __kMDItemHasExtensionHidden, __kMDItemImporterResult, __kMDItemIncomingCounts, 
+                       __kMDItemHasExtensionHidden, __kMDItemImporterResult, __kMDItemIncomingCalendarCounts, 
+                       __kMDItemIncomingCounts, __kMDItemIncomingFileProviderCounts, 
                        __kMDItemIncomingMailCounts, __kMDItemIncomingSMSCounts, __kMDItemInvisibleFileType, 
-                       __kMDItemIsEvictedFile, __kMDItemIsExtensionHidden, __kMDItemIsStationery, 
-                       __kMDItemLocked, __kMDItemMailAccountsAttributesMissing, __kMDItemNodeCount, 
-                       __kMDItemOutgoingCounts, __kMDItemOutgoingMailCounts, __kMDItemOutgoingSMSCounts, 
-                       __kMDItemOwnerGroupID, __kMDItemOwnerUserID, __kMDItemPrescanCandidate, 
-                       __kMDItemServerVersion, __kMDItemSortIdentityAttr, __kMDItemStaticInterestScore, 
-                       __kMDItemSupportFileType, __kMDItemTextContentIndexExists, 
+                       __kMDItemIsEvictedFile, __kMDItemIsExtensionHidden, __kMDItemIsShared, 
+                       __kMDItemIsStationery, __kMDItemLocked, __kMDItemMailAccountsAttributesMissing, 
+                       __kMDItemNodeCount, __kMDItemOutgoingCalendarCounts, __kMDItemOutgoingCounts, 
+                       __kMDItemOutgoingFileProviderCounts, __kMDItemOutgoingMailCounts, 
+                       __kMDItemOutgoingSMSCounts, __kMDItemOwnerGroupID, __kMDItemOwnerName, 
+                       __kMDItemOwnerUserID, __kMDItemPrescanCandidate, __kMDItemServerVersion, 
+                       __kMDItemSharedItemCurrentUserRole, __kMDItemSortIdentityAttr, 
+                       __kMDItemStaticInterestScore, __kMDItemSupportFileType, __kMDItemTextContentIndexExists, 
                        __kMDItemTypeCode, __kMDItemUserTags, __kMDParametersForImporter, 
                        __kMDQueryItemInScopeForRankingOnly, __kMDQueryScope, __kMDUserQueryAttributedInputDateKey, 
                        __kMDUserQueryAttributedInputRecipientKey, __kMDUserQueryAttributedInputSenderKey, 
@@ -1857,19 +1866,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4B4148C5-9CFB-3AA1-89B0-0EB988C0BCD2
+    value:           709AA172-1DE4-3C1F-9B63-8FEFFFF8A3BC
   - target:          x86_64-maccatalyst
-    value:           4B4148C5-9CFB-3AA1-89B0-0EB988C0BCD2
+    value:           709AA172-1DE4-3C1F-9B63-8FEFFFF8A3BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           99622793-6045-36D0-B959-EB6FD06202C0
+    value:           46A15C14-9CEB-3F48-BC0A-6A6BFDC3FB89
   - target:          arm64e-maccatalyst
-    value:           99622793-6045-36D0-B959-EB6FD06202C0
+    value:           46A15C14-9CEB-3F48-BC0A-6A6BFDC3FB89
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices'
-current-version: 1122.33
+current-version: 1141.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -2011,17 +2020,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F54991CF-B1D9-338F-97D7-25E0675E24CA
+    value:           24D008C4-3A7D-3A14-B0E3-84DC9D992A27
   - target:          x86_64-maccatalyst
-    value:           F54991CF-B1D9-338F-97D7-25E0675E24CA
+    value:           24D008C4-3A7D-3A14-B0E3-84DC9D992A27
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0242259D-4D21-310C-B81B-550FDA314126
+    value:           67F6E52B-D8A5-32F9-BD93-FF71801CEDA8
   - target:          arm64e-maccatalyst
-    value:           0242259D-4D21-310C-B81B-550FDA314126
+    value:           67F6E52B-D8A5-32F9-BD93-FF71801CEDA8
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit'
 current-version: 417.1
 parent-umbrella:
@@ -2151,19 +2160,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D8521DF0-1AA2-3157-AE32-7C88AB78C803
+    value:           5970ABAA-BBFC-34B4-911A-78BD149D6F4F
   - target:          x86_64-maccatalyst
-    value:           D8521DF0-1AA2-3157-AE32-7C88AB78C803
+    value:           5970ABAA-BBFC-34B4-911A-78BD149D6F4F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A184E5F-21E6-3CDF-A08E-DE721305B1DD
+    value:           807CB9F0-17E2-31FE-9228-A576CF76A1AD
   - target:          arm64e-maccatalyst
-    value:           2A184E5F-21E6-3CDF-A08E-DE721305B1DD
+    value:           807CB9F0-17E2-31FE-9228-A576CF76A1AD
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList'
-current-version: 144
+current-version: 155
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -321,6 +321,7 @@ struct vfs_attr {
 #define MNT_NOUSERXATTR 0x01000000      /* Don't allow user extended attributes */
 #define MNT_DEFWRITE    0x02000000      /* filesystem should defer writes */
 #define MNT_MULTILABEL  0x04000000      /* MAC support for individual labels */
+#define MNT_NOFOLLOW    0x08000000      /* don't follow symlink when resolving mount point */
 #define MNT_NOATIME             0x10000000      /* disable update of file access time */
 #define MNT_SNAPSHOT    0x40000000 /* The mount is a snapshot */
 #define MNT_STRICTATIME 0x80000000      /* enable strict update of file access time */
@@ -340,7 +341,8 @@ struct vfs_attr {
 	                MNT_ROOTFS	| MNT_DOVOLFS	| MNT_DONTBROWSE | \
 	                MNT_IGNORE_OWNERSHIP | MNT_AUTOMOUNTED | MNT_JOURNALED | \
 	                MNT_NOUSERXATTR | MNT_DEFWRITE	| MNT_MULTILABEL | \
-	                MNT_NOATIME | MNT_STRICTATIME | MNT_SNAPSHOT | MNT_CPROTECT)
+	                MNT_NOFOLLOW | MNT_NOATIME | MNT_STRICTATIME | \
+	                MNT_SNAPSHOT | MNT_CPROTECT)
 /*
  * External filesystem command modifier flags.
  * Unmount can use the MNT_FORCE flag.
@@ -1257,6 +1259,20 @@ void    vfs_event_init(void); /* XXX We should not export this */
 void vfs_set_root_unmounted_cleanly(void);
 
 __END_DECLS
+
+
+/*
+ * Generic file handle
+ */
+#define NFS_MAX_FH_SIZE         NFSV4_MAX_FH_SIZE
+#define NFSV4_MAX_FH_SIZE       128
+#define NFSV3_MAX_FH_SIZE       64
+#define NFSV2_MAX_FH_SIZE       32
+struct fhandle {
+	unsigned int    fh_len;                         /* length of file handle */
+	unsigned char   fh_data[NFS_MAX_FH_SIZE];       /* file handle value */
+};
+typedef struct fhandle  fhandle_t;
 
 
 #endif /* !_SYS_MOUNT_H_ */

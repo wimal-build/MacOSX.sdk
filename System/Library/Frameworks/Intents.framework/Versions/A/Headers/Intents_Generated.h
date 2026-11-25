@@ -2,7 +2,7 @@
 //  Intents_Generated.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INAccountType.h>
@@ -59,6 +59,7 @@
 #import <Intents/INDeleteTasksTaskResolutionResult.h>
 #import <Intents/INFileResolutionResult.h>
 #import <Intents/INFlight.h>
+#import <Intents/INFocusStatus.h>
 #import <Intents/INLocationSearchType.h>
 #import <Intents/INLocationSearchTypeResolutionResult.h>
 #import <Intents/INMediaAffinityType.h>

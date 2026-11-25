@@ -2,7 +2,7 @@
 //  INCarAudioSource.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #ifndef INCarAudioSource_h
@@ -22,6 +22,6 @@ typedef NS_ENUM(NSInteger, INCarAudioSource) {
     INCarAudioSourceMemoryCard,
     INCarAudioSourceOpticalDrive,
     INCarAudioSourceHardDrive,
-} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+} API_DEPRECATED("INCarAudioSource is deprecated. There is no replacement.", ios(10.0, 15.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 #endif // INCarAudioSource_h

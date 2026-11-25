@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8AB78BDB-6FE6-3A07-B697-258C07791AA7
+    value:           7D01D635-3C80-338F-B0AC-4FAE9DBCF636
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9DF5CFBC-4A13-3595-9A90-5BDA100EEF4B
+    value:           E8616A4F-5C1C-3615-99B6-18B059640756
 install-name:    '/System/Library/Frameworks/FWAUserLib.framework/Versions/A/FWAUserLib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

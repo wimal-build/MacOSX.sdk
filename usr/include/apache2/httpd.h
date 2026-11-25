@@ -645,6 +645,49 @@ struct ap_method_list_t {
     /** the array used for extension methods */
     apr_array_header_t *method_list;
 };
+/** @} */
+
+/**
+ * @defgroup bnotes Binary notes recognized by the server
+ * @ingroup APACHE_CORE_DAEMON
+ * @{
+ *
+ * @brief Binary notes recognized by the server.
+ */
+
+/**
+ * The type used for request binary notes.
+ */
+typedef apr_uint64_t ap_request_bnotes_t;
+
+/**
+ * These constants represent bitmasks for notes associated with this
+ * request. There are space for 64 bits in the apr_uint64_t.
+ *
+ */
+#define AP_REQUEST_STRONG_ETAG 1 >> 0
+
+/**
+ * This is a convenience macro to ease with getting specific request
+ * binary notes.
+ */
+#define AP_REQUEST_GET_BNOTE(r, mask) \
+    ((mask) & ((r)->bnotes))
+
+/**
+ * This is a convenience macro to ease with setting specific request
+ * binary notes.
+ */
+#define AP_REQUEST_SET_BNOTE(r, mask, val) \
+    (r)->bnotes = (((r)->bnotes & ~(mask)) | (val))
+
+/**
+ * Returns true if the strong etag flag is set for this request.
+ */
+#define AP_REQUEST_IS_STRONG_ETAG(r) \
+        AP_REQUEST_GET_BNOTE((r), AP_REQUEST_STRONG_ETAG)
+/** @} */
+
 
 /**
  * @defgroup module_magic Module Magic mime types
@@ -1062,6 +1105,11 @@ struct request_rec {
      *  1 yes/success
      */
     int double_reverse;
+    /** Request flags associated with this request. Use
+     * AP_REQUEST_GET_FLAGS() and AP_REQUEST_SET_FLAGS() to access
+     * the elements of this field.
+     */
+    ap_request_bnotes_t bnotes;
 };
 
 /**
@@ -1190,6 +1238,8 @@ struct conn_rec {
 
     /** The "real" master connection. NULL if I am the master. */
     conn_rec *master;
+
+    int outgoing;
 };
 
 /**
@@ -1691,6 +1741,18 @@ AP_DECLARE(int) ap_unescape_url(char *url);
  */
 AP_DECLARE(int) ap_unescape_url_keep2f(char *url, int decode_slashes);
 
+#define AP_UNESCAPE_URL_KEEP_UNRESERVED (1u << 0)
+#define AP_UNESCAPE_URL_FORBID_SLASHES  (1u << 1)
+#define AP_UNESCAPE_URL_KEEP_SLASHES    (1u << 2)
+
+/**
+ * Unescape a URL, with options
+ * @param url The url to unescape
+ * @param flags Bitmask of AP_UNESCAPE_URL_* flags
+ * @return 0 on success, non-zero otherwise
+ */
+AP_DECLARE(int) ap_unescape_url_ex(char *url, unsigned int flags);
+
 /**
  * Unescape an application/x-www-form-urlencoded string
  * @param query The query to unescape
@@ -1713,6 +1775,21 @@ AP_DECLARE(void) ap_no2slash(char *name);
  *        ignored.
  */
 AP_DECLARE(void) ap_no2slash_ex(char *name, int is_fs_path);
+
+#define AP_NORMALIZE_ALLOW_RELATIVE     (1u <<  0)
+#define AP_NORMALIZE_NOT_ABOVE_ROOT     (1u <<  1)
+#define AP_NORMALIZE_DECODE_UNRESERVED  (1u <<  2)
+#define AP_NORMALIZE_MERGE_SLASHES      (1u <<  3)
+#define AP_NORMALIZE_DROP_PARAMETERS    (0) /* deprecated */
+
+/**
+ * Remove all ////, /./ and /xx/../ substrings from a path, and more
+ * depending on passed in flags.
+ * @param path The path to normalize
+ * @param flags bitmask of AP_NORMALIZE_* flags
+ * @return non-zero on success
+ */
+AP_DECLARE(int) ap_normalize_path(char *path, unsigned int flags);
 
 /**
  * Remove all ./ and xx/../ substrings from a file name. Also remove

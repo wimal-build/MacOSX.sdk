@@ -3,9 +3,9 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-760.100
+     Version:    vecLib-794.100
  
-     Copyright:  Copyright (c) 2000-2021 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 2000-2022 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -41,11 +41,13 @@
 #include <vecLib/vDSP.h>
 #endif
 
-#if defined __ppc__ || defined __i386__
+#if defined __i386__
 #ifndef __VDSP_TRANSLATE__
 #include <vecLib/vDSP_translate.h>
 #endif
 #endif
+
+#include <vecLib/fortran_blas.h>
 
 #ifndef CBLAS_H	
 #include <vecLib/cblas.h>

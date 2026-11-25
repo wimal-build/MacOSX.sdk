@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           111C16DD-70F2-3BFF-A3E1-928C7F64B0C1
+    value:           42317F12-7A66-3774-ABAE-A5C31F4A8B5A
   - target:          x86_64-maccatalyst
-    value:           111C16DD-70F2-3BFF-A3E1-928C7F64B0C1
+    value:           42317F12-7A66-3774-ABAE-A5C31F4A8B5A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0792258E-8F02-3C0D-89BC-AF286792501F
+    value:           CE75B0C5-644E-3A3C-8254-705D9EBD5055
   - target:          arm64e-maccatalyst
-    value:           0792258E-8F02-3C0D-89BC-AF286792501F
+    value:           CE75B0C5-644E-3A3C-8254-705D9EBD5055
 install-name:    '/usr/lib/libbz2.1.0.dylib'
-current-version: 1.0.5
+current-version: 1.0.8
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2475547A-50C2-3448-A482-9E49A4B035AB
+    value:           58C41F71-F4E0-3097-B3B8-16EE22BA6B63
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           82FEC0DC-9C35-37AB-A907-035DAFACCA00
+    value:           15BCA666-48C0-3835-A1AB-C20E67D24E0E
 install-name:    '/System/Library/PrivateFrameworks/PrintingPrivate.framework/Versions/A/PrintingPrivate'
-current-version: 203
+current-version: 209.1
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CreateTemporaryFile, _HttpConnectionFromURI, _LoadAndGetPMPrinterInfoBundle, 

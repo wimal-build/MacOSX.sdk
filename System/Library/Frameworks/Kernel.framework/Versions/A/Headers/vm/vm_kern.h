@@ -66,6 +66,7 @@
 #ifndef _VM_VM_KERN_H_
 #define _VM_VM_KERN_H_
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -73,6 +74,7 @@ extern "C" {
 #include <mach/mach_types.h>
 #include <mach/boolean.h>
 #include <mach/kern_return.h>
+#include <mach/vm_types.h>
 
 
 

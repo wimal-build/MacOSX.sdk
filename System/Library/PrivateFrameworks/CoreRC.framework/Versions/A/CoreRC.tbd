@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           29845C1F-C7E6-32ED-BF1C-9519965420C7
+    value:           3EAC2BCE-638A-33A3-89E6-3F053B4D50FE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8D718485-35C0-382B-B1CB-D8D05A830F87
+    value:           79844543-AABA-33BB-9D5C-4A229FF0A6C0
 install-name:    '/System/Library/PrivateFrameworks/CoreRC.framework/Versions/A/CoreRC'
-current-version: 163.100.5
+current-version: 175
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CECAbortReasonString, _CECAddressPreferredForDevice, _CECAddressString, 

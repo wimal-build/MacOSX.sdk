@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2021 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -27,7 +27,9 @@
 #include <IOKit/IOTypes.h>
 #include <IOKit/pci/IOPCIFamilyDefinitions.h>
 
-#if TARGET_OS_OSX
+#define TARGET_OS_HAS_PCIDRIVERKIT_IOPCIDEVICE __has_include(<PCIDriverKit/IOPCIDevice.h>)
+
+#if TARGET_OS_HAS_PCIDRIVERKIT_IOPCIDEVICE
 #include <PCIDriverKit/IOPCIDevice.h>
 #endif
 
@@ -191,6 +193,12 @@ struct IOPCIPhysicalAddress {
 
 #define kIOPCIDeviceDeviceTreeEntryKey  "IOPCIDeviceDeviceTreeEntry"
 
+#if ACPI_SUPPORT
+#define kIOPCIUseDeviceMapperKey        "IOPCIUseDeviceMapper"
+#define kIOPCIChildBundleIdentifierKey  "driver-child-bundle"
+#define kIOPCIDeviceMapArgLen                1024
+#endif
+
 enum {
     kIOPCIDevicePowerStateCount = 4,
     kIOPCIDeviceOffState        = 0,
@@ -232,6 +240,7 @@ class IOPCI2PCIBridge;
 class IOPCIMessagedInterruptController;
 class IOPCIConfigurator;
 class IOPCIEventSource;
+class IOPCIHostBridgeData;
 
 // IOPCIEvent.event
 enum
@@ -270,7 +279,8 @@ private:
     uint8_t           fWriteIndex;
     IOPCIEvent *      fEvents;
 
-public: 
+    IOPCIHostBridgeData *getHostBridgeData(void);
+public:
     virtual void enable( void ) APPLE_KEXT_OVERRIDE;
     virtual void disable( void ) APPLE_KEXT_OVERRIDE;
 
@@ -349,7 +359,7 @@ Matches a device whose class code is 0x0200zz, an ethernet device.
 __exported_push
 class __kpi_deprecated("Use PCIDriverKit") IOPCIDevice : public IOService
 {
-#if TARGET_OS_OSX
+#if TARGET_OS_HAS_PCIDRIVERKIT_IOPCIDEVICE
     OSDeclareDefaultStructorsWithDispatch(IOPCIDevice)
 #else
     OSDeclareDefaultStructors(IOPCIDevice)
@@ -359,6 +369,7 @@ class __kpi_deprecated("Use PCIDriverKit") IOPCIDevice : public IOService
     friend class IOPCI2PCIBridge;
     friend class IOPCIMessagedInterruptController;
     friend class IOPCIConfigurator;
+    friend class IOPCIHostBridgeData;
 
 protected:
     IOPCIBridge *       parent;
@@ -382,7 +393,7 @@ public:
     virtual void free( void ) APPLE_KEXT_OVERRIDE;
     virtual bool attach( IOService * provider ) APPLE_KEXT_OVERRIDE;
     virtual void detach( IOService * provider ) APPLE_KEXT_OVERRIDE;
-	virtual void detachAbove(const IORegistryPlane *) APPLE_KEXT_OVERRIDE;
+    virtual void detachAbove(const IORegistryPlane *) APPLE_KEXT_OVERRIDE;
 
     virtual IOReturn newUserClient( task_t owningTask, void * securityID,
                                     UInt32 type,  OSDictionary * properties,
@@ -397,10 +408,12 @@ public:
                                              unsigned long   stateNumber, 
                                              IOService*      whatDevice) APPLE_KEXT_OVERRIDE;
     virtual IOReturn setPowerState( unsigned long, IOService * ) APPLE_KEXT_OVERRIDE;
+    virtual IOReturn addPowerChild( IOService * theChild ) APPLE_KEXT_OVERRIDE;
+    virtual IOReturn removePowerChild( IOPowerConnection * theChild ) APPLE_KEXT_OVERRIDE;
 
-	virtual unsigned long maxCapabilityForDomainState ( IOPMPowerFlags domainState ) APPLE_KEXT_OVERRIDE;
-	virtual unsigned long initialPowerStateForDomainState ( IOPMPowerFlags domainState ) APPLE_KEXT_OVERRIDE;
-	virtual unsigned long powerStateForDomainState ( IOPMPowerFlags domainState ) APPLE_KEXT_OVERRIDE;
+    virtual unsigned long maxCapabilityForDomainState ( IOPMPowerFlags domainState ) APPLE_KEXT_OVERRIDE;
+    virtual unsigned long initialPowerStateForDomainState ( IOPMPowerFlags domainState ) APPLE_KEXT_OVERRIDE;
+    virtual unsigned long powerStateForDomainState ( IOPMPowerFlags domainState ) APPLE_KEXT_OVERRIDE;
 
     virtual bool compareName( OSString * name, OSString ** matched = 0 ) const APPLE_KEXT_OVERRIDE;
     virtual bool matchPropertyTable(OSDictionary * table) APPLE_KEXT_OVERRIDE;
@@ -408,6 +421,10 @@ public:
                                      SInt32       *     score ) APPLE_KEXT_OVERRIDE;
     virtual IOService * matchLocation( IOService * client ) APPLE_KEXT_OVERRIDE;
     virtual IOReturn getResources( void ) APPLE_KEXT_OVERRIDE;
+
+    using IOService::getProperty;
+    virtual OSObject * getProperty( const OSSymbol * aKey) const APPLE_KEXT_OVERRIDE;
+
     virtual IOReturn setProperties(OSObject * properties) APPLE_KEXT_OVERRIDE;
     virtual IOReturn callPlatformFunction(const OSSymbol * functionName,
                                           bool waitForFunction,
@@ -543,13 +560,7 @@ public:
 
     virtual bool setIOEnable( bool enable, bool exclusive = false );
 
-/*! @function setBusMasterEnable
-    @abstract Sets the device's bus master enable.
-    @discussion This method sets the bus master enable bit in the device's command config space register to the passed value, and returns the previous state of the enable.
-    @param enable True or false to enable or disable bus mastering.
-    @result True if bus mastering was previously enabled, false otherwise. */
-
-    virtual bool setBusMasterEnable( bool enable );
+    virtual bool setBusMasterEnable( bool enable ) API_DEPRECATED_WITH_REPLACEMENT("setBusLeadEnable", macos(10.0, 12.4), ios(1.0, 15.4), watchos(1.0, 8.5), tvos(1.0, 15.4));
 
 /*! @function findPCICapability
     @abstract Search configuration space for a PCI capability register.
@@ -693,8 +704,22 @@ public:
 
     virtual UInt32 extendedFindPCICapability( UInt32 capabilityID, IOByteCount * offset = 0 );
 
+    OSMetaClassDeclareReservedUsed(IOPCIDevice,  3);
+/*! @function configureInterrupts
+    @abstract Configure interrupts.
+    @discussion This method allocates interrupts based on the passed parameters and the device's capabilities, i.e. MSI(X).
+    @param interruptType kIOInterruptTypeLevel, kIOInterruptTypePCIMessaged or kIOInterruptTypePCIMessagedX.
+    @param numRequired The minimum number of vectors for allocation to succeed.
+    @param numRequested The desired number of vectors to allocate.
+    @param options Unused
+    @result kIOReturnSuccess if there were no errors */
+
+    virtual IOReturn configureInterrupts( UInt32 interruptType = kIOInterruptTypeLevel,
+                                          UInt32 numRequired   = 1,
+                                          UInt32 numRequested  = 1,
+                                          IOOptionBits options = 0 );
+
     // Unused Padding
-    OSMetaClassDeclareReservedUnused(IOPCIDevice,  3);
     OSMetaClassDeclareReservedUnused(IOPCIDevice,  4);
     OSMetaClassDeclareReservedUnused(IOPCIDevice,  5);
     OSMetaClassDeclareReservedUnused(IOPCIDevice,  6);
@@ -877,6 +902,14 @@ public:
 	IOReturn deviceMemoryWrite8(uint8_t  memoryIndex,
 						  uint64_t offset,
 						  uint8_t  data);
+
+	/*! @function setBusLeadEnable
+	 *  @abstract Sets the device's bus lead enable.
+	 *  @discussion This method sets the bus lead enable bit in the device's command config space register to the passed value, and returns the previous state of the enable.
+	 *  @param enable True or false to enable or disable bus leading capability.
+	 *  @result True if bus leading was previously enabled, false otherwise.
+	 */
+    bool setBusLeadEnable( bool enable );
 };
 __exported_pop
 

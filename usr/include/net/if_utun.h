@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2019 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2021 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -29,6 +29,8 @@
 
 #ifndef _NET_IF_UTUN_H_
 #define _NET_IF_UTUN_H_
+
+#include <sys/types.h>
 
 
 /*

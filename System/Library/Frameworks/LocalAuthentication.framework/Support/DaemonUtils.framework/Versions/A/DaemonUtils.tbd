@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F1117B84-E367-3CB5-ABBE-40292AD5B4FE
+    value:           FBF88A19-349B-3DD1-9AF0-69A193FAF546
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           132A4F25-5D67-3D6A-9428-1299C7D3EE91
+    value:           ABD5EFD9-7416-30BB-9CD8-C7A65D808373
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/DaemonUtils.framework/Versions/A/DaemonUtils'
-current-version: 827.100.23
+current-version: 985.100.54
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _LANVRAMNamespaceStartupManager ]

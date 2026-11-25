@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A8D3C9D8-E607-3DE2-A5A6-40F5ACC73334
+    value:           23EDEF76-5504-338E-A38F-C0C511DC74EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9F66578C-A2EC-3FEB-9587-84593A054808
+    value:           E3781F9A-D257-3AAF-9F8E-4E3720FB506E
 install-name:    '/System/Library/PrivateFrameworks/CDDataAccess.framework/Frameworks/DACalDAV.framework/Versions/A/DACalDAV'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -100,11 +100,11 @@ exports:
                        _kMobileCalDAVQuotaFreeBytes, _kMobileCalDAVSupportedCalendarComponentSets, 
                        _kMobileCalDAVSupportsCalendarUserSearch, _kMobileCalDAVSupportsFreebusy, 
                        _kMobileCalDAVSupportsPush, _kMobileCalDAVSupportsSyncToken, 
+                       _kRDCalDAVMobileAccountRefreshDidCompleteNotificationName, 
                        _mobileCalDAVProdID, _rem_ReminderSetPropertiesWithBlock, 
                        _rem_reminderFromICSTodoWithOptions ]
     objc-classes:    [ CalDAVAccountDelegatesRefreshOperation, CalDAVHTTPTrafficLog, 
-                       CalDAVMove, CalDAVOccurrenceChange, CalDAVPrincipalResult, 
-                       CalDAVRefreshContext, CalDAVScheduleChangesProperty, DACalDAVREMReminderProxy, 
+                       CalDAVMove, CalDAVPrincipalResult, CalDAVRefreshContext, DACalDAVREMReminderProxy, 
                        DACalDAViCalItem, MobileCalDAVAccount, MobileCalDAVAccountRefreshActor, 
                        MobileCalDAVCalendar, MobileCalDAVDelegateUserInfo, MobileCalDAVNotificationCalendar, 
                        MobileCalDAVPrincipal, MobileCalUserAddress, REMDAAccountInfo ]

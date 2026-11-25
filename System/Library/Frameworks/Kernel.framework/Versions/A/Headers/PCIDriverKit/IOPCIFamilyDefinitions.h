@@ -30,6 +30,7 @@
 #define IOPCIDefinitions_h
 
 #include <TargetConditionals.h>
+#include <os/availability.h>
 #if TARGET_OS_DRIVERKIT
 #include <stdint.h>
 #include <stddef.h>
@@ -60,6 +61,12 @@
 
 #define kIOPCIDeviceMemoryArrayKey       "IODeviceMemory"
 
+// base address of the device's memory map
+#define kIOPCIDeviceMemoryMapBase        "IOPCIDeviceMemoryMapBase"
+// size of device memory map
+#define kIOPCIDeviceMemoryMapSize        "IOPCIDeviceMemoryMapSize"
+// mapper page size
+#define kIOPCIDeviceMapperPageSize       "IOPCIDeviceMapperPageSize"
 
 // IOPCIDevice matching property names
 #define kIOPCITunnelCompatibleKey       "IOPCITunnelCompatible"
@@ -79,7 +86,6 @@
 #define kIOPMPCISleepLinkDisableKey     "IOPMPCISleepLinkDisable"
 // property to issue a secondary bus reset on sleep
 #define kIOPMPCISleepResetKey           "IOPMPCISleepReset"
-
 
 /*  bits getInterruptType result */
 enum
@@ -150,6 +156,7 @@ enum
     kIOPCIExpressCapabilityIDAccessControlServices     = -0x0DU,
     kIOPCIExpressCapabilityIDLatencyTolerenceReporting = -0x18U,
     kIOPCIExpressCapabilityIDL1PMSubstates             = -0x1EU,
+    kIOPCIExpressCapabilityIDPrecisionTimeManagement   = -0x1FU,
 #else  /* defined(__LP64__) */
     kIOPCIExpressCapabilityIDErrorReporting            = -0x01UL,
     kIOPCIExpressCapabilityIDVirtualChannel            = -0x02UL,
@@ -158,6 +165,7 @@ enum
     kIOPCIExpressCapabilityIDAccessControlServices     = -0x0DUL,
     kIOPCIExpressCapabilityIDLatencyTolerenceReporting = -0x18UL,
     kIOPCIExpressCapabilityIDL1PMSubstates             = -0x1EUL,
+    kIOPCIExpressCapabilityIDPrecisionTimeManagement   = -0x1FUL,
 #endif /* !defined(__LP64__) */
 };
 
@@ -166,7 +174,8 @@ enum
 {
     kIOPCICommandIOSpace          = 0x0001,
     kIOPCICommandMemorySpace      = 0x0002,
-    kIOPCICommandBusMaster        = 0x0004,
+    kIOPCICommandBusLead          = 0x0004,
+    kIOPCICommandBusMaster        API_DEPRECATED_WITH_REPLACEMENT("kIOPCICommandBusLead", macos(10.0, 12.4), ios(1.0, 15.4), watchos(1.0, 8.5), tvos(1.0, 15.4)) = kIOPCICommandBusLead,
     kIOPCICommandSpecialCycles    = 0x0008,
     kIOPCICommandMemWrInvalidate  = 0x0010,
     kIOPCICommandPaletteSnoop     = 0x0020,
@@ -191,7 +200,8 @@ enum
     kIOPCIStatusDevSel3            = 0x0600,
     kIOPCIStatusTargetAbortCapable = 0x0800,
     kIOPCIStatusTargetAbortActive  = 0x1000,
-    kIOPCIStatusMasterAbortActive  = 0x2000,
+    kIOPCIStatusLeadAbortActive    = 0x2000,
+    kIOPCIStatusMasterAbortActive  API_DEPRECATED_WITH_REPLACEMENT("kIOPCIStatusLeadAbortActive", macos(10.0, 12.4), ios(1.0, 15.4), watchos(1.0, 8.5), tvos(1.0, 15.4)) = kIOPCIStatusLeadAbortActive,
     kIOPCIStatusSERRActive         = 0x4000,
     kIOPCIStatusParityErrActive    = 0x8000
 };

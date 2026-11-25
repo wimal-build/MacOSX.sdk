@@ -44,6 +44,7 @@ class IOMemoryMap;
 class IOMapper;
 class IOService;
 class IODMACommand;
+class _IOMemoryDescriptorMixedData;
 
 /*
  * Direction of transfer, with respect to the described memory.
@@ -185,6 +186,11 @@ enum{
 	kIODMAMapFixedAddress          = 0x00000200,
 };
 
+// Options used by IOMapper. example IOMappers are DART and VT-d
+enum {
+	kIOMapperUncached      = 0x0001,
+};
+
 
 enum{
 	kIOPreparationIDUnprepared = 0,
@@ -221,7 +227,12 @@ protected:
 	uint16_t            __iomd_reserved1[4];
 	uintptr_t           __iomd_reserved2;
 
-	uintptr_t           __iomd_reserved3;
+	uint16_t            _iomapperOptions;
+#ifdef __LP64__
+	uint16_t            __iomd_reserved3[3];
+#else
+	uint16_t            __iomd_reserved3;
+#endif
 	uintptr_t           __iomd_reserved4;
 
 #ifndef __LP64__
@@ -670,6 +681,20 @@ public:
 		IOVirtualAddress        mapAddress,
 		IOOptionBits            options = 0 );
 
+/*! @function setMapperOptions
+ *   @abstract Set the IOMapper options
+ *   @discussion This method sets the IOMapper options
+ *   @param options  IOMapper options to be set. */
+
+	void setMapperOptions( uint16_t options );
+
+/*! @function getMapperOptions
+ *   @abstract return IOMapper Options
+ *   @discussion This method returns IOMapper Options set earlier using setMapperOptions
+ *   @result IOMapper options set. */
+
+	uint16_t getMapperOptions( void );
+
 // Following methods are private implementation
 
 #ifdef __LP64__
@@ -690,13 +715,14 @@ public:
 		mach_vm_size_t          length,
 		IOOptionBits            options );
 
-	virtual IOMemoryMap *      makeMapping(
+	virtual LIBKERN_RETURNS_NOT_RETAINED IOMemoryMap *      makeMapping(
 		IOMemoryDescriptor *    owner,
 		task_t                  intoTask,
 		IOVirtualAddress        atAddress,
 		IOOptionBits            options,
 		IOByteCount             offset,
 		IOByteCount             length );
+
 
 protected:
 	virtual void                addMapping(
@@ -919,7 +945,7 @@ private:
 #endif /* !__LP64__ */
 
 // Internal
-	OSPtr<OSData>   _memoryEntries;
+	OSPtr<_IOMemoryDescriptorMixedData> _memoryEntries;
 	unsigned int    _pages;
 	ppnum_t         _highestPage;
 	uint32_t        __iomd_reservedA;

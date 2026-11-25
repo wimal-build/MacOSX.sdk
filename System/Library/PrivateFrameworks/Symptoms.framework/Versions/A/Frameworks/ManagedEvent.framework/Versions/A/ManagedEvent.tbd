@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DF2E5601-E311-32E5-8418-EB33611E4C65
+    value:           35D24AD1-399B-3FF9-B248-D9892E072068
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C81753B3-62D1-3371-8DB8-8219DF8FD055
+    value:           8E75177B-80FF-39A3-B7ED-5E34C0E87F55
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/ManagedEvent.framework/Versions/A/ManagedEvent'
-current-version: 1431.100.22
+current-version: 1617.101.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _kManagedEventKeyBackgroundCombinedFlowProperties, _kManagedEventKeyBackgroundSpecificFlowClassifications, 

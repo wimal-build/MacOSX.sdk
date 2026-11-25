@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           03717621-C83A-301F-82C1-9A90D784322B
+    value:           AEF7AD54-3228-32AE-B795-0ADD1D078952
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ED04532F-9B89-3B0A-994E-A0CD935E040A
+    value:           B6E10105-6BA0-3989-A94B-545AB005D4C5
 install-name:    '/System/Library/Frameworks/FileProviderUI.framework/Versions/A/FileProviderUI'
-current-version: 35
+current-version: 40
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _FPUIActionIdentifierAuthenticate, _FPUIActionViewControllerErrorDomain, 

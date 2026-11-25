@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2019 Apple Inc. All rights reserved.
+ * Copyright (c) 2003-2021 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -58,7 +58,9 @@
 
 #include <machine/types.h>
 #include <sys/cdefs.h>
+#include <sys/queue.h>
 #include <stdint.h>
+#include <sys/types.h>
 
 /*
  * Filter types
@@ -366,12 +368,9 @@ enum {
 
 
 /* Temporay solution for BootX to use inode.h till kqueue moves to vfs layer */
-#include <sys/queue.h>
 struct knote;
 SLIST_HEAD(klist, knote);
 
-
-#include <sys/types.h>
 
 struct timespec;
 

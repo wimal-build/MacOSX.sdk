@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B000B012-6ACB-3EB5-9BB0-B4E7978AD6BE
+    value:           70E4C337-85C6-33D7-AD06-1EE2A58922CC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2D79E2C6-1C6B-311C-A91C-79B674BCF593
+    value:           FDC392B2-7094-3143-9A27-12D8A62F28F6
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticExtensionsDaemon.framework/Versions/A/DiagnosticExtensionsDaemon'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -24,17 +24,24 @@ exports:
                        _DEDBugSessionOperationFinishIdentifier, _DEDBugSessionOperationNotifyIdentifier, 
                        _DEDCapabilityClassic, _DEDCapabilityCloudKit, _DEDCapabilityEnhancedExecution, 
                        _DEDCapabilityMutableBugSession, _DEDCapabilitySessionState, 
-                       _DEDConnectionDebugService, _DEDCurrentDeviceIsHomePod, _DEDDeviceHashingKey, 
-                       _DEDDeviceKeyAddress, _DEDDeviceKeyBuild, _DEDDeviceKeyCapabilities, 
-                       _DEDDeviceKeyColor, _DEDDeviceKeyDeviceClass, _DEDDeviceKeyEnclosureColor, 
-                       _DEDDeviceKeyIdentifier, _DEDDeviceKeyModel, _DEDDeviceKeyName, 
-                       _DEDDeviceKeyProductType, _DEDDeviceKeyRemoteTransport, _DEDDeviceKeyStatus, 
-                       _DEDDeviceKeyTransport, _DEDDevicePlatform, _DEDDevicePlatformHomePod, 
-                       _DEDDevicePlatformMac, _DEDDevicePlatformTV, _DEDDevicePlatformUnspecified, 
-                       _DEDDevicePlatformWatch, _DEDDevicePlatformiOS, _DEDErrorDomain, 
-                       _DEDIDSCommandShouldUseFireAndForget, _DEDIDSConnectionLog, 
-                       _DEDKeyAllowsCellularUpload, _DEDKeyCapabilities, _DEDKeyCloudKitContainer, 
-                       _DEDKeyCloudKitData, _DEDKeyCloudKitUseDevelopmentEnvironment, 
+                       _DEDClientEntitlement, _DEDConnectionDebugService, _DEDCurrentDeviceIsHomePod, 
+                       _DEDDeviceHashingKey, _DEDDeviceKeyAddress, _DEDDeviceKeyBuild, 
+                       _DEDDeviceKeyCapabilities, _DEDDeviceKeyColor, _DEDDeviceKeyCompanionDeviceIdentifier, 
+                       _DEDDeviceKeyDeviceClass, _DEDDeviceKeyEnclosureColor, _DEDDeviceKeyHardwareCodename, 
+                       _DEDDeviceKeyHomeButtonType, _DEDDeviceKeyHomeKitIdentifier, 
+                       _DEDDeviceKeyHomeTheaterSystemIdentifier, _DEDDeviceKeyHomeTheaterSystemName, 
+                       _DEDDeviceKeyIDSIdentifier, _DEDDeviceKeyIdentifier, _DEDDeviceKeyIsHomeKitResident, 
+                       _DEDDeviceKeyMediaRemoteIdentifier, _DEDDeviceKeyMediaSystemIdentifier, 
+                       _DEDDeviceKeyMediaSystemName, _DEDDeviceKeyMediaSystemRole, 
+                       _DEDDeviceKeyModel, _DEDDeviceKeyName, _DEDDeviceKeyProductType, 
+                       _DEDDeviceKeyRemoteTransport, _DEDDeviceKeySerialNumber, _DEDDeviceKeyStatus, 
+                       _DEDDeviceKeyTransport, _DEDDeviceKeyUniformTypeIdentifier, 
+                       _DEDDevicePlatform, _DEDDevicePlatformHomePod, _DEDDevicePlatformMac, 
+                       _DEDDevicePlatformTV, _DEDDevicePlatformUnspecified, _DEDDevicePlatformWatch, 
+                       _DEDDevicePlatformiOS, _DEDErrorDomain, _DEDFBKFeedbackUploadsKey, 
+                       _DEDFeedbackGroupContainerName, _DEDIDSCommandShouldUseFireAndForget, 
+                       _DEDIDSConnectionLog, _DEDKeyAllowsCellularUpload, _DEDKeyCapabilities, 
+                       _DEDKeyCloudKitContainer, _DEDKeyCloudKitData, _DEDKeyCloudKitUseDevelopmentEnvironment, 
                        _DEDKeyFinishingMove, _DEDKeyHostAppIdentifier, _DEDKeyLocalizedNotificationBody, 
                        _DEDKeyLocalizedNotificationTitle, _DEDKeyNotifierConfiguration, 
                        _DEDKeyNotifyingMove, _DEDKeyRadarAuthToken, _DEDKeyRadarProblemID, 
@@ -54,19 +61,24 @@ exports:
                        AWDDEDExtensionStarted, AWDDEDFinisherEnded, AWDDEDFinisherStarted, 
                        DEDActivity, DEDAnalytics, DEDAttachmentGroup, DEDAttachmentHandler, 
                        DEDAttachmentItem, DEDBugSession, DEDBugSessionConfiguration, 
-                       DEDBugSessionOperation, DEDCapability, DEDCloudKitAttachment, 
-                       DEDCloudKitFinisher, DEDCollectionNotification, DEDConfiguration, 
-                       DEDConstants, DEDController, DEDDaemon, DEDDeferredExtensionInfo, 
-                       DEDDevice, DEDDiagnosticCollector, DEDEncryptorFactory, DEDExtension, 
-                       DEDExtensionIdentifier, DEDExtensionIdentifierManager, DEDFollowUpNotifier, 
-                       DEDHealthLogsEncryptor, DEDIDSConnection, DEDIDSInbound, DEDIDSOutbound, 
-                       DEDImageResourceManager, DEDLocalTransport, DEDManager, DEDNotifierConfiguration, 
-                       DEDPersistence, DEDRadarFinisher, DEDRadarUploadItem, DEDRequestAdvertiser, 
-                       DEDRequestRecord, DEDSeedingClient, DEDSeedingFilerToken, 
-                       DEDSeedingFinisher, DEDSeedingUploadItem, DEDSharingConnection, 
-                       DEDSharingInbound, DEDSharingOutbound, DEDTestingFinisher, 
-                       DEDUserNotificationNotifier, DEDUtils, DEDXPCConnector, DEDXPCInbound, 
-                       DEDXPCOutbound, ResourceLoader ]
+                       DEDBugSessionOperation, DEDCapability, DEDClientConnection, 
+                       DEDCloudKitAttachmentGroupModel, DEDCloudKitAttachmentGroupStatusModel, 
+                       DEDCloudKitAttachmentModel, DEDCloudKitBaseModel, DEDCloudKitClient, 
+                       DEDCloudKitExtensionsUtil, DEDCloudKitFinisher, DEDCollectionNotification, 
+                       DEDConfiguration, DEDConstants, DEDController, DEDDaemon, 
+                       DEDDataTask, DEDDeferredExtensionInfo, DEDDevice, DEDDiagnosticCollector, 
+                       DEDDirectoriesCleanup, DEDEncryptorFactory, DEDExtension, 
+                       DEDExtensionIdentifier, DEDExtensionIdentifierManager, DEDFBKFeedbackUpload, 
+                       DEDFollowUpNotifier, DEDHealthLogsEncryptor, DEDHomeKitManager, 
+                       DEDIDSConnection, DEDIDSInbound, DEDIDSOutbound, DEDImageResourceManager, 
+                       DEDLocalTransport, DEDManager, DEDNotifierConfiguration, DEDPersistence, 
+                       DEDRadarAttachment, DEDRadarFinisher, DEDRadarUploadItem, 
+                       DEDRapportManager, DEDRequestAdvertiser, DEDRequestRecord, 
+                       DEDSeedingClient, DEDSeedingFilerToken, DEDSeedingFinisher, 
+                       DEDSeedingUploadItem, DEDSharingConnection, DEDSharingInbound, 
+                       DEDSharingOutbound, DEDTestingFinisher, DEDUserNotificationNotifier, 
+                       DEDUtils, DEDXPCConnector, DEDXPCInbound, DEDXPCOutbound, 
+                       ResourceLoader ]
     objc-ivars:      [ AWDDEDBugSessionCreated._has, AWDDEDBugSessionCreated._hostapp, 
                        AWDDEDBugSessionCreated._timestamp, AWDDEDBugSessionEnded._has, 
                        AWDDEDBugSessionEnded._sessionState, AWDDEDBugSessionEnded._timestamp, 

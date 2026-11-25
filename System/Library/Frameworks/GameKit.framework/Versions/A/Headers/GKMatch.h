@@ -2,7 +2,7 @@
 //  GKMatch.h
 //  Game Center
 //
-//  Copyright 2010-2021 Apple Inc. All rights reserved.
+//  Copyright 2010-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -81,6 +81,7 @@ __WATCHOS_PROHIBITED
 - (BOOL)match:(GKMatch *)match shouldReinvitePlayer:(NSString *)playerID NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "This is never invoked and its implementation does nothing, use shouldReinviteDisconnectedPlayer:") ;
 @end
 
+__WATCHOS_PROHIBITED
 @interface GKMatch (Obsoleted)
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
 - (void)chooseBestHostPlayerWithCompletionHandler:(void(^)(NSString * __nullable playerID))completionHandler NS_DEPRECATED(10_9, 10_10, 6_0, 8_0, "This is never invoked and its implementation does nothing, use chooseBestHostingPlayerWithCompletionHandler:") ;

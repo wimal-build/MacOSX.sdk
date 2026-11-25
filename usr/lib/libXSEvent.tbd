@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           450E99BD-0B39-3BE4-AC1B-17364D46E7D5
+    value:           EE450B79-D1E3-3773-9422-4A928557BC30
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           07F6BAAA-3358-31A5-9F92-D1CED2457447
+    value:           D0389A67-5456-3677-AF9D-5B9C088A9630
 install-name:    '/usr/lib/libXSEvent.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A28BFDF3-94C2-321E-81A9-ED452D2D6E5B
+    value:           59E94724-E165-327D-BFC0-797C4FBC1421
   - target:          x86_64-maccatalyst
-    value:           A28BFDF3-94C2-321E-81A9-ED452D2D6E5B
+    value:           59E94724-E165-327D-BFC0-797C4FBC1421
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           347D0913-496C-3369-BE20-97F05A0F96DA
+    value:           AB7885C1-4C98-35E4-B63C-BFE3CCA65BF0
   - target:          arm64e-maccatalyst
-    value:           347D0913-496C-3369-BE20-97F05A0F96DA
+    value:           AB7885C1-4C98-35E4-B63C-BFE3CCA65BF0
 install-name:    '/usr/lib/swift/libswiftCoreGraphics.dylib'
 current-version: 2
 swift-abi-version: 7

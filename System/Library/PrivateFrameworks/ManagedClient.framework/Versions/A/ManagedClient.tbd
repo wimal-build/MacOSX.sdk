@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E875239D-1824-3E31-97F9-09A87BFC19FE
+    value:           B159BEF4-AF19-3C5F-9F2E-B9BDCC3C636D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           05363E46-3E6B-3B0D-8E88-1452C477FCF2
+    value:           05806862-5F38-38FF-A48A-BFAD08940F34
 install-name:    '/System/Library/PrivateFrameworks/ManagedClient.framework/Versions/A/ManagedClient'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

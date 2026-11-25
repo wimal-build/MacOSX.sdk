@@ -134,8 +134,11 @@
 #define O_NOCTTY        0x00020000      /* don't assign controlling terminal */
 
 
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= 200809L
 #define O_DIRECTORY     0x00100000
+#endif
+
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define O_SYMLINK       0x00200000      /* allow open of a symlink */
 #endif
 
@@ -169,6 +172,7 @@
 #if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define AT_REALDEV              0x0200  /* Return real device inodes resides on for fstatat(2) */
 #define AT_FDONLY               0x0400  /* Use only the fd and Ignore the path for fstatat(2) */
+#define AT_SYMLINK_NOFOLLOW_ANY 0x0800  /* Path should not contain any symlinks */
 #endif
 #endif
 
@@ -256,7 +260,13 @@
 
 #define F_LOG2PHYS_EXT  65              /* file offset to device offset, extended */
 
-#define F_GETLKPID              66              /* get record locking information, per-process */
+#define F_GETLKPID              66      /* See man fcntl(2) F_GETLK
+	                                 * Similar to F_GETLK but in addition l_pid is treated as an input parameter
+	                                 * which is used as a matching value when searching locks on the file
+	                                 * so that only locks owned by the process with pid l_pid are returned.
+	                                 * However, any flock(2) type lock will also be found with the returned value
+	                                 * of l_pid set to -1 (as with F_GETLK).
+	                                 */
 
 /* See F_DUPFD_CLOEXEC below for 67 */
 
@@ -299,6 +309,7 @@
 #define F_ADDFILESIGS_INFO      103     /* Add signature from same file, return information */
 #define F_ADDFILESUPPL          104     /* Add supplemental signature from same file with fd reference to original */
 #define F_GETSIGSINFO           105     /* Look up code signature information attached to a file or slice */
+#define F_FSRESERVED            106     /* Placeholder for future usage */
 
 // FS-specific fcntl()'s numbers begin at 0x00010000 and go up
 #define FCNTL_FS_SPECIFIC_BASE  0x00010000

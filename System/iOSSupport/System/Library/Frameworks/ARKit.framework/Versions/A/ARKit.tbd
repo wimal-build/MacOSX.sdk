@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           9C489150-D254-3C44-8F89-BF1372978839
+    value:           ADD80CE8-AE28-3A6D-B924-36E098F6F550
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           479191D0-1AC5-3D14-8161-01E2F26F696A
+    value:           F8C27EE3-FF46-36F5-8C4F-B007B09C75CB
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ARKit.framework/Versions/A/ARKit'
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

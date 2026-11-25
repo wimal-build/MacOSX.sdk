@@ -2,7 +2,7 @@
 //  INStartVideoCallIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -78,7 +78,7 @@ API_UNAVAILABLE(watchos)
  */
 
 - (void)resolveContactsForStartVideoCall:(INStartVideoCallIntent *)intent
-                    withCompletion:(void (^)(NSArray<INPersonResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveContacts(for:with:));
+                          withCompletion:(void (^)(NSArray<INPersonResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveContacts(for:with:));
 
 @end
 

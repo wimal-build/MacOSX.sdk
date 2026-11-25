@@ -2,7 +2,7 @@
 //  GKError.h
 //  Game Center
 //
-//  Copyright 2010-2021 Apple Inc. All rights reserved.
+//  Copyright 2010-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -49,4 +49,5 @@ typedef NS_ENUM(NSInteger, GKErrorCode) {
     GKErrorFriendListDescriptionMissing         = 100,
     GKErrorFriendListRestricted                 = 101,
     GKErrorFriendListDenied                     = 102,
+    GKErrorFriendRequestNotAvailable            = 103,
 };

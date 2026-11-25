@@ -28,7 +28,6 @@ typedef NS_ENUM(NSInteger, CNErrorCode)
     CNErrorCodeRecordIdentifierInvalid = 205,
     CNErrorCodeRecordNotWritable API_AVAILABLE(macos(10.14), ios(13.0), watchos(6.0)) = 206,
     CNErrorCodeParentContainerNotWritable API_AVAILABLE(macos(10.14), ios(13.0), watchos(6.0)) = 207,
-
     
     CNErrorCodeValidationMultipleErrors = 300,
     CNErrorCodeValidationTypeMismatch = 301,
@@ -43,7 +42,8 @@ typedef NS_ENUM(NSInteger, CNErrorCode)
     CNErrorCodeClientIdentifierCollision = 602,
     CNErrorCodeChangeHistoryExpired = 603,
     CNErrorCodeChangeHistoryInvalidAnchor = 604,
-    
+    CNErrorCodeChangeHistoryInvalidFetchRequest = 605,
+
     CNErrorCodeVCardMalformed NS_ENUM_AVAILABLE(10_13, 11_0) = 700,
     CNErrorCodeVCardSummarizationError NS_ENUM_AVAILABLE(10_14, 12_0) = 701,
     

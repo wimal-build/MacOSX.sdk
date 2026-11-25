@@ -2,7 +2,7 @@
 //  INBillPayeeResolutionResult.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResolutionResult.h>
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.3), watchos(3.2))
+API_DEPRECATED("", ios(10.3, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INBillPayeeResolutionResult : INIntentResolutionResult
 

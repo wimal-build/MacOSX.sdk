@@ -2,7 +2,7 @@
 //  CLSDefines.h
 //  ClassKit
 //
-//  Copyright © 2018 - 2019 Apple Inc. All rights reserved.
+//  Copyright © 2018-2021 Apple Inc. All rights reserved.
 //
 
 #ifndef CLSDEFINES_H
@@ -38,6 +38,7 @@ CLS_EXTERN NSString * const CLSErrorCodeDomain API_AVAILABLE(ios(11.3), macos(11
  @constant  CLSErrorCodeInvalidCreate                Attempted to save new object that already exists in the data store.
  @constant  CLSErrorCodeInvalidUpdate                Failed to save updated object in the data store.
  @constant  CLSErrorCodePartialFailure               Returned if an operation resulted in a mix of successes and failures.
+ @constant  CLSErrorCodeInvalidAccountCredentials    Returned if an operation failed because the user MAID account credentials are invalid.
  */
 typedef NS_ERROR_ENUM(CLSErrorCodeDomain, CLSErrorCode) {
     CLSErrorCodeNone = 0,
@@ -49,7 +50,8 @@ typedef NS_ERROR_ENUM(CLSErrorCodeDomain, CLSErrorCode) {
     CLSErrorCodeLimits,
     CLSErrorCodeInvalidCreate,
     CLSErrorCodeInvalidUpdate,
-    CLSErrorCodePartialFailure
+    CLSErrorCodePartialFailure,
+    CLSErrorCodeInvalidAccountCredentials API_AVAILABLE(ios(15.1), macos(12.0), macCatalyst(15.1)) API_UNAVAILABLE(watchos, tvos)
 } API_AVAILABLE(ios(11.3), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 typedef NSString * CLSErrorUserInfoKey NS_EXTENSIBLE_STRING_ENUM API_AVAILABLE(ios(11.3), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos, tvos);
@@ -63,6 +65,11 @@ CLS_EXTERN CLSErrorUserInfoKey const CLSErrorObjectKey API_AVAILABLE(ios(11.3), 
  @abstract   If multiple objects cause errors we return an error with code `CLSErrorCodePartialFailure` which will contain an array of errors in - [NSError userInfo]; under this key.
  */
 CLS_EXTERN CLSErrorUserInfoKey const CLSErrorUnderlyingErrorsKey API_AVAILABLE(ios(11.3), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ @abstract   Errors with the code `CLSErrorCodePartialFailure` may contain an array of successful entities in - [NSError userInfo]; under this key.
+ */
+CLS_EXTERN CLSErrorUserInfoKey const CLSErrorSuccessfulObjectsKey API_AVAILABLE(ios(15.0), macos(12.0), macCatalyst(15.0)) API_UNAVAILABLE(watchos, tvos);
 
 typedef NSString * CLSPredicateKeyPath NS_EXTENSIBLE_STRING_ENUM API_AVAILABLE(ios(11.3), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos, tvos);
 

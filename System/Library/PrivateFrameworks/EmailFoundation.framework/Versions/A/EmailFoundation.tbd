@@ -4,25 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8BC77F24-4FE5-3419-B1B5-3911E55CB285
+    value:           1ABAC428-A6D3-31F7-A1E0-BDEC8CDBCCFE
   - target:          x86_64-maccatalyst
-    value:           8BC77F24-4FE5-3419-B1B5-3911E55CB285
+    value:           1ABAC428-A6D3-31F7-A1E0-BDEC8CDBCCFE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BAF43A9-DDAE-3761-B418-C49EBEC4021E
+    value:           2D61D14E-6601-36AA-856D-4E4676E8299D
   - target:          arm64e-maccatalyst
-    value:           3BAF43A9-DDAE-3761-B418-C49EBEC4021E
+    value:           2D61D14E-6601-36AA-856D-4E4676E8299D
 install-name:    '/System/Library/PrivateFrameworks/EmailFoundation.framework/Versions/A/EmailFoundation'
-current-version: 3654.80
+current-version: 3696.80.82
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _EFArraysAreEqual, _EFAtomicObjectLoad, _EFAtomicObjectRelease, 
-                       _EFAtomicObjectReleaseIfIdentical, _EFAtomicObjectSetIfIdentical, 
-                       _EFAtomicObjectSetIfNil, _EFBundleIdentifierForXPCConnection, 
+    symbols:         [ _EFARC4NormallyDistributedRandomDouble, _EFARC4NormallyDistributedRandomDoubleInRange, 
+                       _EFARC4NormallyDistributedRandomDoubleWithMinimum, _EFArraysAreEqual, 
+                       _EFAtomicObjectLoad, _EFAtomicObjectRelease, _EFAtomicObjectReleaseIfIdentical, 
+                       _EFAtomicObjectSetIfIdentical, _EFAtomicObjectSetIfNil, _EFBundleIdentifierForXPCConnection, 
                        _EFComparatorFromSortDescriptors, _EFContentProtectionDumpDiagnosticState, 
                        _EFContentProtectionGetDeviceLockState, _EFContentProtectionGetObservedState, 
                        _EFContentProtectionSimulateState, _EFCopyResponseDataForURLRequest, 
@@ -32,8 +33,8 @@ exports:
                        _EFIsCustomerBuild, _EFIsNotNull, _EFIsNull, _EFIsRunningUnitTests, 
                        _EFIsSeedBuild, _EFLogRegisterStateCaptureBlock, _EFMurmurHash3Mix, 
                        _EFNonContainerizedHomeDirectory, _EFObjectsAreEqual, _EFPerformSyncWithProtectedDataAvailability, 
-                       _EFPriorityDesignatorKey, _EFProductName, _EFProtectedDataAvailable, 
-                       _EFPublicErrorInfoKey, _EFRegisterContentProtectionObserver, 
+                       _EFPostUTF8FormData, _EFPriorityDesignatorKey, _EFProductName, 
+                       _EFProtectedDataAvailable, _EFPublicErrorInfoKey, _EFRegisterContentProtectionObserver, 
                        _EFRoundUnsignedInteger, _EFSQLSchemaColumnNameRowID, _EFSQLSchemaDatabaseNameMain, 
                        _EFSQLStringForCollation, _EFSQLStringForConflictResolution, 
                        _EFSQLStringForOrderDirection, _EFSQLVerboseDebugLoggingEnabled, 
@@ -42,33 +43,36 @@ exports:
                        _EFStringWithInt, _EFStringWithInt64, _EFStringWithUInt64, 
                        _EFStringWithUnsignedInteger, _EFSystemBuildVersion, _EFSystemVersion, 
                        _EFUnregisterContentProtectionObserver, _EFVerboseVersion, 
-                       _EFVerifyFileProtectionType, __EFLocalizedString, _ef_xpc_activity_register ]
+                       _EFVerifyFileProtectionType, __DiagnosticStateDictionary, 
+                       __EFARC4NormallyDistributedRandomDouble, __EFLocalizedString, 
+                       __ef_xpc_activity_register, _ef_xpc_activity_register, _ef_xpc_activity_register_withcriteria, 
+                       _ef_xpc_activity_run_if_necessary ]
     objc-classes:    [ EFAutoBugCaptureReporter, EFAutoCancelationToken, EFByteSet, 
                        EFCancelationToken, EFCoalescer, EFDeallocInvocationToken, 
-                       EFDebouncer, EFDevice, EFFileWrapper, EFFuture, EFHTMLUtilities, 
-                       EFImmediateScheduler, EFInvocationToken, EFLRUCache, EFLazyCache, 
-                       EFLazyFuture, EFLinearFunction, EFLocked, EFMainThreadScheduler, 
-                       EFMeasuredObject, EFMutableByteSet, EFMutableIndexMap, EFMutableInt64Set, 
-                       EFObservable, EFObserver, EFOperationQueueScheduler, EFPair, 
-                       EFParenthesizedSQLExpression, EFPathComponent, EFPriorityDesignator, 
-                       EFPrivacy, EFProcessBoost, EFProcessTransaction, EFPromise, 
-                       EFQuery, EFQueue, EFQueueScheduler, EFResource, EFResourcePool, 
-                       EFSQLAggregateFunction, EFSQLAndExpression, EFSQLBetweenExpression, 
-                       EFSQLBinaryExpression, EFSQLBinding, EFSQLBitExpression, EFSQLBitExpressionGenerator, 
-                       EFSQLCaseExpression, EFSQLColumn, EFSQLColumnExpression, EFSQLColumnSchema, 
-                       EFSQLConnection, EFSQLDeleteStatement, EFSQLDisqualifiedColumnExpression, 
-                       EFSQLExpressionGenerator, EFSQLFunction, EFSQLGeneratorComparisonPredicateNode, 
-                       EFSQLGeneratorCompoundPredicateNode, EFSQLGeneratorTableRelationship, 
-                       EFSQLIndexSchema, EFSQLIndexedColumnSchema, EFSQLInsertStatement, 
-                       EFSQLJoinOnExpressionGenerator, EFSQLLikeEscapedExpression, 
+                       EFDebouncer, EFDevice, EFFileCompression, EFFileWrapper, EFFuture, 
+                       EFHTMLUtilities, EFImmediateScheduler, EFInvocationToken, 
+                       EFLRUCache, EFLazyCache, EFLazyFuture, EFLinearFunction, EFListStateCapturer, 
+                       EFLocked, EFMainThreadScheduler, EFMeasuredObject, EFMutableByteSet, 
+                       EFMutableIndexMap, EFMutableInt64Set, EFNetworkStatus, EFObservable, 
+                       EFObserver, EFOperationQueueScheduler, EFPair, EFParenthesizedSQLExpression, 
+                       EFPathComponent, EFPriorityDesignator, EFPrivacy, EFProcessBoost, 
+                       EFProcessTransaction, EFPromise, EFQuery, EFQueue, EFQueueScheduler, 
+                       EFResource, EFResourcePool, EFSQLAggregateFunction, EFSQLAndExpression, 
+                       EFSQLBetweenExpression, EFSQLBinaryExpression, EFSQLBinding, 
+                       EFSQLBitExpression, EFSQLBitExpressionGenerator, EFSQLCaseExpression, 
+                       EFSQLColumn, EFSQLColumnExpression, EFSQLColumnSchema, EFSQLConnection, 
+                       EFSQLDeleteStatement, EFSQLDisqualifiedColumnExpression, EFSQLExpressionGenerator, 
+                       EFSQLFunction, EFSQLGeneratorComparisonPredicateNode, EFSQLGeneratorCompoundPredicateNode, 
+                       EFSQLGeneratorTableRelationship, EFSQLIndexSchema, EFSQLIndexedColumnSchema, 
+                       EFSQLInsertStatement, EFSQLJoinOnExpressionGenerator, EFSQLLikeEscapedExpression, 
                        EFSQLObjectPropertyMapper, EFSQLOrExpression, EFSQLOrderByExpressionGenerator, 
                        EFSQLOrderExpression, EFSQLPreparedStatement, EFSQLPropertyMapper, 
                        EFSQLQueryGenerator, EFSQLRow, EFSQLSchema, EFSQLSelectExpressionGenerator, 
                        EFSQLSelectStatement, EFSQLTableSchema, EFSQLUnaryExpression, 
                        EFSQLUpdateStatement, EFSQLUpsertStatement, EFSandboxedURLWrapper, 
                        EFScheduler, EFSchedulerTrampoline, EFSearchableIndexObjectPropertyMapper, 
-                       EFSortDescriptor, EFStoppableScheduler, EFStringHash, EFURLConnectionDelegate, 
-                       EFWatchdog, _EFBlockObservable, _EFBlockObserver, _EFCombineLatestObservable, 
+                       EFSortDescriptor, EFStoppableScheduler, EFStringHash, EFWatchdog, 
+                       _EFBlockObservable, _EFBlockObserver, _EFCombineLatestObservable, 
                        _EFCombineLatestObservableSubscription, _EFConcatenatingObservable, 
                        _EFConnectableObservable, _EFContentProtectionObserverWrapper, 
                        _EFDistinctUntilChangedObservable, _EFGeneratorObservable, 
@@ -78,5 +82,5 @@ exports:
                        _EFSQLDataBinding, _EFSQLDistinctExpression, _EFSQLDoubleBinding, 
                        _EFSQLInsertStatementFirstValue, _EFSQLInsertStatementFollowUpValue, 
                        _EFSQLInsertStatementValue, _EFSQLInt64Binding, _EFSQLJoinExpression, 
-                       _EFSQLStringBinding, _EFSamplingObservable ]
+                       _EFSQLStringBinding, _EFSamplingObservable, _EFURLConnectionDelegate ]
 ...

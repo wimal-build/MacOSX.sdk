@@ -135,7 +135,6 @@ typedef struct clock                    *clock_ctrl_t;
 typedef struct arcade_register          *arcade_register_t;
 typedef struct ipc_eventlink            *ipc_eventlink_t;
 typedef struct ipc_port                 *eventlink_port_pair_t[2];
-typedef struct suid_cred                *suid_cred_t;
 typedef struct task_id_token            *task_id_token_t;
 
 /*
@@ -159,7 +158,6 @@ struct clock;
 struct arcade_register;
 struct ipc_eventlink;
 struct ipc_port;
-struct suid_cred;
 
 __END_DECLS
 
@@ -234,8 +232,7 @@ typedef exception_handler_t     exception_port_t;
 typedef exception_handler_array_t exception_port_arrary_t;
 typedef char vfs_path_t[4096];
 typedef char nspace_path_t[1024]; /* 1024 == PATH_MAX */
-typedef char suid_cred_path_t[1024];
-typedef uint32_t suid_cred_uid_t;
+typedef char nspace_name_t[1024]; /* 1024 == PATH_MAX */
 
 #define TASK_NULL               ((task_t) NULL)
 #define TASK_NAME_NULL          ((task_name_t) NULL)
@@ -264,7 +261,6 @@ typedef uint32_t suid_cred_uid_t;
 #define ARCADE_REG_NULL         ((arcade_register_t) NULL)
 #define MACH_EVENTLINK_NULL     ((mach_eventlink_t) 0)
 #define IPC_EVENTLINK_NULL      ((ipc_eventlink_t) NULL)
-#define SUID_CRED_NULL          ((suid_cred_t) NULL)
 #define TASK_ID_TOKEN_NULL      ((task_id_token_t) NULL)
 
 /* capability strictly _DECREASING_.
@@ -277,11 +273,15 @@ typedef unsigned int            mach_task_flavor_t;
 #define TASK_FLAVOR_INSPECT     2    /* a task_inspect_t */
 #define TASK_FLAVOR_NAME        3    /* a task_name_t */
 
+#define TASK_FLAVOR_MAX         TASK_FLAVOR_NAME
+
 /* capability strictly _DECREASING_ */
 typedef unsigned int            mach_thread_flavor_t;
 #define THREAD_FLAVOR_CONTROL   0    /* a thread_t */
 #define THREAD_FLAVOR_READ      1    /* a thread_read_t */
 #define THREAD_FLAVOR_INSPECT   2    /* a thread_inspect_t */
+
+#define THREAD_FLAVOR_MAX       THREAD_FLAVOR_INSPECT
 
 /* DEPRECATED */
 typedef natural_t               ledger_item_t;

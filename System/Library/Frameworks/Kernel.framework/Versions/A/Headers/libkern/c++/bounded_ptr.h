@@ -29,6 +29,8 @@
 #ifndef XNU_LIBKERN_LIBKERN_CXX_BOUNDED_PTR_H
 #define XNU_LIBKERN_LIBKERN_CXX_BOUNDED_PTR_H
 
+#if !TAPI
+
 #include <stddef.h>
 #include <stdint.h>
 #include <os/overflow.h>
@@ -702,5 +704,7 @@ reinterpret_pointer_cast(bounded_ptr<U, Policy> const& p) noexcept
 	           reinterpret_cast<T const*>(new_end));
 }
 } // end namespace libkern
+
+#endif /* !TAPI */
 
 #endif // !XNU_LIBKERN_LIBKERN_CXX_BOUNDED_PTR_H

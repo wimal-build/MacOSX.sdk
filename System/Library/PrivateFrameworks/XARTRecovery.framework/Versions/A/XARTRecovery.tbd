@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F39C7DE0-4CB2-3862-802A-42BB91A8F2C3
+    value:           A288698A-A821-397C-800F-75FE74D1AC67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F63D3E58-9D97-387B-8005-9D14BA991A53
+    value:           2710A1C4-2C84-32E9-99BB-12ABB2951FF9
 install-name:    '/System/Library/PrivateFrameworks/XARTRecovery.framework/Versions/A/XARTRecovery'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

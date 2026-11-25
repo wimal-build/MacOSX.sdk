@@ -83,7 +83,7 @@ struct IOUSBHostBundledCompletion
 
 /*!
  * @struct      IOUSBHostIsochronousFrame
- * @discussion  Structure representing a single frame in an isochronous transfer.
+ * @discussion  Structure representing a single frame in an isochronous transfer.  Use of this structure is discouraged, use @link IOUSBHostIsochronousTransaction @/link instead.
  * @field       status Completion status for this individual frame.  IOUSBHostFamily will initialize this to kIOReturnInvalid and will update the field with a valid status code upon completion of the frame.
  * @field       requestCount The number of bytes requested to transfer for this frame.  This field must be initialized by the caller before this structure is submitted to IOUSBHostFamily.
  * @field       completeCount The number of bytes actually transferred for this frame.  IOUSBHostFamily will update this field upon completion of the frame.
@@ -97,6 +97,26 @@ struct IOUSBHostIsochronousFrame
     uint32_t     completeCount;
     uint32_t     reserved;
     AbsoluteTime timeStamp;
+} __attribute__((packed));
+
+/*!
+ * @struct      IOUSBHostIsochronousTransaction
+ * @discussion  Structure representing a single frame or microframe in an isochronous transfer.
+ * @field       status Completion status for this individual transaction.  IOUSBHostFamily will initialize this to kIOReturnInvalid and will update the field with a valid status code upon completion of the transaction.
+ * @field       requestCount The number of bytes requested to transfer for this transaction.  This field must be initialized by the caller before this structure is submitted to IOUSBHostFamily.
+ * @field       offset The number of bytes between the start of the memory descriptor in which this transaction resides and the start of the transaction.  The offset cannot exceed 4GB.
+ * @field       completeCount The number of bytes actually transferred for this transaction.  IOUSBHostFamily will update this field upon completion of the transaction.
+ * @field       timeStamp The observed AbsoluteTime for this transaction's completion.  Note that interrupt latency and system load may result in more than one transaction completing with the same timestamp.
+ * @field       options Flags that specify additional transaction behavior.  See @link tIsochronousTransactionOptions @/link for more details.
+ */
+struct IOUSBHostIsochronousTransaction
+{
+    IOReturn     status;
+    uint32_t     requestCount;
+    uint32_t     offset;
+    uint32_t     completeCount;
+    AbsoluteTime timeStamp;
+    IOOptionBits options;
 } __attribute__((packed));
 
 typedef void (*IOUSBHostIsochronousCompletionAction)(void* owner, void* parameter, IOReturn status, IOUSBHostIsochronousFrame* frameList);
@@ -113,6 +133,44 @@ struct IOUSBHostIsochronousCompletion
     void* owner;
     IOUSBHostIsochronousCompletionAction action;
     void* parameter;
+};
+
+typedef void (*IOUSBHostIsochronousTransactionCompletionAction)(void* owner, void* parameter, IOReturn status, IOUSBHostIsochronousTransaction* transactionList);
+
+/*!
+ * @struct      IOUSBHostIsochronousTransactionCompletion
+ * @discussion  Structure describing the completion callback for an asynchronous isochronous operation
+ * @field       owner Pointer to an object that owns the transfer.  May be used as <code>this</code> for an action passed via OSMemberFunctionCast.
+ * @field       action IOUSBHostIsochronousTransactionCompletionAction to run when the IO request completes.
+ * @field       parameter Pointer to be used as context within the completion action.
+ */
+struct IOUSBHostIsochronousTransactionCompletion
+{
+    void* owner;
+    IOUSBHostIsochronousTransactionCompletionAction action;
+    void* parameter;
+};
+
+/*!
+ * @enum        tIsochronousTransferOptions
+ * @brief       Options for controlling isochronous transfer behavior
+ * @constant    kIsochronousTransferOptionsNone No options are selected for this transfer
+ */
+enum tIsochronousTransferOptions
+{
+    kIsochronousTransferOptionsNone = 0,
+};
+
+/*!
+ * @enum        tIsochronousTransactionOptions
+ * @brief       Options for <code>IOUSBHostIsochronousTransaction</code>
+ * @constant    kIsochronousTransactionOptionsNone No options are selected for this transaction
+ * @constant    kIsochronousTransactionOptionsWrap This transaction's data reaches the end of the memory descriptor and continues at the descriptor's start.  If this option is selected, the transaction's offset + requestCount should exceed the memory descriptor's length. This option is not supported on UHCI or UserHCI controllers.
+ */
+enum tIsochronousTransactionOptions
+{
+    kIsochronousTransactionOptionsNone = 0,
+    kIsochronousTransactionOptionsWrap = (1 << 0),
 };
 
 typedef LIST_HEAD (IOUSBHostIOSourceClientRecordList, IOUSBHostIOSourceClientRecord) IOUSBHostIOSourceClientRecordList;
@@ -162,6 +220,7 @@ struct tPacketFilterMetadata
  */
 class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostIOSource : public OSObject
 {
+    friend class AppleUSBHostController;
     friend class AppleUSBIORequest;
     friend class IOUSBHostInterface;
 
@@ -314,7 +373,7 @@ public:
      * @param       dataBuffer IOMemoryDescriptor pointer containing the buffer to use for the transfer
      * @param       dataBufferLength Length of the request.  Must be <= <code>dataBuffer->getLength()</code>
      * @param       completion Pointer to a IOUSBHostCompletion structure.  This will be copied and can therefore be stack-allocated.
-     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt pipes and streams.
+     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt endpoints.
      * @return      kIOReuturnSuccess if the completion will be called in the future, otherwise error
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, IOUSBHostCompletion* completion, uint32_t completionTimeoutMs = 0);
@@ -325,7 +384,7 @@ public:
      * @param       dataBuffer IOMemoryDescriptor pointer containing the buffer to use for the transfer
      * @param       dataBufferLength Length of the request.  Must be <= <code>dataBuffer->getLength()</code>
      * @param       bytesTransferred uint32_t reference which will be updated with the bytes transferred during the request
-     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt pipes and streams.
+     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt endpoints.
      * @return      IOReturn value indicating the result of the IO request
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, uint32_t& bytesTransferred, uint32_t completionTimeoutMs = 0);
@@ -344,7 +403,7 @@ public:
      * @param       dataBuffer IOMemoryDescriptor pointer containing the buffer to use for the transfer
      * @param       dataBufferLength Length of the request.  Must be <= <code>dataBuffer->getLength()</code>
      * @param       completion Pointer to a IOUSBHostBundledCompletion structure.  This will be copied and can therefore be stack-allocated.
-     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt pipes and streams.
+     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt endpoints.
      * @return      kIOReuturnSuccess if the completion will be called in the future, otherwise error
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, IOUSBHostBundledCompletion* completion, uint32_t completionTimeoutMs = 0);
@@ -378,16 +437,17 @@ protected:
 protected:
     struct tInternalDataTransferParameters
     {
-        IOMemoryDescriptor*             dataBuffer;
-        uint32_t                        dataBufferLength;
-        uint32_t*                       bytesTransferred;
-        IOUSBHostCompletion*            completion;
-        IOUSBHostBundledCompletion*     bundledCompletion;
-        uint32_t                        completionTimeoutMs;
-        IOUSBHostIsochronousFrame*      frameList;
-        uint32_t                        frameListCount;
-        uint64_t                        firstFrameNumber;
-        IOUSBHostIsochronousCompletion* isochronousCompletion;
+        IOMemoryDescriptor*                        dataBuffer;
+        uint32_t                                   dataBufferLength;
+        uint32_t*                                  bytesTransferred;
+        IOUSBHostCompletion*                       completion;
+        IOUSBHostBundledCompletion*                bundledCompletion;
+        uint32_t                                   completionTimeoutMs;
+        IOUSBHostIsochronousTransaction*           transactionList;
+        uint32_t                                   transactionListCount;
+        uint64_t                                   firstFrameNumber;
+        IOUSBHostIsochronousTransactionCompletion* isochronousCompletion;
+        IOUSBHostIsochronousFrame*                 frameList;
     };
     
     OSMetaClassDeclareReservedUsed(IOUSBHostIOSource, 49);

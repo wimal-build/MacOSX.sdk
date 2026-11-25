@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           61AEF840-63A8-381D-B45A-A8D6BAD51206
+    value:           8D56625F-8BD9-3513-A6C4-991D644EB44D
   - target:          x86_64-maccatalyst
-    value:           61AEF840-63A8-381D-B45A-A8D6BAD51206
+    value:           8D56625F-8BD9-3513-A6C4-991D644EB44D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           95564673-A9F3-3A44-9A6F-C6CE392B34C0
+    value:           3C036B2A-14D9-3B9C-9261-48B399E9A52C
   - target:          arm64e-maccatalyst
-    value:           95564673-A9F3-3A44-9A6F-C6CE392B34C0
+    value:           3C036B2A-14D9-3B9C-9261-48B399E9A52C
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Frameworks/BrailleTranslation.framework/Versions/A/BrailleTranslation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

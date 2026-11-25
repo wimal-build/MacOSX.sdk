@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4DF008D2-3753-3209-A596-4D3AEE684CF0
+    value:           097EC7AF-2DDD-355C-BBAF-20C570F43EB3
   - target:          x86_64-maccatalyst
-    value:           4DF008D2-3753-3209-A596-4D3AEE684CF0
+    value:           097EC7AF-2DDD-355C-BBAF-20C570F43EB3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11F2EFC1-73D2-3FCD-A7B8-BA731DDEEAAB
+    value:           62021510-366B-365D-A78D-75509748CA3C
   - target:          arm64e-maccatalyst
-    value:           11F2EFC1-73D2-3FCD-A7B8-BA731DDEEAAB
+    value:           62021510-366B-365D-A78D-75509748CA3C
 install-name:    '/System/Library/PrivateFrameworks/SharePointManagement.framework/Versions/A/SharePointManagement'
 current-version: 104
 exports:

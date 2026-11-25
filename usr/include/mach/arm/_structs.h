@@ -31,6 +31,8 @@
 #ifndef _MACH_ARM__STRUCTS_H_
 #define _MACH_ARM__STRUCTS_H_
 
+#if defined (__arm__) || defined (__arm64__)
+
 #include <sys/cdefs.h> /* __DARWIN_UNIX03 */
 #include <machine/types.h> /* __uint32_t */
 
@@ -182,6 +184,7 @@ _STRUCT_ARM_THREAD_STATE64
 
 #define __DARWIN_ARM_THREAD_STATE64_FLAGS_NO_PTRAUTH 0x1
 #define __DARWIN_ARM_THREAD_STATE64_FLAGS_IB_SIGNED_LR 0x2
+#define __DARWIN_ARM_THREAD_STATE64_FLAGS_KERNEL_SIGNED 0x4
 
 /* Return pc field of arm_thread_state64_t as a data pointer value */
 #define __darwin_arm_thread_state64_get_pc(ts) \
@@ -210,7 +213,9 @@ _STRUCT_ARM_THREAD_STATE64
 	ptrauth_auth_and_resign(__f, ptrauth_key_function_pointer, 0, \
 	ptrauth_key_process_independent_code,                         \
 	ptrauth_string_discriminator("pc")) : ptrauth_auth_data(__f,  \
-	ptrauth_key_function_pointer, 0)) : __f); })
+	ptrauth_key_function_pointer, 0)) : __f);                     \
+	__tsp->__opaque_flags &=                                      \
+	~__DARWIN_ARM_THREAD_STATE64_FLAGS_KERNEL_SIGNED; })
 /* Return lr field of arm_thread_state64_t as a data pointer value */
 #define __darwin_arm_thread_state64_get_lr(ts) \
 	__extension__ ({ const _STRUCT_ARM_THREAD_STATE64 *__tsp = &(ts); \
@@ -241,7 +246,8 @@ _STRUCT_ARM_THREAD_STATE64
 	ptrauth_auth_and_resign(__f, ptrauth_key_function_pointer, 0,          \
 	ptrauth_key_process_independent_code,                                  \
 	ptrauth_string_discriminator("lr"))) : ptrauth_auth_data(__f,          \
-	ptrauth_key_function_pointer, 0)) : __f); })
+	ptrauth_key_function_pointer, 0)) : __f); __tsp->__opaque_flags &=     \
+	~__DARWIN_ARM_THREAD_STATE64_FLAGS_KERNEL_SIGNED; })
 /* Return sp field of arm_thread_state64_t as a data pointer value */
 #define __darwin_arm_thread_state64_get_sp(ts) \
 	__extension__ ({ const _STRUCT_ARM_THREAD_STATE64 *__tsp = &(ts); \
@@ -258,7 +264,9 @@ _STRUCT_ARM_THREAD_STATE64
 	__DARWIN_ARM_THREAD_STATE64_FLAGS_NO_PTRAUTH) ?             \
 	ptrauth_sign_unauthenticated(__p,                           \
 	ptrauth_key_process_independent_data,                       \
-	ptrauth_string_discriminator("sp")) : __p); })
+	ptrauth_string_discriminator("sp")) : __p);                 \
+	__tsp->__opaque_flags &=                                    \
+	~__DARWIN_ARM_THREAD_STATE64_FLAGS_KERNEL_SIGNED; })
 /* Return fp field of arm_thread_state64_t as a data pointer value */
 #define __darwin_arm_thread_state64_get_fp(ts) \
 	__extension__ ({ const _STRUCT_ARM_THREAD_STATE64 *__tsp = &(ts); \
@@ -275,7 +283,9 @@ _STRUCT_ARM_THREAD_STATE64
 	__DARWIN_ARM_THREAD_STATE64_FLAGS_NO_PTRAUTH) ?             \
 	ptrauth_sign_unauthenticated(__p,                           \
 	ptrauth_key_process_independent_data,                       \
-	ptrauth_string_discriminator("fp")) : __p); })
+	ptrauth_string_discriminator("fp")) : __p);                 \
+	__tsp->__opaque_flags &=                                    \
+	~__DARWIN_ARM_THREAD_STATE64_FLAGS_KERNEL_SIGNED; })
 
 /* Strip ptr auth bits from pc, lr, sp and fp field of arm_thread_state64_t */
 #define __darwin_arm_thread_state64_ptrauth_strip(ts) \
@@ -294,7 +304,8 @@ _STRUCT_ARM_THREAD_STATE64
 	__DARWIN_ARM_THREAD_STATE64_FLAGS_NO_PTRAUTH) ? __tsp->__opaque_fp :      \
 	ptrauth_strip(__tsp->__opaque_fp, ptrauth_key_process_independent_data)); \
 	__tsp->__opaque_flags |=                                                  \
-	__DARWIN_ARM_THREAD_STATE64_FLAGS_NO_PTRAUTH; })
+	__DARWIN_ARM_THREAD_STATE64_FLAGS_NO_PTRAUTH; __tsp->__opaque_flags &=    \
+	~__DARWIN_ARM_THREAD_STATE64_FLAGS_KERNEL_SIGNED; })
 
 #else /* __has_feature(ptrauth_calls) && defined(__LP64__) */
 
@@ -507,25 +518,6 @@ _STRUCT_ARM_NEON_STATE
 
 #endif /* __DARWIN_UNIX03 */
 
-#if __DARWIN_UNIX03
-#define _STRUCT_ARM_AMX_STATE_V1 struct __darwin_arm_amx_state_v1
-_STRUCT_ARM_AMX_STATE_V1
-{
-	__uint8_t  __x[8][64];        /* 8 64-byte registers */
-	__uint8_t  __y[8][64];        /* 8 64-byte registers */
-	__uint8_t  __z[64][64];       /* 64 64-byte registers in an M-by-N matrix */
-	__uint64_t __amx_state_t_el1; /* AMX_STATE_T_EL1 value */
-} __attribute__((aligned(64)));
-#else /* !__DARWIN_UNIX03 */
-#define _STRUCT_ARM_AMX_STATE_V1 struct arm_amx_state_v1
-_STRUCT_ARM_AMX_STATE_V1
-{
-	__uint8_t  x[8][64];        /* 8 64-byte registers */
-	__uint8_t  y[8][64];        /* 8 64-byte registers */
-	__uint8_t  z[64][64];       /* 64 64-byte registers in an M-by-N matrix */
-	__uint64_t amx_state_t_el1; /* AMX_STATE_T_EL1 value. */
-} __attribute__((aligned(64)));
-#endif /* __DARWIN_UNIX03 */
 
 #define _STRUCT_ARM_PAGEIN_STATE struct __arm_pagein_state
 _STRUCT_ARM_PAGEIN_STATE
@@ -641,5 +633,7 @@ _STRUCT_ARM_CPMU_STATE64
 	__uint64_t ctrs[16];
 };
 #endif /* !__DARWIN_UNIX03 */
+
+#endif /* defined (__arm__) || defined (__arm64__) */
 
 #endif /* _MACH_ARM__STRUCTS_H_ */
