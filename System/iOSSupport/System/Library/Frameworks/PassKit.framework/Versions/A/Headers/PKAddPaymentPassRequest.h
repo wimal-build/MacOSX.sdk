@@ -1,6 +1,7 @@
+#if !__has_include(<PassKitCore/PKAddPaymentPassRequest.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKAddPaymentPassRequest.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2018 Apple, Inc. All rights reserved.
 //
@@ -79,4 +80,9 @@ API_AVAILABLE(ios(9.0), watchos(2.0))
 
 NS_ASSUME_NONNULL_END
 
+#endif
+
+#else
+#import <TargetConditionals.h>
+#import <PassKitCore/PKAddPaymentPassRequest.h>
 #endif

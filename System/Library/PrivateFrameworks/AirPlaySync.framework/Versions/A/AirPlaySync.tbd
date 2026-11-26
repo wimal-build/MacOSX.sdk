@@ -1,16 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4597A297-001A-3156-A07E-1B9E74DD1131
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           29DBBFAC-3B5C-3ECB-8F49-50C259F28134
 install-name:    '/System/Library/PrivateFrameworks/AirPlaySync.framework/Versions/A/AirPlaySync'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _APSyncControllerCloseSpeakerCommChannel, _APSyncControllerCopyProperty, 
                        _APSyncControllerGetLocalSpeakerUUIDWithCompletion, _APSyncControllerGetTypeID, 
                        _APSyncControllerOpenSpeakerCommChannel, _APSyncControllerRemoteCopyShared, 

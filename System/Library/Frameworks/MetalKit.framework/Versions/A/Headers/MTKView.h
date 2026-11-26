@@ -19,7 +19,8 @@
  @class MTKView
  @abstract View for rendering metal content
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0))
+
 @interface MTKView : NSView <NSCoding,CALayerDelegate>
 
 /*!
@@ -97,6 +98,12 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @abstract The pixelFormat used to create depthStencilTexture
  */
 @property (nonatomic) MTLPixelFormat depthStencilPixelFormat;
+
+/*!
+ @property depthStencilStorageMode
+ @abstract The storage mode for the depthStencilTexture. Defaults to MTLStorageModePrivate.
+ */
+@property (nonatomic) MTLStorageMode depthStencilStorageMode API_AVAILABLE(macos(13.0), ios(16.0));
 
 /*!
  @property sampleCount
@@ -224,7 +231,8 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @class MTKViewDelegate
  @abstract Allows an object to render into the view and respond to resize events
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0))
+
 @protocol MTKViewDelegate <NSObject>
 
 /*!

@@ -37,6 +37,7 @@ typedef InlineRefCountsPlaceholder InlineRefCounts;
 #include "swift/Runtime/Atomic.h"
 #include "swift/Runtime/Config.h"
 #include "swift/Runtime/Debug.h"
+#include "swift/Runtime/Heap.h"
 
 
 /*
@@ -417,6 +418,13 @@ class RefCountBitsT {
   }
 
   SWIFT_ALWAYS_INLINE
+  static constexpr BitsType immortalBits() {
+    return (BitsType(2) << Offsets::StrongExtraRefCountShift) |
+           (BitsType(Offsets::IsImmortalMask)) |
+           (BitsType(1) << Offsets::UseSlowRCShift);
+  }
+
+  SWIFT_ALWAYS_INLINE
   RefCountBitsT() = default;
 
   SWIFT_ALWAYS_INLINE
@@ -430,9 +438,7 @@ class RefCountBitsT {
   SWIFT_ALWAYS_INLINE
   constexpr
   RefCountBitsT(Immortal_t immortal)
-  : bits((BitsType(2) << Offsets::StrongExtraRefCountShift) |
-         (BitsType(Offsets::IsImmortalMask)) |
-         (BitsType(1) << Offsets::UseSlowRCShift))
+  : bits(immortalBits())
   { }
 
   SWIFT_ALWAYS_INLINE
@@ -697,7 +703,7 @@ class RefCounts {
   // Out-of-line slow paths.
 
   SWIFT_NOINLINE
-  void incrementSlow(RefCountBits oldbits, uint32_t inc) SWIFT_CC(PreserveMost);
+  HeapObject *incrementSlow(RefCountBits oldbits, uint32_t inc);
 
   SWIFT_NOINLINE
   void incrementNonAtomicSlow(RefCountBits oldbits, uint32_t inc);
@@ -768,7 +774,7 @@ class RefCounts {
       return;
     }
     // Immortal and no objc complications share a bit, so don't let setting
-    // the complications one clear the immmortal one
+    // the complications one clear the immortal one
     if (oldbits.isImmortal(true) || oldbits.pureSwiftDeallocation() == nonobjc){
       assert(!oldbits.hasSideTable());
       return;
@@ -793,14 +799,18 @@ class RefCounts {
   }
 
   // Increment the reference count.
+  //
+  // This returns the enclosing HeapObject so that it the result of this call
+  // can be directly returned from swift_retain. This makes the call to
+  // incrementSlow() a tail call.
   SWIFT_ALWAYS_INLINE
-  void increment(uint32_t inc = 1) {
+  HeapObject *increment(uint32_t inc = 1) {
     auto oldbits = refCounts.load(SWIFT_MEMORY_ORDER_CONSUME);
     
     // constant propagation will remove this in swift_retain, it should only
     // be present in swift_retain_n
     if (inc != 1 && oldbits.isImmortal(true)) {
-      return;
+      return getHeapObject();
     }
     
     RefCountBits newbits;
@@ -809,11 +819,12 @@ class RefCounts {
       bool fast = newbits.incrementStrongExtraRefCount(inc);
       if (SWIFT_UNLIKELY(!fast)) {
         if (oldbits.isImmortal(false))
-          return;
+          return getHeapObject();
         return incrementSlow(oldbits, inc);
       }
     } while (!refCounts.compare_exchange_weak(oldbits, newbits,
                                               std::memory_order_relaxed));
+    return getHeapObject();
   }
 
   SWIFT_ALWAYS_INLINE
@@ -1319,8 +1330,16 @@ class HeapObjectSideTableEntry {
 
   public:
   HeapObjectSideTableEntry(HeapObject *newObject)
-    : object(newObject), refCounts()
+    : object(newObject), 
+#if __arm__ || __powerpc__ // https://github.com/apple/swift/issues/48416
+   refCounts(SideTableRefCounts::Initialized)
+#else
+   refCounts()
+#endif
   { }
+
+  void *operator new(size_t) = delete;
+  void operator delete(void *) = delete;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
@@ -1448,7 +1467,7 @@ class HeapObjectSideTableEntry {
     // Weak ref count is now zero. Delete the side table entry.
     // FREED -> DEAD
     assert(refCounts.getUnownedCount() == 0);
-    delete this;
+    swift_cxx_deleteObject(this);
   }
 
   void decrementWeakNonAtomic() {
@@ -1461,7 +1480,7 @@ class HeapObjectSideTableEntry {
     // Weak ref count is now zero. Delete the side table entry.
     // FREED -> DEAD
     assert(refCounts.getUnownedCount() == 0);
-    delete this;
+    swift_cxx_deleteObject(this);
   }
 
   uint32_t getWeakCount() const {

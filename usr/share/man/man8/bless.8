@@ -1,4 +1,4 @@
-.Dd February 1, 2022
+.Dd July 6, 2022
 .Os "Mac OS X"
 .Dt BLESS 8
 .Sh NAME
@@ -11,11 +11,9 @@
 .Nm bless
 .Fl -folder Ar directory
 .Op Fl -file Ar file
-.Op Fl -bootinfo Op Ar file
 .Op Fl -bootefi Op Ar file
 .Op Fl -label Ar name | Fl -labelfile Ar file
 .Op Fl -setBoot
-.Op Fl -openfolder Ar directory
 .Op Fl -nextonly
 .Op Fl -shortform
 .Op Fl -legacy
@@ -23,6 +21,8 @@
 .Op Fl -options Ar string
 .Op Fl -personalize
 .Op Fl -create-snapshot
+.Op Fl -snapshot
+.Op Fl -snapshotname
 .Op Fl -last-sealed-snapshot
 .Op Fl -quiet | -verbose
 .Pp
@@ -36,6 +36,8 @@
 .Op Fl -legacydrivehint Ar device
 .Op Fl -options Ar string
 .Op Fl -personalize
+.Op Fl -snapshot
+.Op Fl -snapshotname
 .Op Fl -create-snapshot
 .Op Fl -last-sealed-snapshot
 .Op Fl -quiet | -verbose
@@ -114,11 +116,15 @@ specified, the active boot device that the firmware is set to boot from.
 Unbless Mode complements Folder Mode, and clears the persistent blessed
 folder and file information on HFS+ volumes.
 .Pp
+NOTE:
+.Nm bless
+must be run as the root user.
+.Pp
 Additionally,
 .Fl -help
 can be used to display the command-line usage summary.
 .PP
-.Sh OPTIONS FOR INTEL ARCHITECTURE BASED DEVICES or EXTERNAL STORAGE DEVICES:
+.Sh OPTIONS FOR INTEL ARCHITECTURE BASED DEVICES:
 .LP
 .Ss FILE/FOLDER MODE
 Folder Mode has the following options:
@@ -131,7 +137,6 @@ secondary loader for New World machines.
 Set this file to be the Mac OS X/Darwin blessed boot file, containing a booter
 for EFI-based systems. If this option is not provided, a default boot file
 is used based on the blessed directory.
-.It Fl -bootinfo Op Ar file
 Create a
 .Pa BootX
 file in the Mac OS X/Darwin system folder using
@@ -159,9 +164,6 @@ is also provided, the new file will be created at that path instead.
 Render a text label used in the firmware-based OS picker
 .It Fl -labelfile Ar file
 Use a pre-rendered label used for the firmware-based OS picker
-.It Fl -openfolder Ar directory
-Specify a folder to be opened in the Finder when the volume is mounted by
-the system.
 .It Fl -setBoot
 Set the system to boot off the specified partition. This is implemented in
 a platform-specific manner. On Open Firmware-based systems, the
@@ -200,9 +202,16 @@ to set
 Attempts to do a personalization operation on the target, which validates the SecureBoot
 bundle and ensures that the relevant boot files are signed and valid for this particular
 machine.  This may require network access, in order to check the signatures.
+.It Only one of the following snapshot options can be activated at the same time:
 .It Fl -create-snapshot
 Attempts to create an APFS root snapshot of the target APFS system volume and set it as root snapshot
 of the system volume. The target system will boot from this snapshot on its next boot.
+.It Fl -snapshot
+Set specific snapshot (uuid) as root snapshot of the system volume.
+The target system will boot from this snapshot on its next boot.
+.It Fl -snapshotname
+Set specific snapshot (name) as root snapshot of the system volume.
+The target system will boot from this snapshot on its next boot.
 .It Fl -last-sealed-snapshot
 Reverts back to using the previously signed APFS root snapshot reenabling Authenticated Root Volume.
  The target system will boot from this sealed snapshot on its next boot.
@@ -240,6 +249,10 @@ Same as for Folder Mode.
 .It Fl -personalize
 Same as for Folder Mode.
 .It Fl -create-snapshot
+Same as for Folder Mode.
+.It Fl -snapshot
+Same as for Folder Mode.
+.It Fl -snapshotname
 Same as for Folder Mode.
 .It Fl -last-sealed-snapshot
 Same as for Folder Mode.
@@ -362,10 +375,29 @@ and unset any persistent blessed files/directories in the HFS+ Volume Header.
 .PP
 .Sh OPTIONS FOR APPLE SILICON DEVICES:
 .LP
-NOTE: Admin credentials may be prompted when running bless on an Apple silicon platform 
-(beyond running the tool as an admin user). However, if the volume has been previously 
-blessed by a different OS instance, then these credentials may not be necessary 
+NOTE: Admin credentials may be prompted when running bless on an Apple silicon platform
+(beyond running the tool as an admin user). However, if the volume has been previously
+blessed by a different OS instance, then these credentials may not be necessary
 or used to bless the target OS.
+.Ss  FOLDER MODE - Available only for external/removable devices
+Folder Mode has the following options:
+.Bl -tag -width "xxopenfolderxdirectoryx" -compact
+.It Fl -folder Ar directory
+Set this directory to be the Mac OS X/Darwin blessed directory, containing a 
+booter for EFI-based systems.
+.It Fl -file Ar file
+Set this file to be the Mac OS X/Darwin blessed boot file, containing a booter
+for EFI-based systems. If this option is not provided, a default boot file
+is used based on the blessed directory.
+.It Fl -personalize
+Attempts to do a personalization operation on the target, which validates the SecureBoot
+bundle and ensures that the relevant boot files are signed and valid for this particular
+machine.  This may require network access, in order to check the signatures.
+.It Fl -quiet
+Do not print any output
+.It Fl -verbose
+Print verbose output
+.El
 .Ss  MOUNT MODE
 Mount Mode has the following options:
 .Bl -tag -width "xxopenfolderxdirectoryx" -compact
@@ -380,6 +412,12 @@ Only change the boot device selection for the next boot.
 .It Fl -create-snapshot
 Attempts to create an APFS root snapshot of the target APFS system volume and set it as root snapshot
 of the system volume. The target system will boot from this snapshot on its next boot.
+.It Fl -snapshot
+Set specific snapshot (uuid) as root snapshot of the system volume.
+The target system will boot from this snapshot on its next boot.
+.It Fl -snapshotname
+Set specific snapshot (name) as root snapshot of the system volume.
+The target system will boot from this snapshot on its next boot.
 .It Fl -last-sealed-snapshot
 Reverts back to using the previously signed APFS root snapshot reenabling Authenticated Root Volume.
 The target system will boot from this sealed snapshot on its next boot.
@@ -423,6 +461,18 @@ Print verbose output
 .Ss INFO MODE
 Info Mode has the following options:
 .Bl -tag -width "xxopenfolderxdirectoryx" -compact
+.It Fl -info Op Ar directory
+.Nm (Available only for external/removable devices)
+Print out the blessed system folder for the volume mounted at
+.Ar directory
+\&. If
+.Ar directory
+is not specified, print information for the currently selected boot device
+(which may not necessarily be
+.So
+/
+.Sc
+\&).
 .It Fl -getBoot
 Print out the logical boot device, based on what is currently selected. This
 option will take into account the fact that the firmware may be pointing to an
@@ -447,13 +497,6 @@ Print verbose output
 Print bless version and exit immediately
 .El
 .Sh FILES
-.Bl -tag -width /usr/standalone/ppc/bootx.bootinfo -compact
-.It Pa /usr/standalone/ppc/bootx.bootinfo
-Secondary loader with XML headers, used with the
-.Fl -bootinfo
-flag. Used for booting New World PPC-based Macintoshes. If the argument to
-.Fl -bootinfo
-is ommitted, this file will be used as the default input.
 .It Pa /usr/standalone/i386/boot.efi
 Booter for EFI-based systems, used with the
 .Fl -bootefi
@@ -471,7 +514,6 @@ boot.efi files as needed:
 .Nm bless
 .Fl -folder
 .Qo /Volumes/Mac OS X/System/Library/CoreServices Qc
-.Fl -bootinfo
 .Fl -bootefi
 .Ed
 .Ss MOUNT MODE

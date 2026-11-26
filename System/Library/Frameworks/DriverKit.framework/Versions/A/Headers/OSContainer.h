@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from OSContainer.iig */
+/* iig(DriverKit-256.100.8) generated from OSContainer.iig */
 
 /* OSContainer.iig:1-37 */
 /*
@@ -103,7 +103,7 @@ public:
 
 #if !KERNEL
 
-class OSContainerInterface : public OSInterface
+class  OSContainerInterface : public OSInterface
 {
 public:
 };

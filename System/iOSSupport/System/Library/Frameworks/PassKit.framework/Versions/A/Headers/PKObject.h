@@ -1,6 +1,7 @@
+#if !__has_include(<PassKitCore/PKObject.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKObject.h
-//  PassKit
+//    PassKit
 //
 //  Copyright (c) 2013 Apple, Inc. All rights reserved.
 //
@@ -15,3 +16,8 @@
 @end
 
 #endif // __PKOBJECT_H
+
+#else
+#import <TargetConditionals.h>
+#import <PassKitCore/PKObject.h>
+#endif

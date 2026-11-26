@@ -1,17 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           529CC743-B29C-3018-B222-3A1E9E798E34
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           A9235EC7-E471-3CBE-A6ED-7E7BE02750A8
 install-name:    '/System/Library/PrivateFrameworks/CoreThemeDefinition.framework/Versions/A/CoreThemeDefinition'
-current-version: 520
+current-version: 556.2
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AbortDistillKey, _CSIDataKey, _CoreThemeArtworkFormatCAAR, 
                        _CoreThemeArtworkFormatPNG, _CoreThemeArtworkFormatPSD, _CoreThemeDefinitionDataModelKey, 
                        _CoreThemeDefinitionErrorDomain, _CoreThemeDefinitionVersionNumber, 
@@ -60,15 +53,15 @@ exports:
                        TDTextStyleProduction, TDTextStyleRenditionSpec, TDTextureAsset, 
                        TDTextureAssetInfo, TDTextureFace, TDTextureImageRenditionSpec, 
                        TDTextureInterpretation, TDTextureMipLevel, TDTexturePixelFormat, 
-                       TDTextureRenditionSpec, TDThemeBitSource, TDThemeCompressionType, 
-                       TDThemeConstant, TDThemeDeploymentTarget, TDThemeDirection, 
-                       TDThemeDisplayGamut, TDThemeDrawingLayer, TDThemeElement, 
-                       TDThemeGlyphSize, TDThemeGlyphWeight, TDThemeGraphicsFeatureSetClass, 
+                       TDTextureRawRenditionSpec, TDTextureRenditionSpec, TDThemeBitSource, 
+                       TDThemeCompressionType, TDThemeConstant, TDThemeDeploymentTarget, 
+                       TDThemeDirection, TDThemeDisplayGamut, TDThemeDrawingLayer, 
+                       TDThemeElement, TDThemeGlyphSize, TDThemeGlyphWeight, TDThemeGraphicsFeatureSetClass, 
                        TDThemeIdiom, TDThemeLook, TDThemePart, TDThemePresentationState, 
                        TDThemePreviousState, TDThemePreviousValue, TDThemeSchema, 
                        TDThemeSize, TDThemeState, TDThemeUISizeClass, TDThemeValue, 
-                       TDThreadMOCOrganizer, TDVectorGlyphImageRenditionSpec, TDVectorGlyphReader, 
-                       TDVectorGlyphRenditionSpec, _TDLayerStackFilterHelper ]
+                       TDThemeVectorGlyphRenderingMode, TDThreadMOCOrganizer, TDVectorGlyphImageRenditionSpec, 
+                       TDVectorGlyphReader, TDVectorGlyphRenditionSpec, _TDLayerStackFilterHelper ]
     objc-ivars:      [ CTDPSDPreviewRef._columnWidth, CTDPSDPreviewRef._imageInfo, 
                        CTDPSDPreviewRef._layerCount, CTDPSDPreviewRef._layerIndexLayout, 
                        CTDPSDPreviewRef._rowHeight, CTDPSDPreviewRef._sliceColumnCount, 
@@ -110,10 +103,11 @@ exports:
                        TDDeviceTraits._dynamicDisplayModeValue, TDDeviceTraits._graphicsFeatureSetClassValue, 
                        TDDeviceTraits._graphicsFeatureSetFallbackValues, TDDeviceTraits._graphicsPerformanceClass, 
                        TDDeviceTraits._hostedIdiomValues, TDDeviceTraits._idiomValue, 
-                       TDDeviceTraits._memoryPerformanceClass, TDDeviceTraits._scale, 
-                       TDDeviceTraits._sizeClassHorizontal, TDDeviceTraits._sizeClassVertical, 
-                       TDDeviceTraits._subtype, TDDeviceTraits._subtypeFallbackValues, 
-                       TDDistillRunner._packDocument, TDDistiller._assetStore, TDDistiller._changedProductions, 
+                       TDDeviceTraits._memoryPerformanceClass, TDDeviceTraits._platform, 
+                       TDDeviceTraits._scale, TDDeviceTraits._sizeClassHorizontal, 
+                       TDDeviceTraits._sizeClassVertical, TDDeviceTraits._subtype, 
+                       TDDeviceTraits._subtypeFallbackValues, TDDistillRunner._packDocument, 
+                       TDDistiller._assetStore, TDDistiller._changedProductions, 
                        TDDistiller._document, TDDistiller._dontPackRenditionsBeforeDistilling, 
                        TDDistiller._fileCompression, TDDistiller._mainThreadPerformRunLoopModes, 
                        TDDistiller._renditionEntries, TDDoubleProperty._doubleValue, 

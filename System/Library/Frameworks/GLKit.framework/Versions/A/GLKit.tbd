@@ -1,17 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           985A04FE-4EAC-366D-A396-B90C611F8EB3
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B8D280AB-54E9-3124-8266-FE935FDF9BB0
 install-name:    '/System/Library/Frameworks/GLKit.framework/Versions/A/GLKit'
-current-version: 125
+current-version: 126
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GLKMathProject, _GLKMathUnproject, _GLKMatrix3Identity, _GLKMatrix3Invert, 
                        _GLKMatrix3InvertAndTranspose, _GLKMatrix4Identity, _GLKMatrix4Invert, 
                        _GLKMatrix4InvertAndTranspose, _GLKMatrixStackCreate, _GLKMatrixStackGetMatrix2, 

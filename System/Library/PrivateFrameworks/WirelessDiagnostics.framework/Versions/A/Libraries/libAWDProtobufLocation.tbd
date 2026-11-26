@@ -2,23 +2,10 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           437A8648-C6BA-3909-B8BA-471A2954E14A
-  - target:          x86_64-maccatalyst
-    value:           437A8648-C6BA-3909-B8BA-471A2954E14A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E71BFA91-524A-3C17-B466-971AE7747368
-  - target:          arm64e-maccatalyst
-    value:           E71BFA91-524A-3C17-B466-971AE7747368
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufLocation.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN3awd7metrics11MotionState10SharedCtorEv, __ZN3awd7metrics11MotionState10SharedDtorEv, 
                        __ZN3awd7metrics11MotionState16default_instanceEv, __ZN3awd7metrics11MotionState17default_instance_E, 
                        __ZN3awd7metrics11MotionState19kEnabledFieldNumberE, __ZN3awd7metrics11MotionState20kBundleidFieldNumberE, 

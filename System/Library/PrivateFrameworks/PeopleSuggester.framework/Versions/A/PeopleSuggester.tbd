@@ -2,23 +2,10 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           BBE13DE9-DDC1-381F-AA33-5CDD523FAD69
-  - target:          x86_64-maccatalyst
-    value:           BBE13DE9-DDC1-381F-AA33-5CDD523FAD69
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           3F595314-7566-37BE-A3C4-49259CEF5808
-  - target:          arm64e-maccatalyst
-    value:           3F595314-7566-37BE-A3C4-49259CEF5808
 install-name:    '/System/Library/PrivateFrameworks/PeopleSuggester.framework/Versions/A/PeopleSuggester'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _Adaptable, _All, _CAPContactFillerContactEventReadFrom, _CAPContactFillerContactFillerEventForShareReadFrom, 
                        _CAPContactFillerShareEventReadFrom, _CAPContactFillerUserEventReadFrom, 
                        _Classic, _ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEventReadFrom, 
@@ -36,7 +23,7 @@ exports:
                        __PSShareSheetPeopleSuggestionsDisabledKey, __PSShareSheetPeopleSuggestionsDisabledKey_Feedback, 
                        __PSShareSheetSiriSettingsDomain, __PSShareSheetSiriSettingsDomain_Feedback, 
                        __PSShareSheetSuggestionBundleIDMapping, __PSShareSheetSuggestionBundleIDs, 
-                       __PSSuggestionKey, __Z16_PSUnarchiverZipPKvmP5NSURL, _distanceOfNeighborFromReference, 
+                       __PSSuggestionKey, __Z16_PSUnarchiverZipPKvmP5NSURL, _conversationIdentifierPrefix, 
                        _fetchLimit, _kPSBiomeFeedbackSubpath, _kPSCNAutocompleteFeedbackDataVersion, 
                        _kPSCNAutocompleteFeedbackStreamID ]
     objc-classes:    [ CAPContactFillerContactEvent, CAPContactFillerContactFillerEventForShare, 
@@ -62,31 +49,35 @@ exports:
                        _PSContactFillerDataCollectionUtilities, _PSContactFillerNormalizationConstants, 
                        _PSContactFillerRecipient, _PSContactPrior, _PSContactResolver, 
                        _PSContactSuggester, _PSContactSuggesterArchive, _PSContactSuggesterForPeopleWidget, 
-                       _PSContactSuggestion, _PSContactSuggestionHandleAndApp, _PSDBSCAN, 
-                       _PSEnsembleModel, _PSFTZKWConfig, _PSFTZKWOrchestrator, _PSFTZKWSuggestionsTransformerFactory, 
+                       _PSContactSuggestion, _PSContactSuggestionHandleAndApp, _PSContentFeatures, 
+                       _PSDBSCAN, _PSDeviceStateFeatures, _PSEnsembleModel, _PSFTZKWConfig, 
+                       _PSFTZKWOrchestrator, _PSFTZKWSuggestionsTransformerFactory, 
                        _PSFTZKWTrialData, _PSFTZKWTrialUpdateGuardedData, _PSFTZKWTrialWrapper, 
-                       _PSFamilyMLModel, _PSFamilyMLPredictionTask, _PSFamilyUtilities, 
-                       _PSFeatureStatistics, _PSFeaturizedBehaviorRule, _PSFeedback, 
-                       _PSFeedbackAction, _PSFeedbackUtils, _PSHandleRanker, _PSHeuristics, 
-                       _PSInteractionAndContactMonitor, _PSInteractionPredictor, 
+                       _PSFamilyMLModel, _PSFamilyMLPredictionTask, _PSFamilyPhotoSuggestions, 
+                       _PSFamilyUtilities, _PSFeatureCache, _PSFeatureStatistics, 
+                       _PSFeaturizedBehaviorRule, _PSFeedback, _PSFeedbackAction, 
+                       _PSFeedbackUtils, _PSHandleRanker, _PSHeuristics, _PSHistogramFeatureData, 
+                       _PSHistogramFeatures, _PSInteractionAndContactMonitor, _PSInteractionPredictor, 
                        _PSInteractionStoreUtils, _PSKNNModel, _PSKNNModelConfiguration, 
-                       _PSKNNZKWATXDelegateWrapper, _PSKNNeighbor, _PSLogging, _PSMLArrayProvider, 
-                       _PSMailUtils, _PSMapsFeedback, _PSMapsFeedbackAction, _PSMapsPredictionContext, 
-                       _PSMapsSuggester, _PSMessagesPinningFeedback, _PSMessagesPinningSuggester, 
-                       _PSMessagesPinningSuggestion, _PSMessagesPinningUtilities, 
-                       _PSMessagesZkwFeedback, _PSPersonalizationEvaluation, _PSPhotoSuggestions, 
-                       _PSPhotoUtils, _PSPredictionContext, _PSPrivacyDataRetentionPeriod, 
-                       _PSProximityBooster, _PSRecipient, _PSRuleMiningModel, _PSRuleOverlapFeedback, 
-                       _PSRuleRankingMLModel, _PSShareSheetSuggestLessFeedback, _PSSharingContactFeatureExtraction, 
-                       _PSSharingContactRankerMLModel, _PSSharingContactRankerModel, 
-                       _PSSharingContactRankerScoredContact, _PSSiriHandleRanker, 
-                       _PSSiriHandleRankerPredictionContext, _PSSiriNLLogger, _PSSiriNLRankerUtilities, 
-                       _PSSuggester, _PSSuggesterConfiguration, _PSSuggestion, _PSSuggestionFromTextPredictor, 
-                       _PSSuggestionFromTextPredictorDelegateWrapper, _PSSuggestionProxy, 
-                       _PSSuggestionTemplate, _PSZKWFTCalendarEventConfig, _PSZKWFTFallbackInteractionsConfig, 
-                       _PSZKWFTPrimaryInteractionsConfig, _PSZKWFTUnstructuredCalendarConfig, 
-                       _PSZKWFTUnstructuredRemindersConfig, _PS_TPSDiscoverabilitySignal, 
-                       evaluatedRule, scoredModel, scoredRule ]
+                       _PSKNNZKWATXDelegateWrapper, _PSKNNeighbor, _PSLastCommunicatedFeatures, 
+                       _PSLogging, _PSMLArrayProvider, _PSMailUtils, _PSMapsFeedback, 
+                       _PSMapsFeedbackAction, _PSMapsPredictionContext, _PSMapsSuggester, 
+                       _PSMessagesPinningFeedback, _PSMessagesPinningSuggester, _PSMessagesPinningSuggestion, 
+                       _PSMessagesPinningUtilities, _PSMessagesZkwFeedback, _PSPersonalizationEvaluation, 
+                       _PSPhotoSuggestions, _PSPhotoUtils, _PSPredictionContext, 
+                       _PSPrivacyDataRetentionPeriod, _PSProximityBooster, _PSRecipient, 
+                       _PSRuleMiningModel, _PSRuleOverlapFeedback, _PSRuleRankingMLModel, 
+                       _PSShareSheetEphemeralFeatureManager, _PSShareSheetSuggestLessFeedback, 
+                       _PSSharingContactFeatureExtraction, _PSSharingContactRankerMLModel, 
+                       _PSSharingContactRankerModel, _PSSharingContactRankerScoredContact, 
+                       _PSSiriHandleRanker, _PSSiriHandleRankerPredictionContext, 
+                       _PSSiriNLLogger, _PSSiriNLRankerUtilities, _PSSuggester, _PSSuggesterConfiguration, 
+                       _PSSuggestion, _PSSuggestionFromTextPredictor, _PSSuggestionFromTextPredictorDelegateWrapper, 
+                       _PSSuggestionProxy, _PSSuggestionTemplate, _PSZKWFTCalendarEventConfig, 
+                       _PSZKWFTFallbackInteractionsConfig, _PSZKWFTPrimaryInteractionsConfig, 
+                       _PSZKWFTUnstructuredCalendarConfig, _PSZKWFTUnstructuredRemindersConfig, 
+                       _PSZkwUtils, _PS_TPSDiscoverabilitySignal, evaluatedRule, 
+                       scoredModel, scoredRule ]
     objc-ivars:      [ CAPContactFillerContactEvent._averageBehavioralRuleConfidence, 
                        CAPContactFillerContactEvent._averageBehavioralRuleConviction, 
                        CAPContactFillerContactEvent._averageBehavioralRuleLift, CAPContactFillerContactEvent._averageBehavioralRuleMLScore, 

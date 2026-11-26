@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from IOUserServer.iig */
+/* iig(DriverKit-256.100.8) generated from IOUserServer.iig */
 
 /* IOUserServer.iig:1-36 */
 /*
@@ -200,7 +200,7 @@ public:
 
 
 
-class IOUserServerInterface : public OSInterface
+class  IOUserServerInterface : public OSInterface
 {
 public:
 };

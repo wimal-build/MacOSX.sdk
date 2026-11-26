@@ -1,16 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B9F28FD2-26B6-3CBE-B5A0-A9788E54469E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B08186D7-4B87-3A0A-AD5F-BE01CAEC8CED
 install-name:    '/System/Library/PrivateFrameworks/IOSurfaceAccelerator.framework/Versions/A/IOSurfaceAccelerator'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IOSurfaceAcceleratorAbortCaptures, _IOSurfaceAcceleratorAbortTransfers, 
                        _IOSurfaceAcceleratorBlitSurface, _IOSurfaceAcceleratorBlitSurfaceWithSwap, 
                        _IOSurfaceAcceleratorCaptureSurface, _IOSurfaceAcceleratorConditionalTransferSurfaceWithSwap, 
@@ -30,16 +23,17 @@ exports:
                        _kIOSurfaceAcceleratorComm, _kIOSurfaceAcceleratorDirectionalScalingEnable, 
                        _kIOSurfaceAcceleratorDisablePseudoLinearScaling, _kIOSurfaceAcceleratorDitherControl, 
                        _kIOSurfaceAcceleratorEdgeMirroring, _kIOSurfaceAcceleratorEnhanceEnable, 
-                       _kIOSurfaceAcceleratorFixUpscaling, _kIOSurfaceAcceleratorForceMaxSpeedKey, 
-                       _kIOSurfaceAcceleratorHCUApiVersion, _kIOSurfaceAcceleratorHDRApiVersion, 
-                       _kIOSurfaceAcceleratorHDREnable, _kIOSurfaceAcceleratorHighPriority, 
-                       _kIOSurfaceAcceleratorHistogramBinMode, _kIOSurfaceAcceleratorHistogramHeight, 
-                       _kIOSurfaceAcceleratorHistogramMaxPixelValue, _kIOSurfaceAcceleratorHistogramOffsetX, 
-                       _kIOSurfaceAcceleratorHistogramOffsetY, _kIOSurfaceAcceleratorHistogramPixelBins, 
-                       _kIOSurfaceAcceleratorHistogramWidth, _kIOSurfaceAcceleratorHtpcLargeHeaders, 
-                       _kIOSurfaceAcceleratorLockInScaler, _kIOSurfaceAcceleratorNoPowerEarlyBail, 
-                       _kIOSurfaceAcceleratorNoiseEstimationEnable, _kIOSurfaceAcceleratorOptOutBlitClip, 
-                       _kIOSurfaceAcceleratorPixelAveraging, _kIOSurfaceAcceleratorReadOnly, 
+                       _kIOSurfaceAcceleratorFilmGrainEnable, _kIOSurfaceAcceleratorFixUpscaling, 
+                       _kIOSurfaceAcceleratorForceMaxSpeedKey, _kIOSurfaceAcceleratorHCUApiVersion, 
+                       _kIOSurfaceAcceleratorHDRApiVersion, _kIOSurfaceAcceleratorHDREnable, 
+                       _kIOSurfaceAcceleratorHighPriority, _kIOSurfaceAcceleratorHistogramBinMode, 
+                       _kIOSurfaceAcceleratorHistogramHeight, _kIOSurfaceAcceleratorHistogramMaxPixelValue, 
+                       _kIOSurfaceAcceleratorHistogramOffsetX, _kIOSurfaceAcceleratorHistogramOffsetY, 
+                       _kIOSurfaceAcceleratorHistogramPixelBins, _kIOSurfaceAcceleratorHistogramWidth, 
+                       _kIOSurfaceAcceleratorHtpcLargeHeaders, _kIOSurfaceAcceleratorLockInScaler, 
+                       _kIOSurfaceAcceleratorNoPowerEarlyBail, _kIOSurfaceAcceleratorNoiseEstimationEnable, 
+                       _kIOSurfaceAcceleratorOptOutBlitClip, _kIOSurfaceAcceleratorPixelAveraging, 
+                       _kIOSurfaceAcceleratorReadOnly, _kIOSurfaceAcceleratorReducedPrecisionFractionalOffsets, 
                        _kIOSurfaceAcceleratorSharpener, _kIOSurfaceAcceleratorSharpenerMode, 
                        _kIOSurfaceAcceleratorSharpenerMode_Dynamic, _kIOSurfaceAcceleratorSharpenerMode_Static, 
                        _kIOSurfaceAcceleratorSharpenerSourceCleaness, _kIOSurfaceAcceleratorSharpenerSourceCleaness_Clean, 
@@ -50,7 +44,9 @@ exports:
                        _kIOSurfaceAcceleratorSharpenerStrength_Weak, _kIOSurfaceAcceleratorSkipAsyncCallback, 
                        _kIOSurfaceAcceleratorSymmetricTransformKey, _kIOSurfaceAcceleratorUnwireSurfaceKey, 
                        _kIOSurfaceAcceleratorUseCustomFilter, _kIOSurfaceAcceleratorUseNearestFilter, 
-                       _kIOSurfaceAcceleratorVraScaling, _kIOSurfaceAcceleratorZeroFill, 
+                       _kIOSurfaceAcceleratorVraScaling, _kIOSurfaceAcceleratorWriteOnlyModeAlpha, 
+                       _kIOSurfaceAcceleratorWriteOnlyModeBlueCr, _kIOSurfaceAcceleratorWriteOnlyModeGreenCb, 
+                       _kIOSurfaceAcceleratorWriteOnlyModeRedLuma, _kIOSurfaceAcceleratorZeroFill, 
                        _prepareCustomFilter, _prepareTransformBuffersAndOptions, 
                        _prepareTransformRectangles ]
 ...

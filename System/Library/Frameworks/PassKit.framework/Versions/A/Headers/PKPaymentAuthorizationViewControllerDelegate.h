@@ -1,9 +1,13 @@
+#if !__has_include(<PassKitMacHelper/PKPaymentAuthorizationViewControllerDelegate.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentAuthorizationViewControllerDelegate.h
-//  PassKit
+//    PassKit
 //
 //  Copyright (c) 2020 Apple, Inc. All rights reserved.
 //
+
+#ifndef __PKPAYMENTAUTHORIZATIONVIEWCONTROLLERDELEGATE_H__
+#define __PKPAYMENTAUTHORIZATIONVIEWCONTROLLERDELEGATE_H__
 
 #import <TargetConditionals.h>
 
@@ -134,4 +138,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
+#endif
+#endif
+
+#else
+#if TARGET_OS_OSX 
+#import <TargetConditionals.h>
+#import <PassKitMacHelper/PKPaymentAuthorizationViewControllerDelegate.h>
+#endif
 #endif

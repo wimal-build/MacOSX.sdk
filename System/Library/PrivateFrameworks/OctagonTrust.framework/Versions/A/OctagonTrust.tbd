@@ -1,31 +1,24 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           433F0D21-3A55-31BC-AB9E-32D79C5D0E54
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           7EE32383-5314-3B5B-8E5E-113AE752D401
 install-name:    '/System/Library/PrivateFrameworks/OctagonTrust.framework/Versions/A/OctagonTrust'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _OTAccountSettingsXReadFrom, _OTCDPRecoveryInformationReadFrom, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _OTAccountSettingsReadFrom, _OTCDPRecoveryInformationReadFrom, 
                        _OTCliqueChanged, _OTCurrentSecureElementIdentitiesReadFrom, 
                        _OTEscrowAuthenticationInformationReadFrom, _OTEscrowMoveRequestContextReadFrom, 
                        _OTEscrowRecordMetadataClientMetadataReadFrom, _OTEscrowRecordMetadataReadFrom, 
                        _OTEscrowRecordReadFrom, _OTICDPRecordContextReadFrom, _OTICDPRecordSilentContextReadFrom, 
                        _OTInheritanceKeyErrorDomain, _OTJoinedViaBottle, _OTSecureElementPeerIdentityReadFrom, 
-                       _OTTag1ReadFrom, _OTUserControllableViewStatusChanged, _OctagonTrustVersionNumber, 
-                       _OctagonTrustVersionString ]
-    objc-classes:    [ OTAccountSettingsX, OTCDPRecoveryInformation, OTCurrentSecureElementIdentities, 
+                       _OTUserControllableViewStatusChanged, _OTWalrusReadFrom, _OTWebAccessReadFrom, 
+                       _OctagonTrustVersionNumber, _OctagonTrustVersionString ]
+    objc-classes:    [ OTAccountSettings, OTCDPRecoveryInformation, OTCurrentSecureElementIdentities, 
                        OTCustodianRecoveryKey, OTEscrowAuthenticationInformation, 
                        OTEscrowMoveRequestContext, OTEscrowRecord, OTEscrowRecordMetadata, 
                        OTEscrowRecordMetadataClientMetadata, OTEscrowTranslation, 
                        OTICDPRecordContext, OTICDPRecordSilentContext, OTInheritanceKey, 
-                       OTSecureElementPeerIdentity, OTTag1 ]
-    objc-ivars:      [ OTAccountSettingsX._tag1, OTCDPRecoveryInformation._containsIcdpData, 
+                       OTSecureElementPeerIdentity, OTWalrus, OTWebAccess ]
+    objc-ivars:      [ OTAccountSettings._walrus, OTAccountSettings._webAccess, OTCDPRecoveryInformation._containsIcdpData, 
                        OTCDPRecoveryInformation._has, OTCDPRecoveryInformation._recoveryKey, 
                        OTCDPRecoveryInformation._recoverySecret, OTCDPRecoveryInformation._silentRecoveryAttempt, 
                        OTCDPRecoveryInformation._useCachedSecret, OTCDPRecoveryInformation._usePreviouslyCachedRecoveryKey, 
@@ -64,5 +57,5 @@ exports:
                        OTICDPRecordContext._authInfo, OTICDPRecordContext._cdpInfo, 
                        OTICDPRecordSilentContext._authInfo, OTICDPRecordSilentContext._cdpInfo, 
                        OTSecureElementPeerIdentity._peerData, OTSecureElementPeerIdentity._peerIdentifier, 
-                       OTTag1._enabled, OTTag1._has ]
+                       OTWalrus._enabled, OTWalrus._has, OTWebAccess._enabled, OTWebAccess._has ]
 ...

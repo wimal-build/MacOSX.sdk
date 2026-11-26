@@ -67,6 +67,10 @@
 #define __MAC_12_1          120100
 #define __MAC_12_2          120200
 #define __MAC_12_3          120300
+#define __MAC_13_0          130000
+#define __MAC_13_1          130100
+#define __MAC_13_2          130200
+#define __MAC_13_3          130300
 /* __MAC_NA is not defined to a value but is used as a token by macros to indicate that the API is unavailable */
 
 #define __IPHONE_2_0      20000
@@ -129,6 +133,11 @@
 #define __IPHONE_15_2    150200
 #define __IPHONE_15_3    150300
 #define __IPHONE_15_4    150400
+#define __IPHONE_16_0    160000
+#define __IPHONE_16_1    160100
+#define __IPHONE_16_2    160200
+#define __IPHONE_16_3    160300
+#define __IPHONE_16_4    160400
 /* __IPHONE_NA is not defined to a value but is used as a token by macros to indicate that the API is unavailable */
 
 #define __TVOS_9_0        90000
@@ -164,6 +173,11 @@
 #define __TVOS_15_2      150200
 #define __TVOS_15_3      150300
 #define __TVOS_15_4      150400
+#define __TVOS_16_0      160000
+#define __TVOS_16_1      160100
+#define __TVOS_16_2      160200
+#define __TVOS_16_3      160300
+#define __TVOS_16_4      160400
 
 #define __WATCHOS_1_0     10000
 #define __WATCHOS_2_0     20000
@@ -196,6 +210,11 @@
 #define __WATCHOS_8_3     80300
 #define __WATCHOS_8_4     80400
 #define __WATCHOS_8_5     80500
+#define __WATCHOS_9_0     90000
+#define __WATCHOS_9_1     90100
+#define __WATCHOS_9_2     90200
+#define __WATCHOS_9_3     90300
+#define __WATCHOS_9_4     90400
 
 /*
  * Set up standard Mac OS X versions
@@ -237,6 +256,7 @@
 #define MAC_OS_X_VERSION_10_16      101600
 #define MAC_OS_VERSION_11_0         110000
 #define MAC_OS_VERSION_12_0         120000
+#define MAC_OS_VERSION_13_0         130000
 
 #endif /* #if (!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || defined(_DARWIN_C_SOURCE) */
 

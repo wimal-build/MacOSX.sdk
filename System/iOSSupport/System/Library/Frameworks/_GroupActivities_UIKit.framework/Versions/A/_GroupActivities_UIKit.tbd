@@ -1,17 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-maccatalyst
-    value:           BF12490B-9B6D-3D2E-AEFE-001ACC991A3F
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-maccatalyst
-    value:           4289520F-BE38-3507-BC68-1C29C1F2DFF7
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_GroupActivities_UIKit.framework/Versions/A/_GroupActivities_UIKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s22_GroupActivities_UIKit0A21ActivitySharingResultO2eeoiySbAC_ACtFZ', 
                        '_$s22_GroupActivities_UIKit0A21ActivitySharingResultO4hash4intoys6HasherVz_tF', 
                        '_$s22_GroupActivities_UIKit0A21ActivitySharingResultO7successyA2CmFWC', 
@@ -25,6 +18,13 @@ exports:
                        '_$s22_GroupActivities_UIKit0A21ActivitySharingResultOSQAAMc', 
                        '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011dismissViewF06resultyAA0adE6ResultO_tF', 
                        '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011dismissViewF06resultyAA0adE6ResultO_tFfA_', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvMTj', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvMTq', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvgTj', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvgTq', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvpMV', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvsTj', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvsTq', 
                        '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC10controllerAA012PeoplePickerF0Cvg', 
                        '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC10controllerAA012PeoplePickerF0CvpMV', 
                        '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC11resultValueAA0adE6ResultOSgvMTj', 
@@ -168,6 +168,14 @@ exports:
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19shareSheetSessionIDSSSgvpWvd', 
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19shareSheetSessionIDSSSgvs', 
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19shareSheetSessionIDSSSgvsTq', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvM', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvMTq', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvg', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvgTq', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvpMV', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvpWvd', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvs', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvsTq', 
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC22handleServerDisconnectyyF', 
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC24createActivityIfPossible10completionSbySbc_tF', 
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC24createActivityIfPossible10completionSbySbc_tFTq', 
@@ -190,12 +198,21 @@ exports:
                        '_$s22_GroupActivities_UIKit26PeoplePickerViewControllerP8activityScTySo22TUConversationActivityCs5Error_pGvgTj', 
                        '_$s22_GroupActivities_UIKit26PeoplePickerViewControllerP8activityScTySo22TUConversationActivityCs5Error_pGvgTq', 
                        '_$s22_GroupActivities_UIKit26PeoplePickerViewControllerTL', 
-                       '_$s22_GroupActivities_UIKit2ggopySSxSglF', '_$s22_GroupActivities_UIKit3LogV17reliableBroadcast2os6LoggerVvau', 
+                       '_$s22_GroupActivities_UIKit2ggopySSxSglF', '_$s22_GroupActivities_UIKit3LogV07ckShareA15SessionProvider2os6LoggerVvau', 
+                       '_$s22_GroupActivities_UIKit3LogV07ckShareA15SessionProvider2os6LoggerVvgZ', 
+                       '_$s22_GroupActivities_UIKit3LogV07ckShareA15SessionProvider2os6LoggerVvpZ', 
+                       '_$s22_GroupActivities_UIKit3LogV17reliableBroadcast2os6LoggerVvau', 
                        '_$s22_GroupActivities_UIKit3LogV17reliableBroadcast2os6LoggerVvgZ', 
                        '_$s22_GroupActivities_UIKit3LogV17reliableBroadcast2os6LoggerVvpZ', 
                        '_$s22_GroupActivities_UIKit3LogV19extensionController2os6LoggerVvau', 
                        '_$s22_GroupActivities_UIKit3LogV19extensionController2os6LoggerVvgZ', 
                        '_$s22_GroupActivities_UIKit3LogV19extensionController2os6LoggerVvpZ', 
+                       '_$s22_GroupActivities_UIKit3LogV20groupSessionProvider2os6LoggerVvau', 
+                       '_$s22_GroupActivities_UIKit3LogV20groupSessionProvider2os6LoggerVvgZ', 
+                       '_$s22_GroupActivities_UIKit3LogV20groupSessionProvider2os6LoggerVvpZ', 
+                       '_$s22_GroupActivities_UIKit3LogV28groupSessionProviderObserver2os6LoggerVvau', 
+                       '_$s22_GroupActivities_UIKit3LogV28groupSessionProviderObserver2os6LoggerVvgZ', 
+                       '_$s22_GroupActivities_UIKit3LogV28groupSessionProviderObserver2os6LoggerVvpZ', 
                        '_$s22_GroupActivities_UIKit3LogV5topic2os6LoggerVvau', '_$s22_GroupActivities_UIKit3LogV5topic2os6LoggerVvgZ', 
                        '_$s22_GroupActivities_UIKit3LogV5topic2os6LoggerVvpZ', '_$s22_GroupActivities_UIKit3LogV7default2os6LoggerVvau', 
                        '_$s22_GroupActivities_UIKit3LogV7default2os6LoggerVvgZ', 
@@ -225,13 +242,7 @@ exports:
                        '_$s2os6LoggerV22_GroupActivities_UIKitE9subsystem8categoryACx_SStcSYRzSS8RawValueRtzlufC', 
                        '_$sSo14NSItemProviderC22_GroupActivities_UIKitE04loadC8ActivitySo014TUConversationG0CyYaKF', 
                        '_$sSo14NSItemProviderC22_GroupActivities_UIKitE04loadC8ActivitySo014TUConversationG0CyYaKFTu', 
-                       '_$ss26DefaultStringInterpolationV22_GroupActivities_UIKitE06appendC0yyxSglF', 
-                       '_OBJC_CLASS_$__TtC22_GroupActivities_UIKit22PeoplePickerController', 
-                       '_OBJC_CLASS_$__TtC22_GroupActivities_UIKit30GroupActivitySharingController', 
-                       '_OBJC_CLASS_$__TtC22_GroupActivities_UIKit41GroupActivityPlaceholderSharingController', 
-                       '_OBJC_METACLASS_$__TtC22_GroupActivities_UIKit22PeoplePickerController', 
-                       '_OBJC_METACLASS_$__TtC22_GroupActivities_UIKit30GroupActivitySharingController', 
-                       '_OBJC_METACLASS_$__TtC22_GroupActivities_UIKit41GroupActivityPlaceholderSharingController' ]
+                       '_$ss26DefaultStringInterpolationV22_GroupActivities_UIKitE06appendC0yyxSglF' ]
     objc-classes:    [ _TtC22_GroupActivities_UIKit22PeoplePickerController, _TtC22_GroupActivities_UIKit30GroupActivitySharingController, 
                        _TtC22_GroupActivities_UIKit41GroupActivityPlaceholderSharingController ]
 ...

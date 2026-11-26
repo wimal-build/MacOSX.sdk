@@ -1,16 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8D0D2708-DCB3-3E5D-9358-25E8F8557A6E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           701250A1-1855-3E3A-9CB6-724F28F5D35F
 install-name:    '/System/Library/PrivateFrameworks/Trial.framework/Versions/A/Trial'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _TRICloudKitComparator_Equals, _TRICloudKitComparator_GreaterThan, 
                        _TRICloudKitComparator_In, _TRICloudKitComparator_ListContains, 
                        _TRICloudKitComparator_ListContainsAny, _TRICloudKitComparator_NotEquals, 
@@ -55,13 +48,14 @@ exports:
                        _TRILogCategory_XCTest, _TRILoggedNamespaceName, _TRINamespaceUpdateNotificationName, 
                        _TRIPersistedFactorsState_ClearStateOneOfCase, _TRIPersistedNetworkBehavior_DiscretionaryBehavior_EnumDescriptor, 
                        _TRIPersistedNetworkBehavior_DiscretionaryBehavior_IsValidValue, 
-                       _TRIPurgeabilityLevel_EnumDescriptor, _TRIPurgeabilityLevel_IsValidValue, 
-                       _TRISystemFactor_AllowFetchTasks, _TRISystemFactor_AllowTrialTelemetry, 
-                       _TRISystemFactor_CloudKitAssetDownloadTimeoutSeconds, _TRISystemFactor_CloudKitCacheControlMaxAge, 
-                       _TRISystemFactor_CloudKitUseNativeAPI, _TRISystemFactor_FetchExperimentsJitter, 
-                       _TRISystemFactor_FetchRollbacksInterval, _TRISystemFactor_FetchRollbacksJitter, 
-                       _TRISystemFactor_LogUserKeyboardEnabledInputMode, _TRISystemFactor_LogUserSettingsLanguageCode, 
-                       _TRISystemFactor_LogUserSettingsRegionCode, _TRISystemFactor_TaskQueueScheduledTaskDefaultGracePeriod, 
+                       _TRIPopulationOverrideKey, _TRIPurgeabilityLevel_EnumDescriptor, 
+                       _TRIPurgeabilityLevel_IsValidValue, _TRISystemFactor_AllowFetchTasks, 
+                       _TRISystemFactor_AllowTrialTelemetry, _TRISystemFactor_CloudKitAssetDownloadTimeoutSeconds, 
+                       _TRISystemFactor_CloudKitCacheControlMaxAge, _TRISystemFactor_CloudKitUseNativeAPI, 
+                       _TRISystemFactor_FetchExperimentsJitter, _TRISystemFactor_FetchRollbacksInterval, 
+                       _TRISystemFactor_FetchRollbacksJitter, _TRISystemFactor_LogUserKeyboardEnabledInputMode, 
+                       _TRISystemFactor_LogUserSettingsLanguageCode, _TRISystemFactor_LogUserSettingsRegionCode, 
+                       _TRISystemFactor_TaskQueueScheduledTaskDefaultGracePeriod, 
                        _TRISystemFactor_TelemetryLevel, _TRISystemNamespaceName, 
                        _TRIValidateAssetId, _TRIValidateFactorPackId, _TRIValidateFactorPackSetId, 
                        _TRIValidateMLRuntimeEvaluationId, _TRIValidateRampId, _TrialVersionNumber, 
@@ -72,7 +66,9 @@ exports:
                        _kTRIEvaluationStatusEntitlement, _kTRITrialClientEntitlement ]
     objc-classes:    [ TRIAllocationStatus, TRIAllocationStatusCursor, TRIAllocationStatusDefaultProvider, 
                        TRIAllocationStatusProviderGuardedData, TRIAppContainer, TRIAssetIdFactorName, 
-                       TRICKServerEnvironmentReader, TRIClient, TRIClientFactorPackStreamingParser, 
+                       TRIBMLTActiveEvaluationTuple, TRIBackgroundMLTaskIdentifiers, 
+                       TRICKServerEnvironmentReader, TRICellularParameterGuardedData, 
+                       TRICellularParameterManager, TRIClient, TRIClientFactorPackStreamingParser, 
                        TRIClientFactorPackStreamingWriter, TRIClientGuardedData, 
                        TRIClientNamespaceMetadata, TRIClientNamespaceMetadataStorage, 
                        TRIDefaultFactorProvider, TRIDefaultFactorProviderGuardedData, 
@@ -83,11 +79,11 @@ exports:
                        TRIExperimentHistoryRecord, TRIExperimentIdentifiers, TRIFPNamespaceFactorProvider, 
                        TRIFactorDownloadValidator, TRIFactorProviderIdent, TRIFactorsState, 
                        TRIFactorsStateExperimentIdentifiers, TRIFactorsStateRolloutIdentifiers, 
-                       TRIFileBackedMutableStringArray, TRIFileLock, TRILevelChecked, 
-                       TRILockedFactorPackSet, TRILogTreatmentReader, TRILogger, 
-                       TRIMLRuntimeActiveEvaluationTuple, TRIMLRuntimeEvaluationHistoryRecord, 
-                       TRIMisc, TRINaiveFactorLevelCache, TRINamespaceDescriptor, 
-                       TRINamespaceFactorProvider, TRINamespaceFactorProviderChain, 
+                       TRIFileBackedMutableStringArray, TRIFileLock, TRIFullMAAssetId, 
+                       TRILevelChecked, TRILockedFactorPackSet, TRILogTreatmentReader, 
+                       TRILogger, TRIMASpecVer, TRIMLRuntimeActiveEvaluationTuple, 
+                       TRIMLRuntimeEvaluationHistoryRecord, TRIMisc, TRINaiveFactorLevelCache, 
+                       TRINamespaceDescriptor, TRINamespaceFactorProvider, TRINamespaceFactorProviderChain, 
                        TRINamespaceLogPolicy, TRINamespaceOptionalParams, TRINamespaceRecord, 
                        TRINamespaceResolver, TRINamespaceResolverGuardedData, TRINamespaceStatus, 
                        TRINamespaceStatusProvider, TRINamespaceUpdateNotification, 
@@ -110,7 +106,9 @@ exports:
                        TRITripersistedNamespaceStatusRoot, TRITripersistedNetworkBehaviorRoot, 
                        TRITripurgeabilityLevelRoot, TRITypedFactorProvider, TRIVersion, 
                        TRIVersionedNamespace, TRIXPCNamespaceManagementClient, TRIXPCUtils ]
-    objc-ivars:      [ TRIAllocationStatusProviderGuardedData.callbackTokens, TRIClientGuardedData.excessiveStaleFactorUsageTimer, 
+    objc-ivars:      [ TRIAllocationStatusProviderGuardedData.callbackTokens, TRICellularParameterGuardedData.guardedCarrierBundleIdentifier, 
+                       TRICellularParameterGuardedData.guardedCarrierCountryIsoCode, 
+                       TRIClientGuardedData.excessiveStaleFactorUsageTimer, TRIClientGuardedData.isLazyInitComplete, 
                        TRIClientGuardedData.namespaceCallbacks, TRIClientGuardedData.namespaceUpdateHandlerTokens, 
                        TRIClientGuardedData.trackingId, TRIDefaultFactorProviderGuardedData.containerIds, 
                        TRIDefaultFactorProviderGuardedData.factorProviders, TRIDefaultFactorProviderGuardedData.namespaceResolver, 

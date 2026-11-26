@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from IOUSBHostDevice.iig */
+/* iig(DriverKit-256.100.8) generated from IOUSBHostDevice.iig */
 
 /* IOUSBHostDevice.iig:1-38 */
 /*
@@ -850,7 +850,7 @@ public:
 
 #if !KERNEL
 
-class IOUSBHostDeviceInterface : public OSInterface
+class  IOUSBHostDeviceInterface : public OSInterface
 {
 public:
     virtual kern_return_t

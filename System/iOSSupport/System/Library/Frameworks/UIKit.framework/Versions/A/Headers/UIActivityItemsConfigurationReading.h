@@ -10,7 +10,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIActivity;
 
@@ -30,6 +30,7 @@ UIKIT_EXTERN UIActivityItemsConfigurationPreviewIntent const UIActivityItemsConf
 typedef NSString * UIActivityItemsConfigurationInteraction NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 UIKIT_EXTERN UIActivityItemsConfigurationInteraction const UIActivityItemsConfigurationInteractionShare API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN UIActivityItemsConfigurationInteraction const UIActivityItemsConfigurationInteractionCopy API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 
 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
@@ -59,7 +60,7 @@ API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos)
 @property (nonatomic, nullable, readonly, strong) id<UIActivityItemsConfigurationReading> activityItemsConfiguration API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 @end
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIActivityItemsConfigurationReading.h>

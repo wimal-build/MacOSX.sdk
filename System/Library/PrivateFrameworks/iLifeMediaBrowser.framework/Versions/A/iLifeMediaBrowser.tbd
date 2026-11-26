@@ -1,17 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           C20B02DB-D148-3579-94D9-1BA95D98E499
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           90E36E55-4D94-3CA8-AA93-9A0E0C1492EA
 install-name:    '/System/Library/PrivateFrameworks/iLifeMediaBrowser.framework/Versions/A/iLifeMediaBrowser'
-current-version: 797
+current-version: 798.7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASL_LEVEL_ERR_STR, _ASL_LEVEL_INFO_STR, _ILApertureAlbumDotMacWebGalleryTypeIdentifier, 
                        _ILApertureAlbumFacebookTypeIdentifier, _ILApertureAlbumFlickrTypeIdentifier, 
                        _ILApertureAlbumIDKey, _ILApertureAlbumNameKey, _ILApertureAlbumSmugMugTypeIdentifier, 

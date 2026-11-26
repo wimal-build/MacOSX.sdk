@@ -1,18 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E672E480-A168-3C80-873C-897EC8BE4290
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8AC93133-B646-3C55-827E-D0A76A0C4755
 install-name:    '/usr/lib/libiodbcinst.2.dylib'
 current-version: 4.18
 compatibility-version: 4
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CreateDataSource, _GetAvailableDrivers, _GetPrivateProfileString, 
                        _GetTranslator, _InstallDriverPath, _InstallDriverPathLength, 
                        _InstallODBC, _ManageDataSources, _RemoveDSNFromIni, _RemoveDefaultDataSource, 

@@ -1,6 +1,7 @@
+#if !__has_include(<PassKitCore/PKPass.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPass.h
-//  PassKit
+//    PassKit
 //
 //  Copyright (c) 2011 Apple, Inc. All rights reserved.
 //
@@ -60,3 +61,8 @@ NS_ASSUME_NONNULL_BEGIN
 NS_ASSUME_NONNULL_END
 
 #endif // __PKPASS_H
+
+#else
+#import <TargetConditionals.h>
+#import <PassKitCore/PKPass.h>
+#endif

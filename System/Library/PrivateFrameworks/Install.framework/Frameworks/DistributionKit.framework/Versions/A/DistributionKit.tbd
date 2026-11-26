@@ -1,17 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           A50F51B0-741D-3A2B-8A86-5B61BE109BF7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FE1AFC54-B1BE-3D7D-B601-96B254718222
 install-name:    '/System/Library/PrivateFrameworks/Install.framework/Frameworks/DistributionKit.framework/Versions/A/DistributionKit'
 current-version: 1000
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IFJS_ChoiceItemClassDefinition, _IFJS_MyEvaluatorMakeGetProperty, 
                        _IFJS_MySearchResultsMakeGetProperty, _IFJS_SystemBootROMFeatureFlagsMakeGetProperty, 
                        _IFJS_SystemBootROMSupportsAPFSMakeGetProperty, _PKDistributionControllerErrorDomain, 
@@ -21,9 +14,9 @@ exports:
     objc-classes:    [ IFJS_Context, PKBasicHardwareRequirements, PKDistributionChoiceItem, 
                        PKDistributionChoiceTitleButtonCell, PKDistributionController, 
                        PKDistributionControllerCommonCheckRecoveryAttempter, PKDistributionEvaluator, 
-                       PKDistributionValueNode, PKGraphicsHardwareRequirements, PKPredicateRequirements, 
-                       PKRequiredCLDevice, PKRequiredGLRenderer, PKRequiredMetalDevice, 
-                       _PKBasicHardwareRequirementsMatcher ]
+                       PKDistributionHelperController, PKDistributionValueNode, PKGraphicsHardwareRequirements, 
+                       PKPredicateRequirements, PKRequiredCLDevice, PKRequiredGLRenderer, 
+                       PKRequiredMetalDevice, _PKBasicHardwareRequirementsMatcher ]
     objc-ivars:      [ IFJS_Context.allowInsecure, IFJS_Context.choiceItem, IFJS_Context.choicesDelegate, 
                        IFJS_Context.currentBundle, IFJS_Context.currentChoice, IFJS_Context.destinationPath, 
                        IFJS_Context.distributionController, IFJS_Context.distributionScriptsPath, 

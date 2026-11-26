@@ -21,6 +21,7 @@ CF_ASSUME_NONNULL_BEGIN
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFDictionary  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGIFDictionary  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyJFIFDictionary  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEIFDictionary  IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSDictionary  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifDictionary  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyPNGDictionary  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
@@ -792,6 +793,12 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyPNGCompressionFilter IMAGEIO_AV
 #define IMAGEIO_PNG_FILTER_PAETH   0x80
 #define IMAGEIO_PNG_ALL_FILTERS (IMAGEIO_PNG_FILTER_NONE | IMAGEIO_PNG_FILTER_SUB | IMAGEIO_PNG_FILTER_UP | IMAGEIO_PNG_FILTER_AVG | IMAGEIO_PNG_FILTER_PAETH)
 
+/*  For EXR files:
+ *  The value (CFNumberRef) specifies the EXR compression method. See AppleEXR.h for possible values.
+ *  Default value if not specified is 'axr_compression_piz'
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyOpenEXRCompression    IMAGEIO_AVAILABLE_STARTING(13.3, 16.3);
+
 /*
  * For PNG files:
  * When writing indexed color PNGs, the data for the transparity chunk 'tRNS' can be passed in with this key.
@@ -848,7 +855,19 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageIndexRight IMAGEIO_AV
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageIsLeftImage IMAGEIO_AVAILABLE_STARTING(12.0, 15.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageIsRightImage IMAGEIO_AVAILABLE_STARTING(12.0, 15.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageIsAlternateImage IMAGEIO_AVAILABLE_STARTING(12.0, 15.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageBaseline IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageDisparityAdjustment IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
 
+IMAGEIO_EXTERN const CFStringRef kIIOMetadata_CameraExtrinsicsKey  IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
+IMAGEIO_EXTERN const CFStringRef kIIOCameraExtrinsics_CoordinateSystemID IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
+IMAGEIO_EXTERN const CFStringRef kIIOCameraExtrinsics_Position IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
+IMAGEIO_EXTERN const CFStringRef kIIOCameraExtrinsics_Rotation IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
+
+IMAGEIO_EXTERN const CFStringRef kIIOMetadata_CameraModelKey IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
+IMAGEIO_EXTERN const CFStringRef kIIOCameraModel_ModelType IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
+IMAGEIO_EXTERN const CFStringRef kIIOCameraModelType_SimplifiedPinhole IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
+IMAGEIO_EXTERN const CFStringRef kIIOCameraModelType_GenericPinhole IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
+IMAGEIO_EXTERN const CFStringRef kIIOCameraModel_Intrinsics IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
 CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED

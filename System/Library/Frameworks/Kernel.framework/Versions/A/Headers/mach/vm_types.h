@@ -66,7 +66,7 @@ typedef uint32_t        reg64_t;
  * addresses (that are page aligned) as 32-bit page numbers.
  * This limits the physical address space to 16TB of RAM.
  */
-typedef uint32_t ppnum_t;               /* Physical page number */
+typedef uint32_t ppnum_t __kernel_ptr_semantics; /* Physical page number */
 #define PPNUM_MAX UINT32_MAX
 
 
@@ -84,6 +84,20 @@ typedef mach_port_t             vm_map_t, vm_map_read_t, vm_map_inspect_t;
 
 typedef uint64_t                vm_object_offset_t;
 typedef uint64_t                vm_object_size_t;
+
+/*!
+ * @typedef
+ *
+ * @brief
+ * Pair of a min/max address used to denote a memory region.
+ *
+ * @discussion
+ * @c min_address must be smaller or equal to @c max_address.
+ */
+typedef struct mach_vm_range {
+	mach_vm_offset_t        min_address;
+	mach_vm_offset_t        max_address;
+} *mach_vm_range_t;
 
 
 

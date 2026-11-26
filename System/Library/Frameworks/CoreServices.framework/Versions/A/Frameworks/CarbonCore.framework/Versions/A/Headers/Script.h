@@ -9,6 +9,10 @@
 #ifndef __SCRIPT__
 #define __SCRIPT__
 
+#if PRAGMA_ONCE
+#pragma once
+#endif
+
 #ifndef __MACTYPES__
 #include <MacTypes.h>
 #endif
@@ -17,13 +21,8 @@
 #include <CarbonCore/IntlResources.h>
 #endif
 
-
-
 #include <Availability.h>
-
-#if PRAGMA_ONCE
-#pragma once
-#endif
+#include <os/availability.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,7 +35,7 @@ enum {
   smSystemScript                = -1,   /* designates system script.*/
   smCurrentScript               = -2,   /* designates current font script.*/
   smAllScripts                  = -3    /* designates any script*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /*
    Script codes:
@@ -85,7 +84,7 @@ enum {
   smVietnamese                  = 30,
   smExtArabic                   = 31,   /* extended Arabic*/
   smUninterp                    = 32    /* uninterpreted symbols, e.g. palette symbols*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /* Extended script code for full Unicode input*/
 enum {
@@ -103,7 +102,7 @@ enum {
   smEastEurRoman                = 29,   /* Use smCentralEuroRoman*/
   smSindhi                      = 31,   /* Use smExtArabic*/
   smKlingon                     = 32
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /*
    Language codes:
@@ -135,7 +134,7 @@ enum {
   langHindi                     = 21,   /* smDevanagari script*/
   langThai                      = 22,   /* smThai script*/
   langKorean                    = 23    /* smKorean script*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   langLithuanian                = 24,   /* smCentralEuroRoman script*/
@@ -163,7 +162,7 @@ enum {
   langUkrainian                 = 45,   /* modified smCyrillic/Ukrainian script*/
   langByelorussian              = 46,   /* smCyrillic script*/
   langBelorussian               = 46    /* Synonym for langByelorussian                          */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   langUzbek                     = 47,   /* Cyrillic script*/
@@ -190,7 +189,7 @@ enum {
   langAssamese                  = 68,   /* smBengali script*/
   langGujarati                  = 69,   /* smGujarati script*/
   langPunjabi                   = 70    /* smGurmukhi script*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   langOriya                     = 71,   /* smOriya script*/
@@ -219,7 +218,7 @@ enum {
   langChewa                     = 92,   /* synonym for langNyanja*/
   langMalagasy                  = 93,   /* smRoman script*/
   langEsperanto                 = 94    /* Roman script*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   langWelsh                     = 128,  /* modified smRoman/Celtic script*/
@@ -236,7 +235,7 @@ enum {
   langSundaneseRom              = 139,  /* Sundanese in smRoman script*/
   langGalician                  = 140,  /* smRoman script*/
   langAfrikaans                 = 141   /* smRoman script                                   */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   langBreton                    = 142,  /* smRoman or modified smRoman/Celtic script                 */
@@ -249,11 +248,11 @@ enum {
   langGreenlandic               = 149,  /* smRoman script                                   */
   langAzerbaijanRoman           = 150,  /* Azerbaijani in Roman script                             */
   langNynorsk                   = 151   /* Norwegian Nyorsk in smRoman*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   langUnspecified               = 32767 /* Special code for use in resources (such as 'itlm')           */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /*
    Obsolete language code names (kept for backward compatibility):
@@ -273,7 +272,7 @@ enum {
   langGalla                     = 87,   /* Use langOromo                                 */
   langAfricaans                 = 141,  /* Use langAfrikaans                                */
   langGreekPoly                 = 148   /* Use langGreekAncient*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /*
    Region codes:
@@ -315,7 +314,7 @@ enum {
   verCyprus                     = 23,   /* CY el_CY*/
   verTurkey                     = 24,   /* TU tr_TR*/
   verYugoCroatian               = 25    /* YU hr_HR     Croatian for Yugoslavia; now use verCroatia (68)*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   verNetherlandsComma           = 26,   /*              ID for KCHR resource - Dutch*/
@@ -325,7 +324,7 @@ enum {
   vervariantPortugal            = 30,   /*              ID for resource; now unused*/
   vervariantNorway              = 31,   /*              ID for resource; now unused*/
   vervariantDenmark             = 32    /*              ID for KCHR resource - Danish Mac Plus*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   verIndiaHindi                 = 33,   /*       hi_IN     Hindi for India*/
@@ -357,7 +356,7 @@ enum {
   verMagyar                     = 59,   /*       hu_HU     Unused; see verHungary*/
   verBengali                    = 60,   /*       bn         Bangladesh or India*/
   verBelarus                    = 61    /* BY be_BY*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   verUkraine                    = 62,   /* UA uk_UA*/
@@ -396,7 +395,7 @@ enum {
   verPunjabi                    = 95,   /*       pa         Pakistan or India*/
   verIndiaUrdu                  = 96,   /*       ur_IN     Urdu for India*/
   verVietnam                    = 97    /*       vi_VN*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   verFrBelgium                  = 98,   /* BF fr_BE     French for Belgium                       */
@@ -410,7 +409,7 @@ enum {
   verNepal                      = 106,  /*       ne_NP                                      */
   verGreenland                  = 107,  /*       kl                                        */
   verIrelandEnglish             = 108   /*       en_IE     English for Ireland, with Euro for currency*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /*
    Other extra resource IDs assigned in the same number space:
@@ -451,12 +450,12 @@ enum {
   verGeorgia                    = 85,   /* Alternate for verGeorgian                           */
   verAustriaGerman              = 92,   /* Use verAustria                                   */
   verTibet                      = 105   /* Use verTibetan                                   */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   minCountry                    = verUS,
   maxCountry                    = verIrelandEnglish
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,13.0));
 
 enum {
                                         /* Calendar Codes */
@@ -467,7 +466,7 @@ enum {
   calJewish                     = 4,
   calCoptic                     = 5,
   calPersian                    = 6
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* Integer Format Codes */
@@ -477,7 +476,7 @@ enum {
   intJapanese                   = 3,
   intEuropean                   = 4,
   intOutputMask                 = 0x8000
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* CharByte byte types */
@@ -485,7 +484,7 @@ enum {
   smFirstByte                   = -1,
   smLastByte                    = 1,
   smMiddleByte                  = 2
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* CharType field masks */
@@ -496,7 +495,7 @@ enum {
   smcRightMask                  = 0x2000,
   smcUpperMask                  = 0x4000,
   smcDoubleMask                 = 0x8000
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* Basic CharType character types */
@@ -521,7 +520,7 @@ enum {
   smCharFISKana                 = 0x0002, /*Katakana*/
   smCharFISGana                 = 0x0003, /*Hiragana*/
   smCharFISIdeo                 = 0x0004 /*Hanzi, Kanji, Hanja*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   smCharFISGreek                = 0x0005, /*2-byte Greek in Far East systems*/
@@ -550,7 +549,7 @@ enum {
   smJamoBogJaeum                = 0x0100, /*complex consonant char*/
   smJamoMoeum                   = 0x0200, /*simple vowel char*/
   smJamoBogMoeum                = 0x0300 /*complex vowel char*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* CharType glyph orientation for two-byte systems */
@@ -563,7 +562,7 @@ enum {
   smCharUpper                   = 0x4000, /* CharType character size modifiers (1 or multiple bytes). */
   smChar1byte                   = 0x0000,
   smChar2byte                   = 0x8000
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* TransliterateText target types for Roman */
@@ -576,7 +575,7 @@ enum {
   smTransAscii2                 = 3,    /*2-byte Roman*/
   smTransKana1                  = 4,    /*1-byte Japanese Katakana*/
   smTransKana2                  = 5     /*2-byte Japanese Katakana*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   smTransGana2                  = 7,    /*2-byte Japanese Hiragana (no 1-byte Hiragana)*/
@@ -592,7 +591,7 @@ enum {
                                         /* TransliterateText property flags */
   smTransPreDoubleByting        = 1,    /*Convert all text to double byte before transliteration*/
   smTransPreLowerCasing         = 2     /*Convert all text to lower case before transliteration*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* TransliterateText source mask - general */
@@ -609,13 +608,13 @@ enum {
   smMaskHangul2                 = 0x00000100, /*2^smTransHangul2*/
   smMaskJamo2                   = 0x00000200, /*2^smTransJamo2*/
   smMaskBopomofo2               = 0x00000400 /*2^smTransBopomofo2*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* Special script code values for International Utilities */
   iuSystemScript                = -1,   /* <obsolete>  system script */
   iuCurrentScript               = -2    /* <obsolete>  current script (for font of grafPort) */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* Negative verbs for KeyScript */
@@ -635,13 +634,13 @@ enum {
   smKeySetDirLeftRight          = -15,  /* Set default line dir to left-right, align left */
   smKeySetDirRightLeft          = -16,  /* Set default line dir to right-left, align right */
   smKeyRoman                    = -17   /* Set keyscript to Roman. Does nothing if Roman-only system, unlike KeyScript(smRoman) which forces an update to current default Roman keyboard */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* Force keyboard script switching flag and mask for zero and positive KeyScript verbs */
   smKeyForceKeyScriptBit        = 7,    /* Force keyboard script switching flag */
   smKeyForceKeyScriptMask       = 1 << smKeyForceKeyScriptBit /* its mask */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* Roman script constants */
@@ -655,7 +654,7 @@ enum {
   smFondEnd                     = 0xC000, /*past end of range at 48K*/
                                         /* Miscellaneous font equates. */
   smUprHalfCharSet              = 0x80  /*first char code in top half of std char set*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* Character Set Extensions */
@@ -698,13 +697,13 @@ enum {
   doubleAcute                   = 0xFD,
   ogonek                        = 0xFE,
   hachek                        = 0xFF
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* ScriptTokenType values */
   tokenIntl                     = 4,    /*the itl resource number of the tokenizer*/
   tokenEmpty                    = -1    /*used internally as an empty flag*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   tokenUnknown                  = 0,    /*chars that do not match a defined token type*/
@@ -727,7 +726,7 @@ enum {
   tokenRightParen               = 17,   /*close parenthesis*/
   tokenLeftBracket              = 18,   /*open square bracket*/
   tokenRightBracket             = 19    /*close square bracket*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   tokenLeftCurly                = 20,   /*open curly bracket*/
@@ -750,7 +749,7 @@ enum {
   tokenGreatEqual1              = 37,   /*greater than or equal, 1 character*/
   token2Equal                   = 38,   /*double equal (e.g. ==)*/
   tokenColonEqual               = 39    /*colon equal*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   tokenNotEqual                 = 40,   /*not equal, 1 character*/
@@ -773,7 +772,7 @@ enum {
   tokenAmpersand                = 57,
   tokenAtSign                   = 58,
   tokenBar                      = 59    /*vertical bar*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   tokenQuestion                 = 60,
@@ -796,13 +795,13 @@ enum {
   tokenEllipsis                 = 77,
   tokenCenterDot                = 78,
   tokenNil                      = 127
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
   delimPad                      = -2,   /* obsolete, misspelled token names kept for backward compatibility */
   tokenTilda                    = 44,
   tokenCarat                    = 55
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 enum {
                                         /* Table selectors for GetItlTable */
@@ -816,7 +815,7 @@ enum {
   iuNumberPartsTable            = 2,    /* <obsolete>  get default number parts table from 'itl4' */
   iuUnTokenTable                = 3,    /* <obsolete>  get unToken table from 'itl4' */
   iuWhiteSpaceList              = 4     /* <obsolete>  get white space list from 'itl4' */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /* end of stuff moved from Packages.h */
 enum {
@@ -826,22 +825,22 @@ enum {
   badDelim                      = 3,    /* TokenResults */
   badEnding                     = 4,    /* TokenResults */
   crash                         = 5     /* TokenResults */
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
-typedef SInt8                           TokenResults;
-typedef char                            CharByteTable[256];
+typedef SInt8                           TokenResults API_DEPRECATED( "Deprecated", macos(10.0,13.0));
+typedef char                            CharByteTable[256] API_DEPRECATED( "Deprecated", macos(10.0,13.0));;
 /* "TokenType" was renamed to "ScriptTokenType" because of a name collisions*/
-typedef short                           ScriptTokenType;
-typedef ScriptTokenType                 DelimType[2];
-typedef ScriptTokenType                 CommentType[4];
+typedef short                           ScriptTokenType API_DEPRECATED( "Deprecated", macos(10.0,13.0));;
+typedef ScriptTokenType                 DelimType[2] API_DEPRECATED( "Deprecated", macos(10.0,13.0));;
+typedef ScriptTokenType                 CommentType[4] API_DEPRECATED( "Deprecated", macos(10.0,13.0));;
 struct TokenRec {
   ScriptTokenType     theToken;
   Ptr                 position;               /*pointer into original source*/
   long                length;                 /*length of text in original source*/
   StringPtr           stringPosition;         /*Pascal/C string copy of identifier*/
-};
-typedef struct TokenRec                 TokenRec;
-typedef TokenRec *                      TokenRecPtr;
+} API_DEPRECATED( "Deprecated", macos(10.0,13.0));
+typedef struct TokenRec                 TokenRec API_DEPRECATED( "Deprecated", macos(10.0,13.0));
+typedef TokenRec *                      TokenRecPtr API_DEPRECATED( "Deprecated", macos(10.0,13.0));
 struct TokenBlock {
   Ptr                 source;                 /*pointer to stream of characters*/
   long                sourceLength;           /*length of source stream*/
@@ -863,16 +862,16 @@ struct TokenBlock {
   ScriptTokenType     decimalCode;
   Handle              itlResource;            /*handle to itl4 resource of current script*/
   long                reserved[8];            /*must be zero!*/
-};
-typedef struct TokenBlock               TokenBlock;
-typedef TokenBlock *                    TokenBlockPtr;
+} API_DEPRECATED( "Deprecated", macos(10.0,13.0));
+typedef struct TokenBlock               TokenBlock API_DEPRECATED( "Deprecated", macos(10.0,13.0));
+typedef TokenBlock *                    TokenBlockPtr API_DEPRECATED( "Deprecated", macos(10.0,13.0));
 
 /* Result values from GetScriptManagerVariable and SetScriptManagerVariable calls. */
 enum {
   smNotInstalled                = 0,    /*routine not available in script*/
   smBadVerb                     = -1,   /*Bad verb passed to a routine*/
   smBadScript                   = -2    /*Bad script code passed to a routine*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /* Bits in the smGenFlags long. */
 /* First (high-order) byte is set from itlc flags byte. */
@@ -882,12 +881,12 @@ enum {
   smfNameTagEnab                = 29,   /*Reserved for internal use*/
   smfUseAssocFontInfo           = 28,   /*Use the associated font info for FontMetrics calls*/
   smfDisableKeyScriptSync       = 27    /*Disable font and keyboard script synchronization*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /* We should define masks, too. */
 enum {
   smfDisableKeyScriptSyncMask   = 1L << smfDisableKeyScriptSync /*Disable font and keyboard script synchronization mask*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /* GetScriptManagerVariable and SetScriptManagerVariable verbs (deprecated) */
 enum {
@@ -895,7 +894,7 @@ enum {
   smKeyScript                   = 22,   /*Keyboard script*/
   smKCHRCache                   = 38,   /*Returns pointer to KCHR cache*/
   smRegionCode                  = 40    /*Returns current region code (verXxx)*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #if !__LP64__
 enum {
@@ -917,7 +916,7 @@ enum {
   smCharPortion                 = 34,   /*Ch vs SpExtra proportion*/
   smDoubleByte                  = 36,   /*Flag for double-byte script installed*/
   smKeyDisableState             = 42    /*Returns current keyboard disable state*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #endif  /* !__LP64__ */
 
@@ -983,7 +982,7 @@ enum {
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-GetScriptManagerVariable(short selector)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+GetScriptManagerVariable(short selector) API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 /*
@@ -1007,7 +1006,7 @@ GetScriptManagerVariable(short selector)                      __OSX_AVAILABLE_BU
 extern OSErr 
 SetScriptManagerVariable(
   short   selector,
-  long    param)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+						 long    param) API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 #if !__LP64__
@@ -1016,7 +1015,7 @@ enum {
   smRedrawChar                  = 0,    /*Redraw character only*/
   smRedrawWord                  = 1,    /*Redraw entire word (2-byte systems)*/
   smRedrawLine                  = -1    /*Redraw entire line (bidirectional systems)*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #endif  /* !__LP64__ */
 
@@ -1035,7 +1034,7 @@ enum {
   smsfForms                     = 13,   /*Uses contextual forms for letters*/
   smsfLigatures                 = 14,   /*Uses contextual ligatures*/
   smsfReverse                   = 15    /*Reverses native text, right-left*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 /* GetScriptVariable and SetScriptVariable verbs (deprecated). */
 /* Note: Verbs private to script systems are negative, while */
@@ -1075,7 +1074,7 @@ enum {
   smScriptHelpFondSize          = 88,   /*default Help Mgr FOND (hi) & size (lo)*/
   smScriptValidStyles           = 90,   /*mask of valid styles for script*/
   smScriptAliasStyle            = 92    /*style (set) to use for aliases*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #endif  /* !__LP64__ */
 
@@ -1093,7 +1092,7 @@ enum {
   smScriptFntBase               = -285, /* param is associated font to use w/ all other fonts (old verb = -30)*/
   smScriptLigatures             = -263, /* old verb = -8*/
   smScriptNumbers               = -267  /* old verb = -12*/
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 #endif  /* !__LP64__ */
 
@@ -1163,8 +1162,8 @@ enum {
  */
 extern long 
 GetScriptVariable(
-  short   script,
-  short   selector)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+				  short   script,
+				  short   selector ) API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 #endif  /* !__LP64__ */
@@ -1195,9 +1194,9 @@ GetScriptVariable(
  */
 extern OSErr 
 SetScriptVariable(
-  short   script,
-  short   selector,
-  long    param)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+				  short   script,
+				  short   selector,
+				  long    param) API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 #endif  /* !__LP64__ */
@@ -1235,7 +1234,7 @@ SetScriptVariable(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetSysDirection(void)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+GetSysDirection(void) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1253,7 +1252,7 @@ GetSysDirection(void)                                         __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetSysDirection(short value)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+SetSysDirection(short value) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1278,7 +1277,7 @@ SetSysDirection(short value)                                  __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-FontScript(void)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+FontScript(void) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1303,7 +1302,7 @@ FontScript(void)                                              __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-IntlScript(void)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+IntlScript(void) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1327,7 +1326,7 @@ IntlScript(void)                                              __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-FontToScript(short fontNumber)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+FontToScript(short fontNumber) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1349,9 +1348,9 @@ FontToScript(short fontNumber)                                __OSX_AVAILABLE_BU
  */
 extern short 
 CharacterByteType(
-  Ptr          textBuf,
-  short        textOffset,
-  ScriptCode   script)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+				  Ptr          textBuf,
+				  short        textOffset,
+				  ScriptCode   script) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1373,9 +1372,9 @@ CharacterByteType(
  */
 extern short 
 CharacterType(
-  Ptr          textBuf,
-  short        textOffset,
-  ScriptCode   script)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+			  Ptr          textBuf,
+			  short        textOffset,
+			  ScriptCode   script) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1395,11 +1394,11 @@ CharacterType(
  */
 extern OSErr 
 TransliterateText(
-  Handle       srcHandle,
-  Handle       dstHandle,
-  short        target,
-  long         srcMask,
-  ScriptCode   script)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+				  Handle       srcHandle,
+				  Handle       dstHandle,
+				  short        target,
+				  long         srcMask,
+				  ScriptCode   script) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1421,9 +1420,8 @@ TransliterateText(
  */
 extern Boolean 
 FillParseTable(
-  CharByteTable   table,
-  ScriptCode      script)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
-
+			   CharByteTable   table,
+			   ScriptCode      script) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 /*
  *  GetIntlResource()   *** DEPRECATED ***
@@ -1463,7 +1461,7 @@ FillParseTable(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-GetIntlResource(short theID)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+GetIntlResource(short theID) API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 /*
@@ -1481,7 +1479,7 @@ GetIntlResource(short theID)                                  __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ClearIntlResourceCache(void)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+ClearIntlResourceCache(void) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1500,105 +1498,14 @@ ClearIntlResourceCache(void)                                  __OSX_AVAILABLE_BU
  */
 extern void 
 GetIntlResourceTable(
-  ScriptCode   script,
-  short        tableCode,
-  Handle *     itlHandle,
-  long *       offset,
-  long *       length)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+					 ScriptCode   script,
+					 short        tableCode,
+					 Handle *     itlHandle,
+					 long *       offset,
+					 long *       length) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 #endif  /* !__LP64__ */
-
-/*
- *  GetScriptUtilityAddress()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  SetScriptUtilityAddress()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  GetScriptQDPatchAddress()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  SetScriptQDPatchAddress()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  SetIntlResource()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  CharByte()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  CharType()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  Transliterate()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  ParseTable()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
 
 #if !__LP64__
 /*
@@ -1616,8 +1523,7 @@ GetIntlResourceTable(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern TokenResults 
-IntlTokenize(TokenBlockPtr tokenParam)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
-
+IntlTokenize(TokenBlockPtr tokenParam) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 #endif  /* !__LP64__ */
 

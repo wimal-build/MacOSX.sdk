@@ -1,17 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F9748CD4-86ED-3B2E-88E9-F3CB124C4ECC
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9EA1124A-E91D-3344-A615-870F1A44B523
 install-name:    '/System/Library/PrivateFrameworks/SiriKitInvocation.framework/Versions/A/SiriKitInvocation'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _RunVoiceShortcutDirectInvocationIdentifier, _SKIHomeAutomationInvocationIdentifierAsyncResponse, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _RunVoiceShortcutDirectInvocationIdentifier, _SKIDefaultLog, 
+                       _SKIHomeAutomationInvocationIdentifierAsyncResponse, _SKILogSubsystem, 
                        _SKIMessagesDirectInvocationIdentifierAnnounceMessage, _SKIMessagesDirectInvocationIdentifierNewMessage, 
                        _SKIMessagesDirectInvocationIdentifierNewMessageToContact, 
                        _SKIMessagesDirectInvocationIdentifierNewMessageToConversation, 
@@ -51,6 +45,13 @@ exports:
                        _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeySubtitle, 
                        _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeySynchronousBurstIndex, 
                        _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeyTimeSinceLastAnnouncement, 
+                       _SKIPhoneAnnounceIncomingCallNotificationDirectInvocationPayloadKeyAnnouncePlatform, 
+                       _SKIPhoneAnnounceIncomingCallNotificationDirectInvocationPayloadKeyAppBundleId, 
+                       _SKIPhoneAnnounceIncomingCallNotificationDirectInvocationPayloadKeyAppBundleIdOfLastAnnouncement, 
+                       _SKIPhoneAnnounceIncomingCallNotificationDirectInvocationPayloadKeyIsSameTypeAsLastAnnouncement, 
+                       _SKIPhoneAnnounceIncomingCallNotificationDirectInvocationPayloadKeyNotification, 
+                       _SKIPhoneAnnounceIncomingCallNotificationDirectInvocationPayloadKeySynchronousBurstIndex, 
+                       _SKIPhoneAnnounceIncomingCallNotificationDirectInvocationPayloadKeyTimeSinceLastAnnouncement, 
                        _SKIPhoneAnnounceIncomingCallerDirectInvocationPayloadKeyCallProviderBundleId, 
                        _SKIPhoneAnnounceIncomingCallerDirectInvocationPayloadKeyCallProviderIdentifier, 
                        _SKIPhoneAnnounceIncomingCallerDirectInvocationPayloadKeyCallUUID, 
@@ -73,6 +74,7 @@ exports:
                        _SKIPhoneAnnounceVoicemailDirectInvocationPayloadKeyTimeSinceLastAnnouncement, 
                        _SKIPhoneAnnounceVoicemailDirectInvocationPayloadKeyVoicemailIdentifier, 
                        _SKIPhoneDirectInvocationIdentifierAnnounceGroupFaceTimeInvite, 
+                       _SKIPhoneDirectInvocationIdentifierAnnounceIncomingCallNotification, 
                        _SKIPhoneDirectInvocationIdentifierAnnounceIntercom, _SKIPhoneDirectInvocationIdentifierAnnounceIntercomNotification, 
                        _SKIPhoneDirectInvocationIdentifierAnnounceVoicemail, _SKIPhoneDirectInvocationIdentifierIdentifyIncomingCaller, 
                        _SKIPhoneDirectInvocationIdentifierReadIntercom, _SKIPhoneDirectInvocationIdentifierStartPhoneCall, 

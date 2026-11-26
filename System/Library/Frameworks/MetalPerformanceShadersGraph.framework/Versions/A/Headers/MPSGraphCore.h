@@ -55,6 +55,10 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
  *  @constant   MPSGraphTensorNamedDataLayoutCHW             LayoutCHW
  *  @constant   MPSGraphTensorNamedDataLayoutHWC             LayoutHWC
  *  @constant   MPSGraphTensorNamedDataLayoutHW                LayoutHW
+ *  @constant   MPSGraphTensorNamedDataLayoutNCDHW        LayoutNCDHW
+ *  @constant   MPSGraphTensorNamedDataLayoutNDHWC        LayoutNDHWC
+ *  @constant   MPSGraphTensorNamedDataLayoutOIDHW         LayoutOIDHW
+ *  @constant   MPSGraphTensorNamedDataLayoutDHWIO         LayoutDHWIO
  */
 typedef NS_ENUM(NSUInteger, MPSGraphTensorNamedDataLayout)
 {
@@ -65,16 +69,21 @@ typedef NS_ENUM(NSUInteger, MPSGraphTensorNamedDataLayout)
     MPSGraphTensorNamedDataLayoutCHW        MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                        =  4L,
     MPSGraphTensorNamedDataLayoutHWC        MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                        =  5L,
     MPSGraphTensorNamedDataLayoutHW         MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                        =  6L,
+    MPSGraphTensorNamedDataLayoutNCDHW      MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                        =  7L,
+    MPSGraphTensorNamedDataLayoutNDHWC      MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                        =  8L,
+    MPSGraphTensorNamedDataLayoutOIDHW      MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                        =  9L,
+    MPSGraphTensorNamedDataLayoutDHWIO      MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                        =  10L,
 };
 
 /*!
  *  @typedef    MPSGraphPaddingStyle
  *  @abstract   Tensor Layout
  *
- *  @constant   MPSGraphPaddingStyleExplicit                Explicit
- *  @constant   MPSGraphPaddingStyleTF_SAME           TF_SAME
- *  @constant   MPSGraphPaddingStyleTF_VALID           TF_VALID
- *  @constant   MPSGraphPaddingStyleExplicitOffset       Explicit offsets
+ *  @constant   MPSGraphPaddingStyleExplicit                            Explicit
+ *  @constant   MPSGraphPaddingStyleONNX_SAME_LOWER  ONNX_SAME_LOWER
+ *  @constant   MPSGraphPaddingStyleTF_SAME                       TF_SAME
+ *  @constant   MPSGraphPaddingStyleTF_VALID                       TF_VALID
+ *  @constant   MPSGraphPaddingStyleExplicitOffset                   Explicit offsets
  */
 typedef NS_ENUM(NSUInteger, MPSGraphPaddingStyle)
 {
@@ -82,6 +91,7 @@ typedef NS_ENUM(NSUInteger, MPSGraphPaddingStyle)
     MPSGraphPaddingStyleTF_VALID            MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                            =  1L,
     MPSGraphPaddingStyleTF_SAME             MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                            =  2L,
     MPSGraphPaddingStyleExplicitOffset      MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))                            =  3L,
+    MPSGraphPaddingStyleONNX_SAME_LOWER     MPS_ENUM_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))                            =  4L,
 };
 
 /*!

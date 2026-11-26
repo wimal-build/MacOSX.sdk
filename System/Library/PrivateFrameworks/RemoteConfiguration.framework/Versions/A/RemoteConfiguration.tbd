@@ -2,24 +2,11 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E6EA13EE-F00F-31FE-BAF0-FAEDD58FF4A8
-  - target:          x86_64-maccatalyst
-    value:           E6EA13EE-F00F-31FE-BAF0-FAEDD58FF4A8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E5416FBC-E0E2-33DF-A649-ED0901B7461B
-  - target:          arm64e-maccatalyst
-    value:           E5416FBC-E0E2-33DF-A649-ED0901B7461B
 install-name:    '/System/Library/PrivateFrameworks/RemoteConfiguration.framework/Versions/A/RemoteConfiguration'
-current-version: 139.6
+current-version: 169
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NSErrorRCAdditionsIsNetworkUnavailable, _NSErrorRCAdditionsShouldRetry, 
                        _RCAppBundleID, _RCAppVersion, _RCBlockConjunction, _RCBlockWithQualityOfService, 
                        _RCCFTypeCast, _RCChangeTagContentHashKey, _RCChangeTagIdentifierKey, 
@@ -79,7 +66,8 @@ exports:
                        _RCReverseSquare, _RCRound, _RCSecondsToMilliseconds, _RCSharedLog, 
                        _RCSineMap, _RCSpecificCast, _RCStringFromQualityOfService, 
                        _RCStringFromQueuePriority, _RCTestBlockForClass, _RCTestBlockForProtocol, 
-                       _RCURLFetchDownloadTimeout, _RCURLFetchRequestTimeout, _RCURLSessionTaskPriorityHigh, 
+                       _RCTodayConfigurationEndpointURLKey, _RCURLFetchDownloadTimeout, 
+                       _RCURLFetchRequestTimeout, _RCURLSessionTaskPriorityHigh, 
                        _RCURLSessionTaskPriorityLow, _RCURLSessionTaskPriorityNormal, 
                        _RCURLSessionTaskPriorityVeryHigh, _RCUserInfoSegmentSetIDsKey, 
                        _RCUserInfoTreatmentIDsKey, _RCUserSegmentationBackgroundRefreshRateKey, 
@@ -89,19 +77,19 @@ exports:
                        _RCUserSegmentationConfigurationDefaultModMax, _RCUserSegmentationConfigurationDefaultModThreshold, 
                        _RCUserSegmentationConfigurationEndpointURLKey, _RCUserSegmentationConfigurationForegroundRefreshRateKey, 
                        _RCUserSegmentationConfigurationKey, _RCUserSegmentationConfigurationModMaxKey, 
-                       _RCUserSegmentationConfigurationModThresholdKey, _RCUserSegmentationConfigurationWidgetEndpointURLKey, 
-                       _RCUserSegmentationEnvironmentForEnvironmentString, _RCUserSegmentationModMaxKey, 
-                       _RCUserSegmentationModThresholdKey, _RCUserSegmentationRefreshRateKey, 
-                       _RCUserSegmentationWidgetConfigurationKey, _RCUserSegmentationWidgetForegroundRefreshRateKey, 
-                       _RCUserSegmentationWidgetRefreshRateKey, _RCWaitUntilBlockIsInvoked, 
-                       _RCWidgetConfigurationEndpointURLKey, _RemoteConfigurationVersionNumber, 
-                       _RemoteConfigurationVersionString ]
+                       _RCUserSegmentationConfigurationModThresholdKey, _RCUserSegmentationConfigurationTodayEndpointURLKey, 
+                       _RCUserSegmentationConfigurationWidgetEndpointURLKey, _RCUserSegmentationEnvironmentForEnvironmentString, 
+                       _RCUserSegmentationModMaxKey, _RCUserSegmentationModThresholdKey, 
+                       _RCUserSegmentationRefreshRateKey, _RCUserSegmentationWidgetConfigurationKey, 
+                       _RCUserSegmentationWidgetForegroundRefreshRateKey, _RCUserSegmentationWidgetRefreshRateKey, 
+                       _RCWaitUntilBlockIsInvoked, _RCWidgetConfigurationEndpointURLKey, 
+                       _RemoteConfigurationVersionNumber, _RemoteConfigurationVersionString ]
     objc-classes:    [ RCAsyncBlockOperation, RCAsyncOnceOperation, RCAsyncSerialQueue, 
                        RCBoostableOperationThrottler, RCCancelHandler, RCChangeTag, 
                        RCConfigurationManager, RCConfigurationResource, RCConfigurationSettings, 
                        RCDebugOverrides, RCDeviceInfo, RCEndpointError, RCEndpointOperation, 
                        RCFallbackOperation, RCGroupCancelHandler, RCKeyValueStore, 
-                       RCMutexLock, RCOnce, RCOperation, RCOperationDelayedRetrySignal, 
+                       RCMutexLock, RCNetworkEvent, RCOnce, RCOperation, RCOperationDelayedRetrySignal, 
                        RCOperationExternalSignal, RCOperationImmediateRetrySignal, 
                        RCOperationNotificationRetrySignal, RCOperationThrottler, 
                        RCRequestInfo, RCTimedOperationThrottler, RCURLFetchOperation, 

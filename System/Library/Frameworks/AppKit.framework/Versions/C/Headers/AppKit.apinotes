@@ -6089,6 +6089,20 @@ Classes:
   - Selector: "textLayoutFragmentForPosition:"
     MethodKind: Instance
     SwiftName: textLayoutFragment(for:)
+- Name: NSTextListElement
+  Methods:
+  - Selector: "initWithParentElement:textList:contents:markerAttributes:childElements:"
+    MethodKind: Instance
+    SwiftName: init(parent:textList:contents:markerAttributes:children:)
+  - Selector: "textListElementWithContents:markerAttributes:textList:childElements:"
+    MethodKind: Class
+    SwiftName: init(contents:markerAttributes:textList:children:)
+  - Selector: "textListElementWithChildElements:textList:nestingLevel:"
+    MethodKind: Class
+    SwiftName: init(children:textList:nestingLevel:)
+  - Selector: "childElements"
+    MethodKind: Instance
+    SwiftName: children
 - Name: NSTextRange
   Methods:
   - Selector: "containsLocation:"
@@ -7360,6 +7374,8 @@ Typedefs:
   SwiftName: NSFont.TextStyleOptionKey
 - Name: NSFontWeight
   SwiftName: NSFont.Weight
+- Name: NSFontWidth
+  SwiftName: NSFont.Width
 - Name: NSGraphicsContextAttributeKey
   SwiftName: NSGraphicsContext.AttributeKey
 - Name: NSGraphicsContextRepresentationFormatName
@@ -8712,6 +8728,24 @@ Globals:
   SwiftName: macOS11_3
 - Name: NSAppKitVersionNumber11_4
   SwiftName: macOS11_4
+- Name: NSAppKitVersionNumber11_5
+  SwiftName: macOS11_5
+- Name: NSAppKitVersionNumber12_0
+  SwiftName: macOS12_0
+- Name: NSAppKitVersionNumber12_1
+  SwiftName: macOS12_1
+- Name: NSAppKitVersionNumber12_2
+  SwiftName: macOS12_2
+- Name: NSAppKitVersionNumber12_3
+  SwiftName: macOS12_3
+- Name: NSAppKitVersionNumber12_4
+  SwiftName: macOS12_4
+- Name: NSAppKitVersionNumber12_5
+  SwiftName: macOS12_5
+- Name: NSAppKitVersionNumber13_0
+  SwiftName: macOS13_0
+- Name: NSAppKitVersionNumber13_1
+  SwiftName: macOS13_1
 - Name: NSAppKitVersionNumberWithColumnResizingBrowser
   Availability: nonswift
 - Name: NSAppKitVersionNumberWithContinuousScrollingBrowser
@@ -9239,6 +9273,14 @@ Globals:
   SwiftName: weight
 - Name: NSFontWeightUltraLight
   SwiftName: ultraLight
+- Name: NSFontWidthCompressed
+  SwiftName: compressed
+- Name: NSFontWidthCondensed
+  SwiftName: condensed
+- Name: NSFontWidthExpanded
+  SwiftName: expanded
+- Name: NSFontWidthStandard
+  SwiftName: standard
 - Name: NSFontWidthTrait
   SwiftName: width
 - Name: NSForegroundColorAttributeName

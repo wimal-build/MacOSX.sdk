@@ -2,24 +2,11 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9518E42F-494E-3EFC-96E4-F30B14F45BC8
-  - target:          x86_64-maccatalyst
-    value:           9518E42F-494E-3EFC-96E4-F30B14F45BC8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           86B79564-8FFF-3ADB-944C-641EA0BB8BE4
-  - target:          arm64e-maccatalyst
-    value:           86B79564-8FFF-3ADB-944C-641EA0BB8BE4
 install-name:    '/usr/lib/swift/libswiftAppleArchive.dylib'
-current-version: 280.100.14
+current-version: 364.100.3
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s12AppleArchive0B10ByteStreamC010decryptionD011readingFrom17encryptionContext5flags11threadCountACSgAC_AA0b10EncryptionI0CAA0B5FlagsVSitFZ', 
                        '_$s12AppleArchive0B10ByteStreamC010encryptionD011appendingTo0E7Context5flags11threadCountACSgAC_AA0b10EncryptionH0CAA0B5FlagsVSitFZ', 
                        '_$s12AppleArchive0B10ByteStreamC010encryptionD09writingTo0E7Context5flags11threadCountACSgAC_AA0b10EncryptionH0CAA0B5FlagsVSitFZ', 
@@ -175,6 +162,7 @@ exports:
                        '_$s12AppleArchive0B17EncryptionContextC17archiveIdentifier10Foundation4DataVSgvgTj', 
                        '_$s12AppleArchive0B17EncryptionContextC17archiveIdentifier10Foundation4DataVSgvgTq', 
                        '_$s12AppleArchive0B17EncryptionContextC17archiveIdentifier10Foundation4DataVSgvpMV', 
+                       '_$s12AppleArchive0B17EncryptionContextC17decryptAttributesSbyF', 
                        '_$s12AppleArchive0B17EncryptionContextC19setSigningPublicKeyyy9CryptoKit4P256O0F0O0gH0VKFTj', 
                        '_$s12AppleArchive0B17EncryptionContextC19setSigningPublicKeyyy9CryptoKit4P256O0F0O0gH0VKFTq', 
                        '_$s12AppleArchive0B17EncryptionContextC20compressionAlgorithmAA0B11CompressionVvMTj', 

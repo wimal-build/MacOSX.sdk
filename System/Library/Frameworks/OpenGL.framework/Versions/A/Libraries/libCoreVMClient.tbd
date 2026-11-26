@@ -2,23 +2,10 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9646B453-77BC-34AC-823C-D8EFA1926330
-  - target:          x86_64-maccatalyst
-    value:           9646B453-77BC-34AC-823C-D8EFA1926330
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           363D0EB2-0B19-3968-A619-D2DE307B7FD8
-  - target:          arm64e-maccatalyst
-    value:           363D0EB2-0B19-3968-A619-D2DE307B7FD8
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __cvmsIsAssert, __cvmsIsMonolithic, _cvms_connection_control, 
                        _cvms_connection_create, _cvms_connection_has_service, _cvms_connection_release, 
                        _cvms_connection_retain, _cvms_content_get_function_pointer, 

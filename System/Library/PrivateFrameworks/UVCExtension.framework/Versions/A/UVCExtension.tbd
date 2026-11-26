@@ -1,17 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           4172F06A-18ED-39FD-9122-4FC69A60D577
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           579FF819-12E4-3C85-9456-A17CB429CC4A
 install-name:    '/System/Library/PrivateFrameworks/UVCExtension.framework/Versions/A/UVCExtension'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _UVCExtensionLog, _UVCExtensionSMCreateTransitionsFromStateToDestinationOnEvents, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _CMIOExtensionPropertyStreamCenterStageRectOfInterest, _UVCExtensionLog, 
+                       _UVCExtensionSMCreateTransitionsFromStateToDestinationOnEvents, 
                        _UVCExtensionSMCreateTransitionsFromStateToDestinations, _UVCExtensionSMCreateTransitionsFromStatesToDestination, 
                        _UVCExtensionSMDeferEventsInState, _UVCExtensionSMGetMatchingStateEntryEventForExitEvent, 
                        _UVCExtensionSMGetMatchingStateExitEventForEntryEvent, _UVCExtensionSMIsValidEntryEventForState, 

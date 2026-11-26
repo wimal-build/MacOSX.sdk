@@ -2,25 +2,12 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           894BA16B-A2ED-3765-A0EC-1AA9E372035F
-  - target:          x86_64-maccatalyst
-    value:           894BA16B-A2ED-3765-A0EC-1AA9E372035F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2A5357FB-1C1D-3DDB-B658-69E3E7267BB1
-  - target:          arm64e-maccatalyst
-    value:           2A5357FB-1C1D-3DDB-B658-69E3E7267BB1
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf-lite.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN20wireless_diagnostics6google8protobuf13StringAppendVEPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEPKcP13__va_list_tag ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN20wireless_diagnostics6google8protobuf11LogSilencerC1Ev, 
                        __ZN20wireless_diagnostics6google8protobuf11LogSilencerC2Ev, 
                        __ZN20wireless_diagnostics6google8protobuf11LogSilencerD1Ev, 
@@ -492,6 +479,6 @@ exports:
                        __ZTVN20wireless_diagnostics6google8protobuf8internal15ExtensionFinderE, 
                        __ZTVN20wireless_diagnostics6google8protobuf8internal16FunctionClosure0E, 
                        __ZTVN20wireless_diagnostics6google8protobuf8internal24GeneratedExtensionFinderE ]
-  - targets:         [ arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
+  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN20wireless_diagnostics6google8protobuf13StringAppendVEPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEPKcPc ]
 ...

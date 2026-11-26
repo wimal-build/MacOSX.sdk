@@ -2,29 +2,16 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           0BB6C67A-7333-35DA-A5B4-EE26402B61E1
-  - target:          x86_64-maccatalyst
-    value:           0BB6C67A-7333-35DA-A5B4-EE26402B61E1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6C93F6A3-69E1-37F3-994A-E72F0C8DA840
-  - target:          arm64e-maccatalyst
-    value:           6C93F6A3-69E1-37F3-994A-E72F0C8DA840
 install-name:    '/usr/lib/swift/libswiftAppKit.dylib'
-current-version: 109
+current-version: 113
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftAppKit.dylib', '$ld$install_name$os10.11$@rpath/libswiftAppKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftAppKit.dylib', '$ld$install_name$os10.13$@rpath/libswiftAppKit.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftAppKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftAppKit.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation10CocoaErrorV4CodeV6AppKitE016ServiceMalformedg10DictionaryC0AEvgZ', 
                        '_$s10Foundation10CocoaErrorV4CodeV6AppKitE017fontAssetDownloadC0AEvgZ', 
                        '_$s10Foundation10CocoaErrorV4CodeV6AppKitE020ServiceMiscellaneousC0AEvgZ', 
@@ -478,7 +465,9 @@ exports:
                        '_$sSo10NSTouchBarC6AppKitE33_defaultCustomPlaygroundQuickLooks01_ghI0Ovg', 
                        '_$sSo10NSTouchBarC6AppKitE33_defaultCustomPlaygroundQuickLooks01_ghI0OvpMV', 
                        '_$sSo10NSTouchBarCs38__DefaultCustomPlaygroundQuickLookable6AppKitMc', 
-                       '_$sSo12NSFontWeighta6AppKit01_cdD23NumericRawRepresentableACMc', 
+                       '_$sSo11NSFontWidtha6AppKit01_cdD23NumericRawRepresentableACMc', 
+                       '_$sSo11NSFontWidtha6AppKit01_cdD23NumericRawRepresentableACWP', 
+                       '_$sSo11NSFontWidthaSL6AppKitMc', '_$sSo12NSFontWeighta6AppKit01_cdD23NumericRawRepresentableACMc', 
                        '_$sSo12NSFontWeighta6AppKit01_cdD23NumericRawRepresentableACWP', 
                        '_$sSo12NSFontWeightaSL6AppKitMc', '_$sSo12NSStoryboardC6AppKitE21instantiateController10identifier7creatorxSS_xSgSo7NSCoderCcSgtSo06NSViewE0CRbzlF', 
                        '_$sSo12NSStoryboardC6AppKitE21instantiateController10identifier7creatorxSS_xSgSo7NSCoderCcSgtSo08NSWindowE0CRbzlF', 
@@ -501,7 +490,27 @@ exports:
                        '_$sSo16NSLayoutPrioritya6AppKit01_cdD23NumericRawRepresentableACMc', 
                        '_$sSo16NSLayoutPrioritya6AppKit01_cdD23NumericRawRepresentableACWP', 
                        '_$sSo16NSLayoutPriorityaSL6AppKitMc', '_$sSo16NSUnderlineStyleVSH6AppKitMc', 
+                       '_$sSo16NSViewControllerC6AppKitE11ViewLoadingV12wrappedValueAEy_xGx_tcfC', 
+                       '_$sSo16NSViewControllerC6AppKitE11ViewLoadingV12wrappedValuexvM', 
+                       '_$sSo16NSViewControllerC6AppKitE11ViewLoadingV12wrappedValuexvg', 
+                       '_$sSo16NSViewControllerC6AppKitE11ViewLoadingV12wrappedValuexvpMV', 
+                       '_$sSo16NSViewControllerC6AppKitE11ViewLoadingV12wrappedValuexvs', 
+                       '_$sSo16NSViewControllerC6AppKitE11ViewLoadingV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAJyqd__AEy_xGGtcABRbd__luiMZ', 
+                       '_$sSo16NSViewControllerC6AppKitE11ViewLoadingV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAJyqd__AEy_xGGtcABRbd__luigZ', 
+                       '_$sSo16NSViewControllerC6AppKitE11ViewLoadingV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAJyqd__AEy_xGGtcABRbd__luisZ', 
+                       '_$sSo16NSViewControllerC6AppKitE11ViewLoadingVAEy_xGycfC', 
+                       '_$sSo16NSViewControllerC6AppKitE11ViewLoadingVMa', '_$sSo16NSViewControllerC6AppKitE11ViewLoadingVMn', 
                        '_$sSo17NSAnimationEffectV6AppKitE4show10centeredAt4size17completionHandlerySo7CGPointV_So6CGSizeVyyctF', 
+                       '_$sSo18NSWindowControllerC6AppKitE13WindowLoadingV12wrappedValueAEy_xGx_tcfC', 
+                       '_$sSo18NSWindowControllerC6AppKitE13WindowLoadingV12wrappedValuexvM', 
+                       '_$sSo18NSWindowControllerC6AppKitE13WindowLoadingV12wrappedValuexvg', 
+                       '_$sSo18NSWindowControllerC6AppKitE13WindowLoadingV12wrappedValuexvpMV', 
+                       '_$sSo18NSWindowControllerC6AppKitE13WindowLoadingV12wrappedValuexvs', 
+                       '_$sSo18NSWindowControllerC6AppKitE13WindowLoadingV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAJyqd__AEy_xGGtcABRbd__luiMZ', 
+                       '_$sSo18NSWindowControllerC6AppKitE13WindowLoadingV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAJyqd__AEy_xGGtcABRbd__luigZ', 
+                       '_$sSo18NSWindowControllerC6AppKitE13WindowLoadingV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAJyqd__AEy_xGGtcABRbd__luisZ', 
+                       '_$sSo18NSWindowControllerC6AppKitE13WindowLoadingVAEy_xGycfC', 
+                       '_$sSo18NSWindowControllerC6AppKitE13WindowLoadingVMa', '_$sSo18NSWindowControllerC6AppKitE13WindowLoadingVMn', 
                        '_$sSo20NSOpenGLGlobalOptionV6AppKitE11globalValues5Int32VvM', 
                        '_$sSo20NSOpenGLGlobalOptionV6AppKitE11globalValues5Int32Vvg', 
                        '_$sSo20NSOpenGLGlobalOptionV6AppKitE11globalValues5Int32VvpMV', 

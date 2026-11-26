@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from IOBufferMemoryDescriptor.iig */
+/* iig(DriverKit-256.100.8) generated from IOBufferMemoryDescriptor.iig */
 
 /* IOBufferMemoryDescriptor.iig:1-40 */
 /*
@@ -207,7 +207,7 @@ public:
 
 
 
-class IOBufferMemoryDescriptorInterface : public OSInterface
+class  IOBufferMemoryDescriptorInterface : public OSInterface
 {
 public:
 };

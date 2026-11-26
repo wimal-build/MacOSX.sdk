@@ -2,25 +2,12 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           9FFCE02C-6CFD-31F8-91A4-BDC2F5BC7382
-  - target:          x86_64-maccatalyst
-    value:           9FFCE02C-6CFD-31F8-91A4-BDC2F5BC7382
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D8D59204-BD23-30F8-97F5-1DF5847DF00B
-  - target:          arm64e-maccatalyst
-    value:           D8D59204-BD23-30F8-97F5-1DF5847DF00B
 install-name:    '/usr/lib/libFosl_dynamic.dylib'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _fosl_filter_addChild, _fosl_filter_addLibraryFunction, _fosl_filter_assignRoot, 
                        _fosl_filter_createConstant, _fosl_filter_createCoordinateTransform, 
                        _fosl_filter_createGraph, _fosl_filter_createImage, _fosl_filter_createKernel, 

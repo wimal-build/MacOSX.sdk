@@ -1,6 +1,7 @@
+#if !__has_include(<PassKitCore/PKSecureElementPass.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKSecureElementPass.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //
@@ -37,3 +38,8 @@ API_AVAILABLE(macos(11.0), ios(13.4), watchos(6.2))
 NS_ASSUME_NONNULL_END
 
 #endif // __PKSECUREELEMENTPASS_H
+
+#else
+#import <TargetConditionals.h>
+#import <PassKitCore/PKSecureElementPass.h>
+#endif

@@ -1,7 +1,7 @@
 /*
     NSFetchIndexDescription.h
     Core Data
-    Copyright (c) 2017-2021, Apple Inc.
+    Copyright (c) 2017-2023, Apple Inc.
     All rights reserved.
 */
 

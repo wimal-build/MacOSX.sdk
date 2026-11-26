@@ -1,21 +1,30 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           412AEB9E-F7E7-3467-911E-5D3D19F5BB8E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B8F16DBB-C3A3-3A9E-8727-235DD1BC5DAE
 install-name:    '/System/Library/PrivateFrameworks/FeatureStore.framework/Versions/A/FeatureStore'
+swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _FSFCurareInteractionStreamErrorDomain, _FSFCurareInteractionStreamErrorDomainInvalidInput, 
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ '_$s12FeatureStore27CurareInteractionSELFStreamC6filterAC26AIMLInstrumentationStreams11EventFilterC_tcfC', 
+                       '_$s12FeatureStore27CurareInteractionSELFStreamC6filterAC26AIMLInstrumentationStreams11EventFilterC_tcfCTq', 
+                       '_$s12FeatureStore27CurareInteractionSELFStreamC6filterAC26AIMLInstrumentationStreams11EventFilterC_tcfc', 
+                       '_$s12FeatureStore27CurareInteractionSELFStreamC6logger33_0C4DD8B807AA289F718598A1CDCAEC2CLL2os6LoggerVvpfi', 
+                       '_$s12FeatureStore27CurareInteractionSELFStreamC8provider33_0C4DD8B807AA289F718598A1CDCAEC2CLL26AIMLInstrumentationStreams015InstrumentationO16ProviderProtocol_pSgvpfi', 
+                       '_$s12FeatureStore27CurareInteractionSELFStreamC8retrieveSDys11AnyHashableVSDyAFSayypGGGyYaKF', 
+                       '_$s12FeatureStore27CurareInteractionSELFStreamC8retrieveSDys11AnyHashableVSDyAFSayypGGGyYaKFTq', 
+                       '_$s12FeatureStore27CurareInteractionSELFStreamC8retrieveSDys11AnyHashableVSDyAFSayypGGGyYaKFTu', 
+                       '_$s12FeatureStore27CurareInteractionSELFStreamCACycfC', '_$s12FeatureStore27CurareInteractionSELFStreamCACycfc', 
+                       '_$s12FeatureStore27CurareInteractionSELFStreamCMa', '_$s12FeatureStore27CurareInteractionSELFStreamCMn', 
+                       '_$s12FeatureStore27CurareInteractionSELFStreamCN', '_$s12FeatureStore27CurareInteractionSELFStreamCfD', 
+                       _FSFCurareInteractionStreamErrorDomain, _FSFCurareInteractionStreamErrorDomainInvalidInput, 
+                       _FSFSourceTypeFromString, _FSFStringFromSourceType, _FSFSwitchToMobile, 
                        _FeatureStoreVersionNumber, _FeatureStoreVersionString, _maxStreamAgeInSec ]
     objc-classes:    [ FSFBMStringData, FSFBiomeFeatureStore, FSFBiomeFeatureStoreStream, 
-                       FSFCurareEvaluationFeature, FSFCurareInteractionAsDict, FSFCurareInteractionAsJsonStr, 
-                       FSFCurareInteractionAsProto, FSFCurareInteractionStream, FSFNLUFeature, 
-                       FSFNluRequestFeature, FSFNluResponseFeature, FSFNluUserParseFeature, 
-                       FSFSchema, FSFStreamRegistry, FSFUtils, _CurareInternalBiomeFeature ]
+                       FSFCallKitUtil, FSFCurareEvaluationFeature, FSFCurareInteractionAsDict, 
+                       FSFCurareInteractionAsJsonStr, FSFCurareInteractionAsProto, 
+                       FSFCurareInteractionFeatureStoreStream, FSFCurareInteractionSELFStream, 
+                       FSFCurareInteractionStream, FSFDeviceInfo, FSFErrorHandler, 
+                       FSFNLUFeature, FSFNluRequestFeature, FSFNluResponseFeature, 
+                       FSFNluUserParseFeature, FSFSchema, FSFSiriPreferenceUtil, 
+                       FSFStreamRegistry, FSFUtils, _CurareInternalBiomeFeature ]
 ...

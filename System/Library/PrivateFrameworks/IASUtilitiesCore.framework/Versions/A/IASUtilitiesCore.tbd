@@ -1,16 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           21ABD6F1-5559-381F-992D-2257BAE1EA7C
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D4B7E795-2B02-36B7-9333-9125CE6908B2
 install-name:    '/System/Library/PrivateFrameworks/IASUtilitiesCore.framework/Versions/A/IASUtilitiesCore'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IASAuthenticationDidFinish, _IASAuthenticationErrorDomain, 
                        _IASAuthenticationWillStartWithUINotification, _IASAuthenticationWillStartWithoutUINotification, 
                        _IASChunklistChunkNotFound, _IASChunklistDefaultChunkSize, 

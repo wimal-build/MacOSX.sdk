@@ -1,6 +1,7 @@
+#if (!__has_include(<PassKitUI/PKPaymentAuthorizationViewController.h>) && !__has_include(<PassKitMacHelperTemp/PKPaymentAuthorizationViewController.h>)) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentAuthorizationViewController.h
-//  PassKit
+//    PassKit
 //
 //  Copyright (c) 2014 Apple, Inc. All rights reserved.
 //
@@ -23,7 +24,11 @@
 
 #import <PassKit/PKConstants.h>
 #import <PassKit/PKPaymentRequest.h>
+#if TARGET_OS_OSX
 #import <PassKit/PKPaymentAuthorizationViewControllerDelegate.h>
+#else
+#import <PassKit/PKPaymentAuthorizationViewControllerDelegate.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -78,5 +83,14 @@ NS_CLASS_AVAILABLE_MAC(11_0)
 
 NS_ASSUME_NONNULL_END
 
+#endif
+#endif
+
+#else
+#import <TargetConditionals.h>
+#if TARGET_OS_OSX 
+#import <PassKitMacHelperTemp/PKPaymentAuthorizationViewController.h> 
+#else 
+#import <PassKitUI/PKPaymentAuthorizationViewController.h> 
 #endif
 #endif

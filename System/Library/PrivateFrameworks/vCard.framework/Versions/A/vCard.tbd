@@ -2,26 +2,20 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           76C4AED8-2BA8-38EC-AC80-450A23DE1DE1
-  - target:          x86_64-maccatalyst
-    value:           76C4AED8-2BA8-38EC-AC80-450A23DE1DE1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           53D6A003-62BA-30F5-935E-529AC1BA7F7E
-  - target:          arm64e-maccatalyst
-    value:           53D6A003-62BA-30F5-935E-529AC1BA7F7E
 install-name:    '/System/Library/PrivateFrameworks/vCard.framework/Versions/A/vCard'
-current-version: 3535.10
+current-version: 3582.9
 compatibility-version: 0
+swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _CNUseVCard21Format, _CNVCard21Encoding, _CNVCardABPersonFlagsProperty, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s5vCard33CNVCardNameComponentPostProcessorC11postProcess10componentsySo0b7MutableC10ComponentsC_tFZTj', 
+                       '_$s5vCard33CNVCardNameComponentPostProcessorC11postProcess10componentsySo0b7MutableC10ComponentsC_tFZTq', 
+                       '_$s5vCard33CNVCardNameComponentPostProcessorCACycfC', '_$s5vCard33CNVCardNameComponentPostProcessorCACycfc', 
+                       '_$s5vCard33CNVCardNameComponentPostProcessorCMa', '_$s5vCard33CNVCardNameComponentPostProcessorCMn', 
+                       '_$s5vCard33CNVCardNameComponentPostProcessorCMo', '_$s5vCard33CNVCardNameComponentPostProcessorCMu', 
+                       '_$s5vCard33CNVCardNameComponentPostProcessorCN', '_$s5vCard33CNVCardNameComponentPostProcessorCfD', 
+                       _CNUseVCard21Format, _CNVCard21Encoding, _CNVCardABPersonFlagsProperty, 
                        _CNVCardActivityAlertCallKey, _CNVCardActivityAlertIgnoreMuteKey, 
                        _CNVCardActivityAlertKey, _CNVCardActivityAlertKeyCall, _CNVCardActivityAlertKeyIgnoreMute, 
                        _CNVCardActivityAlertKeySound, _CNVCardActivityAlertKeyText, 
@@ -49,15 +43,15 @@ exports:
                        _CNVCardInstantMessageServiceSkype, _CNVCardInstantMessageServiceYahoo, 
                        _CNVCardInstantMessageTeamIdentifierKey, _CNVCardInstantMessageUserIdentifierKey, 
                        _CNVCardInstantMessageUsernameKey, _CNVCardIsPrimaryKey, _CNVCardJobTitleKey, 
-                       _CNVCardKeyABPersonFlags, _CNVCardKeyActivityAlert, _CNVCardKeyAddressingGrammar, 
-                       _CNVCardKeyAlternateBirthdayComponents, _CNVCardKeyBirthdayComponents, 
-                       _CNVCardKeyCalendarURIs, _CNVCardKeyCardDAVUID, _CNVCardKeyDepartmentName, 
-                       _CNVCardKeyEmail, _CNVCardKeyFirstName, _CNVCardKeyFormattedName, 
-                       _CNVCardKeyGuardianWhitelisted, _CNVCardKeyImageHash, _CNVCardKeyImageType, 
-                       _CNVCardKeyInstantMessage, _CNVCardKeyJobTitle, _CNVCardKeyLastName, 
-                       _CNVCardKeyMaidenName, _CNVCardKeyMemojiMetadata, _CNVCardKeyMiddleName, 
-                       _CNVCardKeyNameSuffix, _CNVCardKeyNameTitle, _CNVCardKeyNickname, 
-                       _CNVCardKeyNote, _CNVCardKeyOrganizationName, _CNVCardKeyOriginalImageData, 
+                       _CNVCardKeyABPersonFlags, _CNVCardKeyActivityAlert, _CNVCardKeyAlternateBirthdayComponents, 
+                       _CNVCardKeyBirthdayComponents, _CNVCardKeyCalendarURIs, _CNVCardKeyCardDAVUID, 
+                       _CNVCardKeyDepartmentName, _CNVCardKeyEmail, _CNVCardKeyFirstName, 
+                       _CNVCardKeyFormattedName, _CNVCardKeyGuardianWhitelisted, 
+                       _CNVCardKeyImageHash, _CNVCardKeyImageType, _CNVCardKeyInstantMessage, 
+                       _CNVCardKeyJobTitle, _CNVCardKeyLastName, _CNVCardKeyMaidenName, 
+                       _CNVCardKeyMemojiMetadata, _CNVCardKeyMiddleName, _CNVCardKeyNameSuffix, 
+                       _CNVCardKeyNameTitle, _CNVCardKeyNickname, _CNVCardKeyNote, 
+                       _CNVCardKeyOrganizationName, _CNVCardKeyOriginalImageData, 
                        _CNVCardKeyOtherDateComponents, _CNVCardKeyParentGroups, _CNVCardKeyPhoneNumber, 
                        _CNVCardKeyPhonemeData, _CNVCardKeyPhoneticFirstName, _CNVCardKeyPhoneticLastName, 
                        _CNVCardKeyPhoneticMiddleName, _CNVCardKeyPhoneticOrganizationName, 
@@ -89,13 +83,12 @@ exports:
                        _CNVCardPostalAddressKeySubAdministrativeArea, _CNVCardPostalAddressKeySubLocality, 
                        _CNVCardPreferredApplePersonaIDKey, _CNVCardPreferredLikenessSourceKey, 
                        _CNVCardPronunciationFirstNameKey, _CNVCardPronunciationLastNameKey, 
-                       _CNVCardPropertyNameAddressingGrammar, _CNVCardPropertyNameEmailAddress, 
-                       _CNVCardPropertyNameFormattedName, _CNVCardPropertyNameGuardianWhitelisted, 
-                       _CNVCardPropertyNameImageHash, _CNVCardPropertyNameImageType, 
-                       _CNVCardPropertyNameMemojiMetadata, _CNVCardPropertyNameNameComponents, 
-                       _CNVCardPropertyNameOrganizationName, _CNVCardPropertyNamePhoto, 
-                       _CNVCardPropertyNameTelephoneNumber, _CNVCardPropertyNameXABShowAs, 
-                       _CNVCardRelatedNamesKey, _CNVCardSocialProfileBundleIdentifiersKey, 
+                       _CNVCardPropertyNameEmailAddress, _CNVCardPropertyNameFormattedName, 
+                       _CNVCardPropertyNameGuardianWhitelisted, _CNVCardPropertyNameImageHash, 
+                       _CNVCardPropertyNameImageType, _CNVCardPropertyNameMemojiMetadata, 
+                       _CNVCardPropertyNameNameComponents, _CNVCardPropertyNameOrganizationName, 
+                       _CNVCardPropertyNamePhoto, _CNVCardPropertyNameTelephoneNumber, 
+                       _CNVCardPropertyNameXABShowAs, _CNVCardRelatedNamesKey, _CNVCardSocialProfileBundleIdentifiersKey, 
                        _CNVCardSocialProfileDisplayNameKey, _CNVCardSocialProfileKey, 
                        _CNVCardSocialProfileKeyBundleIdentifiers, _CNVCardSocialProfileKeyDisplayName, 
                        _CNVCardSocialProfileKeyService, _CNVCardSocialProfileKeyTeamIdentifier, 
@@ -128,7 +121,7 @@ exports:
                        CNVCardLine, CNVCardLine21SerializationStrategy, CNVCardLine30SerializationStrategy, 
                        CNVCardLineFactory, CNVCardLineGenerator, CNVCardLineSerializationStrategy, 
                        CNVCardLineSerializationStrategyImpl, CNVCardLiteralLine, 
-                       CNVCardMutableImage, CNVCardMutableNameComponents, CNVCardNameComponentPostProcessor, 
+                       CNVCardLogging, CNVCardMutableImage, CNVCardMutableNameComponents, 
                        CNVCardNameComponents, CNVCardNameSerialization, CNVCardOptions, 
                        CNVCardPHOTOParser, CNVCardParameter, CNVCardParameterDecoder, 
                        CNVCardParameterEncoder, CNVCardParsedDictionaryResultBuilder, 
@@ -142,7 +135,8 @@ exports:
                        CNVCardValueEncoder, CNVCardVersionPlaceholderLine, CNVCardWriting, 
                        CNVCardWritingOptions, CNVCardXABPHOTOParser, CNVCardXACTIVITYALERTParser, 
                        CNVCardXSOCIALPROFILEParser, _CNVCardParsedResultBuilderBlockFactory, 
-                       _CNVCardParsingConcurrentStrategy, _CNVCardParsingSerialStrategy ]
+                       _CNVCardParsingConcurrentStrategy, _CNVCardParsingSerialStrategy, 
+                       _TtC5vCard33CNVCardNameComponentPostProcessor ]
     objc-ivars:      [ CNVCard30PHOTOHelper._maxBytes, CNVCard30PHOTOHelper._options, 
                        CNVCard30PHOTOHelper._person, CNVCardActivityAlertScanner._position, 
                        CNVCardActivityAlertScanner._string, CNVCardDataStorage._data, 
@@ -153,8 +147,7 @@ exports:
                        CNVCardDateComponentsFormatter._yearMonthDayDateHourMinuteSecondZFormatter, 
                        CNVCardDateComponentsParser._formatter, CNVCardDateComponentsParser._gregorianCalendar, 
                        CNVCardDateScanner._position, CNVCardDateScanner._string, 
-                       CNVCardEncoding._name, CNVCardEncoding._stringEncoding, CNVCardFilteredPersonScope._blacklist, 
-                       CNVCardFilteredPersonScope._filterOptions, CNVCardImage._cropRects, 
+                       CNVCardEncoding._name, CNVCardEncoding._stringEncoding, CNVCardImage._cropRects, 
                        CNVCardImage._data, CNVCardImage._size, CNVCardLexer._activeTokenSets, 
                        CNVCardLexer._bytes, CNVCardLexer._cursor, CNVCardLexer._data, 
                        CNVCardLexer._errorCount, CNVCardLexer._length, CNVCardLexer._peekedPoint, 

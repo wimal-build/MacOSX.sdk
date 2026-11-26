@@ -1,11 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           8F8C261C-2D3F-35E8-BF35-7D44C88AAE71
 install-name:    '/System/Library/Frameworks/JavaNativeFoundation.framework/Versions/A/JavaNativeFoundation'
-current-version: 80
+current-version: 81
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaNativeFoundation.framework/Versions/A/JavaNativeFoundation$$1$10.0$10.16$$', 

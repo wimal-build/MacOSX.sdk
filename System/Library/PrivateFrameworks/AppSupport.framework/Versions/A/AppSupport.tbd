@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           984E6D31-8BDE-3614-9A41-64FB4F8D9A58
-  - target:          x86_64-maccatalyst
-    value:           984E6D31-8BDE-3614-9A41-64FB4F8D9A58
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           EBE9F62A-B573-3915-8CD9-D77E9C8A4FB2
-  - target:          arm64e-maccatalyst
-    value:           EBE9F62A-B573-3915-8CD9-D77E9C8A4FB2
 install-name:    '/System/Library/PrivateFrameworks/AppSupport.framework/Versions/A/AppSupport'
 current-version: 29
 reexported-libraries:
@@ -22,8 +9,8 @@ reexported-libraries:
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ALCityCountryNameKey, _ALCityCountryOverrideKey, _ALCityDisplayNameIncludingCountryUsesOnlyCountry, 
                        _ALCityIdentifierKey, _ALCityLatitudeKey, _ALCityLocaleCodeKey, 
                        _ALCityLongitudeKey, _ALCityNameKey, _ALCityPropertiesCount, 
@@ -193,28 +180,30 @@ exports:
                        _CPSqliteDatabaseSetProfileCallback, _CPSqliteDatabaseSetProfileCallbackWithContext, 
                        _CPSqliteDatabaseSetPropertiesEnabled, _CPSqliteDatabaseSetSetupHandler, 
                        _CPSqliteDatabaseSetShouldMigrateInProcess, _CPSqliteDatabaseSetShouldRequestUnlock, 
-                       _CPSqliteDatabaseSetShouldYieldWhenRequested, _CPSqliteDatabaseSetStatementCacheLimit, 
-                       _CPSqliteDatabaseSetSupportsReadOnlyConnections, _CPSqliteDatabaseSetThreadSafeEnabled, 
-                       _CPSqliteDatabaseSetUpdateHookCallback, _CPSqliteDatabaseSetVFSModuleName, 
-                       _CPSqliteDatabaseSetValueForProperty, _CPSqliteDatabaseSetVersion, 
-                       _CPSqliteDatabaseStatementForReading, _CPSqliteDatabaseStatementForWriting, 
-                       _CPSqliteDatabaseUnlockRequested, _CPSqliteHasSortKeyPrefix, 
-                       _CPSqlitePhoneNumberContainsAlphaCharacters, _CPSqlitePreparedStatement, 
-                       _CPSqliteRegisterYieldNotifyBlock, _CPSqliteSetDefaultPageCacheSize, 
-                       _CPSqliteSetDefaultSharedCacheModeEnabledState, _CPSqliteSetupLoggingForDatabaseHandle, 
-                       _CPSqliteStatementApplyValuesFromRecord, _CPSqliteStatementApplyValuesFromRecordWithNullValue, 
-                       _CPSqliteStatementBindValuesForColumns, _CPSqliteStatementCopyStringResult, 
-                       _CPSqliteStatementInteger64Result, _CPSqliteStatementIntegerResult, 
-                       _CPSqliteStatementPerform, _CPSqliteStatementReset, _CPSqliteStatementSendResults, 
-                       _CPSqliteUtilitiesGetIntegerQueryResultAtPath, _CPSqliteUtilitiesGetSchemaVersionAtPath, 
-                       _CPStringMethods, _CPSystemRootDirectory, _CPTemporaryFileWithUniqueName, 
-                       _CPTemporaryPath, _CPTimeBlock, _CPWeekdayAbbreviatedDateFormat, 
-                       _CPWeekdayAbbreviatedNoYearDateFormat, _CPWeekdayFormat, _CPWeekdayNoYearDateFormat, 
-                       _CRAppsKey, _CRCopyAppsRank, _CRCopyCountryCode, _CRCopyMoviesRank, 
-                       _CRCopyRestrictionsDictionary, _CRCopyTVShowsRank, _CRCountryCodeKey, 
-                       _CRDefaultCountryCode, _CRDefaultRank, _CRDisableRank, _CRMaxRank, 
-                       _CRMinRank, _CRMoviesKey, _CRTVShowsKey, _ICUSearchContextPattern, 
-                       _Int64SetKeyCallbacks, _RadioPreferencesCallback, _RadiosPreferencesAirplaneModeDidChangeNotification, 
+                       _CPSqliteDatabaseSetShouldUseInhibitorForConnections, _CPSqliteDatabaseSetShouldYieldWhenRequested, 
+                       _CPSqliteDatabaseSetStatementCacheLimit, _CPSqliteDatabaseSetSupportsReadOnlyConnections, 
+                       _CPSqliteDatabaseSetThreadSafeEnabled, _CPSqliteDatabaseSetUpdateHookCallback, 
+                       _CPSqliteDatabaseSetVFSModuleName, _CPSqliteDatabaseSetValueForProperty, 
+                       _CPSqliteDatabaseSetVersion, _CPSqliteDatabaseStatementForReading, 
+                       _CPSqliteDatabaseStatementForWriting, _CPSqliteDatabaseUnlockRequested, 
+                       _CPSqliteHasSortKeyPrefix, _CPSqlitePhoneNumberContainsAlphaCharacters, 
+                       _CPSqlitePreparedStatement, _CPSqliteRegisterYieldNotifyBlock, 
+                       _CPSqliteSetDefaultPageCacheSize, _CPSqliteSetDefaultSharedCacheModeEnabledState, 
+                       _CPSqliteSetupLoggingForDatabaseHandle, _CPSqliteStatementApplyValuesFromRecord, 
+                       _CPSqliteStatementApplyValuesFromRecordWithNullValue, _CPSqliteStatementBindValuesForColumns, 
+                       _CPSqliteStatementCopyStringResult, _CPSqliteStatementInteger64Result, 
+                       _CPSqliteStatementIntegerResult, _CPSqliteStatementPerform, 
+                       _CPSqliteStatementReset, _CPSqliteStatementSendResults, _CPSqliteUtilitiesGetIntegerQueryResultAtPath, 
+                       _CPSqliteUtilitiesGetSchemaVersionAtPath, _CPStartAnInhibitor, 
+                       _CPStopInhibitorWithIdentifier, _CPStringMethods, _CPSystemRootDirectory, 
+                       _CPTemporaryFileWithUniqueName, _CPTemporaryPath, _CPTimeBlock, 
+                       _CPWeekdayAbbreviatedDateFormat, _CPWeekdayAbbreviatedNoYearDateFormat, 
+                       _CPWeekdayFormat, _CPWeekdayNoYearDateFormat, _CRAppsKey, 
+                       _CRCopyAppsRank, _CRCopyCountryCode, _CRCopyMoviesRank, _CRCopyRestrictionsDictionary, 
+                       _CRCopyTVShowsRank, _CRCountryCodeKey, _CRDefaultCountryCode, 
+                       _CRDefaultRank, _CRDisableRank, _CRMaxRank, _CRMinRank, _CRMoviesKey, 
+                       _CRTVShowsKey, _ICUSearchContextPattern, _Int64SetKeyCallbacks, 
+                       _RadioPreferencesCallback, _RadiosPreferencesAirplaneModeDidChangeNotification, 
                        _RadiosSCPrefsID, _TelephonyStateBundleIdentifierKey, _TelephonyStateEnabledKey, 
                        _TelephonyStateKey, __CPCreateUTF8StringFromCFString, __CPDMCPDistributedMessaging_subsystem, 
                        __CPDMMessage, __CPDMNonBlockingMessage, __CPDMTwoWayMessage, 
@@ -254,13 +243,13 @@ exports:
     objc-classes:    [ ALCity, ALCityManager, ALSCGreenClient, CPAggregateDictionary, 
                        CPBitmapStore, CPDistributedMessagingAsyncOperation, CPDistributedMessagingCallout, 
                        CPDistributedMessagingCenter, CPDistributedMessagingDelayedReplyContext, 
-                       CPDistributedNotificationCenter, CPExclusiveLock, CPLRUDictionary, 
-                       CPLRUDictionaryNode, CPMemoryPool, CPMemoryPoolFile, CPNetworkObserver, 
-                       CPSearchMatcher, CapturedInvocationTrampoline, DelayedInvocationTrampoline, 
+                       CPDistributedNotificationCenter, CPLRUDictionary, CPLRUDictionaryNode, 
+                       CPMemoryPool, CPMemoryPoolFile, CPNetworkObserver, CPSearchMatcher, 
+                       CapturedInvocationTrampoline, DelayedInvocationTrampoline, 
                        InvocationTrampoline, OperationQueueInvocationTrampoline, 
                        PEPServiceConfiguration, RadiosPreferences, ThreadedInvocationTrampoline, 
-                       _CPBundleIdentifierString, _CPPowerAssertion, _CPPowerAssertionThread, 
-                       _ReachabilityRequest ]
+                       _CPBundleIdentifierString, _CPInhibitorManager, _CPPowerAssertion, 
+                       _CPPowerAssertionThread, _ReachabilityRequest ]
     objc-ivars:      [ ALCity._countryName, ALCity._countryOverride, ALCity._identifier, 
                        ALCity._identifierForCPCity, ALCity._latitude, ALCity._localeCode, 
                        ALCity._localizationAttempted, ALCity._longitude, ALCity._name, 
@@ -288,18 +277,17 @@ exports:
                        CPDistributedNotificationCenter._isServer, CPDistributedNotificationCenter._lock, 
                        CPDistributedNotificationCenter._queue, CPDistributedNotificationCenter._receiveNotificationSource, 
                        CPDistributedNotificationCenter._sendPorts, CPDistributedNotificationCenter._startCount, 
-                       CPExclusiveLock._fd, CPExclusiveLock._name, CPLRUDictionary._dictionary, 
-                       CPLRUDictionary._head, CPLRUDictionary._maxCount, CPLRUDictionary._tail, 
-                       CPLRUDictionaryNode._key, CPLRUDictionaryNode._object, CPLRUDictionaryNode.next, 
-                       CPLRUDictionaryNode.prev, CPMemoryPoolFile._deallocator, CPMemoryPoolFile._fd, 
-                       CPMemoryPoolFile._mutex, CPMemoryPoolFile._slotCount, CPMemoryPoolFile._slotLength, 
-                       CPMemoryPoolFile._slots, CPMemoryPoolFile._usedSlots, CPSearchMatcher._asciiComponents, 
-                       CPSearchMatcher._components, CPSearchMatcher._context, CPSearchMatcher._options, 
-                       CPSearchMatcher._wholeSearchStringData, CapturedInvocationTrampoline._outInvocation, 
-                       DelayedInvocationTrampoline._delay, InvocationTrampoline._target, 
-                       OperationQueueInvocationTrampoline._priority, OperationQueueInvocationTrampoline._queue, 
-                       PEPServiceConfiguration._cacheFilePath, PEPServiceConfiguration._cachedFileLastModifyDate, 
-                       PEPServiceConfiguration._shouldDownloadNetworkConfigFile, 
+                       CPLRUDictionary._dictionary, CPLRUDictionary._head, CPLRUDictionary._maxCount, 
+                       CPLRUDictionary._tail, CPLRUDictionaryNode._key, CPLRUDictionaryNode._object, 
+                       CPLRUDictionaryNode.next, CPLRUDictionaryNode.prev, CPMemoryPoolFile._deallocator, 
+                       CPMemoryPoolFile._fd, CPMemoryPoolFile._mutex, CPMemoryPoolFile._slotCount, 
+                       CPMemoryPoolFile._slotLength, CPMemoryPoolFile._slots, CPMemoryPoolFile._usedSlots, 
+                       CPSearchMatcher._asciiComponents, CPSearchMatcher._components, 
+                       CPSearchMatcher._context, CPSearchMatcher._options, CPSearchMatcher._wholeSearchStringData, 
+                       CapturedInvocationTrampoline._outInvocation, DelayedInvocationTrampoline._delay, 
+                       InvocationTrampoline._target, OperationQueueInvocationTrampoline._priority, 
+                       OperationQueueInvocationTrampoline._queue, PEPServiceConfiguration._cacheFilePath, 
+                       PEPServiceConfiguration._cachedFileLastModifyDate, PEPServiceConfiguration._shouldDownloadNetworkConfigFile, 
                        RadiosPreferences._applySkipCount, RadiosPreferences._cachedAirplaneMode, 
                        RadiosPreferences._delegate, RadiosPreferences._dispatchQueue, 
                        RadiosPreferences._isCachedAirplaneModeValid, RadiosPreferences._prefs, 
@@ -316,23 +304,10 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D125D91F-3071-3105-8D88-04CB43BFFB61
-  - target:          x86_64-maccatalyst
-    value:           D125D91F-3071-3105-8D88-04CB43BFFB61
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           CBC6A057-C2A4-3B89-8938-24E0E12AB6C6
-  - target:          arm64e-maccatalyst
-    value:           CBC6A057-C2A4-3B89-8938-24E0E12AB6C6
 install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CFPhoneNumberBundleCopyRulesetFileSystemPath, _CFPhoneNumberBundleCopyRulesetURL, 
                        _CFPhoneNumberBundleGetBundle, _CFPhoneNumberCopyCountryCode, 
                        _CFPhoneNumberCopyFormattedInternationalRepresentation, _CFPhoneNumberCopyFormattedRepresentation, 
@@ -355,17 +330,19 @@ exports:
                        __PNCopyFormattedNumberForDigitsWithCountry, __PNCopyFormattedNumberForDigitsWithCountryByRemovingAtIndex, 
                        __PNCopyFormattedNumberSuggestionForDigitsWithCountry, __PNCopyFullyQualifiedNumberForCountry, 
                        __PNCopyFullyQualifiedNumberForCountryInternal, __PNCopyIndexStringsForAddressBookSearch, 
-                       __PNCopyInternationalCodeForCountry, __PNCopyLastFourDigitsOfLocalNumber, 
+                       __PNCopyInternationalCodeForCountry, __PNCopyInternationalDirectDialingPrefixForCountry, 
+                       __PNCopyInternationalPrefix, __PNCopyLastFourDigitsOfLocalNumber, 
                        __PNCopyNationalDirectDialingPrefixForCountry, __PNCopyNormalized, 
                        __PNCopyPrefixForCountry, __PNCopySampleNumberForCountry, 
                        __PNCopyStrippedNumberWithoutPauses, __PNCreateLocalizedStringWithString, 
                        __PNCreateStringByAddingPauses, __PNCreateStringByStrippingFormattingAndNotVisiblyAllowable, 
                        __PNFindFormatRuleForDigitsWithCountry, __PNGetITUCountryCode, 
-                       __PNSetSampleNumberForCountry, _cpn_default_log, _decomposedPhoneNumbersEqual, 
-                       _kCFPhoneNumberBundleIdentifier, _kCFPhoneNumberBundleRulesetResourceName, 
-                       _kCFPhoneNumberBundleRulesetResourceType, _kCFPhoneNumberStringTransformNormalize, 
-                       _pn_uset_alphabetSetContains, _pn_uset_basicPresentationSetContains, 
-                       _pn_uset_expandedPresentationSetContains, _pn_uset_internationalPrefixSetContains, 
-                       _pn_uset_numeralSetContains, _pn_uset_pauseSetContains, _pn_uset_separatorSetContains, 
+                       __PNIsDomesticNumber, __PNSetSampleNumberForCountry, _cpn_default_log, 
+                       _decomposedPhoneNumbersEqual, _kCFPhoneNumberBundleIdentifier, 
+                       _kCFPhoneNumberBundleRulesetResourceName, _kCFPhoneNumberBundleRulesetResourceType, 
+                       _kCFPhoneNumberStringTransformNormalize, _pn_uset_alphabetSetContains, 
+                       _pn_uset_basicPresentationSetContains, _pn_uset_expandedPresentationSetContains, 
+                       _pn_uset_internationalPrefixSetContains, _pn_uset_numeralSetContains, 
+                       _pn_uset_pauseSetContains, _pn_uset_separatorSetContains, 
                        _pn_uset_verticalServiceSetContains ]
 ...

@@ -1,16 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1A943D99-46A9-30B7-A87C-F2BDDF4165C1
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2E4B22F5-2A27-38BC-BEDA-D7A76CE0950F
 install-name:    '/System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _alBuffer3f, _alBuffer3i, _alBufferData, _alBufferf, _alBufferfv, 
                        _alBufferi, _alBufferiv, _alDeleteBuffers, _alDeleteSources, 
                        _alDisable, _alDistanceModel, _alDopplerFactor, _alDopplerVelocity, 

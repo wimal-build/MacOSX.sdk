@@ -1,16 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           CE80202A-E606-3EF3-80CC-C70CFDE160F0
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           58C0F376-0F02-3731-9CB9-95EADC606AD4
 install-name:    '/System/Library/PrivateFrameworks/MobileSoftwareUpdate.framework/Versions/A/MobileSoftwareUpdate'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MSUApplyUpdate, _MSUAssetCalculateApplySize, _MSUAssetCalculateInstallationSize, 
                        _MSUAssetCalculatePrepareSize, _MSUBrainIsLoadable, _MSUCheckInstallationSize, 
                        _MSUCheckPreparationSize, _MSUCloseUpdateHandle, _MSUCommitStash, 
@@ -18,8 +11,9 @@ exports:
                        _MSUCopyPreviousUpdateAllToleratedFailures, _MSUCopyToleratedStatusForStep, 
                        _MSUDidLastUpdateBasebandTolerateFailure, _MSUGetUpdateInfo, 
                        _MSUIsFirstBootAfterUpdate, _MSUParsedToleratedFailureForStep, 
-                       _MSUPreflightUpdate, _MSUPrepareUpdate, _MSUPrepareUpdateWithAsset, 
-                       _MSUPrepareUpdateWithMAAsset, _MSUPurgeSuspendedUpdate, _MSUReportAndCleanupPreviousUpdateState, 
+                       _MSUPerformDownlevel, _MSUPerformSemiSplat, _MSUPreflightUpdate, 
+                       _MSUPrepareUpdate, _MSUPrepareUpdateWithAsset, _MSUPrepareUpdateWithMAAsset, 
+                       _MSUPurgeSuspendedUpdate, _MSUReportAndCleanupPreviousUpdateState, 
                        _MSUResumeUpdate, _MSUResumeUpdateWithOptions, _MSURetrievePreviousRestoreDate, 
                        _MSURetrievePreviousUpdateDate, _MSURetrievePreviousUpdateFirstToleratedFailure, 
                        _MSURetrievePreviousUpdateResults, _MSURetrievePreviousUpdateState, 
@@ -55,15 +49,16 @@ exports:
                        _kMSUOptionsKeyPreparePath, _kMSUOptionsKeyPrepareSnapshot, 
                        _kMSUOptionsKeyQualityOfService, _kMSUOptionsKeyReadWriteSystemPartition, 
                        _kMSUOptionsKeyRecordPreflightEvents, _kMSUOptionsKeyReleaseType, 
-                       _kMSUOptionsKeyRestoreVersion, _kMSUOptionsKeyRosettaVersionToInstall, 
-                       _kMSUOptionsKeySFRBundlePath, _kMSUOptionsKeySFRUpdateOnly, 
-                       _kMSUOptionsKeySFRUpdateProvided, _kMSUOptionsKeySavageUpdaterInfoOverride, 
-                       _kMSUOptionsKeySeedingProgram, _kMSUOptionsKeyShouldMigrate, 
-                       _kMSUOptionsKeyShouldPerformBridgeOSUpdate, _kMSUOptionsKeyShouldPerformRosettaUpdate, 
-                       _kMSUOptionsKeySkipLocalAuthenticationKey, _kMSUOptionsKeySkipStashbagCommitKey, 
-                       _kMSUOptionsKeySkipVolumeSealing, _kMSUOptionsKeySocksProxy, 
-                       _kMSUOptionsKeySourcePath, _kMSUOptionsKeySystemPartitionReserveMiB, 
-                       _kMSUOptionsKeyTargetUUID, _kMSUOptionsKeyTargetUpdate, _kMSUOptionsKeyUpdateOSBackgroundImagePath, 
+                       _kMSUOptionsKeyRestoreVersion, _kMSUOptionsKeyRollbackSplat, 
+                       _kMSUOptionsKeyRosettaVersionToInstall, _kMSUOptionsKeySFRBundlePath, 
+                       _kMSUOptionsKeySFRUpdateOnly, _kMSUOptionsKeySFRUpdateProvided, 
+                       _kMSUOptionsKeySavageUpdaterInfoOverride, _kMSUOptionsKeySeedingProgram, 
+                       _kMSUOptionsKeyShouldMigrate, _kMSUOptionsKeyShouldPerformBridgeOSUpdate, 
+                       _kMSUOptionsKeyShouldPerformRosettaUpdate, _kMSUOptionsKeySkipLocalAuthenticationKey, 
+                       _kMSUOptionsKeySkipStashbagCommitKey, _kMSUOptionsKeySkipVolumeSealing, 
+                       _kMSUOptionsKeySocksProxy, _kMSUOptionsKeySourcePath, _kMSUOptionsKeySplatOnly, 
+                       _kMSUOptionsKeySystemPartitionReserveMiB, _kMSUOptionsKeyTargetUUID, 
+                       _kMSUOptionsKeyTargetUpdate, _kMSUOptionsKeyUpdateOSBackgroundImagePath, 
                        _kMSUOptionsKeyUpdateOSDisplayHeight, _kMSUOptionsKeyUpdateOSDisplayRefreshRate, 
                        _kMSUOptionsKeyUpdateOSDisplayWidth, _kMSUOptionsKeyUpdateUUID, 
                        _kMSUOptionsKeyUsePreflightUpdate, _kMSUOptionsKeyUserAgentString, 

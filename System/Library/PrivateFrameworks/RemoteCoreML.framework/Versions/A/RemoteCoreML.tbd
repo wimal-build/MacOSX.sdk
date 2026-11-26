@@ -1,16 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           CC26337E-6D17-3FBF-BD77-4766A2F3A5B5
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           93651451-017E-3447-A38E-947552EA641A
 install-name:    '/System/Library/PrivateFrameworks/RemoteCoreML.framework/Versions/A/RemoteCoreML'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RemoteCoreMLVersionNumber, _RemoteCoreMLVersionString, _g_inbound_connection, 
                        _kMLAckFailNetworkHeaderEncoding, _kMLAckSuccessNetworkHeaderEncoding, 
                        _kMLCustomNetworkHeaderEncoding, _kMLErrorNetworkHeaderEncoding, 

@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from OSAction.iig */
+/* iig(DriverKit-256.100.8) generated from OSAction.iig */
 
 /* OSAction.iig:1-38 */
 /*
@@ -175,7 +175,7 @@ public:
 		uint64_t deadline) LOCALONLY;
 
 	virtual void
-	Aborted(void) LOCAL;
+	Aborted(void) LOCALHOST;
 };
 
 #undef KERNEL
@@ -321,7 +321,7 @@ public:\
 
 
 
-class OSActionInterface : public OSInterface
+class  OSActionInterface : public OSInterface
 {
 public:
 };

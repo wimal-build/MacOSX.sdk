@@ -1,6 +1,7 @@
+#if !__has_include(<PassKitCore/PKSuicaPassProperties.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKSuicaPassProperties.h
-//  PassKit
+//    PassKit
 //
 //  Copyright (c) 2016 Apple, Inc. All rights reserved.
 //
@@ -35,3 +36,8 @@ API_AVAILABLE(ios(10.1), watchos(3.1))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <TargetConditionals.h>
+#import <PassKitCore/PKSuicaPassProperties.h>
+#endif

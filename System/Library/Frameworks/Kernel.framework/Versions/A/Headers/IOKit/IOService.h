@@ -142,11 +142,13 @@ extern const OSSymbol *     gIODEXTMatchCountKey;
 extern const OSSymbol *     gIOUserClientClassKey;
 
 extern const OSSymbol *     gIOUserClassKey;
+extern const OSSymbol *     gIOUserClassesKey;
 extern const OSSymbol *     gIOUserServerClassKey;
 extern const OSSymbol *     gIOUserServerNameKey;
 extern const OSSymbol *     gIOUserServerTagKey;
 extern const OSSymbol *     gIOUserUserClientKey;
 extern const OSSymbol *     gIOAssociatedServicesKey;
+extern const OSSymbol *     gIOUserServerPreserveUserspaceRebootKey;
 
 extern const OSSymbol *     gIOKitDebugKey;
 extern const OSSymbol *     gIOServiceKey;
@@ -183,11 +185,15 @@ extern const OSSymbol *     gIOBSDMajorKey;
 extern const OSSymbol *     gIOBSDMinorKey;
 extern const OSSymbol *     gIOBSDUnitKey;
 
+extern const OSSymbol *     gIOUserClientEntitlementsKey;
 extern const OSSymbol *     gIODriverKitEntitlementKey;
 extern const OSSymbol *     gIOServiceDEXTEntitlementsKey;
 extern const OSSymbol *     gIODriverKitUserClientEntitlementsKey;
 extern const OSSymbol *     gIODriverKitUserClientEntitlementAllowAnyKey;
 extern const OSSymbol *     gIODriverKitRequiredEntitlementsKey;
+extern const OSSymbol *     gIODriverKitTestDriverEntitlementKey;
+extern const OSSymbol *     gIODriverKitUserClientEntitlementCommunicatesWithDriversKey;
+extern const OSSymbol *     gIODriverKitUserClientEntitlementAllowThirdPartyUserClientsKey;
 extern const OSSymbol *     gIOMatchDeferKey;
 
 extern const OSSymbol *     gIOAllCPUInitializedKey;
@@ -374,24 +380,7 @@ protected:
 /*! @struct ExpansionData
  *   @discussion This structure will be used to expand the capablilties of this class in the future.
  */
-	struct ExpansionData {
-		uint64_t authorizationID;
-		/*
-		 * Variables associated with interrupt accounting.  Consists of an array
-		 * (that pairs reporters with opaque "statistics" objects), the count for
-		 * the array, and a lock to guard both of the former variables.  The lock
-		 * is necessary as IOReporting will not update reports in a manner that is
-		 * synchonized with the service (i.e, on a workloop).
-		 */
-		IOLock * interruptStatisticsLock;
-		IOInterruptAccountingReporter * interruptStatisticsArray;
-		int interruptStatisticsArrayCount;
-
-		OSObjectUserVars * uvars;
-		IOServiceStateChangeVars * svars;
-
-		IOInterruptSourcePrivate * interruptSourcesPrivate;
-	};
+	struct ExpansionData;
 
 /*! @var reserved
  *   Reserved for future use.  (Internal use only)  */
@@ -756,6 +745,7 @@ public:
  *   @param delta The delta to be applied to the IOService object's <code>busyState</code>. */
 
 	virtual void adjustBusy( SInt32 delta );
+
 
 	APPLE_KEXT_COMPATIBILITY_VIRTUAL
 	IOReturn waitQuiet(mach_timespec_t * timeout)

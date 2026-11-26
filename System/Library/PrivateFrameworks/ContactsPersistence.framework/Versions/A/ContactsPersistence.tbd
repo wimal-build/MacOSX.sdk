@@ -2,25 +2,18 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           39582191-C26D-34D0-9208-5C8801853CDE
-  - target:          x86_64-maccatalyst
-    value:           39582191-C26D-34D0-9208-5C8801853CDE
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           FBB99A75-798E-3759-BAC6-5E950EE97BD0
-  - target:          arm64e-maccatalyst
-    value:           FBB99A75-798E-3759-BAC6-5E950EE97BD0
 install-name:    '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvMZ', 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s19ContactsPersistence11URLVerifierC25isExistingPersistentStoreySb10Foundation3URLVFZTj', 
+                       '_$s19ContactsPersistence11URLVerifierC25isExistingPersistentStoreySb10Foundation3URLVFZTq', 
+                       '_$s19ContactsPersistence11URLVerifierCACycfC', '_$s19ContactsPersistence11URLVerifierCACycfc', 
+                       '_$s19ContactsPersistence11URLVerifierCMa', '_$s19ContactsPersistence11URLVerifierCMn', 
+                       '_$s19ContactsPersistence11URLVerifierCMo', '_$s19ContactsPersistence11URLVerifierCMu', 
+                       '_$s19ContactsPersistence11URLVerifierCN', '_$s19ContactsPersistence11URLVerifierCfD', 
+                       '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvMZ', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvgZ', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvsZ', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC4copy4withyp10ObjectiveC6NSZoneVSg_tFTj', 
@@ -174,12 +167,16 @@ exports:
                        _CNCDSocialProfileKeyUsername, _CNCDSyncStatusCardDAVLegacyCustomProperty, 
                        _CNCDSyncStatusKey, _CNCDURLAddressKeyURL, _CNCDUniqueIdentifierKey, 
                        _CNCoreDataImportCompletedKey, _CNCoreDataMetaDataIOSLegacyIdentifierNamespaceKey, 
-                       _CNCoreDataMetaDataVersionKey, _CNFilenameContactsDatabase, 
-                       _CNFilenameExchangeSyncDatabase, _CNLocalAccountIdentifier, 
-                       _CNPathComponentSources, _CNPersistentStoreURLForBaseURLAndIdentifier, 
+                       _CNCoreDataMetaDataVersionKey, _CNEWSContactFolderKeyFolderName, 
+                       _CNEWSContactFolderKeySyncFolderItemsSyncState, _CNEWSContactMappingKeyContactPictureAttachmentId, 
+                       _CNEWSEntityNameContactFolder, _CNEWSEntityNameContactMapping, 
+                       _CNEWSEntityNameItemMapping, _CNEWSEntityNameMapping, _CNEWSMappingKeyChangeKey, 
+                       _CNEWSMappingKeyContactsIdentifier, _CNEWSMappingKeyFlags, 
+                       _CNEWSMappingKeyItemId, _CNFilenameContactsDatabase, _CNFilenameExchangeSyncDatabase, 
+                       _CNLocalAccountIdentifier, _CNPathComponentSources, _CNPersistentStoreURLForBaseURLAndIdentifier, 
                        _kABAlertToneRelationshipName, _kABAlternateBirthdayRelationshipName, 
-                       _kABCDContactAddressingGrammarKey, _kABCDContactBirthdayComponentsKey, 
-                       _kABCDContactBirthdayKey, _kABCDContactBirthdayYearKey, _kABCDContactBirthdayYearlessKey, 
+                       _kABCDContactBirthdayComponentsKey, _kABCDContactBirthdayKey, 
+                       _kABCDContactBirthdayYearKey, _kABCDContactBirthdayYearlessKey, 
                        _kABCDContactCropRectHashKey, _kABCDContactCropRectIDKey, 
                        _kABCDContactCropRectKey, _kABCDContactDepartmentKey, _kABCDContactFirstNameKey, 
                        _kABCDContactIOSLegacyIdentifier, _kABCDContactIdentitityUniqueIdKey, 
@@ -250,19 +247,21 @@ exports:
                        CNCDIOSLegacyIdentifierSaveDistributor, CNCDIOSLegacyIdentifierXPCRegistrar, 
                        CNCDInMemoryPersistenceBackend, CNCDManagedObjectContext, 
                        CNCDManagedObjectContextSaveListener, CNCDMessagingAddress, 
-                       CNCDMigrator, CNCDOwnedObject, CNCDPersistenceContext, CNCDPersistenceMetrics, 
-                       CNCDPersistenceStack, CNCDPersistentStoreCoordinator, CNCDPhoneNumber, 
-                       CNCDPostalAddress, CNCDRecord, CNCDRemoteExchangeSyncPersistentStoreEndpointFactory, 
+                       CNCDMigrator, CNCDNote, CNCDOwnedObject, CNCDPersistenceContext, 
+                       CNCDPersistenceMetrics, CNCDPersistenceStack, CNCDPersistentStoreCoordinator, 
+                       CNCDPhoneNumber, CNCDPostalAddress, CNCDRecord, CNCDRemoteExchangeSyncPersistentStoreEndpointFactory, 
                        CNCDRemotePersistence, CNCDRemotePersistentStoreDescriptor, 
                        CNCDRemotePersistentStoreEndpointFactory, CNCDRemotePersistentStoreEndpointFetchRequest, 
                        CNCDRemotePersistentStoreEndpointFetchResponse, CNCDService, 
                        CNCDTestManagedObjectContextSession, CNCDTestPersistenceStack, 
-                       CNCDURLAddress, CNCDUnifiedContactInfo, CNCDVCardSerialization, 
+                       CNCDURLAddress, CNCDURLVerifier, CNCDUnifiedContactInfo, CNCDVCardSerialization, 
                        CNCustomPropertyMigrationTask, CNDelegateAccessAccountCollection, 
-                       CNEmptyAccountCollection, CNOnDiskAccountCollection, CNPersistentStoreBuilder, 
-                       CNPersistentStoreCoordinatorCache, CNPersistentStoreCoordinatorCacheEntry, 
-                       CNPersistentStoreCoordinatorFactory, CNPersistentStoreCoordinatorResult, 
-                       CNPersistentStoreCoordinatorUpdater, CNPersistentStoreDescription, 
+                       CNEWSContactFolder, CNEWSContactMapping, CNEWSItemMapping, 
+                       CNEWSMapping, CNEmptyAccountCollection, CNOnDiskAccountCollection, 
+                       CNPersistentStoreBuilder, CNPersistentStoreCoordinatorCache, 
+                       CNPersistentStoreCoordinatorCacheEntry, CNPersistentStoreCoordinatorFactory, 
+                       CNPersistentStoreCoordinatorResult, CNPersistentStoreCoordinatorUpdater, 
+                       CNPersistentStoreDescription, CNTempFileHelper, _CNCDURLVerifier, 
                        _TtC19ContactsPersistence19CNCDFileSystemPhoto, _TtC19ContactsPersistence21CNOpenDirectoryFacade, 
                        _TtC19ContactsPersistence27CNCDFileSystemPhotoMigrator, _TtC19ContactsPersistence31CNOpenDirectoryFacadeTestDouble ]
     objc-ivars:      [ ABCDContainerPermissions._canCreateContacts, ABCDContainerPermissions._canCreateGroups, 

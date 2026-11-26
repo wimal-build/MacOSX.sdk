@@ -1,16 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           AFED50B8-1765-3666-82E3-09EE03896FC0
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           63CF9078-DB8E-3762-AB01-18F7299EF144
 install-name:    '/System/Library/PrivateFrameworks/AppleServiceToolkit.framework/Versions/A/AppleServiceToolkit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASTActionKey, _ASTActionsKey, _ASTAllowCellularDataKey, _ASTCustomServerKey, 
                        _ASTDomain, _ASTErrorDomain, _ASTGZIPEnabledKey, _ASTImageNameKey, 
                        _ASTLogHandleForCategory, _ASTPropertyItemsKey, _ASTRelaxTimeoutsKey, 
@@ -22,9 +15,9 @@ exports:
                        _ASTViewTitleKey, _kASTAlwaysAllowCellularSizeThreshold, _kASTAnalyticsSessionDurationKey, 
                        _kASTAnalyticsStatusCodeKey, _kASTAnalyticsStatusCodeStringKey, 
                        _kASTAnalyticsTestIDKey, _kASTEndpointAssets, _kASTEndpointAuthInfo, 
-                       _kASTEndpointClientStatus, _kASTEndpointEnroll, _kASTEndpointFileUploadFormat, 
-                       _kASTEndpointProfile, _kASTEndpointResults, _kASTEndpointSession, 
-                       _kASTHTTPHeaderAccept, _kASTHTTPHeaderAcceptLanguage, _kASTHTTPHeaderContentEncoding, 
+                       _kASTEndpointClientStatus, _kASTEndpointEnroll, _kASTEndpointProfile, 
+                       _kASTEndpointResults, _kASTEndpointSession, _kASTHTTPHeaderAccept, 
+                       _kASTHTTPHeaderAcceptLanguage, _kASTHTTPHeaderContentEncoding, 
                        _kASTHTTPHeaderContentLength, _kASTHTTPHeaderContentType, 
                        _kASTHTTPHeaderFileSequence, _kASTHTTPHeaderFileSize, _kASTHTTPHeaderHost, 
                        _kASTHTTPHeaderLogLevel, _kASTHTTPHeaderMD5, _kASTHTTPHeaderSessionId, 

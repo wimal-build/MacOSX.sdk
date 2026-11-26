@@ -2,19 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           6ED650D7-3C27-3B98-8D48-B5AD7DC9C161
-  - target:          x86_64-maccatalyst
-    value:           6ED650D7-3C27-3B98-8D48-B5AD7DC9C161
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           37F1609F-AF45-3F0A-971B-7F9D0DCFC9E2
-  - target:          arm64e-maccatalyst
-    value:           37F1609F-AF45-3F0A-971B-7F9D0DCFC9E2
 install-name:    '/System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal'
 current-version: 483
 allowable-clients:
@@ -22,8 +9,8 @@ allowable-clients:
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ CoreFoundation, CoreServicesInternalUnitTests ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __CFURLBookmarkDataCopyDescription, __CFURLBookmarkToAliasHandle, 
                        __CFURLCompareBookmarkData, __CFURLCopySecurityEAs, __CFURLCreateBookmarkData, 
                        __CFURLCreateBookmarkDataFromAliasRecord, __CFURLCreateBookmarkDataFromFile, 
@@ -57,8 +44,8 @@ exports:
                        __URLEnumeratorGetTypeID, __URLEnumeratorGetURLsBulk, __URLEnumeratorSkipDescendents, 
                        __URLReplaceObject ]
 reexports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _kCFURLBookmarkOriginalPathKey, _kCFURLBookmarkOriginalRelativePathComponentsArrayKey, 
                        _kCFURLBookmarkOriginalRelativePathKey, _kCFURLBookmarkOriginalVolumeCreationDateKey, 
                        _kCFURLBookmarkOriginalVolumeNameKey ]

@@ -29,6 +29,7 @@
 #define _MACHINE_MACHINE_ROUTINES_H
 
 #include <sys/cdefs.h>
+#include <stdint.h>
 
 #if defined (__i386__) || defined(__x86_64__)
 #include "i386/machine_routines.h"
@@ -47,10 +48,10 @@ __BEGIN_DECLS
  * @constant CPU_BOOT_REQUESTED      Called from processor_start(); may block.
  * @constant CPU_BOOTED              Called from platform code on the newly-booted CPU; may not block.
  * @constant CPU_ACTIVE              Called from scheduler code; may block.
- * @constant CLUSTER_ACTIVE          Called from platform code; may not block.
+ * @constant CLUSTER_ACTIVE          Called from platform code; may block.
  * @constant CPU_EXIT_REQUESTED      Called from processor_exit(); may block.
  * @constant CPU_DOWN                Called from platform code on the disabled CPU; may not block.
- * @constant CLUSTER_EXIT_REQUESTED  Called from platform code; may not block.
+ * @constant CLUSTER_EXIT_REQUESTED  Called from platform code; may block.
  * @constant CPU_EXITED              Called after CPU is stopped; may block.
  */
 enum cpu_event {
@@ -105,6 +106,8 @@ void ml_io_write8(uintptr_t vaddr, uint8_t val);
 void ml_io_write16(uintptr_t vaddr, uint16_t val);
 void ml_io_write32(uintptr_t vaddr, uint32_t val);
 void ml_io_write64(uintptr_t vaddr, uint64_t val);
+
+
 
 
 __END_DECLS

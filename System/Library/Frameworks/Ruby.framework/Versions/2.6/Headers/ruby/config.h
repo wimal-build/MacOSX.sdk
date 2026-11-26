@@ -146,6 +146,8 @@
 #define NO_ADDRESS_SAFETY_ANALYSIS(x) __attribute__ ((__no_address_safety_analysis__)) x
 #define WARN_UNUSED_RESULT(x) __attribute__ ((__warn_unused_result__)) x
 #define MAYBE_UNUSED(x) __attribute__ ((__unused__)) x
+#define ERRORFUNC(mesg,x) __attribute__ ((__error__ mesg)) x
+#define WARNINGFUNC(mesg,x) __attribute__ ((__warning__ mesg)) x
 #define WEAK(x) __attribute__ ((__weak__)) x
 #define HAVE_FUNC_WEAK 1
 #if defined __i386__
@@ -416,7 +418,7 @@
 #if defined __x86_64__ &&! defined RUBY_PLATFORM_CPU
 #define RUBY_PLATFORM_CPU "x86_64"
 #endif /* defined __x86_64__ &&! defined RUBY_PLATFORM_CPU */
-#define RUBY_PLATFORM_OS "darwin21"
+#define RUBY_PLATFORM_OS "darwin22"
 #define RUBY_ARCH "universal-"RUBY_PLATFORM_OS
 #define RUBY_PLATFORM "universal."RUBY_PLATFORM_CPU"-"RUBY_PLATFORM_OS
 #endif /* INCLUDE_RUBY_CONFIG_H */

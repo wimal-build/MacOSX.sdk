@@ -73,20 +73,8 @@ enum {
 
 class IODTNVRAMVariables;
 class IODTNVRAMDiags;
-
-class IODTNVRAMFormatHandler
-{
-public:
-	virtual
-	~IODTNVRAMFormatHandler();
-	virtual IOReturn setVariable(const uuid_t *varGuid, const char *variableName, OSObject *object) = 0;
-	virtual bool setController(IONVRAMController *_nvramController) = 0;
-	virtual bool sync(void) = 0;
-	virtual uint32_t getGeneration(void) const = 0;
-	virtual uint32_t getVersion(void) const = 0;
-	virtual uint32_t getSystemUsed(void) const = 0;
-	virtual uint32_t getCommonUsed(void) const = 0;
-};
+class IODTNVRAMPlatformNotifier;
+class IODTNVRAMFormatHandler;
 
 class IODTNVRAM : public IOService
 {
@@ -97,8 +85,9 @@ private:
 	friend class IONVRAMCHRPHandler;
 	friend class IONVRAMV3Handler;
 
-	IODTNVRAMDiags         *_diags;
-	IODTNVRAMFormatHandler *_format;
+	IODTNVRAMPlatformNotifier *_notifier;
+	IODTNVRAMDiags            *_diags;
+	IODTNVRAMFormatHandler    *_format;
 
 	IORWLock               *_variableLock;
 	IOLock                 *_controllerLock;
@@ -106,8 +95,7 @@ private:
 	IODTNVRAMVariables     *_commonService;
 	IODTNVRAMVariables     *_systemService;
 
-	OSPtr<OSDictionary>    _commonDict;
-	OSPtr<OSDictionary>    _systemDict;
+	OSPtr<OSDictionary>    _varDict;
 
 	SInt32                 _lastDeviceSync;
 	bool                   _freshInterval;
@@ -116,17 +104,14 @@ private:
 
 	uint32_t getNVRAMSize(void);
 
-	NVRAMPartitionType getDictionaryType(const OSDictionary *dict) const;
-	IOReturn chooseDictionary(IONVRAMOperation operation, const uuid_t *varGuid,
-	    const char *variableName, OSDictionary **dict) const;
-	IOReturn flushDict(const uuid_t *guid, IONVRAMOperation op);
-	bool handleSpecialVariables(const char *name, const uuid_t *guid, const OSObject *obj, IOReturn *error);
+	IOReturn flushGUID(const uuid_t guid, IONVRAMOperation op);
+	bool handleSpecialVariables(const char *name, const uuid_t guid, const OSObject *obj, IOReturn *error);
 
 	IOReturn setPropertyInternal(const OSSymbol *aKey, OSObject *anObject);
 	IOReturn removePropertyInternal(const OSSymbol *aKey);
-	OSSharedPtr<OSObject> copyPropertyWithGUIDAndName(const uuid_t *guid, const char *name) const;
-	IOReturn removePropertyWithGUIDAndName(const uuid_t *guid, const char *name);
-	IOReturn setPropertyWithGUIDAndName(const uuid_t *guid, const char *name, OSObject *anObject);
+	OSSharedPtr<OSObject> copyPropertyWithGUIDAndName(const uuid_t guid, const char *name) const;
+	IOReturn removePropertyWithGUIDAndName(const uuid_t guid, const char *name);
+	IOReturn setPropertyWithGUIDAndName(const uuid_t guid, const char *name, OSObject *anObject);
 
 	void syncInternal(bool rateLimit);
 	bool safeToSync(void);
@@ -138,6 +123,7 @@ public:
 	virtual void registerNVRAMController(IONVRAMController *controller);
 
 	virtual void sync(void);
+	virtual void reload(void);
 
 	virtual bool serializeProperties(OSSerialize *s) const APPLE_KEXT_OVERRIDE;
 	virtual OSPtr<OSObject> copyProperty(const OSSymbol *aKey) const APPLE_KEXT_OVERRIDE;

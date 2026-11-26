@@ -2,24 +2,11 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           D5449E53-26F3-39AD-9B3D-1A5CBAD3CA6E
-  - target:          x86_64-maccatalyst
-    value:           D5449E53-26F3-39AD-9B3D-1A5CBAD3CA6E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           83917B94-DF42-36A6-90F2-03BE08890659
-  - target:          arm64e-maccatalyst
-    value:           83917B94-DF42-36A6-90F2-03BE08890659
 install-name:    '/usr/lib/libcoretls.dylib'
-current-version: 178
+current-version: 183
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CipherSuiteCount, _CurvesCount, _KnownCipherSuites, _KnownCurves, 
                        _KnownSigAlgs, _SigAlgsCount, _Ssl3Callouts, _Tls12Callouts, 
                        _Tls1Callouts, _sslCipherSuiteGetKeyExchangeMethod, _sslCipherSuiteGetKeydataSize, 

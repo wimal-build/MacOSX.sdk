@@ -848,7 +848,7 @@ extern const CFStringRef kSecAttrPRFHmacAlgSHA512
     @constant kSecMatchEmailAddressIfPresent Specifies a dictionary key whose
         value is a CFStringRef containing an RFC822 email address. If
         provided, returned certificates or identities will be limited to those
-        that contain the address, or do not contain any email address.
+        that contain the address in their subject or subject alternative name.
     @constant kSecMatchSubjectContains Specifies a dictionary key whose value
         is a CFStringRef. If provided, returned certificates or identities
         will be limited to those containing this string in the subject.
@@ -1023,6 +1023,8 @@ extern const CFStringRef kSecValuePersistentRef
     @constant kSecUseDataProtectionKeychain Specifies a dictionary key whose value
         is a CFBooleanRef. Set to kCFBooleanTrue to use kSecAttrAccessGroup and/or
         kSecAttrAccessible on macOS without requiring the item to be marked synchronizable.
+    @constant kSecUseUserIndependentKeychain Specifies a dctionary key whose value is a CFBooleanRef
+        indicating whether the item is shared with other personas on the system.
 */
 extern const CFStringRef kSecUseItemList
     API_AVAILABLE(macos(10.6))
@@ -1040,6 +1042,9 @@ extern const CFStringRef kSecUseAuthenticationContext
     API_AVAILABLE(macos(10.11), ios(9.0));
 extern const CFStringRef kSecUseDataProtectionKeychain
     API_AVAILABLE(macos(10.15), ios(13.0));
+extern const CFStringRef kSecUseUserIndependentKeychain
+    API_AVAILABLE(tvos(16.0))
+    API_UNAVAILABLE(macos, ios, watchos, macCatalyst);
 
 /*!
     @enum kSecUseAuthenticationUI Value Constants

@@ -2,7 +2,7 @@
 //  MediaPlayerDefines.h
 //  MediaPlayer
 //
-//  Copyright © 2022 Apple Inc. All rights reserved.
+//  Copyright © 2023 Apple Inc. All rights reserved.
 //
 
 #ifndef MP_DEFINES
@@ -41,11 +41,22 @@
 #define MP_DEPRECATED_WITH_REPLACEMENT_BEGIN(...)   __API_DEPRECATED_WITH_REPLACEMENT_BEGIN(__VA_ARGS__)
 #define MP_DEPRECATED_WITH_REPLACEMENT_END          __API_DEPRECATED_WITH_REPLACEMENT_END
 
-#define MP_FALLTHROUGH __attribute__((fallthrough))
-#define MP_TYPE_PROTOCOL __attribute((objc_non_runtime_protocol))
-#define MP_COMPLETION __attribute__((called_once))
-#define MP_OVERLOAD __attribute__((overloadable))
-#define MP_FINAL_CLASS __attribute__((objc_subclassing_restricted))
+#define MP_FALLTHROUGH                              __attribute__((fallthrough))
+#define MP_TYPE_PROTOCOL                            __attribute__((objc_non_runtime_protocol))
+#define MP_COMPLETION                               __attribute__((called_once))
+#define MP_OVERLOAD                                 __attribute__((overloadable))
+#define MP_FINAL_CLASS                              __attribute__((objc_subclassing_restricted))
+
+#if __has_attribute(swift_attr)
+#define MP_SWIFT_MAIN_ACTOR                         __attribute__((swift_attr("@MainActor")))
+#else
+#define MP_SWIFT_MAIN_ACTOR
+#endif
+#if __has_attribute(swift_error)
+#define MP_SWIFT_ERROR_NULLABLE_RESULT              __attribute__((swift_error(nonnull_error)))
+#else
+#define MP_SWIFT_ERROR_NULLABLE_RESULT
+#endif
 
 #pragma mark - Utility
 

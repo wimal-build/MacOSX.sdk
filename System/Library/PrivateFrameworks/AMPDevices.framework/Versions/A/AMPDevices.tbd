@@ -1,16 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           F63FE4BA-8D29-3AE2-9828-93DB45D2182E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           82E2B750-DE1C-3A9D-93DE-A2BF38A630B1
 install-name:    '/System/Library/PrivateFrameworks/AMPDevices.framework/Versions/A/AMPDevices'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AMPDeviceAppsCategoryKey, _AMPDeviceAskUserAlertStyleKey, 
                        _AMPDeviceAskUserCancelButtonTitleKey, _AMPDeviceAskUserCheckboxTitleKey, 
                        _AMPDeviceAskUserCheckboxValueKey, _AMPDeviceAskUserExplanationKey, 

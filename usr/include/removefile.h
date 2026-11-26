@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-21 Apple Computer, Inc.  All rights reserved.
+ * Copyright (c) 2015-22 Apple Inc.  All rights reserved.
  */
 
 #ifndef __REMOVEFILE_H__
@@ -10,6 +10,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+__ptrcheck_abi_assume_single()
 
 /*
  * Flags
@@ -26,6 +28,7 @@ enum {
 	REMOVEFILE_SECURE_1_PASS_ZERO = (1 << 6),   // Single-pass overwrite, with 0 instead of random data
 	REMOVEFILE_CROSS_MOUNT = (1 << 7),          // Cross mountpoints when deleting recursively.
 	REMOVEFILE_ALLOW_LONG_PATHS = (1 << 8),     // Paths may be longer than PATH_MAX - requires temporarily changing cwd
+	REMOVEFILE_CLEAR_PURGEABLE = (1 << 9),      // Clear purgeable any directory encountered before deletion
 };
 
 /*
@@ -49,7 +52,7 @@ enum {
 	REMOVEFILE_STATE_STATUS_CONTEXT = 7,		// void*
 };
 
-typedef int (*removefile_callback_t)(removefile_state_t state, const char* path, void* context);
+typedef int (*removefile_callback_t)(removefile_state_t state, const char *__unsafe_indexable path, void* context);
 
 /* 
  * Callback return values
@@ -61,8 +64,8 @@ enum {
 };
 
 
-int removefile(const char* path, removefile_state_t state, removefile_flags_t flags);
-int removefileat(int fd, const char* path, removefile_state_t state, removefile_flags_t flags);
+int removefile(const char *__unsafe_indexable path, removefile_state_t state, removefile_flags_t flags);
+int removefileat(int fd, const char *__unsafe_indexable path, removefile_state_t state, removefile_flags_t flags);
 
 int removefile_cancel(removefile_state_t state);
 

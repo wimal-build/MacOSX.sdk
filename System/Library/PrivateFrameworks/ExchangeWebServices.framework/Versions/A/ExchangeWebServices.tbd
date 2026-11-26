@@ -2,24 +2,11 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           35EF092B-40EC-30BA-A729-BBBE92F3727F
-  - target:          x86_64-maccatalyst
-    value:           35EF092B-40EC-30BA-A729-BBBE92F3727F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           8D5C50CC-4255-337F-8087-063F168C7001
-  - target:          arm64e-maccatalyst
-    value:           8D5C50CC-4255-337F-8087-063F168C7001
 install-name:    '/System/Library/PrivateFrameworks/ExchangeWebServices.framework/Versions/A/ExchangeWebServices'
 current-version: 281
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _EWSEmailAddressKeyEmailAddress1, _EWSEmailAddressKeyEmailAddress2, 
                        _EWSEmailAddressKeyEmailAddress3, _EWSErrorKeyInvalidResponse, 
                        _EWSErrorLineKey, _EWSErrorMessageKey, _EWSErrorPositionKey, 
@@ -70,8 +57,9 @@ exports:
                        _ExchangeWebServicesVersionString, _JWTClockSkew, _SOAPErrorFaultCodeKey, 
                        _SOAPErrorFaultStringKey, _SOAPErrorHTTPStatusKey, _SOAPErrorSOAPHeaderKey, 
                        _SOAPFaultKey, _SOAPNamespaceURI, _SOAPWebServicesErrorDomain, 
-                       _autodiscoverKillSwitchURL, _kAutodiscoverProtocolActiveSync, 
-                       _kAutodiscoverProtocolEWS, _kCacheMaxTimeInterval, _kExchangeBasicAccountMigrationLastAttemptDate, 
+                       _autodiscoverKillSwitchURL, _encodedTypeCopy, _encodedTypeNonatomic, 
+                       _encodedTypeRetain, _kAutodiscoverProtocolActiveSync, _kAutodiscoverProtocolEWS, 
+                       _kCacheMaxTimeInterval, _kExchangeBasicAccountMigrationLastAttemptDate, 
                        _kExchangeBasicAccountMigrationStatus, _kExchangeJWKSCacheDate, 
                        _kExchangeJWKSData, _kExchangeJWKSURI, _kExchangeOAuthSupportedKey, 
                        _kExchangeOAuthVersion, _kExchangeRenewCredentialsShouldTriggerMigrationKey, 
@@ -94,18 +82,19 @@ exports:
                        EWSAttachmentIdType, EWSAttachmentInfoResponseMessageType, 
                        EWSAttachmentResponseShapeType, EWSAttachmentType, EWSAttendeeType, 
                        EWSAutodiscoverBinding, EWSAutodiscoverKillSwitch, EWSAutodiscoverOperation, 
-                       EWSAutodiscoverRequest, EWSAutodiscoverResponse, EWSAutodiscoverV2Binding, 
-                       EWSAutodiscoverV2Operation, EWSAutodiscoverV2Response, EWSBaseDelegateResponseMessageType, 
-                       EWSBaseDelegateType, EWSBaseEmailAddressType, EWSBaseFolderIdDefinition, 
-                       EWSBaseFolderIdType, EWSBaseFolderType, EWSBaseItemIdDefinition, 
-                       EWSBaseItemIdType, EWSBaseMessageResponseType, EWSBaseMoveCopyFolderType, 
-                       EWSBaseMoveCopyItemType, EWSBaseNotificationEventType, EWSBaseNotificationEventTypeDefinition, 
-                       EWSBaseObjectChangedEventType, EWSBasePagingType, EWSBasePagingTypeDefinition, 
-                       EWSBasePathToElementType, EWSBasePermissionType, EWSBaseRequestType, 
-                       EWSBaseSubscriptionRequestType, EWSBodyType, EWSBodyTypeResponseTypeDefinition, 
-                       EWSBodyTypeTypeDefinition, EWSCalendarEvent, EWSCalendarEventDetails, 
-                       EWSCalendarFolderType, EWSCalendarItemCreateOrDeleteOperationTypeDefinition, 
-                       EWSCalendarItemType, EWSCalendarItemTypeTypeDefinition, EWSCalendarItemUpdateOperationTypeDefinition, 
+                       EWSAutodiscoverRequest, EWSAutodiscoverResponse, EWSAutodiscoverUtils, 
+                       EWSAutodiscoverV2Binding, EWSAutodiscoverV2Operation, EWSAutodiscoverV2Response, 
+                       EWSBaseDelegateResponseMessageType, EWSBaseDelegateType, EWSBaseEmailAddressType, 
+                       EWSBaseFolderIdDefinition, EWSBaseFolderIdType, EWSBaseFolderType, 
+                       EWSBaseItemIdDefinition, EWSBaseItemIdType, EWSBaseMessageResponseType, 
+                       EWSBaseMoveCopyFolderType, EWSBaseMoveCopyItemType, EWSBaseNotificationEventType, 
+                       EWSBaseNotificationEventTypeDefinition, EWSBaseObjectChangedEventType, 
+                       EWSBasePagingType, EWSBasePagingTypeDefinition, EWSBasePathToElementType, 
+                       EWSBasePermissionType, EWSBaseRequestType, EWSBaseSubscriptionRequestType, 
+                       EWSBodyType, EWSBodyTypeResponseTypeDefinition, EWSBodyTypeTypeDefinition, 
+                       EWSCalendarEvent, EWSCalendarEventDetails, EWSCalendarFolderType, 
+                       EWSCalendarItemCreateOrDeleteOperationTypeDefinition, EWSCalendarItemType, 
+                       EWSCalendarItemTypeTypeDefinition, EWSCalendarItemUpdateOperationTypeDefinition, 
                        EWSCalendarPermissionLevelTypeDefinition, EWSCalendarPermissionReadAccessTypeDefinition, 
                        EWSCalendarPermissionSetType, EWSCalendarPermissionType, EWSCalendarViewType, 
                        EWSCancelCalendarItemType, EWSChangeDescriptionType, EWSCompleteNameType, 
@@ -213,7 +202,7 @@ exports:
                        EWSRuleActionsType, EWSRuleFieldURITypeDefinition, EWSRuleOperationErrorType, 
                        EWSRuleOperationType, EWSRulePredicateDateRangeType, EWSRulePredicateSizeRangeType, 
                        EWSRulePredicatesType, EWSRuleType, EWSRuleValidationErrorCodeTypeDefinition, 
-                       EWSRuleValidationErrorType, EWSSRVLookup, EWSSRVRecord, EWSSearchExpressionDefinition, 
+                       EWSRuleValidationErrorType, EWSSearchExpressionDefinition, 
                        EWSSearchExpressionType, EWSSearchFolderType, EWSSensitivityChoicesTypeDefinition, 
                        EWSSerializableTimeZone, EWSSerializableTimeZoneTime, EWSServerVersionInfo, 
                        EWSSetFolderFieldType, EWSSetFolderFieldTypeFolderDefinition, 

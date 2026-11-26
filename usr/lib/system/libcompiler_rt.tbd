@@ -1,13 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           AD346AFB-8737-3E88-B4C5-25D77181AE44
-  - target:          arm64-macos
-    value:           0B616B91-A847-3817-B571-4498A1D36CC0
-  - target:          arm64e-macos
-    value:           7E374D5C-9785-3D65-88D2-98B92AD24C78
 install-name:    '/usr/lib/system/libcompiler_rt.dylib'
 current-version: 103.1
 parent-umbrella:
@@ -50,7 +43,7 @@ exports:
                        ___paritysi2, ___parityti2, ___popcountdi2, ___popcountsi2, 
                        ___popcountti2, ___powixf2, ___subvdi3, ___subvsi3, ___subvti3, 
                        ___ucmpdi2, ___ucmpti2, ___udivdi3, ___udivmoddi4, ___umoddi3 ]
-  - targets:         [ arm64-macos, arm64e-macos, x86_64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$hide$os10.10$___chkstk_darwin', '$ld$hide$os10.10$___extendhfsf2', 
                        '$ld$hide$os10.10$___truncdfhf2', '$ld$hide$os10.10$___truncsfhf2', 
                        '$ld$hide$os10.10$_atomic_flag_clear', '$ld$hide$os10.10$_atomic_flag_clear_explicit', 

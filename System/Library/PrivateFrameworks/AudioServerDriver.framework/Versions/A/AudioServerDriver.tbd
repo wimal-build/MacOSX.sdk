@@ -1,25 +1,19 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           456ABBA8-735B-30D9-8E3A-CF3105C392E4
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           9CCE4FB4-8923-3612-A5E7-D830A6A817B5
 install-name:    '/System/Library/PrivateFrameworks/AudioServerDriver.framework/Versions/A/AudioServerDriver'
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __ZN5CALog6log_vaEiPKNS_5ScopeEPKciS4_S4_PK10__CFStringP13__va_list_tag, 
                        __ZN5CALog7vprintfEiPKcP13__va_list_tag ]
     weak-symbols:    [ __ZTI11CAException, __ZTIN8DSPGraph9ExceptionE, __ZTINSt3__117bad_function_callE, 
-                       __ZTISt11logic_error, __ZTISt12length_error, __ZTISt13runtime_error, 
-                       __ZTISt9bad_alloc, __ZTISt9exception, __ZTS11CAException, 
-                       __ZTSN8DSPGraph9ExceptionE, __ZTSNSt3__117bad_function_callE, 
-                       __ZTSSt11logic_error, __ZTSSt12length_error, __ZTSSt13runtime_error, 
+                       __ZTISt11logic_error, __ZTISt12length_error, __ZTISt12out_of_range, 
+                       __ZTISt13runtime_error, __ZTISt20bad_array_new_length, __ZTISt9bad_alloc, 
+                       __ZTISt9exception, __ZTS11CAException, __ZTSN8DSPGraph9ExceptionE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSSt11logic_error, __ZTSSt12length_error, 
+                       __ZTSSt12out_of_range, __ZTSSt13runtime_error, __ZTSSt20bad_array_new_length, 
                        __ZTSSt9bad_alloc, __ZTSSt9exception ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASDStereoPanControlCenter, _ASDStereoPanControlFullLeft, 
                        _ASDStereoPanControlFullRight, _ASD_AddAudioDeviceRealTimeOperations, 
                        _ASD_AddClockDeviceRealTimeOperations, _ASD_AddPlugin, _ASD_AddStreamRealTimeOperations, 
@@ -186,7 +180,7 @@ exports:
                        ASDRingBufferStreamPair, ASDSRCAudioDevice, ASDSRCStream, 
                        ASDSelectorControl, ASDSelectorValue, ASDSliderControl, ASDStereoPanControl, 
                        ASDStream, ASDStreamDSPConfiguration, ASDStreamFormat ]
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __ZN5CALog6log_vaEiPKNS_5ScopeEPKciS4_S4_PK10__CFStringPc, 
                        __ZN5CALog7vprintfEiPKcPc ]
 ...

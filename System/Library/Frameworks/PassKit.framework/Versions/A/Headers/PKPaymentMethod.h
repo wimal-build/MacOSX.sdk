@@ -1,6 +1,7 @@
+#if !__has_include(<PassKitCore/PKPaymentMethod.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentMethod.h
-//
+//    PassKit
 //  Copyright © 2015 Apple, Inc. All rights reserved.
 //
 
@@ -51,3 +52,8 @@ NS_ASSUME_NONNULL_END
 
 #endif // End __PKPAYMENTMETHOD_H
 
+
+#else
+#import <TargetConditionals.h>
+#import <PassKitCore/PKPaymentMethod.h>
+#endif

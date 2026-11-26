@@ -1,19 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           E8D0A6DE-7576-3A51-91E1-E34617C298A7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F86C7638-33A7-3E36-AF0A-2A4195D10A7A
 install-name:    '/System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet'
-current-version: 9.12
+current-version: 10.5.2
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __Z10jet_assertbP8NSString, __Z13xglCheckErrorv, __Z13xglPrintErrorv, 
                        __Z13xglPrintFloatPKcj, __Z13xglPrintStatev, __Z14jet_util_isPOTjj, 
                        __Z14xglLinkProgramj, __Z15xglPrintBooleanPKcj, __Z15xglPrintIntegerPKcj, 
@@ -198,6 +191,8 @@ exports:
                        __ZNK11jet_texture30is_color_attachment_compatibleEv, __ZNK11jet_texture30is_depth_attachment_compatibleEv, 
                        __ZNK11jet_texture32is_stencil_attachment_compatibleEv, __ZNK15jet_buffer_pool10get_lengthEv, 
                        __ZNK15jet_buffer_pool18get_current_bufferEv, __ZNK15jet_framebuffer5cloneEv, 
+                       __ZNK17jet_context_Metal20get_max_texture_sizeE16jet_texture_type, 
+                       __ZNK18jet_context_OpenGL20get_max_texture_sizeE16jet_texture_type, 
                        __ZTI10jet_buffer, __ZTI11jet_context, __ZTI11jet_program, 
                        __ZTI11jet_sampler, __ZTI11jet_texture, __ZTI12jet_constant, 
                        __ZTI15jet_buffer_pool, __ZTI15jet_framebuffer, __ZTI15jet_render_mode, 

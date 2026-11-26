@@ -1,4 +1,4 @@
-/* iig(DriverKit-192.100.7) generated from OSDictionary.iig */
+/* iig(DriverKit-256.100.8) generated from OSDictionary.iig */
 
 /* OSDictionary.iig:1-42 */
 /*
@@ -408,7 +408,7 @@ public:
 
 #if !KERNEL
 
-class OSDictionaryInterface : public OSInterface
+class  OSDictionaryInterface : public OSInterface
 {
 public:
 };

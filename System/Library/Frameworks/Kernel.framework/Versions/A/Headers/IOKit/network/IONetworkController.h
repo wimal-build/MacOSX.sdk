@@ -232,7 +232,8 @@ enum {
     kIONetworkFeatureTSOIPv6                    = 0x020,
     kIONetworkFeatureTransmitCompletionStatus   = 0x040,
     kIONetworkFeatureHWTimeStamp                = 0x080,
-    kIONetworkFeatureSWTimeStamp                = 0x100
+    kIONetworkFeatureSWTimeStamp                = 0x100,
+    kIONetworkFeatureLRO                        = 0x200
 };
 
 #ifdef KERNEL
@@ -1501,8 +1502,41 @@ protected:
     OSMetaClassDeclareReservedUnused( IONetworkController,  3);
     OSMetaClassDeclareReservedUnused( IONetworkController,  4);
     OSMetaClassDeclareReservedUnused( IONetworkController,  5);
-    OSMetaClassDeclareReservedUnused( IONetworkController,  6);
-    OSMetaClassDeclareReservedUnused( IONetworkController,  7);
+    
+public:
+/*! @function allocatePacketNoWait
+    @abstract Allocates a packet with a data buffer that is larger than
+    or equal to the size specified, it will not aggressively wait for a mbuf to be
+    become available.
+    @discussion This method is identical to the 'allocatePacket' method except
+    that it will not block indefinitely if the requested 'mbuf_t' can't be allocated
+    immediately.
+    @param size The minimum size of the data buffer for the mbuf
+    packet allocated.
+    @result Returns an mbuf packet, or 0 if allocation failed.
+*/
+
+    virtual mbuf_t allocatePacketNoWait(UInt32 size);
+
+    OSMetaClassDeclareReservedUsed( IONetworkController,  6);
+
+/*! @function setHardwareAssists
+    @abstract Allow the Controller to be notified of a Hardware acceleration
+    configuration change.
+    @discussion Allow the Controller to be notified of a Hardware acceleration
+    configuration change.
+    @param hardwareAssists The assists that have changed.
+    @param hardwareAssistsMask The mask if the hardware assists thar need
+    a hardware reconfiguration
+    @result Default implementation returns <code>kIOReturnUnsupported</code>.
+    Driver should return <code>kIOReturnSuccess</code> if the notification
+    was handled.
+*/
+
+    virtual IOReturn setHardwareAssists( UInt32 hardwareAssists, UInt32 hardwareAssistsMask )
+
+    OSMetaClassDeclareReservedUsed( IONetworkController,  7);
+
     OSMetaClassDeclareReservedUnused( IONetworkController,  8);
     OSMetaClassDeclareReservedUnused( IONetworkController,  9);
     OSMetaClassDeclareReservedUnused( IONetworkController, 10);

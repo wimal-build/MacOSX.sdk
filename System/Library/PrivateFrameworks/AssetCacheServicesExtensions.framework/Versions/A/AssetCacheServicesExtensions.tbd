@@ -2,24 +2,11 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           A333AF48-E6B0-32B1-9B5B-F332FF476BC8
-  - target:          x86_64-maccatalyst
-    value:           A333AF48-E6B0-32B1-9B5B-F332FF476BC8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F964D068-63E4-35D8-A47E-CA2FFBE8FD6C
-  - target:          arm64e-maccatalyst
-    value:           F964D068-63E4-35D8-A47E-CA2FFBE8FD6C
 install-name:    '/System/Library/PrivateFrameworks/AssetCacheServicesExtensions.framework/Versions/A/AssetCacheServicesExtensions'
-current-version: 119
+current-version: 127
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AssetCacheServicesExtensionsVersionNumber, _AssetCacheServicesExtensionsVersionString, 
                        __kACSMManagedPreferencesDomain, __kACSMSettingsAutoActivationKey, 
                        __kACSMSettingsAutoEnableTetheredCachingKey, __kACSMSettingsDenyActivationKey, 
@@ -103,7 +90,8 @@ exports:
                        _kACTSStatusDeviceSerialNumberKey, _kACTSStatusPrimaryInterfaceBSDNameKey, 
                        _kACTSStatusPrimaryInterfaceIPAddressKey, _kACTSStatusPrimaryInterfaceKey, 
                        _kACTSStatusPrimaryInterfaceMbpsKey, _kACTSStatusPrimaryInterfaceUserReadableKey, 
-                       _kACTSStatusPrimaryInterfaceWiredKey, _kAssetCacheAlertSharingPrefsMainAnchor ]
+                       _kACTSStatusPrimaryInterfaceWiredKey, _kACTSStatusStandaloneKey, 
+                       _kAssetCacheAlertSharingPrefsMainAnchor ]
     objc-classes:    [ AssetCacheAlert, AssetCacheLowSpaceAlert, AssetCacheMetric, 
                        AssetCacheMetricsReader, AssetCacheNoSpaceAlert, AssetCacheParentCycleAlert, 
                        AssetCacheParentDepthAlert, AssetCachePeerCycleAlert, AssetCacheRegistrationRejectedAlert, 

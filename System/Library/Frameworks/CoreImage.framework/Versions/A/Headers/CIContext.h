@@ -3,11 +3,22 @@
    Copyright (c) 2014 Apple, Inc.
    All rights reserved. */
 
+#ifndef CICONTEXT_H
+#define CICONTEXT_H
+
+#ifdef __OBJC__
+
 #import <CoreImage/CIImage.h>
 #import <CoreImage/CoreImageDefines.h>
 #import <CoreVideo/CoreVideo.h>
 
-#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !TARGET_OS_MACCATALYST)
+#if TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
+  #define COREIMAGE_SUPPORTS_OPENGLES 1
+#else
+  #define COREIMAGE_SUPPORTS_OPENGLES 0
+#endif 
+
+#if COREIMAGE_SUPPORTS_OPENGLES
  #import <OpenGLES/EAGL.h>
 #elif TARGET_OS_OSX
  #import <OpenGL/CGLTypes.h>
@@ -40,8 +51,8 @@ CORE_IMAGE_EXPORT CIContextOption const kCIContextWorkingColorSpace;
 
 /* An NSNumber with a CIFormat value defining the pixel format to use for intermediate buffers.
  * On iOS the supported values for this key are RGBA8 and RGBAh. If not specified:
- *   RGBA8 is used if app is linked against OSX 10.12 SDK or earlier.
- *   RGBAh is used if app is linked against OSX 10.13 SDK or later.
+ *   RGBA8 is used if app is linked against iOS 12 SDK or earlier.
+ *   RGBAh is used if app is linked against iOS 13 SDK or later.
  * On OSX the supported values for this key are RGBA8, RGBAh and RGBAf. If not specified, RGBAh is used. */
 CORE_IMAGE_EXPORT CIContextOption const kCIContextWorkingFormat NS_AVAILABLE(10_4,8_0);
 
@@ -150,7 +161,7 @@ NS_AVAILABLE(10_4,5_0);
  *
  * The [context drawImage:...] render methods will render to the EAGLContext.
  */
-#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !TARGET_OS_MACCATALYST)
+#if COREIMAGE_SUPPORTS_OPENGLES
 + (CIContext *)contextWithEAGLContext:(EAGLContext *)eaglContext
     CI_GL_DEPRECATED_IOS(5_0,12_0);
 
@@ -561,3 +572,7 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemant
 
 
 NS_ASSUME_NONNULL_END
+
+#endif /* __OBJC__ */
+
+#endif /* CICONTEXT_H */

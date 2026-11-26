@@ -21,6 +21,7 @@
 #include "SwiftStdbool.h"
 #include "SwiftStddef.h"
 #include "SwiftStdint.h"
+#include "SwiftStdbool.h"
 #include "Visibility.h"
 
 #ifdef __cplusplus
@@ -61,6 +62,12 @@ int _swift_stdlib_putc_stderr(int C);
 
 SWIFT_RUNTIME_STDLIB_API
 __swift_size_t _swift_stdlib_getHardwareConcurrency(void);
+
+#ifdef __swift__
+/// Called by ReflectionMirror in stdlib through C-calling-convention
+SWIFT_RUNTIME_STDLIB_API
+__swift_bool swift_isClassType(const void *type);
+#endif
 
 /// Manually allocated memory is at least 16-byte aligned in Swift.
 ///
@@ -115,6 +122,20 @@ __swift_bool swift_stdlib_isStackAllocationSafe(__swift_size_t byteCount,
 SWIFT_RUNTIME_STDLIB_SPI SWIFT_WEAK_IMPORT
 __swift_bool _swift_stdlib_getCurrentStackBounds(__swift_uintptr_t *outBegin,
                                                  __swift_uintptr_t *outEnd);
+
+/// A value representing a version number for the Standard Library.
+typedef struct {
+  __swift_uint32_t _value;
+} _SwiftStdlibVersion;
+
+/// Checks if the currently running executable was built using a Swift release
+/// matching or exceeding the specified Standard Library version number. This
+/// can be used to stage behavioral changes in the Standard Library, preventing
+/// them from causing compatibility issues with existing binaries.
+SWIFT_RUNTIME_STDLIB_INTERNAL
+__swift_bool _swift_stdlib_isExecutableLinkedOnOrAfter(
+  _SwiftStdlibVersion version
+) __attribute__((const));
 
 #ifdef __cplusplus
 } // extern "C"

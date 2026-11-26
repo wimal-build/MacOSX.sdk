@@ -2,25 +2,12 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           CFA02B7D-535B-343F-9735-9983A4A7FE4F
-  - target:          x86_64-maccatalyst
-    value:           CFA02B7D-535B-343F-9735-9983A4A7FE4F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           118EF983-3FAF-359F-B928-5038717233B8
-  - target:          arm64e-maccatalyst
-    value:           118EF983-3FAF-359F-B928-5038717233B8
-install-name:    '/AppleInternal/Library/BuildRoots/66382bca-8bca-11ec-aade-6613bcf0e2ee/Library/Caches/com.apple.xbs/Binaries/CVMS/install/Symbols/Release/libCoreVMClient.mono600.dylib'
+install-name:    '/AppleInternal/Library/BuildRoots/97f6331a-ba75-11ed-a4bc-863efbbaf80d/Library/Caches/com.apple.xbs/Binaries/CVMS/install/Symbols/Release/libCoreVMClient.mono600.dylib'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __cvmsIsAssert, __cvmsIsMonolithic, _cvms_connection_control, 
                        _cvms_connection_create, _cvms_connection_has_service, _cvms_connection_release, 
                        _cvms_connection_retain, _cvms_content_get_function_pointer, 

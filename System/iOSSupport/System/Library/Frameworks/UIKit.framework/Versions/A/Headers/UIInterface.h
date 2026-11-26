@@ -13,7 +13,7 @@
 
 // for UINavigationBar and UIToolBar
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIBarStyle) {
     UIBarStyleDefault          = 0,
@@ -81,6 +81,13 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceActiveAppearance) {
     UIUserInterfaceActiveAppearanceActive,
 } API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
+typedef NS_ENUM(NSInteger, UINSToolbarItemPresentationSize) {
+    UINSToolbarItemPresentationSizeUnspecified = -1,
+    UINSToolbarItemPresentationSizeRegular = 0,
+    UINSToolbarItemPresentationSizeSmall = 1,
+    UINSToolbarItemPresentationSizeLarge = 3
+} API_AVAILABLE(macCatalyst(16.0));
+
 // System colors
 
 @interface UIColor (UIColorSystemColors)
@@ -111,10 +118,10 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceActiveAppearance) {
 /* The numbered variations, systemGray2 through systemGray6, are grays which increasingly
  * trend away from systemGray and in the direction of systemBackgroundColor.
  *
- * In UIUserInterfaceStyleLight: systemGray1 is slightly lighter than systemGray.
- *                               systemGray2 is lighter than that, and so on.
- * In UIUserInterfaceStyleDark:  systemGray1 is slightly darker than systemGray.
- *                               systemGray2 is darker than that, and so on.
+ * In UIUserInterfaceStyleLight: systemGray2 is slightly lighter than systemGray.
+ *                               systemGray3 is lighter than that, and so on.
+ * In UIUserInterfaceStyleDark:  systemGray2 is slightly darker than systemGray.
+ *                               systemGray3 is darker than that, and so on.
  */
 @property (class, nonatomic, readonly) UIColor *systemGray2Color        API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
 @property (class, nonatomic, readonly) UIColor *systemGray3Color        API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
@@ -246,7 +253,7 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceActiveAppearance) {
 @property(class, nonatomic, readonly) CGFloat systemMinimumFontSize API_UNAVAILABLE(macos, ios, tvos, watchos);
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIInterface.h>

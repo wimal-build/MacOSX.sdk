@@ -2,7 +2,7 @@
 //  GKScore.h
 //  Game Center
 //
-//  Copyright 2010-2022 Apple Inc. All rights reserved.
+//  Copyright 2010-2023 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// GKScore represents a score in the leaderboards.
-API_DEPRECATED("Replaced by GKLeaderboardEntry", ios(4.1, 14.0), tvos(9.0, 14.0), macosx(10.8, 11.0), watchos(3.0, 7.0))
+API_DEPRECATED("Replaced by GKLeaderboardScore", ios(4.1, 14.0), tvos(9.0, 14.0), macosx(10.8, 11.0), watchos(3.0, 7.0))
 @interface GKScore : NSObject <NSCoding, NSSecureCoding>
 
 /// Initialize the score with the local player and current date.

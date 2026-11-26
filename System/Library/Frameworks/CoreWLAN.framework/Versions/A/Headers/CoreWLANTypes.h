@@ -255,6 +255,12 @@ typedef NS_ENUM(NSInteger, CWInterfaceMode)
  * @constant kCWSecurityWPA3Transition
  * WPA3 Transition (WPA3/WPA2 Personal) authentication.
  *
+ * @constant kCWSecurityOWE
+ * OWE security.
+ *
+ * @constant kCWSecurityOWETransition
+ * OWE Transition.
+ * 
  * @constant kCWSecurityUnknown 
  * Unknown security type.
  */
@@ -274,6 +280,8 @@ typedef NS_ENUM(NSInteger, CWSecurity)
 	kCWSecurityWPA3Personal         = 11,
 	kCWSecurityWPA3Enterprise       = 12,
 	kCWSecurityWPA3Transition       = 13,
+    kCWSecurityOWE                  = 14,
+    kCWSecurityOWETransition        = 15,
     kCWSecurityUnknown              = NSIntegerMax,
 } NS_ENUM_AVAILABLE_MAC(10_7);
 
@@ -340,12 +348,16 @@ typedef NS_ENUM(NSInteger, CWChannelWidth)
  *
  * @constant kCWChannelBand5GHz
  * 5GHz channel band.
+ *
+ * @constant kCWChannelBand6GHz
+ * 6GHz channel band.
  */
 typedef NS_ENUM(NSInteger, CWChannelBand)
 {
 	kCWChannelBandUnknown	= 0,
 	kCWChannelBand2GHz		= 1,
 	kCWChannelBand5GHz		= 2,
+    kCWChannelBand6GHz      = 3,
 } NS_ENUM_AVAILABLE_MAC(10_7);
 
 /*!
@@ -444,6 +456,7 @@ typedef NS_ENUM(NSInteger, CWEventType)
     CWEventTypeLinkQualityDidChange     = 6,
     CWEventTypeModeDidChange            = 7,
     CWEventTypeScanCacheUpdated         = 8,
+    CWEventTypeBtCoexStats              = 9,
     CWEventTypeUnknown                  = NSIntegerMax,
 } NS_ENUM_AVAILABLE_MAC(10_10);
 

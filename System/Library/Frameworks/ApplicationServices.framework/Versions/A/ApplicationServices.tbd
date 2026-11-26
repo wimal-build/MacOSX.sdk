@@ -2,21 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           ED20BBDF-51E0-3489-BDE0-944C4D59C312
-  - target:          x86_64-maccatalyst
-    value:           ED20BBDF-51E0-3489-BDE0-944C4D59C312
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5135F624-1CF2-3795-9662-57B402C64FEF
-  - target:          arm64e-maccatalyst
-    value:           5135F624-1CF2-3795-9662-57B402C64FEF
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices'
-current-version: 56
+current-version: 61
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -32,26 +19,13 @@ reexported-libraries:
                        '/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText', 
                        '/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ApplicationServicesVersionNumber, _ApplicationServicesVersionString ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           E8655C59-3D54-32FB-8113-F25B4792FC5E
-  - target:          x86_64-maccatalyst
-    value:           E8655C59-3D54-32FB-8113-F25B4792FC5E
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           6B09B034-30FA-3EC8-B82B-22A280E7EC5B
-  - target:          arm64e-maccatalyst
-    value:           6B09B034-30FA-3EC8-B82B-22A280E7EC5B
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS'
 current-version: 236
 parent-umbrella:
@@ -59,8 +33,8 @@ parent-umbrella:
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AGAddAttribute, _AGBeginIteration, _AGComputeByteCapacity, 
                        _AGComputeByteCapacityV, _AGComputeChecksum, _AGComputeIncrementalCapacity, 
                        _AGComputeIncrementalCapacityV, _AGCongruent, _AGFindAttribute, 
@@ -209,19 +183,12 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           1E528D32-6630-3028-8161-FFC7A7EFFC4D
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           56785513-F26C-359C-A711-15CC95A4E794
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ATSApplyMorph, _ATSClearGlyphVector, _ATSGrowGlyphVector, 
                        _ATSInitializeGlyphVector, _ATSUBatchBreakLines, _ATSUBreakLine, 
                        _ATSUClearAttributes, _ATSUClearFontFeatures, _ATSUClearFontVariations, 
@@ -277,13 +244,6 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           B901DBA6-0300-310C-B306-0F5995C13B48
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           1BEE6CFA-0DA4-3DCE-812B-7751F60A9234
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -292,7 +252,7 @@ allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ DMProxy ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CMCloneProfileRef, _CMCloseProfile, _CMConvertDoubleXYZToD50, 
                        _CMConvertRGBFloatBitmap, _CMConvertXYZFloatBitmap, _CMCopyProfile, 
                        _CMCopyProfileDescriptionString, _CMCopyProfileLocalizedString, 
@@ -335,25 +295,18 @@ exports:
                        __CMGetProfileOfSuite, __CMLoadProfileLutsByAVID, __CMProfileGetProperty, 
                        __CMProfileSetProperty, __CWColorWorldGetProperty, __CWColorWorldSetProperty, 
                        _kCMIlluminantD50, _kCMIlluminantD65 ]
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _ColorSyncLoadLegacyFunction ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           2E58F8CE-D41E-3F70-B13E-CBF282C15648
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           E6EB06F5-5546-3C97-A88D-DB6EAA655D97
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices'
-current-version: 739.1
+current-version: 768
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AXAPIEnabled, _AXIsProcessTrusted, _AXIsProcessTrustedWithOptions, 
                        _AXMakeProcessTrusted, _AXObserverAddNotification, _AXObserverAddNotificationAsync, 
                        _AXObserverCreate, _AXObserverCreateWithInfoCallback, _AXObserverGetRunLoopSource, 
@@ -584,20 +537,13 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           610A0ABD-918B-3411-8252-75CE7B82DE0F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           BF1E9E9A-21B7-36D7-9C4E-6622F44E65C0
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 544.1
+current-version: 572.1
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CPLAutoSelectCancel, _CPLAutoSelectCreateContext, _CPLAutoSelectGetInfo, 
                        _CPLAutoSelectHasNewPPD, _CPLAutoSelectInstallableOptions, 
                        _CPLAutoSelectPPD, _CPLAutoSelectReleaseContext, _CPLAutoSelectSetIsBinaryOK, 
@@ -624,17 +570,18 @@ exports:
                        _PJCCreateSuggestedPaper, _PJCGetCurrentProfileIDFromPPD, 
                        _PJCIsMetric, _PJCLaunchPrintCenter, _PJCNewPageFormatWithPMPaper, 
                        _PJCPrintSettingsCreateCustomProfileRef, _PJCPrintSettingsSetCustomProfilePath, 
-                       _PJCPrinterCopyFinishingTemplatesList, _PJCPrinterCopyReadyMediaList, 
-                       _PJCPrinterGetDeviceID, _PJCPrinterProxyCreateURL, _PJCPrinterSupportsFinishingTemplates, 
-                       _PJCPrinterSupportsReadyMedia, _PJCPrinterSupportsThisCustomPaper, 
-                       _PJCRunWorkflowWithRenamedPDF, _PJCSessionCreateCopyForAppKit, 
-                       _PJCSessionHasApplicationSetPrinter, _PJCSessionSetHideFileExtension, 
-                       _PJCSetPresetPrintingPref, _PJCSetPrintingPref, _PJCTicketGetSrcImageableArea, 
-                       _PJCTicketGetSrcOrientation, _PJCTicketGetSrcPaperSize, _PJCTicketGetSrcResolution, 
-                       _PJCTicketGetSrcScaling, _PMAnalyticsSendEventLazy, _PMBackendExecIO, 
-                       _PMCFEqual, _PMCGImageCreateWithEPSDataProvider, _PMConvertFile, 
-                       _PMCopyAvailablePPDs, _PMCopyLocalizedPPD, _PMCopyPPDData, 
-                       _PMCopyPageFormat, _PMCopyPrintSettings, _PMCopyUserDefaultPaperSize, 
+                       _PJCPrinterCopyFinishingTemplatesList, _PJCPrinterCopyIPPPresetsList, 
+                       _PJCPrinterCopyLocalizationStrings, _PJCPrinterCopyPrinterInfoDictionary, 
+                       _PJCPrinterCopyReadyMediaList, _PJCPrinterGetDeviceID, _PJCPrinterProxyCreateURL, 
+                       _PJCPrinterSupportsFinishingTemplates, _PJCPrinterSupportsReadyMedia, 
+                       _PJCPrinterSupportsThisCustomPaper, _PJCRunWorkflowWithRenamedPDF, 
+                       _PJCSessionCreateCopyForAppKit, _PJCSessionHasApplicationSetPrinter, 
+                       _PJCSessionSetHideFileExtension, _PJCSetPresetPrintingPref, 
+                       _PJCSetPrintingPref, _PJCTicketGetSrcImageableArea, _PJCTicketGetSrcOrientation, 
+                       _PJCTicketGetSrcPaperSize, _PJCTicketGetSrcResolution, _PJCTicketGetSrcScaling, 
+                       _PMAnalyticsSendEventLazy, _PMBackendExecIO, _PMCFEqual, _PMCGImageCreateWithEPSDataProvider, 
+                       _PMConvertFile, _PMCopyAvailablePPDs, _PMCopyLocalizedPPD, 
+                       _PMCopyPPDData, _PMCopyPageFormat, _PMCopyPrintSettings, _PMCopyUserDefaultPaperSize, 
                        _PMCreateCFArrayForPMObjects, _PMCreateGenericPrinter, _PMCreatePageFormat, 
                        _PMCreatePageFormatWithPMPaper, _PMCreatePaperInfoTicketFromPPDPaperName, 
                        _PMCreatePrintSettings, _PMCreatePrinter, _PMCreateProxy, 
@@ -649,20 +596,20 @@ exports:
                        _PMPageFormatCreateWithDataRepresentation, _PMPageFormatGetPrinterID, 
                        _PMPaperAddToUserPrefs, _PMPaperCopyUserPrefs, _PMPaperCreateCustom, 
                        _PMPaperCreateInternal, _PMPaperCreateLocalizedName, _PMPaperCreatePMTicketRef, 
-                       _PMPaperGetHeight, _PMPaperGetID, _PMPaperGetMargins, _PMPaperGetPPDPaperName, 
-                       _PMPaperGetPrinterID, _PMPaperGetWidth, _PMPaperIsCustom, 
-                       _PMPaperRemoveFromUserPrefs, _PMPresetCopyName, _PMPresetCreatePrintSettings, 
-                       _PMPresetGetAttributes, _PMPrintSettingsCopyAsDictionary, 
-                       _PMPrintSettingsCopyKeys, _PMPrintSettingsCreateDataRepresentation, 
-                       _PMPrintSettingsCreateWithDataRepresentation, _PMPrintSettingsGetJobName, 
-                       _PMPrintSettingsGetValue, _PMPrintSettingsSetJobName, _PMPrintSettingsSetValue, 
-                       _PMPrintSettingsToOptions, _PMPrintSettingsToOptionsWithPrinterAndPageFormat, 
+                       _PMPaperCreateWithTicketRef, _PMPaperGetHeight, _PMPaperGetID, 
+                       _PMPaperGetMargins, _PMPaperGetPPDPaperName, _PMPaperGetPrinterID, 
+                       _PMPaperGetWidth, _PMPaperIsCustom, _PMPaperRemoveFromUserPrefs, 
+                       _PMPresetCopyName, _PMPresetCreatePrintSettings, _PMPresetGetAttributes, 
+                       _PMPrintSettingsCopyAsDictionary, _PMPrintSettingsCopyKeys, 
+                       _PMPrintSettingsCreateDataRepresentation, _PMPrintSettingsCreateWithDataRepresentation, 
+                       _PMPrintSettingsGetJobName, _PMPrintSettingsGetValue, _PMPrintSettingsSetJobName, 
+                       _PMPrintSettingsSetValue, _PMPrintSettingsToOptions, _PMPrintSettingsToOptionsWithPrinterAndPageFormat, 
                        _PMPrinterCanDuplex, _PMPrinterCanIdentify, _PMPrinterCanScan, 
                        _PMPrinterChargeInfoURI, _PMPrinterCopyACL, _PMPrinterCopyDefaultUserCredentials, 
                        _PMPrinterCopyDescriptionURL, _PMPrinterCopyDeviceURI, _PMPrinterCopyFinalDeviceURI, 
-                       _PMPrinterCopyHostName, _PMPrinterCopyMembers, _PMPrinterCopyPresets, 
-                       _PMPrinterCopyRequiredUserCredentials, _PMPrinterCopyScannerUUID, 
-                       _PMPrinterCopyScanningApp, _PMPrinterCopyScanningAppPath, 
+                       _PMPrinterCopyHostName, _PMPrinterCopyMembers, _PMPrinterCopyOAUTHInfo, 
+                       _PMPrinterCopyPresets, _PMPrinterCopyRequiredUserCredentials, 
+                       _PMPrinterCopyScannerUUID, _PMPrinterCopyScanningApp, _PMPrinterCopyScanningAppPath, 
                        _PMPrinterCopyState, _PMPrinterCopySuppliesURI, _PMPrinterCopyTempPPDURL, 
                        _PMPrinterCreateFromPrinterID, _PMPrinterCreatePaperInfoListForMenuPriv, 
                        _PMPrinterGetCommInfo, _PMPrinterGetConsumables, _PMPrinterGetConsumablesDisclaimer, 
@@ -758,18 +705,13 @@ exports:
                        _getMediaNameFromPaperInfo, _getPDFSpoolingFunctionCallbacks, 
                        _parsePostScriptStatus, _printUIToolCreateConnection, _printUIToolGetAuthenticationInfo, 
                        _printUIToolPrintFD ]
-    objc-classes:    [ PMInkChecker ]
+    objc-classes:    [ PDEPlugInLoader, PMInkChecker, PMPrintServiceBrowserNode, 
+                       PMPrintServiceExtension, PMPrintServiceExtension_Browser, 
+                       PMPrintServiceExtension_Context, PMPrinterDestination ]
     objc-ivars:      [ PMInkChecker._consumables, PMInkChecker._printer, PMInkChecker._supplies ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           FE3CE7F1-B68D-344F-9D27-30E171CFFBA8
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           DE7DA4A1-F75B-3EEF-A910-D36D94826195
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -778,7 +720,7 @@ reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$hide$os10.10$_AddPt', '$ld$hide$os10.10$_ClipCGContextToRegion', 
                        '$ld$hide$os10.10$_ConvertARGBToRGBA', '$ld$hide$os10.10$_CreateCGImageRefFromPixMaps', 
                        '$ld$hide$os10.10$_DisposeCalcColorTableUPP', '$ld$hide$os10.10$_DisposeColorComplementUPP', 
@@ -798,7 +740,6 @@ exports:
                        '$ld$hide$os10.10$_DisposeQDTextUPP', '$ld$hide$os10.10$_DisposeQDTxMeasUPP', 
                        '$ld$hide$os10.10$_DisposeRGBA32ImageData', '$ld$hide$os10.10$_DisposeRecordColorsUPP', 
                        '$ld$hide$os10.10$_DisposeRegionToRectsUPP', '$ld$hide$os10.10$_DisposeStyleRunDirectionUPP', 
-                       '$ld$hide$os10.10$_FMFontGetCGFontRefFromFontFamilyInstance', 
                        '$ld$hide$os10.10$_GetCTSeed', '$ld$hide$os10.10$_GetPMBaseAddr', 
                        '$ld$hide$os10.10$_GetPMRowBytes', '$ld$hide$os10.10$_GetPixBaseAddr', 
                        '$ld$hide$os10.10$_HandleToRgn', '$ld$hide$os10.10$_InvokeCalcColorTableUPP', 
@@ -863,7 +804,6 @@ exports:
                        '$ld$hide$os10.11$_DisposeQDTextUPP', '$ld$hide$os10.11$_DisposeQDTxMeasUPP', 
                        '$ld$hide$os10.11$_DisposeRGBA32ImageData', '$ld$hide$os10.11$_DisposeRecordColorsUPP', 
                        '$ld$hide$os10.11$_DisposeRegionToRectsUPP', '$ld$hide$os10.11$_DisposeStyleRunDirectionUPP', 
-                       '$ld$hide$os10.11$_FMFontGetCGFontRefFromFontFamilyInstance', 
                        '$ld$hide$os10.11$_GetCTSeed', '$ld$hide$os10.11$_GetPMBaseAddr', 
                        '$ld$hide$os10.11$_GetPMRowBytes', '$ld$hide$os10.11$_GetPixBaseAddr', 
                        '$ld$hide$os10.11$_HandleToRgn', '$ld$hide$os10.11$_InvokeCalcColorTableUPP', 
@@ -928,7 +868,6 @@ exports:
                        '$ld$hide$os10.12$_DisposeQDTextUPP', '$ld$hide$os10.12$_DisposeQDTxMeasUPP', 
                        '$ld$hide$os10.12$_DisposeRGBA32ImageData', '$ld$hide$os10.12$_DisposeRecordColorsUPP', 
                        '$ld$hide$os10.12$_DisposeRegionToRectsUPP', '$ld$hide$os10.12$_DisposeStyleRunDirectionUPP', 
-                       '$ld$hide$os10.12$_FMFontGetCGFontRefFromFontFamilyInstance', 
                        '$ld$hide$os10.12$_GetCTSeed', '$ld$hide$os10.12$_GetPMBaseAddr', 
                        '$ld$hide$os10.12$_GetPMRowBytes', '$ld$hide$os10.12$_GetPixBaseAddr', 
                        '$ld$hide$os10.12$_HandleToRgn', '$ld$hide$os10.12$_InvokeCalcColorTableUPP', 
@@ -993,7 +932,6 @@ exports:
                        '$ld$hide$os10.13$_DisposeQDTextUPP', '$ld$hide$os10.13$_DisposeQDTxMeasUPP', 
                        '$ld$hide$os10.13$_DisposeRGBA32ImageData', '$ld$hide$os10.13$_DisposeRecordColorsUPP', 
                        '$ld$hide$os10.13$_DisposeRegionToRectsUPP', '$ld$hide$os10.13$_DisposeStyleRunDirectionUPP', 
-                       '$ld$hide$os10.13$_FMFontGetCGFontRefFromFontFamilyInstance', 
                        '$ld$hide$os10.13$_GetCTSeed', '$ld$hide$os10.13$_GetPMBaseAddr', 
                        '$ld$hide$os10.13$_GetPMRowBytes', '$ld$hide$os10.13$_GetPixBaseAddr', 
                        '$ld$hide$os10.13$_HandleToRgn', '$ld$hide$os10.13$_InvokeCalcColorTableUPP', 
@@ -1058,7 +996,6 @@ exports:
                        '$ld$hide$os10.9$_DisposeQDTextUPP', '$ld$hide$os10.9$_DisposeQDTxMeasUPP', 
                        '$ld$hide$os10.9$_DisposeRGBA32ImageData', '$ld$hide$os10.9$_DisposeRecordColorsUPP', 
                        '$ld$hide$os10.9$_DisposeRegionToRectsUPP', '$ld$hide$os10.9$_DisposeStyleRunDirectionUPP', 
-                       '$ld$hide$os10.9$_FMFontGetCGFontRefFromFontFamilyInstance', 
                        '$ld$hide$os10.9$_GetCTSeed', '$ld$hide$os10.9$_GetPMBaseAddr', 
                        '$ld$hide$os10.9$_GetPMRowBytes', '$ld$hide$os10.9$_GetPixBaseAddr', 
                        '$ld$hide$os10.9$_HandleToRgn', '$ld$hide$os10.9$_InvokeCalcColorTableUPP', 
@@ -1120,13 +1057,13 @@ exports:
                        _DisposeQDRgnUPP, _DisposeQDStdGlyphsUPP, _DisposeQDTextUPP, 
                        _DisposeQDTxMeasUPP, _DisposeRGBA32ImageData, _DisposeRecordColorsUPP, 
                        _DisposeRegionToRectsUPP, _DisposeRgn, _DisposeStyleRunDirectionUPP, 
-                       _EmptyRect, _EmptyRgn, _EqualPt, _EqualRect, _EqualRgn, _FMFontGetCGFontRefFromFontFamilyInstance, 
-                       _FMGetATSFontFamilyRefFromFontFamily, _FMGetATSFontRefFromFont, 
-                       _FMGetFontFamilyFromATSFontFamilyRef, _FMGetFontFromATSFontRef, 
-                       _GetCGSConnectionID, _GetCTSeed, _GetCTable, _GetPMBaseAddr, 
-                       _GetPMRowBytes, _GetPixBaseAddr, _GetRegionBounds, _HandleToRgn, 
-                       _HideCursor, _InitCursor, _InsetRect, _InsetRgn, _InvokeCalcColorTableUPP, 
-                       _InvokeColorComplementUPP, _InvokeColorSearchUPP, _InvokeDMComponentListIteratorUPP, 
+                       _EmptyRect, _EmptyRgn, _EqualPt, _EqualRect, _EqualRgn, _FMGetATSFontFamilyRefFromFontFamily, 
+                       _FMGetATSFontRefFromFont, _FMGetFontFamilyFromATSFontFamilyRef, 
+                       _FMGetFontFromATSFontRef, _GetCGSConnectionID, _GetCTSeed, 
+                       _GetCTable, _GetPMBaseAddr, _GetPMRowBytes, _GetPixBaseAddr, 
+                       _GetRegionBounds, _HandleToRgn, _HideCursor, _InitCursor, 
+                       _InsetRect, _InsetRgn, _InvokeCalcColorTableUPP, _InvokeColorComplementUPP, 
+                       _InvokeColorSearchUPP, _InvokeDMComponentListIteratorUPP, 
                        _InvokeDMDisplayListIteratorUPP, _InvokeDMDisplayModeListIteratorUPP, 
                        _InvokeDMExtendedNotificationUPP, _InvokeDMNotificationUPP, 
                        _InvokeDMProfileListIteratorUPP, _InvokeDeviceLoopDrawingUPP, 
@@ -1162,30 +1099,29 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           072910C8-2250-3525-A4BD-EB47540A28F7
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           2332F71C-26EA-3A98-AE66-809FB60D0186
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CancelSpokenNotification, _CancelSpokenNotificationForProcess, 
-                       _CancelTalkingAlert, _ContinueSpeech, _CopyAvailableIntervals, 
-                       _CopyAvailablePhrases, _CopyIdentifierStringForPreferredVoiceInListWithLocale, 
+                       _CancelTalkingAlert, _CancelTalkingAlertForPID, _ContinueSpeech, 
+                       _CopyAvailableIntervals, _CopyAvailablePhrases, _CopyIdentifierStringForPreferredVoiceInListWithLocale, 
                        _CopyIdentifierStringForPreferredVoiceWithLocale, _CopyIdentifierStringForVoiceSpec, 
                        _CopyPhonemesFromText, _CopySpeechProperty, _CopySpeechSynthesisVoicesForMode, 
                        _CopyTimeAnnouncementsPreferences, _CountVoices, _CreateSpeechLanguageLocale, 
-                       _DisposeSpeechChannel, _GetIdentifierStringForPreferredVoiceInListWithLocale, 
+                       _DisposeSpeechChannel, _DisposeSpeechDoneUPP, _DisposeSpeechErrorUPP, 
+                       _DisposeSpeechPhonemeUPP, _DisposeSpeechSyncUPP, _DisposeSpeechTextDoneUPP, 
+                       _DisposeSpeechWordUPP, _GetIdentifierStringForPreferredVoiceInListWithLocale, 
                        _GetIdentifierStringForPreferredVoiceWithLocale, _GetIndVoice, 
                        _GetSpeechInfo, _GetSpeechPitch, _GetSpeechRate, _GetVoiceDescription, 
-                       _GetVoiceInfo, _MakeVoiceSpec, _MakeVoiceSpecForIdentifierString, 
-                       _NewSpeechChannel, _PauseSpeechAt, _RegisterSpokenNotificationForProcess, 
+                       _GetVoiceInfo, _InvokeSpeechDoneUPP, _InvokeSpeechErrorUPP, 
+                       _InvokeSpeechPhonemeUPP, _InvokeSpeechSyncUPP, _InvokeSpeechTextDoneUPP, 
+                       _InvokeSpeechWordUPP, _MakeVoiceSpec, _MakeVoiceSpecForIdentifierString, 
+                       _NewSpeechChannel, _NewSpeechDoneUPP, _NewSpeechErrorUPP, 
+                       _NewSpeechPhonemeUPP, _NewSpeechSyncUPP, _NewSpeechTextDoneUPP, 
+                       _NewSpeechWordUPP, _PauseSpeechAt, _RegisterSpokenNotificationForProcess, 
                        _RegisterTalkingAlertWithProperties, _SRSetSecurityFlags, 
                        _SUAddAppPathToLoginStartupList, _SUCopyAXUIElementExceptionsDictionary, 
                        _SUCopyKeyNamesPropertyList, _SUCopyPhraseArrayFromDisk, _SUIsMainBundleUsingEnglishLocalization, 
@@ -1232,117 +1168,20 @@ exports:
                        _kSpeechSpeechDoneCallBack, _kSpeechStatusNumberOfCharactersLeft, 
                        _kSpeechStatusOutputBusy, _kSpeechStatusOutputPaused, _kSpeechStatusPhonemeCode, 
                        _kSpeechStatusProperty, _kSpeechSyncCallBack, _kSpeechSynthExtensionProperty, 
-                       _kSpeechSynthesizerInfoIdentifier, _kSpeechSynthesizerInfoProperty, 
-                       _kSpeechSynthesizerInfoVersion, _kSpeechTextDoneCallBack, 
-                       _kSpeechVoiceAge, _kSpeechVoiceCreator, _kSpeechVoiceDemoText, 
-                       _kSpeechVoiceGender, _kSpeechVoiceGenderFemale, _kSpeechVoiceGenderMale, 
-                       _kSpeechVoiceGenderNeuter, _kSpeechVoiceID, _kSpeechVoiceIdentifier, 
-                       _kSpeechVoiceIndividuallySpokenCharacters, _kSpeechVoiceLanguage, 
-                       _kSpeechVoiceLocaleIdentifier, _kSpeechVoiceLocalizedNames, 
+                       _kSpeechSynthesizerInfoIdentifier, _kSpeechSynthesizerInfoManufacturer, 
+                       _kSpeechSynthesizerInfoProperty, _kSpeechSynthesizerInfoVersion, 
+                       _kSpeechTextDoneCallBack, _kSpeechVoiceAge, _kSpeechVoiceCreator, 
+                       _kSpeechVoiceDemoText, _kSpeechVoiceGender, _kSpeechVoiceGenderFemale, 
+                       _kSpeechVoiceGenderMale, _kSpeechVoiceGenderNeuter, _kSpeechVoiceGenderNeutral, 
+                       _kSpeechVoiceGroup, _kSpeechVoiceGroupCompact, _kSpeechVoiceGroupCustom, 
+                       _kSpeechVoiceGroupCustomCompact, _kSpeechVoiceGroupDefault, 
+                       _kSpeechVoiceID, _kSpeechVoiceIdentifier, _kSpeechVoiceIndividuallySpokenCharacters, 
+                       _kSpeechVoiceLanguage, _kSpeechVoiceLocaleIdentifier, _kSpeechVoiceLocalizedNames, 
                        _kSpeechVoiceName, _kSpeechVoiceNameRoot, _kSpeechVoiceNumericID, 
-                       _kSpeechVoiceSupportedCharacters, _kSpeechVoiceSynthesizerNumericID, 
-                       _kSpeechVoiceUnicodeCharBegin, _kSpeechVoiceUnicodeCharEnd, 
-                       _kSpeechVoiceVersion, _kSpeechVolumeProperty, _kSpeechWordCFCallBack, 
-                       _kSpeechWordCallBack, _kVoiceIndividuallySpokenCharacters, 
+                       _kSpeechVoiceRelativeDesirability, _kSpeechVoiceSupportedCharacters, 
+                       _kSpeechVoiceSynthesizerNumericID, _kSpeechVoiceUnicodeCharBegin, 
+                       _kSpeechVoiceUnicodeCharEnd, _kSpeechVoiceVersion, _kSpeechVolumeProperty, 
+                       _kSpeechWordCFCallBack, _kSpeechWordCallBack, _kVoiceConstantRateOnly, 
+                       _kVoiceIndividuallySpokenCharacters, _kVoiceShowInFullListOnly, 
                        _kVoiceSupportedCharacters ]
-  - targets:         [ arm64e-macos, arm64-macos ]
-    symbols:         [ _CancelTalkingAlertForPID, _DisposeServerConnection, _DisposeSpeechDoneUPP, 
-                       _DisposeSpeechErrorUPP, _DisposeSpeechPhonemeUPP, _DisposeSpeechSyncUPP, 
-                       _DisposeSpeechTextDoneUPP, _DisposeSpeechWordUPP, _InitServerConnection, 
-                       _InvokeSpeechDoneUPP, _InvokeSpeechErrorUPP, _InvokeSpeechPhonemeUPP, 
-                       _InvokeSpeechSyncUPP, _InvokeSpeechTextDoneUPP, _InvokeSpeechWordUPP, 
-                       _IsAppAlreadyRunning, _IsValueCArrayOK, _MTUOpenResourceFile, 
-                       _MTUReadResourceDataFile, _NewSpeechDoneUPP, _NewSpeechErrorUPP, 
-                       _NewSpeechPhonemeUPP, _NewSpeechSyncUPP, _NewSpeechTextDoneUPP, 
-                       _NewSpeechWordUPP, _SendMessagePrimitive, _SendMessageToServer, 
-                       _StartServerConnection, _TTSIsSpeakingSelection_XPC, _TTSStartSpeakingSelectionWithString_XPC, 
-                       _TTSStartSpeakingSelection_XPC, _TTSStopSpeakingSelection_XPC, 
-                       __Z16UseDictionaryPtrP19SpeechChannelRecordPKvm, __Z36SetPreferredVoiceIdentifierForLocalePK10__CFLocalePK10__CFString, 
-                       __Z37CopyPreferredVoiceIdentifierForLocalePK10__CFLocale, 
-                       __ZN13SpeechGlobals11CopyVoiceIDEPK9VoiceSpecPPK10__CFString, 
-                       __ZN13SpeechGlobals13CopyVoicePathEPK9VoiceSpecPPK10__CFString, 
-                       __ZN13SpeechGlobals13SessionSwitchE19CGSNotificationTypePvjS1_, 
-                       __ZN13SpeechGlobals14GetChannelByIdEy, __ZN13SpeechGlobals14SendXPCMessageEPv10SpeechArch, 
-                       __ZN13SpeechGlobals15RegisterChannelEP19SpeechChannelHandle, 
-                       __ZN13SpeechGlobals15SetSessionStateEb, __ZN13SpeechGlobals15SetupConnectionEPKc, 
-                       __ZN13SpeechGlobals15ValidateChannelEP19SpeechChannelHandle, 
-                       __ZN13SpeechGlobals16ArchForVoiceSpecEPK9VoiceSpec, __ZN13SpeechGlobals17ConnectionForArchE10SpeechArch, 
-                       __ZN13SpeechGlobals17UnregisterChannelEP19SpeechChannelHandle, 
-                       __ZN13SpeechGlobals19AddArchForVoiceSpecEPK9VoiceSpec10SpeechArch, 
-                       __ZN13SpeechGlobals19CopyVoiceAttributesEPK9VoiceSpecPPK14__CFDictionary, 
-                       __ZN13SpeechGlobals20CopyVoiceDescriptionEPK10__CFStringP16VoiceDescription, 
-                       __ZN13SpeechGlobals20CopyVoiceDescriptionEPK9VoiceSpecP16VoiceDescriptionb, 
-                       __ZN13SpeechGlobals20PerformOnCorrectArchEPK9VoiceSpecU13block_pointerFv10SpeechArchPbE, 
-                       __ZN13SpeechGlobals21BuildArchForVoiceSpecEPK9VoiceSpec, __ZN13SpeechGlobals22ArchForVoiceIdentifierEPK10__CFString, 
-                       __ZN13SpeechGlobals23MayHaveNonNativeEnginesEv, __ZN13SpeechGlobals25AddArchForVoiceIdentifierEPK10__CFString10SpeechArch, 
-                       __ZN13SpeechGlobals27BuildArchForVoiceIdentifierEPK10__CFString, 
-                       __ZN13SpeechGlobals32RecomputeMayHaveNonNativeEnginesEv, __ZN13SpeechGlobals8InstanceEv, 
-                       __ZN13SpeechGlobals9sInstanceE, __ZN13SpeechGlobalsC1Ev, __ZN13SpeechGlobalsC2Ev, 
-                       __ZN14SpeechAPITimer5SetupEv, __ZN18SpeechElapsedTimer11ElapsedTimeEv, 
-                       __ZN19SpeechChannelHandle10CopyVoicesEPKv, __ZN19SpeechChannelHandle10InitializeEP9VoiceSpec, 
-                       __ZN19SpeechChannelHandle10SetLoggingEii, __ZN19SpeechChannelHandle10SpeechBusyEb, 
-                       __ZN19SpeechChannelHandle10StopSpeechExb, __ZN19SpeechChannelHandle11EnvironmentEPPKcS2_, 
-                       __ZN19SpeechChannelHandle11FromChannelEP19SpeechChannelRecord, 
-                       __ZN19SpeechChannelHandle11PauseSpeechEx, __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvP9__CFErrorE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvPK10__CFString7CFRangeE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvPPKvPmPiE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvjE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvmtE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvsE, 
-                       __ZN19SpeechChannelHandle11SetCallbackEPFvP19SpeechChannelRecordPvslE, 
-                       __ZN19SpeechChannelHandle11SpeakBufferEPKvmx, __ZN19SpeechChannelHandle12CurrentVoiceEv, 
-                       __ZN19SpeechChannelHandle12OutputToFileEP18OpaqueExtAudioFile, 
-                       __ZN19SpeechChannelHandle12OutputToFileEPKv, __ZN19SpeechChannelHandle13SpeakCFStringEPK10__CFStringPK14__CFDictionary, 
-                       __ZN19SpeechChannelHandle13TrackPropertyEPKcPv, __ZN19SpeechChannelHandle13UseDictionaryEPK14__CFDictionary, 
-                       __ZN19SpeechChannelHandle13UseDictionaryEPKvm, __ZN19SpeechChannelHandle14CachedPropertyEPKc, 
-                       __ZN19SpeechChannelHandle14ContinueSpeechEv, __ZN19SpeechChannelHandle14HandleCallbackEPvb, 
-                       __ZN19SpeechChannelHandle14PrivateChannelEv, __ZN19SpeechChannelHandle14RecoverChannelEv, 
-                       __ZN19SpeechChannelHandle14RegisterModuleEPK7__CFURL, __ZN19SpeechChannelHandle14TextToPhonemesEPKvmPPvPl, 
-                       __ZN19SpeechChannelHandle15PermitAllVoicesEv, __ZN19SpeechChannelHandle16UnregisterModuleEPK7__CFURL, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringPKv, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringRK13DelimiterInfo, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringRK14SpeechXtndData, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringRK9VoiceSpec, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringb, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringi, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringj, 
-                       __ZN19SpeechChannelHandle17SetSpeechPropertyEPK10__CFStringx, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringP14SpeechXtndData, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringP15SpeechErrorInfo, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringP16SpeechStatusInfo, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringP17SpeechVersionInfo, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringP9VoiceSpec, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPPKv, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPPP17PhonemeDescriptor, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPb, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPi, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPj, 
-                       __ZN19SpeechChannelHandle18CopySpeechPropertyEPK10__CFStringPx, 
-                       __ZN19SpeechChannelHandle18SetLatencyCallbackEPFvP19SpeechChannelRecordPvjE, 
-                       __ZN19SpeechChannelHandle19CopyVoiceAttributesEPK9VoiceSpecPPK14__CFDictionary, 
-                       __ZN19SpeechChannelHandle19CopyVoiceBundlePathEPK9VoiceSpecPPK10__CFString, 
-                       __ZN19SpeechChannelHandle19OutputToAudioDeviceEPKv, __ZN19SpeechChannelHandle19OutputToAudioDeviceEj, 
-                       __ZN19SpeechChannelHandle20CopyPhonemesFromTextEPK10__CFStringPS2_, 
-                       __ZN19SpeechChannelHandle20CopyVoiceDescriptionEPK9VoiceSpecP16VoiceDescription, 
-                       __ZN19SpeechChannelHandle22OutputToFileDescriptorEPKv, __ZN19SpeechChannelHandle32CopyIdentifierStringForVoiceSpecEPK9VoiceSpec, 
-                       __ZN19SpeechChannelHandle32MakeVoiceSpecForIdentifierStringEPK10__CFStringP9VoiceSpec, 
-                       __ZN19SpeechChannelHandle37CopyIdentifierStringForPreferredVoiceEPK9__CFArrayPK10__CFLocale, 
-                       __ZN19SpeechChannelHandle8ShutdownEv, __ZN19SpeechChannelHandle9SetRefConEPv, 
-                       __ZN19SpeechChannelHandleC1Ev, __ZN19SpeechChannelHandleC2Ev, 
-                       __ZN19SpeechChannelHandleD1Ev, __ZN19SpeechChannelHandleD2Ev, 
-                       __ZltRK9VoiceSpecS1_, _gOurCGSConnectionID, _gServerConnections, 
-                       _kSSDKeyAllVoices, _kSSDKeyCallback, _kSSDKeyChannel, _kSSDKeyEnabled, 
-                       _kSSDKeyEncoding, _kSSDKeyError, _kSSDKeyFlags, _kSSDKeyLength, 
-                       _kSSDKeyLocale, _kSSDKeyMessage, _kSSDKeyMode, _kSSDKeyOffset, 
-                       _kSSDKeyPath, _kSSDKeyProperty, _kSSDKeyReply, _kSSDKeySetEnv, 
-                       _kSSDKeySystemWide, _kSSDKeyTAAppPID, _kSSDKeyTAEnabled, _kSSDKeyTANotifyType, 
-                       _kSSDKeyTARegID, _kSSDKeyTARegProps, _kSSDKeyText, _kSSDKeyTextID, 
-                       _kSSDKeyUnsetEnv, _kSSDKeyValue, _kSSDKeyVoiceAttr, _kSSDKeyVoiceDesc, 
-                       _kSSDKeyVoiceID, _kSSDKeyVoiceList, _kSSDKeyVoiceSpec, _kSSDKeyWhere, 
-                       _kSpeechSynthesizerInfoManufacturer, _kSpeechVoiceGroup, _kSpeechVoiceGroupCompact, 
-                       _kSpeechVoiceGroupCustom, _kSpeechVoiceGroupCustomCompact, 
-                       _kSpeechVoiceGroupDefault, _kSpeechVoiceRelativeDesirability, 
-                       _kVoiceConstantRateOnly, _kVoiceShowInFullListOnly, _sCachedTimeAnnouncementsDictionary ]
-    objc-classes:    [ SpeechSynthesisApps ]
 ...

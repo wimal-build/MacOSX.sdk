@@ -40,6 +40,7 @@
 #include <mach/message.h>
 #include <mach/vm_types.h>
 
+
 /*
  *    Support for determining the state of a thread
  */
@@ -74,6 +75,11 @@
 #ifndef ARM_STATE_FLAVOR_IS_OTHER_VALID
 #define ARM_STATE_FLAVOR_IS_OTHER_VALID(_flavor_) 0
 #endif
+
+#define FLAVOR_MODIFIES_CORE_CPU_REGISTERS(x) \
+((x == ARM_THREAD_STATE) ||     \
+ (x == ARM_THREAD_STATE32) ||   \
+ (x == ARM_THREAD_STATE64))
 
 #define VALID_THREAD_STATE_FLAVOR(x) \
 	((x == ARM_THREAD_STATE) ||           \

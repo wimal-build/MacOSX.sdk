@@ -2,24 +2,11 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DB8E3D8B-14C0-3D42-BA53-0791865EBDE6
-  - target:          x86_64-maccatalyst
-    value:           DB8E3D8B-14C0-3D42-BA53-0791865EBDE6
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F17B7E40-927E-3018-997E-C89B0038F131
-  - target:          arm64e-maccatalyst
-    value:           F17B7E40-927E-3018-997E-C89B0038F131
 install-name:    '/System/Library/PrivateFrameworks/ProtocolBuffer.framework/Versions/A/ProtocolBuffer'
-current-version: 288.22.9
+current-version: 294.20.6
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _PBDataWriterPlaceMark, _PBDataWriterRecallMark, _PBDataWriterWriteBOOLField, 
                        _PBDataWriterWriteBareVarint, _PBDataWriterWriteDataField, 
                        _PBDataWriterWriteDoubleField, _PBDataWriterWriteFixed32Field, 

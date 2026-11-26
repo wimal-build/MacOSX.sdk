@@ -1,6 +1,7 @@
+#if !__has_include(<PassKitCore/PKBarcodeEventMetadataRequest.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKBarcodeEventMetadataRequest.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //
@@ -68,3 +69,8 @@ API_AVAILABLE(ios(14.0), watchos(7.0))
 
 NS_ASSUME_NONNULL_END
 
+
+#else
+#import <TargetConditionals.h>
+#import <PassKitCore/PKBarcodeEventMetadataRequest.h>
+#endif

@@ -1,16 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DE56FCF1-9774-3D1D-B998-F4FC7760561F
-  - target:          x86_64-maccatalyst
-    value:           DE56FCF1-9774-3D1D-B998-F4FC7760561F
-install-name:    '/AppleInternal/Library/BuildRoots/66382bca-8bca-11ec-aade-6613bcf0e2ee/Library/Caches/com.apple.xbs/Binaries/CVMS/install/Symbols/Release/libCoreVMClient.mono3425AMD.dylib'
+targets:         [ x86_64h-macos, x86_64h-maccatalyst ]
+install-name:    '/AppleInternal/Library/BuildRoots/97f6331a-ba75-11ed-a4bc-863efbbaf80d/Library/Caches/com.apple.xbs/Binaries/CVMS/install/Symbols/Release/libCoreVMClient.mono3425AMD.dylib'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+  - targets:         [ x86_64h-macos, x86_64h-maccatalyst ]
     symbols:         [ __cvmsIsAssert, __cvmsIsMonolithic, _cvms_connection_control, 
                        _cvms_connection_create, _cvms_connection_has_service, _cvms_connection_release, 
                        _cvms_connection_retain, _cvms_content_get_function_pointer, 

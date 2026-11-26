@@ -2,23 +2,10 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           1A3FEC9C-F024-380B-B07F-139536003C15
-  - target:          x86_64-maccatalyst
-    value:           1A3FEC9C-F024-380B-B07F-139536003C15
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           784F14A3-58E2-31F0-9D44-4EF824F5795F
-  - target:          arm64e-maccatalyst
-    value:           784F14A3-58E2-31F0-9D44-4EF824F5795F
 install-name:    '/System/Library/PrivateFrameworks/VirtualGarage.framework/Versions/A/VirtualGarage'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _GEOEvChargingConnectorTypeFromVGConnectorType, _IsVirtualGarageEnabled, 
                        _NSStringFromVGChargingConnectorTypeOptions, _VGChargingConnectorTypeOptionsList, 
                        _VGChargingConnectorTypeOptionsPacked, _VGChargingConnectorTypeOptionsUnpacked, 
@@ -44,7 +31,8 @@ exports:
                        _VirtualGarageConfig_EVRoutingOEMAppPullInterval, _VirtualGarageConfig_EVRoutingResourceNameForAllowAndDenylists, 
                        _VirtualGarageConfig_EVRoutingStreamUpdatesDuringNav, _VirtualGarageConfig_EVRoutingSynchronousVehicleStateUpdate, 
                        _VirtualGarageConfig_EVRoutingUseCarDisplaySimIdentifier, 
-                       _VirtualGarageConfig_EVRoutingUseMapsSyncLiveUpdates, _VirtualGarageConfig_TimeThresholdForVehicleStateComparison, 
+                       _VirtualGarageConfig_EVRoutingUseMapsSyncLiveUpdates, _VirtualGarageConfig_EnableAutomaticVehicleUnpairing, 
+                       _VirtualGarageConfig_TimeThresholdForVehicleStateComparison, 
                        _startHostingVirtualGarageServiceWithPersister, _stopHostingVirtualGarageService ]
     objc-classes:    [ VGDataCoordinator, VGOEMApplication, VGOEMApplicationFinder, 
                        VGVehicle, VGVehicleDeduper, VGVehicleState, VGVehicleStateStorage, 

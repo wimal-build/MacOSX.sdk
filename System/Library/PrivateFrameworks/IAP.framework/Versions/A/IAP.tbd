@@ -2,23 +2,10 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           DCEB8C80-3C3A-3102-A732-6FC505B871C9
-  - target:          x86_64-maccatalyst
-    value:           DCEB8C80-3C3A-3102-A732-6FC505B871C9
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           F988087B-2ADB-3F90-A0CA-F6BB391124E1
-  - target:          arm64e-maccatalyst
-    value:           F988087B-2ADB-3F90-A0CA-F6BB391124E1
 install-name:    '/System/Library/PrivateFrameworks/IAP.framework/Versions/A/IAP'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _Generate32BitConnectionID, _GetConnectionToIAP2Daemon, _GetConnectionToIAPDaemon, 
                        _GetConnectionToIAPDaemonByCheckingConnectionID, _GetConnectionToIAPDaemonOwningPhysicalConnector, 
                        _GetConnectionToIAPDaemonWithConnectionID, _GetConnectionToIAPTransportDaemon, 
@@ -139,12 +126,13 @@ exports:
                        __Z23GetIAP2DaemonConnectionv, __Z24__IAPConnectionMutexLockv, 
                        __Z25RetainIAPDaemonConnectionv, __Z26RetainIAP2DaemonConnectionv, 
                        __Z26__IAPConnectionMutexUnlockv, __Z31GetIAPTransportDaemonConnectionv, 
-                       __Z34RetainIAPTransportDaemonConnectionv, ___instance_ref_IAPNavigation, 
-                       _iaptransportdHasLaunched, _kBTHIDPriorityDefault, _kBTHIDPriorityHigh, 
-                       _kEAPipePath, _kIAP2AvailableNotification, _kIAP2DXPCServiceName, 
-                       _kIAP2ServerDiedNotification, _kIAP2ServerLaunchedNotification, 
-                       _kIAPAvailableNotification, _kIAPDXPCServiceName, _kIAPFrameworkBundleID, 
-                       _kIAPMinAccPowerDelayInMs, _kIAPNavigation_ManeuverInfoUpdate_AfterManeuverRoadName_ParamID, 
+                       __Z34RetainIAPTransportDaemonConnectionv, ___IAPAppSendXPCMessageDefaultTimeoutMs, 
+                       ___instance_ref_IAPNavigation, _iaptransportdHasLaunched, 
+                       _kBTHIDPriorityDefault, _kBTHIDPriorityHigh, _kEAPipePath, 
+                       _kIAP2AvailableNotification, _kIAP2DXPCServiceName, _kIAP2ServerDiedNotification, 
+                       _kIAP2ServerLaunchedNotification, _kIAPAvailableNotification, 
+                       _kIAPDXPCServiceName, _kIAPFrameworkBundleID, _kIAPMinAccPowerDelayInMs, 
+                       _kIAPNavigation_ManeuverInfoUpdate_AfterManeuverRoadName_ParamID, 
                        _kIAPNavigation_ManeuverInfoUpdate_DistanceBetweenManeuverDisplayString_ParamID, 
                        _kIAPNavigation_ManeuverInfoUpdate_DistanceBetweenManeuverDisplayUnits_ParamID, 
                        _kIAPNavigation_ManeuverInfoUpdate_DistanceBetweenManeuver_ParamID, 

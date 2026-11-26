@@ -1,17 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-uuids:
-  - target:          x86_64-macos
-    value:           492F1A35-2A6F-374E-BC1C-0BB362C2EF2F
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           B9E036D3-8DFC-3C4F-A976-D247AD65569E
 install-name:    '/System/Library/PrivateFrameworks/PerformanceAnalysis.framework/Versions/A/PerformanceAnalysis'
-current-version: 302.2
+current-version: 332
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _PACancelOperation, _PADetailedPerfLoggingWhiteListAddEntry, 
                        _PADetailedPerfLoggingWhiteListClearList, _PADetailedPerfLoggingWhiteListRemoveEntry, 
                        _PAMarkOperationEnd, _PAMarkOperationEndAndGetIntervalStats, 

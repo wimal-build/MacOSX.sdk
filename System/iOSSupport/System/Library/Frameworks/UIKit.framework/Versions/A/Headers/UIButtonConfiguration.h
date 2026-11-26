@@ -8,14 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIBackgroundConfiguration.h>
+#import <UIKit/NSParagraphStyle.h>
 
 @class UIImageSymbolConfiguration;
 @class UIButton;
 @class UIImage;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef NSDictionary<NSAttributedStringKey, id> *_Nonnull (^UIConfigurationTextAttributesTransformer)(NSDictionary<NSAttributedStringKey, id> *textAttributes) API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+typedef NSDictionary<NSAttributedStringKey, id> *_Nonnull (^/*NS_SWIFT_SENDABLE*/ UIConfigurationTextAttributesTransformer)(NSDictionary<NSAttributedStringKey, id> *textAttributes) API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
 
 typedef NS_ENUM(NSInteger, UIButtonConfigurationSize) {
     UIButtonConfigurationSizeMedium,
@@ -60,6 +61,15 @@ typedef NS_ENUM(NSInteger, UIButtonConfigurationMacIdiomStyle) {
     /// Always use a tinted, borderless style button
     UIButtonConfigurationMacIdiomStyleBorderlessTinted,
 } API_AVAILABLE(ios(15.0));
+
+typedef NS_ENUM(NSInteger, UIButtonConfigurationIndicator) {
+    /// Automatically determine an indicator based on the button's properties.
+    UIButtonConfigurationIndicatorAutomatic,
+    /// Don't show any indicator
+    UIButtonConfigurationIndicatorNone,
+    /// Show an indicator appropriate for a popup-style button
+    UIButtonConfigurationIndicatorPopup,
+} API_AVAILABLE(ios(16.0));
 
 UIKIT_EXTERN API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0)) NS_SWIFT_UI_ACTOR
 @interface UIButtonConfiguration : NSObject <NSCopying, NSSecureCoding>
@@ -109,10 +119,18 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0)) NS_SWIFT_UI_ACTO
 @property (nonatomic, readwrite, copy, nullable) NSString *title;
 @property (nonatomic, readwrite, copy, nullable) NSAttributedString *attributedTitle;
 @property (nonatomic, readwrite, copy, nullable) UIConfigurationTextAttributesTransformer titleTextAttributesTransformer;
+/// Default is WordWrapping. WordWrapping and CharWrapping both allow for multi-line text, other modes will restrict the title to a single line of text.
+@property (nonatomic, readwrite, assign) NSLineBreakMode titleLineBreakMode;
 
 @property (nonatomic, readwrite, copy, nullable) NSString *subtitle;
 @property (nonatomic, readwrite, copy, nullable) NSAttributedString *attributedSubtitle;
 @property (nonatomic, readwrite, copy, nullable) UIConfigurationTextAttributesTransformer subtitleTextAttributesTransformer;
+/// Default is WordWrapping. WordWrapping and CharWrapping both allow for multi-line text, other modes will restrict the subtitle to a single line of text.
+@property (nonatomic, readwrite, assign) NSLineBreakMode subtitleLineBreakMode;
+
+/// What kind of indicator should the button show. Default value is .automatic.
+@property (nonatomic, readwrite, assign) UIButtonConfigurationIndicator indicator API_AVAILABLE(ios(16.0));
+@property (nonatomic, readwrite, copy, nullable) UIConfigurationColorTransformer indicatorColorTransformer API_AVAILABLE(ios(16.0));
 
 /// Insets from the bounds of the button to create the content region. Defaults styles provide insets based on the button size.
 @property (nonatomic, readwrite, assign) NSDirectionalEdgeInsets contentInsets;
@@ -131,7 +149,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0)) NS_SWIFT_UI_ACTO
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else
 #import <UIKitCore/UIButtonConfiguration.h>

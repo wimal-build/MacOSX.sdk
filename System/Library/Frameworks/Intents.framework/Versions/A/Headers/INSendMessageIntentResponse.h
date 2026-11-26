@@ -2,7 +2,7 @@
 //  INSendMessageIntentResponse.h
 //  Intents
 //
-//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2023 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResponse.h>
@@ -34,7 +34,7 @@ API_UNAVAILABLE(tvos)
 
 @property (readonly, NS_NONATOMIC_IOSONLY) INSendMessageIntentResponseCode code;
 
-@property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) INMessage *sentMessage API_AVAILABLE(ios(10.3));
+@property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INMessage *> *sentMessages API_AVAILABLE(ios(16.0), watchos(9.0));
 
 @end
 
